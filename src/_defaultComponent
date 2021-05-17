@@ -1,0 +1,16 @@
+<template>
+  <div class="view-FILE"></div>
+</template>
+
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+
+@Component
+export default class FILE extends Vue {}
+</script>
+
+<style lang="scss" scoped>
+.view-FILE {
+  //
+}
+</style>

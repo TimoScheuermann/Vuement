@@ -1,0 +1,14 @@
+// Colors
+$tc_blue: #08f;
+$tc_red: #ff4757;
+$tc_green: #25ca49;
+$tc_yellow: #f1c40f;
+
+// Gradients
+$tc_blue_gradient: linear-gradient(to bottom right, lighten($tc_blue, 7.5%), darken($tc_blue, 7.5%));
+$tc_red_gradient: linear-gradient(to bottom right, lighten($tc_red, 7.5%), darken($tc_red, 7.5%));
+$tc_green_gradient: linear-gradient(to bottom right, lighten($tc_green, 7.5%), darken($tc_green, 7.5%));
+$tc_yellow_gradient: linear-gradient(to bottom right, lighten($tc_yellow, 7.5%), darken($tc_yellow, 7.5%));
+
+// Options
+$border-radius: 7.5px;
