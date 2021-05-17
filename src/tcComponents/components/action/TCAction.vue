@@ -105,6 +105,12 @@ export default class TCAction extends Vue {
     display: grid;
     place-content: center;
     cursor: pointer;
+
+    transition: 0.2s ease-in-out;
+    &:active {
+      filter: brightness(105%);
+      transform: scale(0.85);
+    }
   }
 
   &--items {

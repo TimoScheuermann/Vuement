@@ -51,6 +51,10 @@ export default class TCSwitch extends Vue {
     }
   }
 
+  &:active .tc-switch__container {
+    filter: brightness(105%);
+  }
+
   &__container {
     position: relative;
     width: #{$ballSize * 2 + 6}px;

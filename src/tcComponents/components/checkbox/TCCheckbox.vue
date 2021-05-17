@@ -2,10 +2,10 @@
   <label class="tc-checkbox">
     <input type="checkbox" v-model="checked" />
     <div class="tc-checkbox__background" />
-    <div class="tc-checkbox--checkbox">
+    <div class="tc-checkbox--checkbox" :style="tcChecked">
       <svg viewBox="0 0 100 100">
         <path
-          stroke="#08f"
+          stroke="#fff"
           d="M1550,970.667l14.167,14.167L1601,948l-36.833,36.833Z"
           transform="translate(-1525 -915.917)"
         />
@@ -16,14 +16,19 @@
 </template>
 
 <script lang="ts">
+import { getColor } from '@/tcComponents/util';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class TCCheckbox extends Vue {
-  @Prop() title!: string;
+  @Prop({ default: 'Title' }) title!: string;
   @Prop({ default: 'primary' }) color!: string;
 
   public checked = false;
+
+  get tcChecked(): string {
+    return `--tc-checked:${getColor(this, this.color)}`;
+  }
 }
 </script>
 
@@ -43,11 +48,24 @@ export default class TCCheckbox extends Vue {
 
   color: var(--tc-color);
 
+  transition: 0.2s ease-in-out;
+  &:active {
+    filter: brightness(105%);
+    transform: scale(0.95);
+  }
+
   input {
     display: none;
   }
 
   input:checked ~ &--checkbox {
+    background: var(--tc-checked);
+    transform: scale(1.15);
+    box-shadow: 1px 2px 4px rgba(#111, 0.1);
+
+    transition: background 0.2s ease-in-out, transform 0.2s ease-in-out,
+      box-shadow 0.2s ease-in-out;
+
     path {
       stroke: {
         dasharray: 172px;
@@ -79,6 +97,9 @@ export default class TCCheckbox extends Vue {
     width: 19.33px;
     border-radius: #{$border-radius / 1.5};
     background: var(--tc-background);
+
+    transition: background 0.3s ease-in-out 0.3s, transform 0.4s ease-in-out,
+      box-shadow 0.4s ease-in-out;
 
     svg {
       path {

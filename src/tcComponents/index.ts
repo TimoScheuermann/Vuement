@@ -28,7 +28,7 @@ const install = (vue: VueConstructor, options: TCOptions = tcoptions): void => {
   });
 
   if (typeof window !== 'undefined') {
-    const theme = tcoptions.themes[1];
+    const theme = tcoptions.themes[0];
     Object.entries(theme).forEach(([key, value]) => {
       if (key !== 'name') {
         document.documentElement.style.setProperty('--tc-' + key, value);

@@ -46,12 +46,8 @@ export default class TCRadio extends Vue {
   $scale: 13px;
   input:checked ~ .tc-radio--dot {
     box-shadow: 1px 2px 4px rgba(#111, 0.1);
-    background: var(--tc-color);
-    &::before {
-      opacity: 1;
-      width: #{$scale / 1.95};
-      height: #{$scale / 1.95};
-    }
+    border-color: var(--tc-color);
+    border-width: #{$scale / 2 - 2.5px};
   }
 
   &--dot {
@@ -61,22 +57,7 @@ export default class TCRadio extends Vue {
     border-radius: $scale;
     background: var(--tc-paragraph);
     transition: 0.2s ease-in-out;
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: calc(50% - 0px);
-      left: calc(50% - 0px);
-      transform: translate(-50%, -50%);
-      height: inherit;
-      width: inherit;
-      background: var(--tc-paragraph);
-      opacity: 0;
-      border-radius: $border-radius;
-      transition: 0.2s ease-in-out;
-      transition-property: height, width;
-    }
+    box-sizing: border-box;
   }
 
   &--title {

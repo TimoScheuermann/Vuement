@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-select">
+  <div class="tc-select" :disabled="disabled">
     <div
       class="tc-select--container"
       ref="trigger"
@@ -51,6 +51,7 @@ export default class TCSelect extends Vue {
   @Prop({ default: 'Select one or more' }) placeholder!: string;
   @Prop({ default: true }) multiple!: boolean;
   @Prop() frosted!: boolean;
+  @Prop({ default: false }) disabled!: boolean;
 
   public visible = true;
   public pos = '';
@@ -116,6 +117,7 @@ export default class TCSelect extends Vue {
   }
 
   public toggleVisible(): void {
+    if (this.disabled) return;
     const prev = this.visible;
     setTimeout(() => {
       this.visible = !prev;
@@ -173,7 +175,19 @@ export default class TCSelect extends Vue {
     }
   }
 
+  &[disabled] {
+    filter: brightness(75%);
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:not([disabled]) .tc-select--container:active {
+    filter: brightness(105%);
+    transform: scale(0.95);
+  }
+
   &--container {
+    transition: 0.2s ease-in-out;
     position: relative;
     display: flex;
     flex-wrap: nowrap;

@@ -166,6 +166,7 @@ export default class TCButton extends mixins(TCLinkMixin) {
 
   &:not([disabled]):active {
     filter: brightness(120%);
+    transform: scale(0.95);
   }
 }
 </style>
