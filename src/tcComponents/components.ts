@@ -23,6 +23,7 @@ export { default as tcSelect } from './components/select';
 export { default as tcSheet } from './components/sheet';
 export { default as tcSidebar } from './components/sidebar';
 export { default as tcSlider } from './components/slider';
+export { default as tcSpinner } from './components/spinner';
 export { default as tcSwitch } from './components/switch';
 export { default as tcTabbar } from './components/tabbar';
 export { default as tcTextarea } from './components/textarea';

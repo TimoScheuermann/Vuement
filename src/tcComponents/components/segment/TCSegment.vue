@@ -1,7 +1,10 @@
 <template>
   <div class="tc-segment">
     <div class="tc-segment__background" />
-    <div class="tc-segment__box" :style="boxStyle" />
+    <div class="tc-segment__box">
+      <div :style="boxStyle" />
+    </div>
+
     <div class="tc-segment__items">
       <slot />
     </div>
@@ -87,12 +90,18 @@ export default class TCSegment extends Vue {
 
   &__box {
     position: absolute;
-    background: var(--tc-background);
-    height: calc(100% - 5px);
-    border-radius: #{$border-radius / 1.5};
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.3s cubic-bezier(0.63, 1.65, 0.42, 0.75);
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+
+    div {
+      position: absolute;
+      background: var(--tc-background);
+      top: 50%;
+      transform: translateY(-50%);
+      height: 100%;
+      border-radius: #{$border-radius / 1.5};
+      transition: all 0.3s cubic-bezier(0.63, 1.65, 0.42, 0.75);
+    }
   }
 
   &__items {

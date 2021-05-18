@@ -9,20 +9,20 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class TCGrid extends Vue {
-  @Prop({ default: '300px' }) width!: string;
-  @Prop({ default: 'auto-fit' }) mode!: string;
+  @Prop({ default: '200px' }) width!: string;
+  @Prop({ default: 'auto-fill' }) mode!: string;
   @Prop({ default: '30px' }) gap!: string;
 
   get gridMode(): string {
-    return `--tc-grid-mode:${this.mode}`;
+    return `--tc-grid-mode:${this.mode};`;
   }
 
   get gridGap(): string {
-    return `--tc-grid-gap:${this.transformNumber(this.gap)}`;
+    return `--tc-grid-gap:${this.transformNumber(this.gap)};`;
   }
 
   get gridWidth(): string {
-    return `--tc-grid-width:${this.transformNumber(this.width)}`;
+    return `--tc-grid-width:${this.transformNumber(this.width)};`;
   }
 
   public transformNumber(number: string | number): string {

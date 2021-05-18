@@ -41,10 +41,10 @@
     </div>
 
     <br />
-    <tc-hero image="https://components.timos.design/assets/banner.svg">
+    <!-- <tc-hero image="https://components.timos.design/assets/banner.svg">
       <tc-input :frosted="true" title="House" icon="ti-house"></tc-input>
       <tc-textarea :frosted="true" title="House" icon="ti-house"></tc-textarea>
-    </tc-hero>
+    </tc-hero> -->
 
     <tc-scroll-up></tc-scroll-up>
 
@@ -66,6 +66,7 @@
       <tc-list-item title="Hello">
         <tc-switch></tc-switch>
       </tc-list-item>
+      <br />
 
       <tc-list-item title="Hello" description="Oh no, a description">
         <tc-action>
@@ -84,13 +85,13 @@
       <tc-sheet-item icon="ti-house" title="Home"></tc-sheet-item>
     </tc-sheet>
 
-    <tc-chip-wrapper>
+    <!-- <tc-chip-wrapper>
       <tc-chip></tc-chip>
       <tc-chip></tc-chip>
       <tc-chip
         image="https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci84YTkxOWRjYjhlOGY4NzhlZTM3MmFkMjA1OTBlMzc5Yj9zaXplPTEwMCZkZWZhdWx0PXJldHJvIn0.qFeLjA_Uqp_W29W8Chtq5ozvI0GrtYYtU8Fw4oJdmmA"
       ></tc-chip>
-    </tc-chip-wrapper>
+    </tc-chip-wrapper> -->
 
     <tc-dialog title="Dialog">
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas
@@ -104,19 +105,7 @@
       <tc-dialog-button color="error" title="cancel" slot="buttons" />
     </tc-dialog>
 
-    <b>R1</b>
-    <tc-radio name="r1"></tc-radio>
-    <tc-radio name="r1"></tc-radio>
-    <tc-radio name="r1"></tc-radio>
-    <br />
-    <b>R2</b>
-
-    <tc-radio name="r2"></tc-radio>
-    <tc-radio name="r2"></tc-radio>
-    <tc-radio name="r2"></tc-radio>
-    <tc-radio name="r2"></tc-radio>
-
-    <br />
+    <!-- <tc-spinner type="square"></tc-spinner> -->
   </div>
 </template>
 

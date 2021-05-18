@@ -1,7 +1,7 @@
 <template>
   <label class="tc-input" :frosted="frosted">
     <div class="tc-input--title" v-if="title">{{ title }}</div>
-    <div class="tc-input--input">
+    <div class="tc-input--input" :style="outlineStyle">
       <div class="tc-input--input__background" />
       <div class="tc-input--input--icon" v-if="icon">
         <i :class="icon" />
@@ -12,11 +12,12 @@
 </template>
 
 <script lang="ts">
+import { getColor } from '@/tcComponents/util';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class TCInput extends Vue {
-  @Prop({ default: 'Placeholder' }) placeholder!: string;
+  @Prop() placeholder!: string;
   @Prop() value!: string;
   @Prop() background!: string;
   @Prop() color!: string;
@@ -24,6 +25,12 @@ export default class TCInput extends Vue {
   @Prop() title!: string;
   @Prop() icon!: string;
   @Prop() frosted!: boolean;
+  @Prop() outline!: string;
+
+  get outlineStyle(): string | null {
+    if (!this.outline) return null;
+    return `--tc-outline:${getColor(this, this.outline)};`;
+  }
 }
 </script>
 
@@ -55,9 +62,12 @@ export default class TCInput extends Vue {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
+    width: calc(100% - 10px);
     padding: 0 5px;
     border-radius: $border-radius;
+
+    border-bottom: 1.5px solid var(--tc-outline);
+    box-sizing: border-box;
 
     &__background {
       position: absolute;
