@@ -4,6 +4,7 @@
     :to="to || { name: routeName }"
     :href="href"
     :style="tcColor"
+    @click.stop="clicked"
     class="tc-link"
   >
     <slot />
@@ -29,6 +30,7 @@ export default class TCLink extends Mixins(TCLinkMixin) {
 .tc-link {
   color: var(--tc-color);
   text-decoration: none;
+  cursor: pointer;
   position: relative;
 
   &::before {

@@ -3,7 +3,7 @@
     <div
       class="tc-select--container"
       ref="trigger"
-      @click="toggleVisible"
+      @click.stop.capture="visible = !visible"
       :frosted="frosted"
     >
       <div class="tc-select--container__background" />
@@ -22,7 +22,8 @@
         v-if="visible"
       >
         <div class="tc-select--items__background" />
-        <slot />
+        <div class="tc-select--items__title" v-if="title">{{ title }}</div>
+        <div class="tc-select--items__items"><slot /></div>
       </div>
     </transition>
   </div>
@@ -49,11 +50,12 @@ export default class TCSelect extends Vue {
   @Prop() color!: string;
   @Prop() background!: string;
   @Prop({ default: 'Select one or more' }) placeholder!: string;
-  @Prop({ default: true }) multiple!: boolean;
+  @Prop({ default: false }) multiple!: boolean;
   @Prop() frosted!: boolean;
   @Prop({ default: false }) disabled!: boolean;
+  @Prop() title!: string;
 
-  public visible = true;
+  public visible = !!this.value;
   public pos = '';
   public selection: TCSelectSelection[] = [];
 
@@ -85,7 +87,7 @@ export default class TCSelect extends Vue {
     this.$emit('input', this.visible);
   }
 
-  @Watch('value')
+  @Watch('value', { immediate: true })
   valueChanged(): void {
     this.visible = this.value;
   }
@@ -114,14 +116,6 @@ export default class TCSelect extends Vue {
 
   public updateChildren(): void {
     this.$children.forEach((c) => c.$emit('selection', this.selection));
-  }
-
-  public toggleVisible(): void {
-    if (this.disabled) return;
-    const prev = this.visible;
-    setTimeout(() => {
-      this.visible = !prev;
-    }, 10);
   }
 
   public updatePosition(): void {
@@ -278,6 +272,18 @@ export default class TCSelect extends Vue {
       bottom: 0;
       border-radius: inherit;
       background: var(--tc-container);
+    }
+
+    &__title {
+      padding: 5px 10px;
+      opacity: 0.75;
+      font-size: 14px;
+      position: relative;
+    }
+
+    &__items {
+      max-height: calc(50vh - 50px);
+      overflow: auto;
     }
   }
 }

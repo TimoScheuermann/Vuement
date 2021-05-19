@@ -73,7 +73,7 @@ export default class TCSidebarItem extends Mixins(TCLinkMixin) {
   &:not([disabled]):hover,
   &[active] {
     .tc-sidebar-item__background {
-      opacity: 0.5;
+      opacity: 0.75;
     }
   }
 }

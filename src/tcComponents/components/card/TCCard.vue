@@ -52,22 +52,22 @@ export default class TCCard extends Vue {
   display: grid;
 
   &[direction='column'] {
-    grid-template-rows: minmax(0px, 200px) 1fr;
+    grid-template-rows: auto auto;
     .tc-card--media {
+      height: 200px;
       border-top-right-radius: $border-radius;
       border-top-left-radius: $border-radius;
     }
   }
 
   &[direction='row'] {
-    grid-template-columns: minmax(0px, 1fr) 2fr;
+    grid-template-columns: auto auto;
     .tc-card--media {
+      width: 200px;
       border-top-left-radius: $border-radius;
       border-bottom-left-radius: $border-radius;
     }
   }
-
-  width: fit-content;
 
   border-radius: $border-radius;
   background: var(--tc-paragraph);

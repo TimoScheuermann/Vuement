@@ -1,11 +1,19 @@
 <template>
-  <div class="tc-sidebar">
+  <div class="tc-sidebar" :frosted="frosted" :style="{ width, color }">
     <div class="tc-sidebar__backgroundImage" v-if="backgroundImage">
       <img :src="backgroundImage" alt="" />
     </div>
-    <div class="tc-sidebar__background" />
+    <div class="tc-sidebar__background" :style="{ background }" />
     <div class="tc-sidebar--content">
-      <slot />
+      <div class="tc-sidebar--content__header">
+        <slot name="header" />
+      </div>
+      <div class="tc-sidebar--content__body">
+        <slot />
+      </div>
+      <div class="tc-sidebar--content__footer">
+        <slot name="footer" />
+      </div>
     </div>
   </div>
 </template>
@@ -16,6 +24,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class TCSidebar extends Vue {
   @Prop() backgroundImage!: string;
+  @Prop({ default: false }) frosted!: boolean;
+  @Prop() width!: string;
+  @Prop() color!: string;
+  @Prop() background!: string;
 }
 </script>
 
@@ -25,9 +37,18 @@ export default class TCSidebar extends Vue {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 100;
-  width: 220px;
-  @include backdrop-blur();
+  z-index: 101;
+
+  &[frosted] {
+    @supports (backdrop-filter: saturate(180%) blur(20px)) {
+      .tc-sidebar__background {
+        opacity: 0.5;
+      }
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+  }
+
+  box-shadow: 4px 8px 20px rgba(#111, 0.18);
 
   &__backgroundImage {
     position: absolute;
@@ -54,10 +75,28 @@ export default class TCSidebar extends Vue {
 
   &--content {
     z-index: inherit;
-    padding: 20px;
     position: relative;
+
+    display: grid;
+    grid-gap: 0;
+    grid-template-rows: auto 1fr auto;
+    max-height: calc(
+      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)
+    );
+
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-bottom: env(safe-area-inset-bottom);
+
+    &__body {
+      padding: 10px;
+      overflow: auto;
+      @include scrollbar();
+    }
   }
 
-  //
+  /deep/ .tc-spacer {
+    background: none;
+  }
 }
 </style>

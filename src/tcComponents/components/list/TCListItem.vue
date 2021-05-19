@@ -76,6 +76,7 @@ export default class TCListItem extends Mixins(TCLinkMixin) {
       justify-content: center;
       align-items: flex-start;
       margin-right: 10px;
+      min-height: 30px;
 
       .tc-list-item--title {
         font-weight: 500;

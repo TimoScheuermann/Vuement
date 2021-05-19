@@ -111,6 +111,9 @@ export default class TCProgress extends Vue {
 
 <style lang="scss" scoped>
 .tc-progress {
+  display: flex;
+  flex: 1 1 0px;
+
   &--bar {
     display: flex;
     flex: 1 1 0px;
@@ -131,9 +134,10 @@ export default class TCProgress extends Vue {
 
   &--ring {
     height: auto;
+    transform: rotate(-90deg);
+
     circle {
       fill: none;
-
       stroke: var(--tc-container);
       stroke-linecap: round;
       stroke-linejoin: round;

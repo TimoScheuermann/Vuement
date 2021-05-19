@@ -1,6 +1,6 @@
 <template>
   <transition name="appear" appear :delay="300">
-    <div class="tc-sheet" v-if="visible" @click="close" @touchmove.prevent>
+    <div class="tc-sheet" v-if="visible" @click.stop="close" @touchmove.prevent>
       <transition name="slide" appear>
         <div class="tc-sheet--sheet" @click.prevent.stop>
           <div class="tc-sheet--sheet__title" v-if="title">{{ title }}</div>
@@ -14,16 +14,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCSheet extends Vue {
   @Prop() title!: string;
+  @Prop() value!: boolean;
 
-  public visible = false;
+  public visible = !!this.value;
 
   mounted(): void {
     this.$on('close', this.close);
+  }
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.visible = !!this.value;
+  }
+
+  @Watch('visible', { immediate: true })
+  visibleChanged(): void {
+    this.$emit('input', this.visible);
   }
 
   public close(): void {

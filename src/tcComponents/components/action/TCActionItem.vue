@@ -44,7 +44,7 @@ export default class TCActionItem extends Mixins(TCLinkMixin) {
     cursor: not-allowed;
   }
 
-  & ~ .tc-action-item::after {
+  & + .tc-action-item::after {
     content: '';
     position: absolute;
     top: 0;
@@ -69,7 +69,8 @@ export default class TCActionItem extends Mixins(TCLinkMixin) {
     display: grid;
     place-content: center start;
     white-space: nowrap;
-    padding: 0 5px;
+    padding-left: 5px;
+    padding-right: 15px;
   }
 }
 </style>

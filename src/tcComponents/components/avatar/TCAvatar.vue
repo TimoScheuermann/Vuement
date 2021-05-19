@@ -1,6 +1,6 @@
 <template>
   <div class="tc-avatar" :size="avatarSize" :variant="avatarVariant">
-    <img :src="src" alt="" />
+    <img v-if="src" :src="src" alt="" />
   </div>
 </template>
 

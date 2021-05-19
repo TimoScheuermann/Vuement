@@ -12,7 +12,7 @@ router.afterEach((to: Route) => {
   document.getElementsByTagName('title')[0].innerHTML = prefix + to.meta.title;
 });
 
-Vue.use(TCComponents, { colors: { primary: '#08f' } });
+Vue.use(TCComponents, { colors: { primary: '#ff4757' } });
 
 new Vue({
   router,

@@ -24,7 +24,6 @@ export default class TCPropagateSpinner extends Vue {}
   position: relative;
 
   margin: 0 calc(var(--tc-spinner-s) * 0.2);
-  background: red;
 
   div {
     position: absolute;

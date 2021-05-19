@@ -6,3 +6,22 @@
       backdrop-filter: saturate(180%) blur(20px);
     }
 }
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    position: absolute !important;
+    border-radius: 4px;
+    transition: 0.2s ease;
+    opacity: 0.5;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    transition: 0.2s ease;
+    border-radius: 4px;
+    background: #808080;
+    opacity: 0.5;
+  }
+
+}

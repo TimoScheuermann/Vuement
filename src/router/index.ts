@@ -1,3 +1,5 @@
+import { components } from '@/utils/constants';
+import InterimComponent from '@/views-interim/InterimComponent.vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -14,19 +16,49 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home.vue'),
+      component: () => import('@/views//Home.vue'),
       meta: {
         title: 'Home',
       },
     },
     {
-      path: '/buttons',
-      name: 'buttons',
-      component: () => import('@/views/Buttons.vue'),
+      path: '/colors',
+      name: 'colors',
+      component: () => import('@/views/Colors.vue'),
       meta: {
-        title: 'Buttons',
+        title: 'Colors',
       },
     },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('@/views/Settings.vue'),
+      meta: {
+        title: 'Settings',
+      },
+    },
+    {
+      path: '/themes',
+      name: 'themes',
+      component: () => import('@/views/Themes.vue'),
+      meta: {
+        title: 'Themes',
+      },
+    },
+
+    {
+      path: '/component',
+      component: InterimComponent,
+      children: components.map((x) => {
+        return {
+          path: x.toLowerCase(),
+          name: 'tc' + x,
+          component: () => import('@/views/components/' + x + '.vue'),
+          meta: { title: 'TC ' + x },
+        };
+      }),
+    },
+
     {
       path: '*',
       redirect: { name: 'home' },

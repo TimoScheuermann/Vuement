@@ -16,7 +16,8 @@
         v-if="visible"
       >
         <div class="tc-action--items__background" />
-        <slot />
+        <div class="tc-action--items__title" v-if="title">{{ title }}</div>
+        <div class="tc-action--items__items"><slot /></div>
       </div>
     </transition>
   </div>
@@ -36,8 +37,9 @@ export default class TCAction extends Vue {
   @Prop({ default: false }) value!: boolean;
   @Prop() color!: string;
   @Prop() background!: string;
+  @Prop() title!: string;
 
-  public visible = this.value;
+  public visible = !!this.value;
   public pos = '';
 
   mounted(): void {
@@ -151,6 +153,18 @@ export default class TCAction extends Vue {
       bottom: 0;
       border-radius: inherit;
       background: var(--tc-container);
+    }
+
+    &__title {
+      padding: 5px 10px;
+      opacity: 0.75;
+      font-size: 14px;
+      position: relative;
+    }
+
+    &__items {
+      max-height: calc(50vh - 50px);
+      overflow: auto;
     }
   }
 }

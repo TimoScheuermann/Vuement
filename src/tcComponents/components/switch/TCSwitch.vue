@@ -1,6 +1,6 @@
 <template>
-  <label class="tc-switch" :style="switchColor">
-    <input type="checkbox" v-model="checked" @input="update" />
+  <label class="tc-switch" :style="switchColor" @click.stop>
+    <input type="checkbox" v-model="checked" />
     <div class="tc-switch__container">
       <div class="tc-switch__container--ball" />
     </div>
@@ -16,19 +16,20 @@ export default class TCSwitch extends Vue {
   @Prop({ default: 'primary' }) color!: string;
   @Prop({ default: false }) value!: boolean;
 
-  public checked = this.value;
+  public checked = !!this.value;
 
   get switchColor(): string {
     return `--tc-switch:${getColor(this, this.color)}`;
   }
 
-  @Watch('value')
+  @Watch('value', { immediate: true })
   public valueChanged(): void {
-    this.checked = this.value;
+    this.checked = !!this.value;
   }
 
-  public update(): void {
-    this.$emit('input', !this.checked);
+  @Watch('checked', { immediate: true })
+  public checkedChanged(): void {
+    this.$emit('input', this.checked);
   }
 }
 </script>

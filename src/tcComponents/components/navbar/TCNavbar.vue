@@ -32,8 +32,9 @@ export default class TCNavbar extends Vue {
   mounted(): void {
     window.addEventListener('resize', this.checkOverflow);
     this.checkOverflow();
-
-    this.$router.afterEach(() => (this.overflowVisible = false));
+    this.$router.afterEach(() => {
+      this.overflowVisible = false;
+    });
   }
 
   beforeDestroy(): void {

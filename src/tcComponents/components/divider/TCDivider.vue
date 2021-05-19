@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-divider">
+  <div class="tc-divider" :style="tcColor">
     <div class="tc-divider__bar" v-if="position !== 'leading'" />
     <div class="tc-divider__content" v-if="$slots.default"><slot /></div>
     <div class="tc-divider__bar" v-if="position !== 'trailing'" />
@@ -7,12 +7,18 @@
 </template>
 
 <script lang="ts">
+import { getColor } from '@/tcComponents/util';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class TCDivider extends Vue {
   @Prop() color!: string;
   @Prop({ default: 'center' }) position!: string;
+
+  get tcColor(): string | null {
+    if (!this.color) return null;
+    return `--tc-color: ${getColor(this, this.color)}`;
+  }
 }
 </script>
 

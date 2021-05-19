@@ -39,14 +39,14 @@ export default class TCTabbarItem extends Mixins(TCLinkMixin) {
   flex: 1 1 0px;
   justify-content: center;
   align-items: center;
+
   @media only screen and(max-width: 650px) {
     flex-direction: column;
   }
 
-  margin: 0 2.5px;
-
   &__icon,
   &__title {
+    padding: 0 5px;
     height: 20px;
     line-height: 20px;
     transition: all 0.2s ease-in-out;

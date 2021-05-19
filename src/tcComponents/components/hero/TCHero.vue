@@ -47,8 +47,8 @@ export default class TCHero extends Vue {
   position: relative;
   overflow: hidden;
 
-  img,
-  video {
+  & > img,
+  & > video {
     position: absolute;
     top: 0;
     left: 0;

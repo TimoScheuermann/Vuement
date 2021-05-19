@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-sheet-item" @click="handleClick">
+  <div class="tc-sheet-item" @click.stop="handleClick">
     <div class="tc-sheet-item---media">
       <slot />
       <i v-if="icon && !$slots.default" :class="icon" />

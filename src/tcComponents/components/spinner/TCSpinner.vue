@@ -35,8 +35,8 @@ import TCDotsSpinner from './types/TCDotsSpinner.vue';
 export default class TCSpinner extends Vue {
   @Prop() type!: string;
   @Prop() color!: string;
-  @Prop({ default: '40px' }) size!: string;
-  @Prop({ default: '5px' }) margin!: string;
+  @Prop({ default: '20px' }) size!: string;
+  @Prop({ default: '3px' }) margin!: string;
 
   get spinnerType(): string {
     const types = [

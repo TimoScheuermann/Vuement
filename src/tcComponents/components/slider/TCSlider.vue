@@ -6,12 +6,13 @@
     :min="min"
     :max="max"
     :step="step"
+    v-model="innerVal"
   />
 </template>
 
 <script lang="ts">
 import { getColor } from '@/tcComponents/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCSlider extends Vue {
@@ -19,9 +20,22 @@ export default class TCSlider extends Vue {
   @Prop({ default: 1 }) min!: number;
   @Prop({ default: 10 }) max!: number;
   @Prop({ default: 1 }) step!: number;
+  @Prop({ default: 1 }) value!: number;
+
+  public innerVal = this.value || 1;
 
   get tcColor(): string {
     return `--tc-slider-c:${getColor(this, this.color)};`;
+  }
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    if (this.value) this.innerVal = this.value;
+  }
+
+  @Watch('innerVal', { immediate: true })
+  innerValChanged(): void {
+    this.$emit('input', this.innerVal);
   }
 }
 </script>

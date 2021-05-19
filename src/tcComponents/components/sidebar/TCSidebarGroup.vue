@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import TCRevealer from '../revealer/TCRevealer.vue';
 
 @Component({
@@ -26,7 +26,19 @@ import TCRevealer from '../revealer/TCRevealer.vue';
 })
 export default class TCSidebarGroup extends Vue {
   @Prop() title!: string;
-  public expanded = false;
+  @Prop() value!: boolean;
+
+  public expanded = !!this.value;
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.expanded = !!this.value;
+  }
+
+  @Watch('expanded', { immediate: true })
+  expandedChanged(): void {
+    this.$emit('input', this.expanded);
+  }
 }
 </script>
 
@@ -42,9 +54,8 @@ export default class TCSidebarGroup extends Vue {
 
     &__title {
       font-weight: bold;
-      font-size: 13px;
-      opacity: 0.75;
-      text-transform: uppercase;
+      font-size: 14px;
+      opacity: 0.8;
       display: grid;
       place-content: center start;
       user-select: none;
@@ -86,12 +97,6 @@ export default class TCSidebarGroup extends Vue {
           transform: translate(-25%, -25%) rotate(-45deg);
         }
       }
-    }
-  }
-  &--items {
-    transition: all 0.3s ease-in-out;
-    &[expanded] {
-      margin-left: 7.5px;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <label class="tc-radio" v-if="name" :disabled="disabled" :style="tcColor">
-    <input type="radio" :name="name" :disabled="disabled" />
+    <input type="radio" :name="name" :disabled="disabled" v-model="innerVal" />
     <div class="tc-radio--dot" />
     <div class="tc-radio--title" v-if="title">{{ title }}</div>
   </label>
@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { getColor } from '@/tcComponents/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCRadio extends Vue {
@@ -16,9 +16,22 @@ export default class TCRadio extends Vue {
   @Prop({ required: true }) name!: string;
   @Prop({ default: false }) disabled!: boolean;
   @Prop({ default: 'primary' }) color!: string;
+  @Prop() value!: string;
+
+  public innerVal = this.value || null;
 
   get tcColor(): string {
     return `--tc-color:${getColor(this, this.color)};`;
+  }
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.innerVal = this.value || null;
+  }
+
+  @Watch('innerVal', { immediate: true })
+  innerValChanged(): void {
+    this.$emit('input', this.innerVal);
   }
 }
 </script>

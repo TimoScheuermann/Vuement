@@ -17,17 +17,28 @@
 
 <script lang="ts">
 import { getColor } from '@/tcComponents/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCCheckbox extends Vue {
   @Prop({ default: 'Title' }) title!: string;
   @Prop({ default: 'primary' }) color!: string;
+  @Prop() value!: boolean;
 
-  public checked = false;
+  public checked = !!this.value;
 
   get tcChecked(): string {
     return `--tc-checked:${getColor(this, this.color)}`;
+  }
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.checked = !!this.value;
+  }
+
+  @Watch('checked', { immediate: true })
+  checkedChanged(): void {
+    this.$emit('input', this.checked);
   }
 }
 </script>

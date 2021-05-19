@@ -1,47 +1,54 @@
 <template>
-  <div id="timos-icons">
-    <!-- <tc-navbar>
-      <b slot="title">TC Components</b>
-      <tc-navbar-item icon="ti-house" title="Home" routeName="home" />
-      <tc-navbar-item icon="ti-button" title="Buttons" routeName="buttons" />
-    </tc-navbar> -->
+  <div id="timos-components">
+    <CNavbar />
+    <CSidebar />
+    <CTabbar />
 
-    <!-- <tc-tabbar>
-      <tc-tabbar-item icon="ti-house" title="Home" routeName="home" />
-      <tc-tabbar-item icon="ti-button" title="Buttons" routeName="buttons" />
-    </tc-tabbar> -->
-
-    <!-- <tc-sidebar>
-      <tc-sidebar-item icon="ti-house" title="Home" routeName="home" />
-      <tc-sidebar-item icon="ti-button" title="Buttons" routeName="buttons" />
-
-      <tc-sidebar-group title="Group #1">
-        <tc-sidebar-item icon="ti-house" title="Home" />
-        <tc-sidebar-item icon="ti-button" title="Buttons" />
-        <tc-sidebar-group title="Group #1.1">
-          <tc-sidebar-item icon="ti-house" title="Home" />
-          <tc-sidebar-item icon="ti-button" title="Buttons" />
-          <tc-sidebar-item icon="ti-button" title="Buttons" />
-        </tc-sidebar-group>
-      </tc-sidebar-group>
-      <tc-sidebar-item icon="ti-button" title="Buttons" />
-
-      <tc-sidebar-group title="Group #1">
-        <tc-sidebar-item icon="ti-house" title="Home" />
-        <tc-sidebar-item icon="ti-button" title="Buttons" />
-        <tc-sidebar-item icon="ti-button" title="Buttons" />
-      </tc-sidebar-group>
-    </tc-sidebar> -->
-
-    <router-view></router-view>
+    <div
+      class="router-view"
+      :darken="$store.getters.sidebar"
+      @click="$store.commit('sidebar', false)"
+      @touchmove="touchmove"
+    >
+      <CRouter />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import CSidebar from '@/components/CSidebar.vue';
+import {
+  registerMediaQueries,
+  unregisterMediaQueries,
+} from '@/utils/mediaQueries';
+import CRouter from '@/components/CRouter.vue';
+import CNavbar from '@/components/CNavbar.vue';
+import CTabbar from './components/CTabbar.vue';
 
-@Component
-export default class App extends Vue {}
+@Component({
+  components: {
+    CSidebar,
+    CRouter,
+    CNavbar,
+    CTabbar,
+  },
+})
+export default class App extends Vue {
+  mounted(): void {
+    registerMediaQueries();
+  }
+
+  beforeDestroy(): void {
+    unregisterMediaQueries();
+  }
+
+  public touchmove(e: Event): void {
+    if (this.$store.getters.sidebar) {
+      e.preventDefault();
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -57,5 +64,24 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+}
+
+[content] {
+  padding: 20px 5vw;
+  padding-top: calc(70px + env(safe-area-inset-top));
+
+  @media #{$isMobile} {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.router-view {
+  transition: 0.2s ease-in-out;
+  &[darken] {
+    filter: brightness(50%);
+  }
 }
 </style>

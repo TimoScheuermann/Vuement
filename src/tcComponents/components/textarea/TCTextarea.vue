@@ -3,19 +3,50 @@
     <div class="tc-textarea--title" v-if="title">{{ title }}</div>
     <div class="tc-textarea--textarea">
       <div class="tc-textarea--textarea__background" />
-      <textarea :placeholder="placeholder" />
+      <textarea
+        :placeholder="placeholder"
+        v-model="innerVal"
+        :autofocus="autofocus"
+        :cols="cols"
+        :disabled="disabled"
+        :readonly="readonly"
+        :required="required"
+        :rows="rows"
+        :wrap="wrap"
+      />
     </div>
   </label>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCTextarea extends Vue {
   @Prop() frosted!: boolean;
   @Prop() title!: string;
   @Prop({ default: 'Enter text...' }) placeholder!: string;
+  @Prop() value!: string;
+
+  @Prop() autofocus!: boolean;
+  @Prop() cols!: number;
+  @Prop() disabled!: boolean;
+  @Prop() readonly!: boolean;
+  @Prop() required!: boolean;
+  @Prop({ default: 3 }) rows!: string;
+  @Prop() wrap!: string;
+
+  public innerVal = this.value || '';
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.innerVal = this.value || '';
+  }
+
+  @Watch('innerVal', { immediate: true })
+  innerValChanged(): void {
+    this.$emit('input', this.innerVal);
+  }
 }
 </script>
 
@@ -74,6 +105,14 @@ export default class TCTextarea extends Vue {
       font: inherit;
       font-size: inherit;
       color: inherit;
+
+      resize: none;
+
+      &::placeholder {
+        font: inherit;
+        color: inherit;
+        opacity: 0.6;
+      }
     }
   }
 }

@@ -1,6 +1,11 @@
 <template>
   <transition name="appear" appear :delay="300">
-    <div class="tc-dialog" v-if="visible" @click="close" @touchmove.prevent>
+    <div
+      class="tc-dialog"
+      v-if="visible"
+      @click.stop="close"
+      @touchmove.prevent
+    >
       <transition name="slide" appear>
         <div class="tc-dialog--dialog" @click.prevent.stop>
           <div class="tc-dialog--dialog__background" />
@@ -18,16 +23,27 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCDialog extends Vue {
   @Prop() title!: string;
+  @Prop() value!: boolean;
 
-  public visible = false;
+  public visible = !!this.value;
 
   mounted(): void {
     this.$on('close', this.close);
+  }
+
+  @Watch('value', { immediate: true })
+  valueChanged(): void {
+    this.visible = !!this.value;
+  }
+
+  @Watch('visible', { immediate: true })
+  visibleChanged(): void {
+    this.$emit('input', this.visible);
   }
 
   public close(): void {

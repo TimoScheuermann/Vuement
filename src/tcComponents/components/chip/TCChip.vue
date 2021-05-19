@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-chip">
+  <div class="tc-chip" @click="clicked">
     <div class="tc-chip--image" v-if="image">
       <img :src="image" alt="" />
     </div>
@@ -16,7 +16,7 @@
       {{ value }}
     </div>
     <div class="tc-chip--spacer" />
-    <div class="tc-chip--remove" v-if="remove">
+    <div class="tc-chip--remove" v-if="remove" @click="removeClicked">
       <span></span>
       <span></span>
     </div>
@@ -24,14 +24,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import TCLinkMixin from '@/tcComponents/mixins/TCLink.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class TCChip extends Vue {
+export default class TCChip extends Mixins(TCLinkMixin) {
   @Prop({ default: '' }) value!: string;
   @Prop() icon!: string;
   @Prop() image!: string;
-  @Prop({ default: true }) remove!: boolean;
+  @Prop({ default: false }) remove!: boolean;
   @Prop({ default: false }) editable!: boolean;
   @Prop({ default: 10 }) maxLength!: number;
 
@@ -66,6 +67,10 @@ export default class TCChip extends Vue {
       this.$emit('input', (elem as HTMLElement).innerHTML);
     }
   }
+
+  public removeClicked(): void {
+    this.$emit('remove');
+  }
 }
 </script>
 
@@ -78,6 +83,7 @@ export default class TCChip extends Vue {
   flex-wrap: nowrap;
   padding: 2.5px;
   margin: 2.5px;
+  cursor: pointer;
 
   $indicatorScale: 24px;
   border-radius: $indicatorScale;

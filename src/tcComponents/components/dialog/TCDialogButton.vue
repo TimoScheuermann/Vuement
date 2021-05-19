@@ -1,7 +1,7 @@
 <template>
   <div
     class="tc-dialog-button"
-    @click="handleClick"
+    @click.stop="handleClick"
     :style="tcColor"
     :disabled="disabled"
   >

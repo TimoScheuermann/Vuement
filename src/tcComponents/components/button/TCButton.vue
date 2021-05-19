@@ -1,7 +1,7 @@
 <template>
   <button
     class="tc-button"
-    @click="clicked"
+    @click.stop="clicked"
     :disabled="disabled"
     :size="size"
     :variant="buttonVariant"
@@ -101,6 +101,14 @@ export default class TCButton extends mixins(TCLinkMixin) {
     justify-content: center;
     align-items: center;
     user-select: none;
+  }
+
+  &__icon,
+  &__title {
+    display: grid;
+    place-content: center;
+    min-height: 19.33px;
+    min-width: 19.33px;
   }
 
   &[disabled] {

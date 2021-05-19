@@ -84,7 +84,7 @@ export default class TCSelectItem extends Vue {
     cursor: not-allowed;
   }
 
-  & ~ .tc-select-item::after {
+  & + .tc-select-item::after {
     content: '';
     position: absolute;
     top: 0;
@@ -111,7 +111,8 @@ export default class TCSelectItem extends Vue {
     display: grid;
     place-content: center start;
     white-space: nowrap;
-    padding: 0 5px;
+    padding-right: 5px;
+    padding-left: 15px;
   }
 }
 </style>
