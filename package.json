@@ -1,5 +1,5 @@
 {
-  "name": "tccomponents",
+  "name": "vuement",
   "version": "0.0.1",
   "private": false,
   "author": {
@@ -23,7 +23,7 @@
     "serve": "vue-cli-service serve",
     "build": "node build.js && vue-cli-service build",
     "build:lib": "cross-env TC_TARGET=true vue-cli-service build --target lib src/tcComponents/index.ts",
-    "build:test": "yarn build:lib && npm pack && shx mv ./tccomponents-0.1.0.tgz .."
+    "build:test": "yarn build:lib && npm pack && shx mv ./vuement-0.1.0.tgz .."
   },
   "files": [
     "lib/*",
@@ -33,12 +33,13 @@
   "directories": {
     "lib": "lib"
   },
-  "main": "lib/tccomponents.umd.min.js",
-  "browser": "lib/tccomponents.umd.min.js",
-  "module": "lib/tccomponents.umd.min.js",
-  "unpkg": "lib/tccomponents.umd.min.js",
-  "jsdeliver": "lib/tccomponents.umd.min.js",
+  "main": "lib/vuement.umd.min.js",
+  "browser": "lib/vuement.umd.min.js",
+  "module": "lib/vuement.umd.min.js",
+  "unpkg": "lib/vuement.umd.min.js",
+  "jsdeliver": "lib/vuement.umd.min.js",
   "keywords": [
+    "vuement",
     "tccomponents",
     "vue",
     "vuejs",
