@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { getColor } from '@/tcComponents/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import TCBounceSpinner from './types/TCBounceSpinner.vue';
 import TCDotSpinner from './types/TCDotSpinner.vue';
 import TCBarSpinner from './types/TCBarSpinner.vue';
@@ -33,9 +33,9 @@ import TCDotsSpinner from './types/TCDotsSpinner.vue';
   },
 })
 export default class TCSpinner extends Vue {
-  @Prop() type!: string;
+  @Prop({ default: 'bar' }) type!: string;
   @Prop() color!: string;
-  @Prop({ default: '20px' }) size!: string;
+  @Prop({ default: '10px' }) size!: string;
   @Prop({ default: '3px' }) margin!: string;
 
   get spinnerType(): string {

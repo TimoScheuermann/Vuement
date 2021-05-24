@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCAvatar from './TCAvatar.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcAvatar', TCAvatar);
+const tcAvatar = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcAvatar', TCAvatar);
+  },
 };
+
+export default tcAvatar;

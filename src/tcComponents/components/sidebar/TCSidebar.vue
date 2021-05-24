@@ -94,9 +94,5 @@ export default class TCSidebar extends Vue {
       @include scrollbar();
     }
   }
-
-  /deep/ .tc-spacer {
-    background: none;
-  }
 }
 </style>

@@ -1,6 +1,6 @@
 export interface TCOptions {
   colors: Record<string, string>;
-  settings: Record<string, string | boolean>;
+  settings: Record<string, string>;
   themes: TCTheme[];
 }
 

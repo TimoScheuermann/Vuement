@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCSlider from './TCSlider.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcSlider', TCSlider);
+const tcSlider = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcSlider', TCSlider);
+  },
 };
+
+export default tcSlider;

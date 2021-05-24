@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
-import TCFlow from './TCFlow.vue';
+import _Vue from 'vue';
+import TLFlow from './TLFlow.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcFlow', TCFlow);
+const tlFlow = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tlFlow', TLFlow);
+  },
 };
+
+export default tlFlow;

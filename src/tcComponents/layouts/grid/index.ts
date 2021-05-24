@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
-import TCGrid from './TCGrid.vue';
+import _Vue from 'vue';
+import TLGrid from './TLGrid.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcGrid', TCGrid);
+const tlGrid = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tlGrid', TLGrid);
+  },
 };
+
+export default tlGrid;

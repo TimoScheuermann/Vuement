@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCNavbar from './TCNavbar.vue';
 import TCNavbarItem from './TCNavbarItem.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcNavbar', TCNavbar);
-  vue.component('tcNavbarItem', TCNavbarItem);
+const tcNavbar = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcNavbar', TCNavbar);
+    Vue.component('tcNavbarItem', TCNavbarItem);
+  },
 };
+
+export default tcNavbar;

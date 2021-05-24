@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCList from './TCList.vue';
 import TCListItem from './TCListItem.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcList', TCList);
-  vue.component('tcListItem', TCListItem);
+const tcList = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcList', TCList);
+    Vue.component('tcListItem', TCListItem);
+  },
 };
+
+export default tcList;

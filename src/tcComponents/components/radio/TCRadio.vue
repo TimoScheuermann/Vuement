@@ -12,7 +12,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCRadio extends Vue {
-  @Prop({ default: 'Radio title' }) title!: string;
+  @Prop() title!: string;
   @Prop({ required: true }) name!: string;
   @Prop({ default: false }) disabled!: boolean;
   @Prop({ default: 'primary' }) color!: string;

@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCCheckbox from './TCCheckbox.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcCheckbox', TCCheckbox);
+const tcCheckbox = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcCheckbox', TCCheckbox);
+  },
 };
+
+export default tcCheckbox;

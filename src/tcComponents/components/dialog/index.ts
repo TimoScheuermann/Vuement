@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCDialog from './TCDialog.vue';
 import TCDialogButton from './TCDialogButton.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcDialog', TCDialog);
-  vue.component('tcDialogButton', TCDialogButton);
+const tcDialog = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcDialog', TCDialog);
+    Vue.component('tcDialogButton', TCDialogButton);
+  },
 };
+
+export default tcDialog;

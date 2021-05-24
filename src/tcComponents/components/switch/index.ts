@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCSwitch from './TCSwitch.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcSwitch', TCSwitch);
+const tcSwitch = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcSwitch', TCSwitch);
+  },
 };
+
+export default tcSwitch;

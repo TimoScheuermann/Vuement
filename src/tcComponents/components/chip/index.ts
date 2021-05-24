@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCChip from './TCChip.vue';
 import TCChipWrapper from './TCChipWrapper.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcChip', TCChip);
-  vue.component('tcChipWrapper', TCChipWrapper);
+const tcChip = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcChip', TCChip);
+    Vue.component('tcChipWrapper', TCChipWrapper);
+  },
 };
+
+export default tcChip;

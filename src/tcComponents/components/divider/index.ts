@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCDivider from './TCDivider.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcDivider', TCDivider);
+const tcDivider = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcDivider', TCDivider);
+  },
 };
+
+export default tcDivider;

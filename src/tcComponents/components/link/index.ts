@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCLink from './TCLink.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcLink', TCLink);
+const tcLink = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcLink', TCLink);
+  },
 };
+
+export default tcLink;

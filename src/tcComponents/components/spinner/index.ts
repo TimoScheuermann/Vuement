@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCSpinner from './TCSpinner.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcSpinner', TCSpinner);
+const tcSpinner = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcSpinner', TCSpinner);
+  },
 };
+
+export default tcSpinner;

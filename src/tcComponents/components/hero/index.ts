@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCHero from './TCHero.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcHero', TCHero);
+const tcHero = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcHero', TCHero);
+  },
 };
+
+export default tcHero;

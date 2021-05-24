@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
-    "jsx": "preserve",
+    "declaration": true,
+    "declarationDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
@@ -12,8 +14,11 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "jsx": "preserve",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "node",
+      "vue"
     ],
     "paths": {
       "@/*": [
@@ -36,6 +41,8 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "lib"
   ]
 }

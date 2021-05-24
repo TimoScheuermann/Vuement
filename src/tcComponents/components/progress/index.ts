@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCProgress from './TCProgress.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcProgress', TCProgress);
+const tcProgress = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcProgress', TCProgress);
+  },
 };
+
+export default tcProgress;

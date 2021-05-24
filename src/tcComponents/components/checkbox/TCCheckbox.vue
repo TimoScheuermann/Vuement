@@ -21,7 +21,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class TCCheckbox extends Vue {
-  @Prop({ default: 'Title' }) title!: string;
+  @Prop() title!: string;
   @Prop({ default: 'primary' }) color!: string;
   @Prop() value!: boolean;
 

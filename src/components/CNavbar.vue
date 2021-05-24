@@ -1,5 +1,5 @@
 <template>
-  <tc-navbar class="c-navbar">
+  <tc-navbar class="c-navbar" breakpoint="850px">
     <template slot="title">
       <tc-flow>
         <div class="title" @click="goHome">

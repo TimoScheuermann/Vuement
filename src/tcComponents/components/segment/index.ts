@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCSegment from './TCSegment.vue';
 import TCSegmentItem from './TCSegmentItem.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcSegment', TCSegment);
-  vue.component('tcSegmentItem', TCSegmentItem);
+const tcSegment = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcSegment', TCSegment);
+    Vue.component('tcSegmentItem', TCSegmentItem);
+  },
 };
+
+export default tcSegment;

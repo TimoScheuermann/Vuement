@@ -3,6 +3,7 @@
     <div class="tc-sheet" v-if="visible" @click.stop="close" @touchmove.prevent>
       <transition name="slide" appear>
         <div class="tc-sheet--sheet" @click.prevent.stop>
+          <div class="tc-sheet--sheet__dragger" v-touch:swipe.bottom="close" />
           <div class="tc-sheet--sheet__title" v-if="title">{{ title }}</div>
           <div class="tc-sheet--sheet__items">
             <slot />
@@ -63,11 +64,31 @@ export default class TCSheet extends Vue {
     left: 50%;
     transform: translate(-50%, 0%);
     width: calc(90vw);
-    max-width: 600px;
+    max-width: 400px;
     border-radius: 39px 39px 0 0;
     background: var(--tc-background);
-    padding: 20px;
-    padding: 20px 5vw calc(20px + env(safe-area-inset-bottom)) 5vw;
+
+    padding: 0px 5vw calc(20px + env(safe-area-inset-bottom)) 5vw;
+
+    &__dragger {
+      position: relative;
+      height: 20px;
+      width: 100%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 3px;
+        border-radius: 10px;
+        width: 40%;
+        max-width: 200px;
+        background: currentColor;
+        opacity: 0.5;
+      }
+    }
 
     &__title {
       font-weight: bold;

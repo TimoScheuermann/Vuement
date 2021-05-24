@@ -27,7 +27,9 @@ import { Component, Prop } from 'vue-property-decorator';
 import TCLinkMixin from '@/tcComponents/mixins/TCLink.mixin';
 import { mixins } from 'vue-class-component';
 
-@Component
+@Component({
+  name: 'tcButton',
+})
 export default class TCButton extends mixins(TCLinkMixin) {
   @Prop() title!: string;
   @Prop() icon!: string;

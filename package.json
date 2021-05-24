@@ -1,20 +1,68 @@
 {
-  "name": "timos-icons",
+  "name": "tccomponents",
   "version": "0.0.1",
   "private": false,
+  "author": {
+    "name": "Timo Scheuermann",
+    "email": "contact@timos.design",
+    "url": "https://timos.design/"
+  },
+  "description": "Component Library for Vue.js",
+  "license": "MIT",
+  "homepage": "https://components.timos.design",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TimoScheuermann/TCComponents"
+  },
+  "bugs": {
+    "url": "https://github.com/TimoScheuermann/TCComponents/issues"
+  },
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-lib": "vue-cli-service build --target lib src/index.ts"
+    "prepublishOnly": "yarn build:lib",
+    "serve": "vue-cli-service serve",
+    "build": "node build.js && vue-cli-service build",
+    "build:lib": "cross-env TC_TARGET=true vue-cli-service build --target lib src/tcComponents/index.ts",
+    "build:test": "yarn build:lib && npm pack && shx mv ./tccomponents-0.1.0.tgz .."
   },
   "files": [
-    "dist/*",
-    "types/*",
-    "icons/*"
+    "lib/*",
+    "src/tcComponents/types/*"
   ],
-  "types": "./types/index.d.ts",
-  "main": "./dist/timos-icons.umd.js",
+  "types": "./src/tcComponents/types/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "main": "lib/tccomponents.umd.min.js",
+  "browser": "lib/tccomponents.umd.min.js",
+  "module": "lib/tccomponents.umd.min.js",
+  "unpkg": "lib/tccomponents.umd.min.js",
+  "jsdeliver": "lib/tccomponents.umd.min.js",
+  "keywords": [
+    "tccomponents",
+    "vue",
+    "vuejs",
+    "vue.js",
+    "component",
+    "comüonents",
+    "vue-components",
+    "css",
+    "javascript",
+    "typescript",
+    "ui",
+    "framework",
+    "library",
+    "frontend",
+    "responsive",
+    "custom",
+    "customizable",
+    "mobile",
+    "desktop",
+    "ios",
+    "safari",
+    "flat",
+    "modern"
+  ],
   "dependencies": {
     "core-js": "^3.6.5",
     "register-service-worker": "^1.7.1",
@@ -23,6 +71,7 @@
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.2.0",
+    "vue2-touch-events": "^3.2.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -37,6 +86,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^6.2.2",
@@ -60,8 +110,10 @@
     ],
     "parserOptions": {
       "ecmaVersion": 2020
-    },
-    "rules": {}
+    }
+  },
+  "engines": {
+    "node": ">=12"
   },
   "browserslist": [
     "> 1%",

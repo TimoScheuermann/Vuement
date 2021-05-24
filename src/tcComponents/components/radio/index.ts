@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCRadio from './TCRadio.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcRadio', TCRadio);
+const tcRadio = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcRadio', TCRadio);
+  },
 };
+
+export default tcRadio;

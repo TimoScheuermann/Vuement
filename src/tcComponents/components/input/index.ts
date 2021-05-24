@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCInput from './TCInput.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcInput', TCInput);
+const tcInput = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcInput', TCInput);
+  },
 };
+
+export default tcInput;

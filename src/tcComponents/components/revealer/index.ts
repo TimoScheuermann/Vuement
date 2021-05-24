@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCRevealer from './TCRevealer.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcRevealer', TCRevealer);
+const tcRevealer = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcRevealer', TCRevealer);
+  },
 };
+
+export default tcRevealer;

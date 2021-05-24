@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCSpacer from './TCSpacer.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcSpacer', TCSpacer);
+const tcSpacer = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcSpacer', TCSpacer);
+  },
 };
+
+export default tcSpacer;

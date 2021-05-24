@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCTitle from './TCTitle.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcTitle', TCTitle);
+const tcTitle = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcTitle', TCTitle);
+  },
 };
+
+export default tcTitle;

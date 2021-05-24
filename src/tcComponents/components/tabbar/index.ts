@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCTabbar from './TCTabbar.vue';
 import TCTabbarItem from './TCTabbarItem.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcTabbar', TCTabbar);
-  vue.component('tcTabbarItem', TCTabbarItem);
+const tcTabbar = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcTabbar', TCTabbar);
+    Vue.component('tcTabbarItem', TCTabbarItem);
+  },
 };
+
+export default tcTabbar;

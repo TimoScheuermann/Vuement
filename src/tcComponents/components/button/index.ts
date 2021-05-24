@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCButton from './TCButton.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcButton', TCButton);
+const tcButton = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcButton', TCButton);
+  },
 };
+
+export default tcButton;

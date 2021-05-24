@@ -38,5 +38,6 @@ export default class TCSheetItem extends Mixins(TCLinkMixin) {
   &--title {
     font-weight: 500;
   }
+  padding: 5px 0;
 }
 </style>

@@ -1,4 +1,4 @@
-import { components } from '@/utils/constants';
+import { getComponents } from '@/utils/components';
 import InterimComponent from '@/views-interim/InterimComponent.vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -49,12 +49,12 @@ const router = new VueRouter({
     {
       path: '/component',
       component: InterimComponent,
-      children: components.map((x) => {
+      children: getComponents().map((x) => {
         return {
           path: x.toLowerCase(),
           name: 'tc' + x,
           component: () => import('@/views/components/' + x + '.vue'),
-          meta: { title: 'TC ' + x },
+          meta: { title: 'TC ' + x, component: x },
         };
       }),
     },

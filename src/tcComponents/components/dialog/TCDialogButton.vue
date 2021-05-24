@@ -22,9 +22,9 @@ import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
 export default class TCDialogButton extends Mixins(TCLinkMixin) {
-  @Prop({ default: 'Hello' }) title!: string;
+  @Prop() title!: string;
   @Prop() color!: string;
-  @Prop({ default: 'ti-dots' }) icon!: string;
+  @Prop() icon!: string;
   @Prop() image!: string;
 
   public handleClick(e: MouseEvent): void {

@@ -1,4 +1,3 @@
-// Components
 export { default as tcAction } from './components/action';
 export { default as tcAvatar } from './components/avatar';
 export { default as tcButton } from './components/button';
@@ -27,7 +26,8 @@ export { default as tcSpacer } from './components/spacer';
 export { default as tcSpinner } from './components/spinner';
 export { default as tcSwitch } from './components/switch';
 export { default as tcTabbar } from './components/tabbar';
+export { default as tcTable } from './components/table';
 export { default as tcTextarea } from './components/textarea';
 export { default as tcTitle } from './components/title';
-export { default as tcFlow } from './layouts/flow';
-export { default as tcGrid } from './layouts/grid';
+export { default as tlFlow } from './layouts/flow';
+export { default as tlGrid } from './layouts/grid';

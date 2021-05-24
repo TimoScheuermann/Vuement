@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCImage from './TCImage.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcImage', TCImage);
+const tcImage = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcImage', TCImage);
+  },
 };
+
+export default tcImage;

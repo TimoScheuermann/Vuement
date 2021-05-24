@@ -1,6 +1,14 @@
 <template>
   <label class="tc-input" :frosted="frosted">
-    <div class="tc-input--title" v-if="title">{{ title }}</div>
+    <div
+      class="tc-input--title"
+      :floating="floatingTitle"
+      :moveUp="!!this.innerVal && this.innerVal.length > 0"
+      :icon="icon"
+      v-if="title"
+    >
+      {{ title }}
+    </div>
     <div class="tc-input--input" :style="outlineStyle">
       <div class="tc-input--input__background" />
       <div class="tc-input--input--icon" v-if="icon">
@@ -8,8 +16,8 @@
       </div>
       <input
         :type="type"
-        :value="type && type !== 'file' ? innerVal : null"
-        :placeholder="placeholder"
+        v-model="innerVal"
+        :placeholder="floatingTitle ? '' : placeholder"
         :accept="accept"
         :autocomplete="autocomplete"
         :autofocus="autofocus"
@@ -44,6 +52,7 @@ export default class TCInput extends Vue {
   @Prop() icon!: string;
   @Prop() frosted!: boolean;
   @Prop() outline!: string;
+  @Prop({ default: false }) floatingTitle!: boolean;
 
   @Prop() accept!: string;
   @Prop() autocomplete!: 'on' | 'off';
@@ -103,6 +112,7 @@ export default class TCInput extends Vue {
   max-width: calc(100% - 5px);
 
   color: var(--tc-color);
+  position: relative;
 
   &[frosted] {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -118,6 +128,31 @@ export default class TCInput extends Vue {
   &--title {
     font-weight: 550;
     margin-left: 5px;
+
+    &[floating] {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      z-index: 10;
+      transform: translateY(-50%);
+      font-weight: normal;
+      opacity: 0.6;
+      transition: all 0.2s ease-in-out;
+      user-select: none;
+
+      &[icon] {
+        margin-left: 26px;
+      }
+
+      &[moveUp] {
+        font-weight: 550;
+        user-select: text;
+        opacity: 1;
+        top: -10px;
+        left: 0;
+        margin-left: 0;
+      }
+    }
   }
 
   &--input {

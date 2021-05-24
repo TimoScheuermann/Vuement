@@ -1,8 +1,12 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCAction from './TCAction.vue';
 import TCActionItem from './TCActionItem.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcAction', TCAction);
-  vue.component('tcActionItem', TCActionItem);
+const tcAction = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcAction', TCAction);
+    Vue.component('tcActionItem', TCActionItem);
+  },
 };
+
+export default tcAction;

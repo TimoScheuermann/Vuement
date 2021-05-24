@@ -1,24 +1,22 @@
-# timos-photos
+# TCComponents
 
-## Project setup
-```
-yarn install
-```
+## Installation
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+``` bash
+# npm
+npm install tccomponents
 ```
 
-### Compiles and minifies for production
+``` bash
+# yarn
+yarn add tccomponents
 ```
-yarn build
-```
+## Use
 
-### Lints and fixes files
-```
-yarn lint
-```
+``` javascript
+import Vue from 'vue';
+import TCComponents from 'tccomponents';
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Vue.use(TCComponents);
+
+```

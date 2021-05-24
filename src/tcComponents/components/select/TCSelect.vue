@@ -49,7 +49,7 @@ export default class TCSelect extends Vue {
   @Prop({ default: false }) value!: boolean;
   @Prop() color!: string;
   @Prop() background!: string;
-  @Prop({ default: 'Select one or more' }) placeholder!: string;
+  @Prop({ default: 'Select one' }) placeholder!: string;
   @Prop({ default: false }) multiple!: boolean;
   @Prop() frosted!: boolean;
   @Prop({ default: false }) disabled!: boolean;

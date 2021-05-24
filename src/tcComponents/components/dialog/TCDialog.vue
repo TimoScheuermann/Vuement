@@ -8,7 +8,10 @@
     >
       <transition name="slide" appear>
         <div class="tc-dialog--dialog" @click.prevent.stop>
-          <div class="tc-dialog--dialog__background" />
+          <div
+            class="tc-dialog--dialog__dragger"
+            v-touch:swipe.bottom="close"
+          />
           <div class="tc-dialog--dialog__title" v-if="title">{{ title }}</div>
           <div class="tc-dialog--dialog__items">
             <slot />
@@ -23,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 
 @Component
 export default class TCDialog extends Vue {
@@ -61,7 +64,11 @@ export default class TCDialog extends Vue {
   bottom: 0;
   z-index: 200;
 
-  background: rgba(#000, 0.25);
+  background: rgba(#000, 0.85);
+  @supports (backdrop-filter: saturate(180%) blur(20px)) {
+    backdrop-filter: saturate(180%) blur(10px);
+    background: rgba(#000, 0.65);
+  }
 
   &--dialog {
     position: absolute;
@@ -75,28 +82,34 @@ export default class TCDialog extends Vue {
     max-height: 90vh;
 
     padding: 20px;
+    padding-top: 0px;
     border-radius: #{2 * $border-radius};
-    @supports (backdrop-filter: saturate(180%) blur(20px)) {
-      backdrop-filter: saturate(180%) blur(20px);
-      &__background {
-        opacity: 0.85;
-      }
-    }
-
-    &__background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--tc-paragraph);
-      border-radius: inherit;
-    }
+    background: var(--tc-paragraph);
 
     &__title,
     &__items,
     &__buttons {
       position: relative;
+    }
+
+    &__dragger {
+      position: relative;
+      height: 20px;
+      width: 100%;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 3px;
+        border-radius: 10px;
+        width: 40%;
+        max-width: 200px;
+        background: currentColor;
+        opacity: 0.5;
+      }
     }
 
     &__title {
@@ -133,11 +146,11 @@ export default class TCDialog extends Vue {
 
 .slide-enter,
 .slide-leave-to {
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, 0%);
   opacity: 0;
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: 0.3s cubic-bezier(0.97, 1.61, 0.43, 0.69);
+  transition: 0.3s ease-in-out;
 }
 </style>

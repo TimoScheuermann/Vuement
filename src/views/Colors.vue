@@ -1,5 +1,7 @@
 <template>
-  <div class="view-colors">colors</div>
+  <div class="view-colors" content>
+    <h1>Colors</h1>
+  </div>
 </template>
 
 <script lang="ts">

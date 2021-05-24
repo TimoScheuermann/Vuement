@@ -1,5 +1,5 @@
 <template>
-  <div class="tc-flow" :class="classes">
+  <div class="tl-flow" :class="classes">
     <slot />
   </div>
 </template>
@@ -8,26 +8,26 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class TCFlow extends Vue {
+export default class TLFlow extends Vue {
   @Prop({ default: 'center' }) vertical!: string;
   @Prop({ default: 'space-between' }) horizontal!: string;
   @Prop({ default: 'row' }) flow!: string;
 
   get classes(): string {
     const classes = ['h-' + this.horizontal, 'v-' + this.vertical];
-    if (this.flow === 'column') classes.push('tc-flow__column');
+    if (this.flow === 'column') classes.push('tl-flow__column');
     return classes.join(' ');
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.tc-flow {
+.tl-flow {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  &.tc-flow__column {
+  &.tl-flow__column {
     flex-direction: column;
   }
   &.h-space-between {

@@ -1,6 +1,10 @@
-import { VueConstructor } from 'vue';
+import _Vue from 'vue';
 import TCScrollUp from './TCScrollUp.vue';
 
-export default (vue: VueConstructor): void => {
-  vue.component('tcScrollUp', TCScrollUp);
+const tcScrollUp = {
+  install(Vue: typeof _Vue): void {
+    Vue.component('tcScrollUp', TCScrollUp);
+  },
 };
+
+export default tcScrollUp;

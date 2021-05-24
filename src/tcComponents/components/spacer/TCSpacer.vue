@@ -12,7 +12,6 @@ export default class TCSpacer extends Vue {}
 <style lang="scss" scoped>
 .tc-spacer {
   height: 5px;
-  background: var(--tc-color);
   opacity: 0.1;
 }
 </style>
