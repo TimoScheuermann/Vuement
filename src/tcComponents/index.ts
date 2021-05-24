@@ -5,7 +5,7 @@ import * as tcComponents from './components';
 import tcoptions, { TCOptions } from './options';
 import $tc from './tc';
 
-const TCComponents = {
+const Vuement = {
   install(Vue: typeof _Vue, options: TCOptions = tcoptions): void {
     if (!options.colors) options.colors = tcoptions.colors;
     if (!options.settings) options.settings = tcoptions.settings;
@@ -46,8 +46,8 @@ const TCComponents = {
 };
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(TCComponents);
+  window.Vue.use(Vuement);
 }
 
-export default TCComponents;
+export default Vuement;
 export * from './components';

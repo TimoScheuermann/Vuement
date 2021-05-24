@@ -1,7 +1,7 @@
 import Vue, { PluginFunction } from 'vue';
 
-declare const TCComponents: PluginFunction<Vue>;
-export default TCComponents;
+declare const Vuement: PluginFunction<Vue>;
+export default Vuement;
 
 // Components
 export const tcButton: PluginFunction<Vue>;

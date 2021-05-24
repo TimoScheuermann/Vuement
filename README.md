@@ -1,22 +1,22 @@
-# TCComponents
+# Vuement
 
 ## Installation
 
 ``` bash
 # npm
-npm install tccomponents
+npm install vuement
 ```
 
 ``` bash
 # yarn
-yarn add tccomponents
+yarn add vuement
 ```
 ## Use
 
 ``` javascript
 import Vue from 'vue';
-import TCComponents from 'tccomponents';
+import Vuement from 'vuement';
 
-Vue.use(TCComponents);
+Vue.use(Vuement);
 
 ```
