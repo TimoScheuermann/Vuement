@@ -1,7 +1,7 @@
 <template>
-  <tc-action>
-    <tc-action-item />
-  </tc-action>
+  <vm-action>
+    <vm-action-item />
+  </vm-action>
 </template>
 
 <script lang="ts">
@@ -12,7 +12,7 @@ export default class CPreviewAction extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-// .tc-navbar {
+// .vm-navbar {
 //   position: static;
 //   padding-left: 20px;
 //   padding-right: 20px;

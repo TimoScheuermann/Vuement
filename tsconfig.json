@@ -4,7 +4,7 @@
     "module": "esnext",
     "strict": true,
     "declaration": true,
-    "declarationDir": "lib",
+    "declarationDir": "dist",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "importHelpers": true,
@@ -14,9 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "jsx": "preserve",
     "types": [
-      "webpack-env",
       "node",
       "vue"
     ],
@@ -32,17 +30,8 @@
       "scripthost"
     ]
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.js",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
   "exclude": [
     "node_modules",
-    "dist",
-    "lib"
+    "dist"
   ]
 }

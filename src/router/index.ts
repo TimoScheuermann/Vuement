@@ -4,7 +4,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
-export const prefix = 'TC Components | ';
+export const prefix = 'Vuement | ';
 
 const router = new VueRouter({
   scrollBehavior() {
@@ -16,7 +16,7 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views//Home.vue'),
+      component: () => import('@/views/Home.vue'),
       meta: {
         title: 'Home',
       },
@@ -52,9 +52,9 @@ const router = new VueRouter({
       children: getComponents().map((x) => {
         return {
           path: x.toLowerCase(),
-          name: 'tc' + x,
+          name: 'vm' + x,
           component: () => import('@/views/components/' + x + '.vue'),
-          meta: { title: 'TC ' + x, component: x },
+          meta: { title: 'VM ' + x, component: x },
         };
       }),
     },

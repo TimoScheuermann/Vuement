@@ -1,11 +1,11 @@
 module.exports = {
-  outputDir: process.env.TC_TARGET ? 'lib' : 'dist',
+  outputDir: process.env.VM_TARGET ? 'lib' : 'dist',
   css: {
     extract: false,
     loaderOptions: {
       sass: {
         prependData:
-          "@import '@/tcComponents/scss/_variables.scss';\n@import '@/tcComponents/scss/_mixins.scss';",
+          "@import '@/vuement/scss/_variables.scss';\n@import '@/vuement/scss/_mixins.scss';",
       },
     },
   },
@@ -14,7 +14,7 @@ module.exports = {
       display: 'fullscreen',
       start_url: '.',
     },
-    name: 'TC Components',
+    name: 'Vuement',
     themeColor: '#000',
     msTileColor: '#ffffff',
     appleMobileWebAppCapable: 'yes',

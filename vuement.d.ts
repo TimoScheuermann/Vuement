@@ -1,0 +1,38 @@
+import { PluginFunction } from 'vue';
+
+declare const Vuement: PluginFunction<any>;
+export default Vuement;
+
+export const vmButton: PluginFunction<any>;
+export const vmAction: PluginFunction<any>;
+export const vmAvatar: PluginFunction<any>;
+export const vmCard: PluginFunction<any>;
+export const vmCheckbox: PluginFunction<any>;
+export const vmChip: PluginFunction<any>;
+export const vmDialog: PluginFunction<any>;
+export const vmDivider: PluginFunction<any>;
+export const vmHero: PluginFunction<any>;
+export const vmImage: PluginFunction<any>;
+export const vmInput: PluginFunction<any>;
+export const vmLink: PluginFunction<any>;
+export const vmList: PluginFunction<any>;
+export const vmNavbar: PluginFunction<any>;
+export const vmProgress: PluginFunction<any>;
+export const vmQuote: PluginFunction<any>;
+export const vmRadio: PluginFunction<any>;
+export const vmRevealer: PluginFunction<any>;
+export const vmScrollUp: PluginFunction<any>;
+export const vmSegment: PluginFunction<any>;
+export const vmSelect: PluginFunction<any>;
+export const vmSheet: PluginFunction<any>;
+export const vmSidebar: PluginFunction<any>;
+export const vmSlider: PluginFunction<any>;
+export const vmSpacer: PluginFunction<any>;
+export const vmSpinner: PluginFunction<any>;
+export const vmSwitch: PluginFunction<any>;
+export const vmTabbar: PluginFunction<any>;
+export const vmTable: PluginFunction<any>;
+export const vmTextarea: PluginFunction<any>;
+export const vmTitle: PluginFunction<any>;
+export const vmFlow: PluginFunction<any>;
+export const vmGrid: PluginFunction<any>;

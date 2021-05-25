@@ -1,38 +1,38 @@
 import router from '@/router';
 
-export interface TCProp {
+export interface VMProp {
   name: string;
   default: string | boolean | number | undefined;
   description: string;
   type: string;
 }
 
-export interface TCComponent {
+export interface VMComponent {
   icon?: string;
   preview?: string;
-  props: TCProp[];
+  props: VMProp[];
   siblings?: string[];
 }
 
-const V_MODEL_BOOL: TCProp = {
+const V_MODEL_BOOL: VMProp = {
   default: undefined,
   description: 'TODO:',
   name: 'v-model',
   type: 'boolean',
 };
-const V_VALUE_BOOL: TCProp = {
+const V_VALUE_BOOL: VMProp = {
   default: false,
   description: 'TODO:',
   name: 'value',
   type: 'boolean',
 };
-const COLOR_UNDEF: TCProp = {
+const COLOR_UNDEF: VMProp = {
   default: undefined,
   description: 'TODO:',
   name: 'color',
   type: 'string',
 };
-const BACKGROUND_UNDEF: TCProp = {
+const BACKGROUND_UNDEF: VMProp = {
   default: undefined,
   description: 'TODO:',
   name: 'background',
@@ -174,7 +174,7 @@ const components = {
   Title: {
     props: [],
   },
-} as Record<string, TCComponent>;
+} as Record<string, VMComponent>;
 
 export function getComponents(): string[] {
   return Object.keys(components).sort((a, b) => a.localeCompare(b));
@@ -182,7 +182,7 @@ export function getComponents(): string[] {
 
 export function getComponent(
   component: string | undefined = undefined
-): undefined | TCComponent {
+): undefined | VMComponent {
   if (!component) {
     const { meta } = router.currentRoute;
     if (meta) component = meta.component;
@@ -195,7 +195,7 @@ export function getComponent(
 
 export function getProps(
   component: string | undefined = undefined
-): undefined | TCProp[] {
+): undefined | VMProp[] {
   if (!component) {
     const { meta } = router.currentRoute;
     if (meta) component = meta.component;

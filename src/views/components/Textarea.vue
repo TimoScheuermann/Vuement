@@ -1,16 +1,16 @@
 <template>
   <div class="view-textarea">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Examples</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
-    <tc-grid>
-      <tc-textarea />
-      <tc-textarea placeholder="Tell us something about yourself" />
-      <tc-textarea value="I like squirrels" />
+    <vm-grid>
+      <vm-textarea />
+      <vm-textarea placeholder="Tell us something about yourself" />
+      <vm-textarea value="I like squirrels" />
 
-      <tc-textarea title="Anything else?" :rows="2" />
-    </tc-grid>
+      <vm-textarea title="Anything else?" :rows="2" />
+    </vm-grid>
   </div>
 </template>
 

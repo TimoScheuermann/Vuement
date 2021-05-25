@@ -1,10 +1,10 @@
 <template>
-  <tc-tabbar>
-    <tc-tabbar-item title="Home" icon="ti-house" />
-    <tc-tabbar-item title="About" icon="ti-i-circle" routeName="tcTabbar" />
-    <tc-tabbar-item title="Profile" icon="ti-user-filled" />
-    <tc-tabbar-item title="Settings" icon="ti-gears" />
-  </tc-tabbar>
+  <vm-tabbar>
+    <vm-tabbar-item title="Home" icon="ti-house" />
+    <vm-tabbar-item title="About" icon="ti-i-circle" routeName="vmTabbar" />
+    <vm-tabbar-item title="Profile" icon="ti-user-filled" />
+    <vm-tabbar-item title="Settings" icon="ti-gears" />
+  </vm-tabbar>
 </template>
 
 <script lang="ts">
@@ -15,7 +15,7 @@ export default class CPreviewTabbar extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-.tc-tabbar {
+.vm-tabbar {
   position: static !important;
   padding-left: 20px !important;
   padding-right: 20px !important;

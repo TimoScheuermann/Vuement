@@ -1,37 +1,37 @@
 <template>
   <div class="view-divider">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Positioning</h3>
-    </tc-divider>
+    </vm-divider>
     <p>You can define the position of your content inside a divider.</p>
     <br />
 
-    <tc-grid>
-      <tc-divider position="leading">leading</tc-divider>
-      <tc-divider>center</tc-divider>
-      <tc-divider position="trailing">trailing</tc-divider>
-    </tc-grid>
+    <vm-grid>
+      <vm-divider position="leading">leading</vm-divider>
+      <vm-divider>center</vm-divider>
+      <vm-divider position="trailing">trailing</vm-divider>
+    </vm-grid>
 
     <br />
     <br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Colors</h3>
-    </tc-divider>
+    </vm-divider>
     <p>
-      By default, tc divider uses the current color for drawing the line. But
-      you can specify other colors, using either
-      <tc-link routeName="colors">pre-defined colors</tc-link> or setting
+      By default, vmDivider uses the current color for drawing the line. But you
+      can specify other colors, using either
+      <vm-link routeName="colors">pre-defined colors</vm-link> or setting
       individual hex/hsl colors
     </p>
     <br />
 
-    <tc-grid>
-      <tc-divider color="#08f">primary</tc-divider>
-      <tc-divider color="error">error</tc-divider>
-      <tc-divider color="success">success</tc-divider>
-      <tc-divider color="alarm">alarm</tc-divider>
-      <tc-divider color="purple">purple</tc-divider>
-    </tc-grid>
+    <vm-grid>
+      <vm-divider color="#08f">primary</vm-divider>
+      <vm-divider color="error">error</vm-divider>
+      <vm-divider color="success">success</vm-divider>
+      <vm-divider color="alarm">alarm</vm-divider>
+      <vm-divider color="purple">purple</vm-divider>
+    </vm-grid>
   </div>
 </template>
 

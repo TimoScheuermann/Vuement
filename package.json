@@ -12,27 +12,24 @@
   "homepage": "https://components.timos.design",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TimoScheuermann/TCComponents"
+    "url": "git+https://github.com/TimoScheuermann/Vuement"
   },
   "bugs": {
-    "url": "https://github.com/TimoScheuermann/TCComponents/issues"
+    "url": "https://github.com/TimoScheuermann/Vuement/issues"
   },
   "scripts": {
     "lint": "vue-cli-service lint",
     "prepublishOnly": "yarn build:lib",
     "serve": "vue-cli-service serve",
     "build": "node build.js && vue-cli-service build",
-    "build:lib": "cross-env TC_TARGET=true vue-cli-service build --target lib src/tcComponents/index.ts",
+    "build:lib": "cross-env VM_TARGET=true vue-cli-service build --target lib src/vuement/index.ts",
     "build:test": "yarn build:lib && npm pack && shx mv ./vuement-0.1.0.tgz .."
   },
   "files": [
     "lib/*",
-    "src/tcComponents/types/*"
+    "vuement.d.ts"
   ],
-  "types": "./src/tcComponents/types/index.d.ts",
-  "directories": {
-    "lib": "lib"
-  },
+  "types": "vuement.d.ts",
   "main": "lib/vuement.umd.min.js",
   "browser": "lib/vuement.umd.min.js",
   "module": "lib/vuement.umd.min.js",
@@ -40,7 +37,6 @@
   "jsdeliver": "lib/vuement.umd.min.js",
   "keywords": [
     "vuement",
-    "tccomponents",
     "vue",
     "vuejs",
     "vue.js",
@@ -76,6 +72,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.13.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",

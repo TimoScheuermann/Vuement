@@ -1,31 +1,31 @@
 <template>
   <div class="view-switch">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Colors</h3>
-    </tc-divider>
+    </vm-divider>
 
-    <tc-grid width="70">
+    <vm-grid width="70">
       <tl-flow flow="column">
         <p><b>primary</b></p>
-        <tc-switch color="#08f" :value="true" />
+        <vm-switch color="#08f" :value="true" />
       </tl-flow>
       <tl-flow flow="column">
         <p><b>error</b></p>
-        <tc-switch color="error" :value="true" />
+        <vm-switch color="error" :value="true" />
       </tl-flow>
       <tl-flow flow="column">
         <p><b>success</b></p>
-        <tc-switch color="success" :value="true" />
+        <vm-switch color="success" :value="true" />
       </tl-flow>
       <tl-flow flow="column">
         <p><b>alarm</b></p>
-        <tc-switch color="alarm" :value="true" />
+        <vm-switch color="alarm" :value="true" />
       </tl-flow>
       <tl-flow flow="column">
         <p><b>purple</b></p>
-        <tc-switch color="purple" :value="true" />
+        <vm-switch color="purple" :value="true" />
       </tl-flow>
-    </tc-grid>
+    </vm-grid>
   </div>
 </template>
 

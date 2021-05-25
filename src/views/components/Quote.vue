@@ -1,57 +1,57 @@
 <template>
   <div class="view-quote">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Examples</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
-    <tc-grid>
+    <vm-grid>
       <tl-flow>
-        <tc-quote>
+        <vm-quote>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus, ad
           aut. Quaerat fugit alias ipsum, maiores modi dolor voluptas possimus
           architecto est, a autem fuga sequi necessitatibus ratione explicabo
           ipsa?
-        </tc-quote>
+        </vm-quote>
       </tl-flow>
       <tl-flow>
-        <tc-quote title="Quote by Don Joe">
+        <vm-quote title="Quote by Don Joe">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat non
           unde alias tempore doloribus repudiandae nostrum aperiam quos
           deleniti, inventore reiciendis amet, similique nisi sequi eius aut
           adipisci modi. Debitis?
-        </tc-quote>
+        </vm-quote>
       </tl-flow>
       <tl-flow>
-        <tc-quote>
+        <vm-quote>
           <b>Quote by Don Joe:</b>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem rem
           quas tempora omnis vero illum nostrum doloremque iure, delectus
           recusandae exercitationem praesentium obcaecati quasi sunt. Incidunt
           maxime itaque provident dolorem!
-        </tc-quote>
+        </vm-quote>
       </tl-flow>
-    </tc-grid>
+    </vm-grid>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Colors</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
 
-    <tc-grid>
-      <tc-quote color="#08f">
+    <vm-grid>
+      <vm-quote color="#08f">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </tc-quote>
-      <tc-quote>
+      </vm-quote>
+      <vm-quote>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </tc-quote>
-      <tc-quote color="success">
+      </vm-quote>
+      <vm-quote color="success">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </tc-quote>
-      <tc-quote color="pink">
+      </vm-quote>
+      <vm-quote color="pink">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-      </tc-quote>
-    </tc-grid>
+      </vm-quote>
+    </vm-grid>
   </div>
 </template>
 

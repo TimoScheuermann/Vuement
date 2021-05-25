@@ -2,19 +2,19 @@
   <div class="view-interim-component">
     <div class="component-hero">
       <div class="hero-wrapper">
-        <tc-flow>
-          <tc-title :title="$route.meta.title" subtitle="Component" />
-          <tc-flow>
-            <tc-button icon="ti-github" variant="filled" />
-            <tc-button icon="ti-back" variant="filled" />
-            <tc-button icon="ti-bug" variant="filled" />
-          </tc-flow>
-        </tc-flow>
+        <vm-flow>
+          <vm-title :title="$route.meta.title" subtitle="Component" />
+          <vm-flow>
+            <vm-button icon="ti-github" variant="filled" />
+            <vm-button icon="ti-back" variant="filled" />
+            <vm-button icon="ti-bug" variant="filled" />
+          </vm-flow>
+        </vm-flow>
         <template v-if="comp && comp.preview">
           <div class="spacer" />
-          <tc-flow horizontal="center">
+          <vm-flow horizontal="center">
             <component :is="comp.preview" />
-          </tc-flow>
+          </vm-flow>
         </template>
       </div>
     </div>
@@ -24,43 +24,43 @@
       <br />
 
       <template v-if="props">
-        <tc-title :title="$route.meta.title" subtitle="API" />
+        <vm-title :title="$route.meta.title" subtitle="API" />
         <br />
-        <tc-table>
-          <tc-tr>
-            <tc-td>Prop</tc-td>
-            <tc-td>Type</tc-td>
-            <tc-td>Default</tc-td>
-            <tc-td>Description</tc-td>
-          </tc-tr>
-          <tc-tr v-for="p in props" :key="p.name">
-            <tc-td>{{ p.name }}</tc-td>
-            <tc-td>{{ p.type }}</tc-td>
-            <tc-td>{{ p.default }}</tc-td>
-            <tc-td>{{ p.description }}</tc-td>
-          </tc-tr>
-        </tc-table>
+        <vm-table>
+          <vm-tr>
+            <vm-td>Prop</vm-td>
+            <vm-td>Type</vm-td>
+            <vm-td>Default</vm-td>
+            <vm-td>Description</vm-td>
+          </vm-tr>
+          <vm-tr v-for="p in props" :key="p.name">
+            <vm-td>{{ p.name }}</vm-td>
+            <vm-td>{{ p.type }}</vm-td>
+            <vm-td>{{ p.default }}</vm-td>
+            <vm-td>{{ p.description }}</vm-td>
+          </vm-tr>
+        </vm-table>
       </template>
 
       <template v-if="siblings">
         <div v-for="s in Object.keys(siblings)" :key="s">
           <br />
-          <tc-title :title="'TC ' + s" subtitle="API" />
+          <vm-title :title="'VM ' + s" subtitle="API" />
           <br />
-          <tc-table>
-            <tc-tr>
-              <tc-td>Prop</tc-td>
-              <tc-td>Type</tc-td>
-              <tc-td>Default</tc-td>
-              <tc-td>Description</tc-td>
-            </tc-tr>
-            <tc-tr v-for="p in siblings[s]" :key="p.name">
-              <tc-td>{{ p.name }}</tc-td>
-              <tc-td>{{ p.type }}</tc-td>
-              <tc-td>{{ p.default }}</tc-td>
-              <tc-td>{{ p.description }}</tc-td>
-            </tc-tr>
-          </tc-table>
+          <vm-table>
+            <vm-tr>
+              <vm-td>Prop</vm-td>
+              <vm-td>Type</vm-td>
+              <vm-td>Default</vm-td>
+              <vm-td>Description</vm-td>
+            </vm-tr>
+            <vm-tr v-for="p in siblings[s]" :key="p.name">
+              <vm-td>{{ p.name }}</vm-td>
+              <vm-td>{{ p.type }}</vm-td>
+              <vm-td>{{ p.default }}</vm-td>
+              <vm-td>{{ p.description }}</vm-td>
+            </vm-tr>
+          </vm-table>
         </div>
       </template>
     </div>
@@ -75,8 +75,8 @@ import {
   getComponent,
   getProps,
   getSiblings,
-  TCComponent,
-  TCProp,
+  VMComponent,
+  VMProp,
 } from '@/utils/components';
 import { Vue, Component } from 'vue-property-decorator';
 
@@ -88,19 +88,19 @@ import { Vue, Component } from 'vue-property-decorator';
   },
 })
 export default class InterimComponent extends Vue {
-  get comp(): TCComponent | undefined {
+  get comp(): VMComponent | undefined {
     return getComponent();
   }
 
-  get props(): TCProp[] | undefined {
+  get props(): VMProp[] | undefined {
     return getProps();
   }
 
-  get siblings(): Record<string, TCProp[]> | undefined {
+  get siblings(): Record<string, VMProp[]> | undefined {
     const sib = getSiblings();
     if (!sib || sib.length === 0) return undefined;
 
-    const sibs: Record<string, TCProp[]> = {};
+    const sibs: Record<string, VMProp[]> = {};
     sib.forEach((x) => {
       const props = getProps(x);
       if (props && props.length > 0) sibs[x] = props;

@@ -1,9 +1,9 @@
 <template>
-  <tc-navbar>
+  <vm-navbar>
     <b slot="title">Navbar</b>
-    <tc-navbar-item title="Home" icon="ti-house" />
-    <tc-navbar-item title="About" icon="ti-i-circle" routeName="tcNavbar" />
-  </tc-navbar>
+    <vm-navbar-item title="Home" icon="ti-house" />
+    <vm-navbar-item title="About" icon="ti-i-circle" routeName="vmNavbar" />
+  </vm-navbar>
 </template>
 
 <script lang="ts">
@@ -14,7 +14,7 @@ export default class CPreviewNavbar extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-.tc-navbar {
+.vm-navbar {
   position: static !important;
   padding-left: 20px !important;
   padding-right: 20px !important;

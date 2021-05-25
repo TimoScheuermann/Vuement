@@ -1,24 +1,26 @@
 <template>
-  <tc-navbar class="c-navbar" breakpoint="850px">
+  <vm-navbar class="c-navbar" breakpoint="850px">
     <template slot="title">
-      <tc-flow>
+      <vm-flow>
         <div class="title" @click="goHome">
-          <i class="ti-tccomponents" />
-          <span>TC Components</span>
+          <img
+            src="https://timos.s3.eu-central-1.amazonaws.com/lib/632e6c9c-bee5-4018-9e19-0ebdb099af7b.svg"
+            alt=""
+          />
         </div>
-      </tc-flow>
+      </vm-flow>
     </template>
 
     <template v-if="$store.getters.desktop">
-      <tc-navbar-item
+      <vm-navbar-item
         title="Components"
         @click="$store.commit('sidebar', true)"
       />
-      <tc-navbar-item title="Colors" />
-      <tc-navbar-item title="Themes" />
-      <tc-navbar-item title="Getting started" />
+      <vm-navbar-item title="Colors" />
+      <vm-navbar-item title="Themes" />
+      <vm-navbar-item title="Getting started" />
     </template>
-  </tc-navbar>
+  </vm-navbar>
 </template>
 
 <script lang="ts">
@@ -51,10 +53,10 @@ export default class CNavbar extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 0;
 
-    i {
-      margin-right: 10px;
-      color: $error;
+    img {
+      height: 20px;
     }
   }
 }

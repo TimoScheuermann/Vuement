@@ -1,55 +1,55 @@
 <template>
   <div class="view-input">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Examples</h3>
-    </tc-divider>
+    </vm-divider>
     <p>
-      TC-Input has different options, like title, placeholder, type, icon,
+      vmInput has different options, like title, placeholder, type, icon,
       disabled and more. Below are some examples.
     </p>
-    <tc-grid width="150">
-      <tc-input title="Text Input" />
-      <tc-input title="Text + Icon" icon="ti-user-filled" />
-      <tc-input title="Number Input" type="number" />
-      <tc-input title="Number + Icon" icon="ti-sort-numeric" />
-      <tc-input title="Placeholder" placeholder="Placeholder" />
-      <tc-input title="Disabled" :disabled="true" />
-    </tc-grid>
+    <vm-grid width="150">
+      <vm-input title="Text Input" />
+      <vm-input title="Text + Icon" icon="ti-user-filled" />
+      <vm-input title="Number Input" type="number" />
+      <vm-input title="Number + Icon" icon="ti-sort-numeric" />
+      <vm-input title="Placeholder" placeholder="Placeholder" />
+      <vm-input title="Disabled" :disabled="true" />
+    </vm-grid>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Outlines</h3>
-    </tc-divider>
+    </vm-divider>
     <p>
       You can inform the user about wrong or correct inputs by displaying an
       outline.
     </p>
-    <tc-grid width="150">
-      <tc-input title="Correct Inout" value="Squirrel" outline="success" />
-      <tc-input title="Wrong Input" value="Fox" outline="error" />
-      <tc-input
+    <vm-grid width="150">
+      <vm-input title="Correct Inout" value="Squirrel" outline="success" />
+      <vm-input title="Wrong Input" value="Fox" outline="error" />
+      <vm-input
         value="1234"
         type="password"
         title="Weak Password"
         outline="alarm"
       />
-    </tc-grid>
+    </vm-grid>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Types</h3>
-    </tc-divider>
-    <p>You can assign the following input types to TC Input.</p>
-    <tc-flow horizontal="start">
-      <tc-chip v-for="t in types" :key="t" @click="type = t" :value="t" />
-    </tc-flow>
+    </vm-divider>
+    <p>You can assign the following input types to vmInput.</p>
+    <vm-flow horizontal="start">
+      <vm-chip v-for="t in types" :key="t" @click="type = t" :value="t" />
+    </vm-flow>
     <br />
-    <tc-input :placeholder="type" :type="type" />
+    <vm-input :placeholder="type" :type="type" />
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Colors</h3>
-    </tc-divider>
+    </vm-divider>
     TODO:
   </div>
 </template>

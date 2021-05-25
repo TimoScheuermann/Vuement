@@ -1,58 +1,58 @@
 <template>
   <div class="view-progress">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Types</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
-    <tc-grid>
+    <vm-grid>
       <div>
         <b>bar</b>
-        <tc-progress :progress="0.174" />
+        <vm-progress :progress="0.174" />
       </div>
       <div>
         <b>ring</b>
-        <tc-progress type="ring" :progress="0.174" />
+        <vm-progress type="ring" :progress="0.174" />
       </div>
-    </tc-grid>
+    </vm-grid>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Colors</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
 
-    <tc-grid>
-      <tc-progress type="ring" color="#08f" :progress="0.573" />
-      <tc-progress type="ring" color="success" :progress="0.273" />
-      <tc-progress color="alarm" :progress="0.573" />
-      <tc-progress color="purple" :progress="0.273" />
-    </tc-grid>
+    <vm-grid>
+      <vm-progress type="ring" color="#08f" :progress="0.573" />
+      <vm-progress type="ring" color="success" :progress="0.273" />
+      <vm-progress color="alarm" :progress="0.573" />
+      <vm-progress color="purple" :progress="0.273" />
+    </vm-grid>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Ring Options</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
-    <tc-flow>
-      <tc-progress type="ring" :progress="0.333" :ringWidth="20" />
-      <tc-progress type="ring" :progress="0.333" :ringSize="50" />
-      <tc-progress
+    <vm-flow>
+      <vm-progress type="ring" :progress="0.333" :ringWidth="20" />
+      <vm-progress type="ring" :progress="0.333" :ringSize="50" />
+      <vm-progress
         type="ring"
         :progress="0.333"
         :ringWidth="20"
         :ringSize="50"
       />
-    </tc-flow>
+    </vm-flow>
 
     <br /><br />
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Bar Options</h3>
-    </tc-divider>
+    </vm-divider>
     <br />
-    <tc-grid>
-      <tc-progress barHeight="10px" :progress="0.333" />
-      <tc-progress barHeight="15px" :progress="0.333" />
-    </tc-grid>
+    <vm-grid>
+      <vm-progress barHeight="10px" :progress="0.333" />
+      <vm-progress barHeight="15px" :progress="0.333" />
+    </vm-grid>
   </div>
 </template>
 

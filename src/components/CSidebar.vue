@@ -1,14 +1,14 @@
 <template>
   <transition name="appear">
-    <tc-sidebar v-if="$store.getters.sidebar" width="200px">
+    <vm-sidebar v-if="$store.getters.sidebar" width="200px">
       <div class="title" slot="header">Components</div>
-      <tc-sidebar-item
+      <vm-sidebar-item
         v-for="c in components"
         :key="c"
         :title="c"
-        :routeName="'tc' + c"
+        :routeName="'vm' + c"
       />
-    </tc-sidebar>
+    </vm-sidebar>
   </transition>
 </template>
 

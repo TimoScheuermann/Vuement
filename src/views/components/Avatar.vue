@@ -1,70 +1,70 @@
 <template>
   <div class="view-avatar">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Sizes</h3>
-    </tc-divider>
+    </vm-divider>
 
-    <tc-flow horizontal="space-around">
-      <tc-flow flow="column" horizontal="center">
-        <tc-avatar
+    <vm-flow horizontal="space-around">
+      <vm-flow flow="column" horizontal="center">
+        <vm-avatar
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>small</b>
-      </tc-flow>
-      <tc-flow flow="column" horizontal="center">
-        <tc-avatar
+      </vm-flow>
+      <vm-flow flow="column" horizontal="center">
+        <vm-avatar
           size="normal"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>normal</b>
-      </tc-flow>
-      <tc-flow flow="column" horizontal="center">
-        <tc-avatar
+      </vm-flow>
+      <vm-flow flow="column" horizontal="center">
+        <vm-avatar
           size="medium"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>medium</b>
-      </tc-flow>
-      <tc-flow flow="column" horizontal="center">
-        <tc-avatar
+      </vm-flow>
+      <vm-flow flow="column" horizontal="center">
+        <vm-avatar
           size="large"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>large</b>
-      </tc-flow>
-    </tc-flow>
+      </vm-flow>
+    </vm-flow>
 
     <br />
 
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Variants</h3>
-    </tc-divider>
+    </vm-divider>
 
-    <tc-grid width="100px">
-      <tc-flow flow="column">
-        <tc-avatar
+    <vm-grid width="100px">
+      <vm-flow flow="column">
+        <vm-avatar
           size="normal"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>rounded</b>
-      </tc-flow>
-      <tc-flow flow="column">
-        <tc-avatar
+      </vm-flow>
+      <vm-flow flow="column">
+        <vm-avatar
           variant="circle"
           size="normal"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>circle</b>
-      </tc-flow>
-      <tc-flow flow="column">
-        <tc-avatar
+      </vm-flow>
+      <vm-flow flow="column">
+        <vm-avatar
           variant="square"
           size="normal"
           src="https://images.unsplash.com/photo-1470130623320-9583a8d06241?h=400"
         />
         <b>square</b>
-      </tc-flow>
-    </tc-grid>
+      </vm-flow>
+    </vm-grid>
   </div>
 </template>
 

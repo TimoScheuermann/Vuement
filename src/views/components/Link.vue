@@ -1,27 +1,27 @@
 <template>
   <div class="view-link">
-    <tc-divider position="leading">
+    <vm-divider position="leading">
       <h3>Examples</h3>
-    </tc-divider>
+    </vm-divider>
     <p>
-      Use links to add <tc-link routeName="tcLink">navigations</tc-link> inside
+      Use links to add <vm-link routeName="vmLink">navigations</vm-link> inside
       paragraphs.
     </p>
 
-    <tc-grid width="100">
+    <vm-grid width="100">
       <div>
-        <tc-link color="#08f" routeName="tcLink">Primary color</tc-link>
+        <vm-link color="#08f" routeName="vmLink">Primary color</vm-link>
       </div>
       <div>
-        <tc-link color="error" routeName="tcLink">Error color</tc-link>
+        <vm-link color="error" routeName="vmLink">Error color</vm-link>
       </div>
       <div>
-        <tc-link color="success" routeName="tcLink">Success color</tc-link>
+        <vm-link color="success" routeName="vmLink">Success color</vm-link>
       </div>
       <div>
-        <tc-link color="alarm" routeName="tcLink">Alarm color</tc-link>
+        <vm-link color="alarm" routeName="vmLink">Alarm color</vm-link>
       </div>
-    </tc-grid>
+    </vm-grid>
   </div>
 </template>
 
