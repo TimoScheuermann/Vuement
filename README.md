@@ -1,4 +1,5 @@
-![](https://timos.s3.eu-central-1.amazonaws.com/lib/632e6c9c-bee5-4018-9e19-0ebdb099af7b.svg)
+<img src="https://timos.s3.eu-central-1.amazonaws.com/lib/632e6c9c-bee5-4018-9e19-0ebdb099af7b.svg" />
+
 ___
 
 **44+ Components, ready to use, for Vue.js**
