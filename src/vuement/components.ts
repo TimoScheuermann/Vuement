@@ -1,6 +1,6 @@
 export { default as vmAction } from './components/action';
 export { default as vmAvatar } from './components/avatar';
-export { vmButton } from './components/button';
+export { default as vmButton } from './components/button';
 export { default as vmCard } from './components/card';
 export { default as vmCheckbox } from './components/checkbox';
 export { default as vmChip } from './components/chip';
