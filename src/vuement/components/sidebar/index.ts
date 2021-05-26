@@ -1,14 +1,13 @@
-import _Vue, { PluginFunction } from 'vue';
+import { LooseObject } from '@/vuement/util';
+import { VueConstructor } from 'vue/types/umd';
 import VMSidebar from './VMSidebar.vue';
 import VMSidebarGroup from './VMSidebarGroup.vue';
 import VMSidebarItem from './VMSidebarItem.vue';
 
-const install: PluginFunction<any> = function installVuementComponent(
-  Vue: typeof _Vue
-): void {
-  Vue.component('vmSidebar', VMSidebar);
-  Vue.component('vmSidebarGroup', VMSidebarGroup);
-  Vue.component('vmSidebarItem', VMSidebarItem);
+(VMSidebar as LooseObject).install = (vue: VueConstructor) => {
+  vue.component('vmSidebar', VMSidebar);
+  vue.component('vmSidebarGroup', VMSidebarGroup);
+  vue.component('vmSidebarItem', VMSidebarItem);
 };
 
-export default install;
+export default VMSidebar;
