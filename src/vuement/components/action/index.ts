@@ -1,12 +1,12 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMAction from './VMAction.vue';
 import VMActionItem from './VMActionItem.vue';
 
-const vmAction = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmAction', VMAction);
-    Vue.component('vmActionItem', VMActionItem);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmAction', VMAction);
+  Vue.component('vmActionItem', VMActionItem);
 };
 
-export default vmAction;
+export default install;

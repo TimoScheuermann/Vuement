@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMSpinner from './VMSpinner.vue';
 
-const vmSpinner = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmSpinner', VMSpinner);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmSpinner', VMSpinner);
 };
 
-export default vmSpinner;
+export default install;

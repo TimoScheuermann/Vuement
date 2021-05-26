@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMFlow from './VMFlow.vue';
 
-const vmFlow = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmFlow', VMFlow);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmFlow', VMFlow);
 };
 
-export default vmFlow;
+export default install;

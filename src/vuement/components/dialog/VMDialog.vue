@@ -4,7 +4,10 @@
       class="vm-dialog"
       v-if="visible"
       @click.stop="close"
-      @touchmove.prevent
+      @touchmove.self.prevent
+      @wheel.self.prevent
+      @mousewheel.self.prevent
+      @DOMMouseScroll.self.prevent
     >
       <transition name="slide" appear>
         <div class="vm-dialog--dialog" @click.prevent.stop>

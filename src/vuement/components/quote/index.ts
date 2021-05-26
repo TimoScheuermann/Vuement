@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMQuote from './VMQuote.vue';
 
-const vmQuote = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmQuote', VMQuote);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmQuote', VMQuote);
 };
 
-export default vmQuote;
+export default install;

@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMScrollUp from './VMScrollUp.vue';
 
-const vmScrollUp = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmScrollUp', VMScrollUp);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmScrollUp', VMScrollUp);
 };
 
-export default vmScrollUp;
+export default install;

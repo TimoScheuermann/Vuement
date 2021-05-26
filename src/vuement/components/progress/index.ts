@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMProgress from './VMProgress.vue';
 
-const vmProgress = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmProgress', VMProgress);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmProgress', VMProgress);
 };
 
-export default vmProgress;
+export default install;

@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMSwitch from './VMSwitch.vue';
 
-const vmSwitch = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmSwitch', VMSwitch);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmSwitch', VMSwitch);
 };
 
-export default vmSwitch;
+export default install;

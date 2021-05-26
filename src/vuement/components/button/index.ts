@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMButton from './VMButton.vue';
 
-const vmButton = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmButton', VMButton);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmButton', VMButton);
 };
 
-export default vmButton;
+export default install;

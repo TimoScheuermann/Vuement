@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMTextarea from './VMTextarea.vue';
 
-const vmTextarea = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmTextarea', VMTextarea);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmTextarea', VMTextarea);
 };
 
-export default vmTextarea;
+export default install;

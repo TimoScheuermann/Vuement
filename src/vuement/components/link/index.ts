@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMLink from './VMLink.vue';
 
-const vmLink = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmLink', VMLink);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmLink', VMLink);
 };
 
-export default vmLink;
+export default install;

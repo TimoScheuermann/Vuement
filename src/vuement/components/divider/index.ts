@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMDivider from './VMDivider.vue';
 
-const vmDivider = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmDivider', VMDivider);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmDivider', VMDivider);
 };
 
-export default vmDivider;
+export default install;

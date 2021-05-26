@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMImage from './VMImage.vue';
 
-const vmImage = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmImage', VMImage);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmImage', VMImage);
 };
 
-export default vmImage;
+export default install;

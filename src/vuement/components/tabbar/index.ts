@@ -1,12 +1,12 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMTabbar from './VMTabbar.vue';
 import VMTabbarItem from './VMTabbarItem.vue';
 
-const vmTabbar = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmTabbar', VMTabbar);
-    Vue.component('vmTabbarItem', VMTabbarItem);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmTabbar', VMTabbar);
+  Vue.component('vmTabbarItem', VMTabbarItem);
 };
 
-export default vmTabbar;
+export default install;

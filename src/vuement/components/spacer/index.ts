@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMSpacer from './VMSpacer.vue';
 
-const vmSpacer = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmSpacer', VMSpacer);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmSpacer', VMSpacer);
 };
 
-export default vmSpacer;
+export default install;

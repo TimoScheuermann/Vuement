@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMRevealer from './VMRevealer.vue';
 
-const vmRevealer = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmRevealer', VMRevealer);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmRevealer', VMRevealer);
 };
 
-export default vmRevealer;
+export default install;

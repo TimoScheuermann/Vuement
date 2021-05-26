@@ -1,6 +1,14 @@
 <template>
   <transition name="appear" appear :delay="300">
-    <div class="vm-sheet" v-if="visible" @click.stop="close" @touchmove.prevent>
+    <div
+      class="vm-sheet"
+      v-if="visible"
+      @click.stop="close"
+      @touchmove.self.prevent
+      @wheel.self.prevent
+      @mousewheel.self.prevent
+      @DOMMouseScroll.self.prevent
+    >
       <transition name="slide" appear>
         <div class="vm-sheet--sheet" @click.prevent.stop>
           <div class="vm-sheet--sheet__dragger" v-touch:swipe.bottom="close" />

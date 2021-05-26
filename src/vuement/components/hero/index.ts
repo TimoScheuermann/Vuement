@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMHero from './VMHero.vue';
 
-const vmHero = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmHero', VMHero);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmHero', VMHero);
 };
 
-export default vmHero;
+export default install;

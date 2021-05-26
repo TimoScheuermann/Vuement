@@ -1,10 +1,10 @@
-import _Vue from 'vue';
+import _Vue, { PluginFunction } from 'vue';
 import VMSlider from './VMSlider.vue';
 
-const vmSlider = {
-  install(Vue: typeof _Vue): void {
-    Vue.component('vmSlider', VMSlider);
-  },
+const install: PluginFunction<any> = function installVuementComponent(
+  Vue: typeof _Vue
+): void {
+  Vue.component('vmSlider', VMSlider);
 };
 
-export default vmSlider;
+export default install;
