@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMRadio extends Vue {
+export default class VMRadio extends Mixins(VMColorMixin) {
   @Prop() title!: string;
   @Prop({ required: true }) name!: string;
   @Prop({ default: false }) disabled!: boolean;
@@ -21,7 +21,7 @@ export default class VMRadio extends Vue {
   public innerVal = this.value || null;
 
   get vmColor(): string {
-    return `--vm-color:${getColor(this.color)};`;
+    return `--vm-color:${this.getColor(this.color)};`;
   }
 
   @Watch('value', { immediate: true })

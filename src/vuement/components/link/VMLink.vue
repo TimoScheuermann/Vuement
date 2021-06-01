@@ -12,16 +12,16 @@
 </template>
 
 <script lang="ts">
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import { getColor } from '@/vuement/util';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMLink extends Mixins(VMLinkMixin) {
+export default class VMLink extends Mixins(VMLinkMixin, VMColorMixin) {
   @Prop({ default: 'primary' }) color!: string;
 
   get vmColor(): string {
-    return `--vm-color: ${getColor(this.color)}`;
+    return `--vm-color: ${this.getColor(this.color)}`;
   }
 }
 </script>

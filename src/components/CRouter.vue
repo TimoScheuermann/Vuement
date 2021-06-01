@@ -89,10 +89,10 @@ export default class CRouter extends Vue {
   position: relative;
   max-width: 100vw;
   .sub-view {
-    position: absolute;
     right: 0;
     left: 0px;
     z-index: 10;
+    position: absolute;
     min-height: 100vh;
     overflow-x: hidden;
     background: var(--vm-background);

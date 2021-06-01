@@ -2,9 +2,11 @@
   <div
     class="vm-navbar-item"
     @click="clicked"
-    :style="vmColor"
     :active="isUrlActive"
     :disabled="disabled"
+    :style="{
+      '--vm-primary': vmColor,
+    }"
   >
     <div class="vm-navbar-item__icon" v-if="icon && !iconTrailing">
       <i :class="icon" />
@@ -19,17 +21,18 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import { getColor } from '@/vuement/util';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 
 @Component
-export default class VMNavbarItem extends Mixins(VMLinkMixin) {
+export default class VMNavbarItem extends Mixins(VMLinkMixin, VMColorMixin) {
   @Prop() title!: string;
   @Prop() icon!: string;
   @Prop() iconTrailing!: boolean;
-  @Prop({ default: 'primary' }) color!: string;
+  @Prop() color!: string;
 
-  get vmColor(): string {
-    return `--vm-color:${getColor(this.color)};`;
+  get vmColor(): string | null {
+    if (!this.color) return null;
+    return this.getColor(this.color);
   }
 }
 </script>
@@ -56,6 +59,7 @@ export default class VMNavbarItem extends Mixins(VMLinkMixin) {
 
   position: relative;
   line-height: 40px;
+
   &::before {
     position: absolute;
     content: '';
@@ -63,14 +67,14 @@ export default class VMNavbarItem extends Mixins(VMLinkMixin) {
     bottom: -5px;
     width: 0%;
     height: 2px;
-    background: var(--vm-color);
+    background: rgba(var(--vm-primary), 1);
     transition: inherit;
   }
 
   &[active] {
     .vm-navbar-item__icon,
     .vm-navbar-item__title {
-      color: var(--vm-color);
+      color: rgba(var(--vm-primary), 1);
     }
     opacity: 1;
     &::before {

@@ -4,7 +4,10 @@
       class="vm-action__icon"
       ref="trigger"
       @click.stop.capture="visible = !visible"
-      :style="actionStyles"
+      :style="{
+        '--vm-color': vmColor,
+        '--vm-container': vmBackground,
+      }"
     >
       <i :class="icon" @click.stop />
     </div>
@@ -24,16 +27,16 @@
 </template>
 
 <script lang="ts">
-import { convertStyles, getColor, getContainerPosition } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { getContainerPosition } from '@/vuement/dev/util';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMAction extends Vue {
+export default class VMAction extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'ti-dots-vertical' }) icon!: string;
-  @Prop({ default: false }) value!: boolean;
-  @Prop() color!: string;
-  @Prop() background!: string;
   @Prop() title!: string;
+  @Prop({ default: false }) value!: boolean;
 
   public visible = !!this.value;
   public pos = '';
@@ -62,20 +65,6 @@ export default class VMAction extends Vue {
     this.visible = this.value;
   }
 
-  get actionBackground(): string | null {
-    if (!this.background) return null;
-    return `--vm-container:${getColor(this.background)};`;
-  }
-
-  get actionColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)};`;
-  }
-
-  get actionStyles(): string | null {
-    return convertStyles([this.actionBackground, this.actionColor]);
-  }
-
   public updatePosition(): void {
     this.pos = getContainerPosition(this.$refs.trigger);
   }
@@ -93,10 +82,10 @@ export default class VMAction extends Vue {
 
   $size: 29.33px;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
 
   &__icon {
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
     height: $size;
     width: $size;
     border-radius: $size;
@@ -148,7 +137,7 @@ export default class VMAction extends Vue {
       right: 0;
       bottom: 0;
       border-radius: inherit;
-      background: var(--vm-container);
+      background: rgba(var(--vm-container), 1);
     }
 
     &__title {

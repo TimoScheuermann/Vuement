@@ -8,6 +8,10 @@
       @wheel.self.prevent
       @mousewheel.self.prevent
       @DOMMouseScroll.self.prevent
+      :style="{
+        '--vm-color': vmColor,
+        '--vm-background': vmBackground,
+      }"
     >
       <transition name="slide" appear>
         <div class="vm-dialog--dialog" @click.prevent.stop>
@@ -29,14 +33,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialog extends Vue {
+export default class VMDialog extends Mixins(VMColorMixin) {
   @Prop() title!: string;
   @Prop() value!: boolean;
+  @Prop() color!: string;
+  @Prop() background!: string;
 
   public visible = !!this.value;
+
+  get vmColor(): string | null {
+    if (!this.color) return null;
+    return this.getColor(this.color);
+  }
+
+  get vmBackground(): string | null {
+    if (!this.background) return null;
+    return this.getColor(this.background);
+  }
 
   mounted(): void {
     this.$on('close', this.close);
@@ -65,7 +82,8 @@ export default class VMDialog extends Vue {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 200;
+  z-index: 2000;
+  color: rgba(var(--vm-color), 1);
 
   background: rgba(#000, 0.85);
   @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -87,7 +105,7 @@ export default class VMDialog extends Vue {
     padding: 20px;
     padding-top: 0px;
     border-radius: #{2 * $border-radius};
-    background: var(--vm-paragraph);
+    background: rgba(var(--vm-background), 1);
 
     &__title,
     &__items,

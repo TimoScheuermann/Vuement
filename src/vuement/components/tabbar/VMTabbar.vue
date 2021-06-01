@@ -1,31 +1,33 @@
 <template>
-  <div class="vm-tabbar" :style="tabbarStyle">
+  <div
+    class="vm-tabbar"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-background': vmBackground,
+    }"
+  >
     <div class="vm-tabbar__background" />
     <div class="vm-tabbar__items"><slot /></div>
   </div>
 </template>
 
 <script lang="ts">
-import { convertStyles, getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMTabbar extends Vue {
+export default class VMTabbar extends Mixins(VMColorMixin) {
   @Prop() background!: string;
   @Prop() color!: string;
 
-  get tabbarColor(): string | null {
+  get vmColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)};`;
+    return this.getColor(this.color);
   }
 
-  get tabbarBackground(): string | null {
+  get vmBackground(): string | null {
     if (!this.background) return null;
-    return `--vm-paragraph:${this.background};`;
-  }
-
-  get tabbarStyle(): string | null {
-    return convertStyles([this.tabbarColor, this.tabbarBackground]);
+    return this.getColor(this.background);
   }
 }
 </script>
@@ -38,10 +40,10 @@ export default class VMTabbar extends Vue {
   left: 0;
   right: 0;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
   padding: 0 5vw;
   padding-bottom: env(safe-area-inset-top);
-  box-shadow: 2px 4px 8px rgba(#111, 0.05);
+  box-shadow: -2px -4px 8px rgba(#111, 0.05);
 
   &__items {
     position: relative;
@@ -59,7 +61,7 @@ export default class VMTabbar extends Vue {
     right: 0;
     bottom: 0;
     left: 0;
-    background: var(--vm-paragraph);
+    background: rgba(var(--vm-background), 1);
   }
 }
 </style>

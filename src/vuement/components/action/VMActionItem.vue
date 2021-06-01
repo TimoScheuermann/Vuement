@@ -6,19 +6,19 @@
 </template>
 
 <script lang="ts">
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import { getColor } from '@/vuement/util';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMActionItem extends Mixins(VMLinkMixin) {
+export default class VMActionItem extends Mixins(VMLinkMixin, VMColorMixin) {
   @Prop() icon!: string;
   @Prop() title!: string;
   @Prop() color!: string;
 
   get actionItemColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)};`;
+    return `--vm-color:${this.getColor(this.color)};`;
   }
 }
 </script>

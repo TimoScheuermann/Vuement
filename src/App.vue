@@ -37,6 +37,12 @@ import CTabbar from './components/CTabbar.vue';
 export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
+
+    // (this as LooseObject).$vm.setColor('primary', 'magenta');
+
+    setTimeout(() => {
+      // (this as LooseObject).$vm.setColor('primary', 'lime');
+    }, 5000);
   }
 
   beforeDestroy(): void {

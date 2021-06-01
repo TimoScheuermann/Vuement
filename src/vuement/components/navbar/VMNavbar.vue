@@ -1,5 +1,11 @@
 <template>
-  <div class="vm-navbar">
+  <div
+    class="vm-navbar"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-background': vmBackground,
+    }"
+  >
     <transition appear name="appear">
       <div
         v-if="overflowVisible"
@@ -13,7 +19,6 @@
       :overflow="overflow"
       :overflowVisible="overflowVisible"
       :floating="floating"
-      :style="navbarStyle"
     >
       <div class="vm-navbar--container__background" />
       <div class="vm-navbar--container__title">
@@ -41,8 +46,8 @@
 </template>
 
 <script lang="ts">
-import { convertStyles, getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
 @Component({
@@ -50,11 +55,11 @@ import VMRevealer from '../revealer/VMRevealer.vue';
     VMRevealer,
   },
 })
-export default class VMNavbar extends Vue {
-  @Prop() background!: string;
-  @Prop() color!: string;
+export default class VMNavbar extends Mixins(VMColorMixin) {
   @Prop({ default: '400px' }) breakpoint!: string;
   @Prop({ default: false }) floating!: boolean;
+  @Prop() background!: string;
+  @Prop() color!: string;
 
   public overflow = false;
   public overflowVisible = false;
@@ -71,18 +76,14 @@ export default class VMNavbar extends Vue {
     this.unregisterMediaQuery();
   }
 
-  get navbarColor(): string | null {
+  get vmColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)};`;
+    return this.getColor(this.color);
   }
 
-  get navbarBackground(): string | null {
+  get vmBackground(): string | null {
     if (!this.background) return null;
-    return `--vm-paragraph:${this.background};`;
-  }
-
-  get navbarStyle(): string | null {
-    return convertStyles([this.navbarColor, this.navbarBackground]);
+    return this.getColor(this.background);
   }
 
   @Watch('breakpoint', { immediate: true })
@@ -94,7 +95,7 @@ export default class VMNavbar extends Vue {
     this.unregisterMediaQuery();
     this.mediaQuery = window.matchMedia(`(max-width: ${this.breakpoint})`);
     this.mediaQuery.addListener(this.mediaQueryListener);
-    this.overflowVisible = false;
+    this.overflowVisible = !false;
     this.overflow = this.mediaQuery.matches;
   }
 
@@ -113,13 +114,15 @@ export default class VMNavbar extends Vue {
 
 <style lang="scss" scoped>
 .vm-navbar {
+  color: rgba(var(--vm-color), 1);
+
   &__overflow-background {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 99;
+    z-index: 1499;
 
     background: rgba(#000, 0.85);
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -130,14 +133,13 @@ export default class VMNavbar extends Vue {
 
   &--container {
     position: fixed;
-    z-index: 100;
+    z-index: 1500;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: nowrap;
 
-    color: var(--vm-color);
     box-shadow: 2px 4px 8px rgba(#111, 0.05);
 
     &:not([floating]) {
@@ -169,7 +171,7 @@ export default class VMNavbar extends Vue {
       right: 0;
       bottom: 0;
       left: 0;
-      background: var(--vm-paragraph);
+      background: rgba(var(--vm-background), 1);
     }
 
     &__title {
@@ -262,36 +264,6 @@ export default class VMNavbar extends Vue {
         }
       }
     }
-
-    // &:not([overflow]) .vm-navbar__items {
-    //   overflow: hidden;
-    // }
-
-    // &[overflow] {
-    //   flex-direction: column;
-
-    //   .vm-navbar__items {
-    //     max-height: 0px;
-    //     &[overflowVisible] {
-    //       max-height: calc(
-    //         100vh - 50px - env(safe-area-inset-top) - env(safe-area-inset-bottom)
-    //       );
-    //       padding-bottom: env(safe-area-inset-bottom);
-    //     }
-    //     flex-direction: column;
-    //     width: 100%;
-    //     margin: 0 -5vw;
-    //     padding: 0 5vw;
-
-    //     .vm-navbar-item::before {
-    //       display: none;
-    //     }
-
-    //     .vm-navbar-item ~ .vm-navbar-item {
-    //       border-top: 1px solid currentColor;
-    //     }
-    //   }
-    // }
   }
 }
 

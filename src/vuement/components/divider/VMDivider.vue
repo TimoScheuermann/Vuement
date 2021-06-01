@@ -7,17 +7,17 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMDivider extends Vue {
+export default class VMDivider extends Mixins(VMColorMixin) {
   @Prop() color!: string;
   @Prop({ default: 'center' }) position!: string;
 
   get vmColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color: ${getColor(this.color)}`;
+    return `--vm-color: ${this.getColor(this.color)}`;
   }
 }
 </script>

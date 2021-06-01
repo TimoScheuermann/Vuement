@@ -16,12 +16,12 @@
 </template>
 
 <script lang="ts">
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import { getColor } from '@/vuement/util';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialogButton extends Mixins(VMLinkMixin) {
+export default class VMDialogButton extends Mixins(VMLinkMixin, VMColorMixin) {
   @Prop() title!: string;
   @Prop() color!: string;
   @Prop() icon!: string;
@@ -36,7 +36,7 @@ export default class VMDialogButton extends Mixins(VMLinkMixin) {
 
   get vmColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)}`;
+    return `--vm-color:${this.getColor(this.color)}`;
   }
 }
 </script>

@@ -11,12 +11,12 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import { VMSelectSelection } from './VMSelect.vue';
 
 @Component
-export default class VMSelectItem extends Vue {
+export default class VMSelectItem extends Mixins(VMColorMixin) {
   @Prop() icon!: string;
   @Prop() title!: string;
   @Prop({ default: 'primary' }) color!: string;
@@ -36,7 +36,7 @@ export default class VMSelectItem extends Vue {
   }
 
   get selectItemColor(): string | null {
-    return `--vm-color:${getColor(this.color)};`;
+    return `--vm-color:${this.getColor(this.color)};`;
   }
 
   public clicked(): void {

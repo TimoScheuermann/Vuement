@@ -33,9 +33,9 @@ export default class VMTable extends Vue {
 
     &__striped {
       .vm-tr:nth-child(ODD) {
-        background: rgba(#111, 0.05);
+        background: var(--vm-paragraph);
         &:hover {
-          background: var(--vm-container);
+          background: var(--vm-border);
         }
       }
     }

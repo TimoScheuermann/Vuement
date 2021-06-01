@@ -5,8 +5,7 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMBounceSpinner from './types/VMBounceSpinner.vue';
 import VMDotSpinner from './types/VMDotSpinner.vue';
 import VMBarSpinner from './types/VMBarSpinner.vue';
@@ -17,6 +16,7 @@ import VMRotateSpinner from './types/VMRotateSpinner.vue';
 import VMScaleSpinner from './types/VMScaleSpinner.vue';
 import VMSquareSpinner from './types/VMSquareSpinner.vue';
 import VMDotsSpinner from './types/VMDotsSpinner.vue';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 
 @Component({
   components: {
@@ -32,7 +32,7 @@ import VMDotsSpinner from './types/VMDotsSpinner.vue';
     VMDotsSpinner,
   },
 })
-export default class VMSpinner extends Vue {
+export default class VMSpinner extends Mixins(VMColorMixin) {
   @Prop({ default: 'bar' }) type!: string;
   @Prop() color!: string;
   @Prop({ default: '10px' }) size!: string;
@@ -69,7 +69,7 @@ export default class VMSpinner extends Vue {
 
   get colorStyle(): string {
     if (!this.color) return '';
-    return `color:${getColor(this.color)};`;
+    return `color:${this.getColor(this.color)};`;
   }
 }
 </script>

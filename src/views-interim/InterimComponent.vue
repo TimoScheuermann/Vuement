@@ -28,10 +28,10 @@
         <br />
         <vm-table>
           <vm-tr>
-            <vm-td>Prop</vm-td>
-            <vm-td>Type</vm-td>
-            <vm-td>Default</vm-td>
-            <vm-td>Description</vm-td>
+            <vm-th>Prop</vm-th>
+            <vm-th>Type</vm-th>
+            <vm-th>Default</vm-th>
+            <vm-th>Description</vm-th>
           </vm-tr>
           <vm-tr v-for="p in props" :key="p.name">
             <vm-td>{{ p.name }}</vm-td>
@@ -49,10 +49,10 @@
           <br />
           <vm-table>
             <vm-tr>
-              <vm-td>Prop</vm-td>
-              <vm-td>Type</vm-td>
-              <vm-td>Default</vm-td>
-              <vm-td>Description</vm-td>
+              <vm-th>Prop</vm-th>
+              <vm-th>Type</vm-th>
+              <vm-th>Default</vm-th>
+              <vm-th>Description</vm-th>
             </vm-tr>
             <vm-tr v-for="p in siblings[s]" :key="p.name">
               <vm-td>{{ p.name }}</vm-td>

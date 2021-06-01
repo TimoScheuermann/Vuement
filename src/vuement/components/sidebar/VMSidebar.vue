@@ -1,5 +1,13 @@
 <template>
-  <div class="vm-sidebar" :frosted="frosted" :style="{ width, color }">
+  <div
+    class="vm-sidebar"
+    :frosted="frosted"
+    :style="{
+      width,
+      '--vm-color:': vmColor,
+      '--vm-background': vmBackground,
+    }"
+  >
     <div class="vm-sidebar__backgroundImage" v-if="backgroundImage">
       <img :src="backgroundImage" alt="" />
     </div>
@@ -19,15 +27,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMSidebar extends Vue {
+export default class VMSidebar extends Mixins(VMCProp, VMBgProp) {
   @Prop() backgroundImage!: string;
   @Prop({ default: false }) frosted!: boolean;
   @Prop() width!: string;
-  @Prop() color!: string;
-  @Prop() background!: string;
 }
 </script>
 
@@ -37,7 +45,9 @@ export default class VMSidebar extends Vue {
   top: 0;
   left: 0;
   bottom: 0;
-  z-index: 101;
+  z-index: 1600;
+  box-shadow: 4px 8px 20px rgba(#111, 0.18);
+  color: rgba(var(--vm-color), 1);
 
   &[frosted] {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -47,8 +57,6 @@ export default class VMSidebar extends Vue {
       backdrop-filter: saturate(180%) blur(20px);
     }
   }
-
-  box-shadow: 4px 8px 20px rgba(#111, 0.18);
 
   &__backgroundImage {
     position: absolute;
@@ -70,7 +78,7 @@ export default class VMSidebar extends Vue {
     z-index: 99;
     width: 100%;
     height: 100%;
-    background: var(--vm-paragraph);
+    background: rgba(var(--vm-background), 1);
   }
 
   &--content {

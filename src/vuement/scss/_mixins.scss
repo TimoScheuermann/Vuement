@@ -1,7 +1,7 @@
 @mixin backdrop-blur() {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
       &__background {
-        opacity: 0.5;
+        opacity: 0.72;
       }
       backdrop-filter: saturate(180%) blur(20px);
     }

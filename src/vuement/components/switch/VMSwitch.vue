@@ -8,18 +8,18 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMSwitch extends Vue {
+export default class VMSwitch extends Mixins(VMColorMixin) {
   @Prop({ default: 'primary' }) color!: string;
   @Prop({ default: false }) value!: boolean;
 
   public checked = !!this.value;
 
   get switchColor(): string {
-    return `--vm-switch:${getColor(this.color)}`;
+    return `--vm-switch:${this.getColor(this.color)}`;
   }
 
   @Watch('value', { immediate: true })

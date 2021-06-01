@@ -16,7 +16,7 @@
         title="Components"
         @click="$store.commit('sidebar', true)"
       />
-      <vm-navbar-item title="Colors" />
+      <vm-navbar-item title="Colors" routeName="colors" />
       <vm-navbar-item title="Themes" />
       <vm-navbar-item title="Getting started" />
     </template>

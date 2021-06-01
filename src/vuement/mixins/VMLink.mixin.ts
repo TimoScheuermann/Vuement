@@ -1,6 +1,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Location } from 'vue-router';
-import { NOOP } from '../util';
+import { NOOP } from '../dev/constants';
 
 @Component
 export default class VMLinkMixin extends Vue {

@@ -30,8 +30,9 @@
 </template>
 
 <script lang="ts">
-import { convertStyles, getColor, getContainerPosition } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { convertStyles, getContainerPosition } from '@/vuement/dev/util';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 export interface VMSelectSelection {
   id: string;
@@ -40,7 +41,7 @@ export interface VMSelectSelection {
 }
 
 @Component
-export default class VMSelect extends Vue {
+export default class VMSelect extends Mixins(VMColorMixin) {
   @Prop() icon!: string;
   @Prop({ default: false }) value!: boolean;
   @Prop() color!: string;
@@ -90,12 +91,12 @@ export default class VMSelect extends Vue {
 
   get selectBackground(): string | null {
     if (!this.background) return null;
-    return `--vm-container:${getColor(this.background)};`;
+    return `--vm-container:${this.getColor(this.background)};`;
   }
 
   get selectColor(): string | null {
     if (!this.color) return null;
-    return `--vm-color:${getColor(this.color)};`;
+    return `--vm-color:${this.getColor(this.color)};`;
   }
 
   get selectStyles(): string | null {

@@ -42,24 +42,20 @@
 
     <vm-grid>
       <div>
-        <vm-button background="#08f" variant="border" title="Primary" />
+        <vm-button variant="border" title="Primary" />
+        <vm-button title="Primary" icon="ti-tccomponents-tc" />
+        <vm-button variant="opaque" icon="ti-tccomponents-tc" />
+        <vm-button title="Primary" :disabled="true" />
+      </div>
+      <div>
+        <vm-button background="error" variant="border" title="Error" />
+        <vm-button background="error" title="Error" icon="ti-tccomponents-tc" />
         <vm-button
-          background="#08f"
-          title="Primary"
-          icon="ti-tccomponents-tc"
-        />
-        <vm-button
-          background="#08f"
+          background="error"
           variant="opaque"
           icon="ti-tccomponents-tc"
         />
-        <vm-button background="#08f" title="Primary" :disabled="true" />
-      </div>
-      <div>
-        <vm-button variant="border" title="Error" />
-        <vm-button title="Error" icon="ti-tccomponents-tc" />
-        <vm-button variant="opaque" icon="ti-tccomponents-tc" />
-        <vm-button title="Error" :disabled="true" />
+        <vm-button background="error" title="Error" :disabled="true" />
       </div>
       <div>
         <vm-button background="success" variant="border" title="Success" />

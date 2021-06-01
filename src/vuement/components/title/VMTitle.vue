@@ -1,41 +1,50 @@
 <template>
-  <div class="vm-title" :style="actionColor">
+  <div
+    class="vm-title"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-color-secondary': vmColorSecondary,
+    }"
+  >
     <div class="vm-title--subtitle" v-if="subtitle">{{ subtitle }}</div>
     <div class="vm-title--title" v-if="title">{{ title }}</div>
   </div>
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMTitle extends Vue {
+export default class VMTitle extends Mixins(VMColorMixin) {
   @Prop() title!: string;
   @Prop() subtitle!: string;
   @Prop() color!: string;
+  @Prop() colorSecondary!: string;
 
-  get actionColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-action-color:${getColor(this.color)}`;
+  get vmColor(): string | null {
+    return this.color ? this.getColor(this.color) : null;
+  }
+
+  get vmColorSecondary(): string | null {
+    return this.colorSecondary ? this.getColor(this.colorSecondary) : null;
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .vm-title {
-  color: var(--vm-action-color);
-
   &--title {
     font-size: 25px;
     font-weight: bold;
     overflow-wrap: break-word;
+    color: rgba(var(--vm-color), 1);
   }
   &--subtitle {
     font-size: 12px;
     font-weight: bold;
-    opacity: 0.5;
     text-transform: uppercase;
+    color: rgba(var(--vm-color-secondary), 1);
   }
 }
 </style>

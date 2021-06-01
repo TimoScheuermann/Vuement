@@ -1,8 +1,15 @@
 <template>
-  <label class="vm-checkbox">
-    <input type="checkbox" v-model="checked" />
+  <label
+    class="vm-checkbox"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-primary': vmChecked,
+      '--vm-container': vmBackground,
+    }"
+  >
+    <input type="checkbox" v-model="innerVal" />
     <div class="vm-checkbox__background" />
-    <div class="vm-checkbox--checkbox" :style="vmChecked">
+    <div class="vm-checkbox--checkbox">
       <svg viewBox="0 0 100 100">
         <path
           stroke="#fff"
@@ -16,29 +23,31 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMCheckbox extends Vue {
+export default class VMCheckbox extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
-  @Prop({ default: 'primary' }) color!: string;
   @Prop() value!: boolean;
+  @Prop() checked!: string;
 
-  public checked = !!this.value;
+  public innerVal = !!this.value;
 
-  get vmChecked(): string {
-    return `--vm-checked:${getColor(this.color)}`;
+  get vmChecked(): string | null {
+    if (!this.checked) return null;
+    return this.getColor(this.checked);
   }
 
   @Watch('value', { immediate: true })
   valueChanged(): void {
-    this.checked = !!this.value;
+    this.innerVal = !!this.value;
   }
 
-  @Watch('checked', { immediate: true })
-  checkedChanged(): void {
-    this.$emit('input', this.checked);
+  @Watch('innerVal', { immediate: true })
+  innerValChanged(): void {
+    this.$emit('input', this.innerVal);
   }
 }
 </script>
@@ -57,7 +66,7 @@ export default class VMCheckbox extends Vue {
   padding: 5px;
   border-radius: $border-radius;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
 
   transition: 0.2s ease-in-out;
   &:active {
@@ -70,7 +79,7 @@ export default class VMCheckbox extends Vue {
   }
 
   input:checked ~ &--checkbox {
-    background: var(--vm-checked);
+    background: rgba(var(--vm-primary), 1);
     transform: scale(1.15);
     box-shadow: 1px 2px 4px rgba(#111, 0.1);
 
@@ -93,12 +102,13 @@ export default class VMCheckbox extends Vue {
     left: 0;
     right: 0;
     bottom: 0;
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
   }
 
   &--title {
     position: inherit;
     margin-left: 5px;
+    padding: 0 2.5px;
     user-select: none;
   }
 
@@ -107,7 +117,7 @@ export default class VMCheckbox extends Vue {
     height: 19.33px;
     width: 19.33px;
     border-radius: #{$border-radius / 1.5};
-    background: var(--vm-background);
+    background: rgba(var(--vm-background), 1);
 
     transition: background 0.3s ease-in-out 0.3s, transform 0.4s ease-in-out,
       box-shadow 0.4s ease-in-out;

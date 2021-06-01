@@ -1,30 +1,29 @@
-import tinycolor from 'tinycolor2';
 import _Vue, { PluginFunction } from 'vue';
 import Vue2TouchEvents from 'vue2-touch-events';
 import * as vmComponents from './components';
-import vmoptions, { VMOptions } from './options';
-import { setTheme } from './util';
+import { COLORS_DEFAULT, THEMES_DEFAULT } from './dev/constants';
+import { setTheme } from './dev/functions';
+import { LooseObject, VMOptions } from './dev/interfaces';
+import { convertColor } from './dev/util';
 import $vm from './vm';
 
 const install: PluginFunction<VMOptions> = function installVuement(
   Vue: typeof _Vue,
-  options = vmoptions
+  options = {} as VMOptions
 ): void {
-  if (!options.colors) options.colors = vmoptions.colors;
-  if (!options.settings) options.settings = vmoptions.settings;
-  if (!options.themes) options.themes = vmoptions.themes;
+  if (!options.colors) options.colors = COLORS_DEFAULT;
+  if (!options.themes) options.themes = THEMES_DEFAULT;
 
-  for (const c in vmoptions.colors) {
-    if (!options.colors[c]) {
-      options.colors[c] = vmoptions.colors[c];
-    }
-
-    options.colors[c] = tinycolor(options.colors[c]).toHexString();
+  for (const c in COLORS_DEFAULT) {
+    if (!options.colors[c]) options.colors[c] = COLORS_DEFAULT[c];
+    options.colors[c] = convertColor(options.colors[c]);
   }
 
-  for (const s in vmoptions.settings) {
-    if (!options.settings[s]) {
-      options.settings[s] = vmoptions.settings[s];
+  for (const theme in options.themes) {
+    for (const c in options.themes[theme]) {
+      (options.themes[theme] as LooseObject)[c] = convertColor(
+        (options.themes[theme] as LooseObject)[c]
+      );
     }
   }
 
@@ -35,7 +34,7 @@ const install: PluginFunction<VMOptions> = function installVuement(
   });
 
   if (typeof window !== 'undefined') {
-    setTheme(options.theme);
+    setTheme(options.theme || 'light');
   }
 
   Vue.use(Vue2TouchEvents);

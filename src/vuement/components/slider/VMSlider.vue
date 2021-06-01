@@ -11,11 +11,11 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMSlider extends Vue {
+export default class VMSlider extends Mixins(VMColorMixin) {
   @Prop({ default: 'primary' }) color!: string;
   @Prop({ default: 1 }) min!: number;
   @Prop({ default: 10 }) max!: number;
@@ -25,7 +25,7 @@ export default class VMSlider extends Vue {
   public innerVal = this.value || 1;
 
   get vmColor(): string {
-    return `--vm-slider-c:${getColor(this.color)};`;
+    return `--vm-slider-c:${this.getColor(this.color)};`;
   }
 
   @Watch('value', { immediate: true })

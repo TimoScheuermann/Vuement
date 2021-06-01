@@ -1,5 +1,13 @@
 <template>
-  <label class="vm-input" :frosted="frosted">
+  <label
+    class="vm-input"
+    :frosted="frosted"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-container': vmBackground,
+      '--vm-outline': vmOutline,
+    }"
+  >
     <div
       class="vm-input--title"
       :floating="floatingTitle"
@@ -9,7 +17,7 @@
     >
       {{ title }}
     </div>
-    <div class="vm-input--input" :style="outlineStyle">
+    <div class="vm-input--input">
       <div class="vm-input--input__background" />
       <div class="vm-input--input--icon" v-if="icon">
         <i :class="icon" />
@@ -38,22 +46,22 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMInput extends Vue {
-  @Prop() placeholder!: string;
-  @Prop() value!: string;
-  @Prop() background!: string;
-  @Prop() color!: string;
-  @Prop({ default: 'text' }) type!: string;
+export default class VMInput extends Mixins(VMCProp, VMBgProp) {
+  @Prop() outline!: string;
+
   @Prop() title!: string;
+  @Prop({ default: false }) floatingTitle!: boolean;
+  @Prop() placeholder!: string;
   @Prop() icon!: string;
   @Prop() frosted!: boolean;
-  @Prop() outline!: string;
-  @Prop({ default: false }) floatingTitle!: boolean;
 
+  @Prop({ default: 'text' }) type!: string;
+  @Prop() value!: string;
   @Prop() accept!: string;
   @Prop() autocomplete!: 'on' | 'off';
   @Prop() autofocus!: boolean;
@@ -69,9 +77,9 @@ export default class VMInput extends Vue {
 
   public innerVal = this.value || '';
 
-  get outlineStyle(): string | null {
+  get vmOutline(): string | null {
     if (!this.outline) return null;
-    return `--vm-outline:${getColor(this.outline)};`;
+    return this.getColor(this.outline);
   }
 
   get inputMode(): string {
@@ -81,10 +89,7 @@ export default class VMInput extends Vue {
     if (this.type === 'email') return 'email';
     if (this.type === 'url') return 'url';
     if (this.type === 'number') {
-      if (('' + this.step).includes('.')) {
-        return 'decimal';
-      }
-      return 'numeric';
+      return ('' + this.step).includes('.') ? 'decimal' : 'numeric';
     }
     return '';
   }
@@ -111,7 +116,7 @@ export default class VMInput extends Vue {
   margin: 2.5px;
   max-width: calc(100% - 5px);
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
   position: relative;
 
   &[frosted] {
@@ -163,7 +168,7 @@ export default class VMInput extends Vue {
     padding: 0 5px;
     border-radius: $border-radius;
 
-    border-bottom: 1.5px solid var(--vm-outline);
+    border-bottom: 1.5px solid rgba(var(--vm-outline), 1);
     box-sizing: border-box;
 
     &__background {
@@ -173,7 +178,7 @@ export default class VMInput extends Vue {
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--vm-container);
+      background: rgba(var(--vm-container), 1);
     }
     &--icon {
       position: relative;

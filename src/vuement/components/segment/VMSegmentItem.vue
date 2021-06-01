@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMSegmentItem extends Vue {
+export default class VMSegmentItem extends Mixins(VMColorMixin) {
   @Prop() icon!: string;
   @Prop() title!: string;
   @Prop({ default: false }) iconTrailing!: boolean;
@@ -34,7 +34,7 @@ export default class VMSegmentItem extends Vue {
   }
 
   get itemActiveColor(): string {
-    return `--vm-s-item:${getColor(this.color)}`;
+    return `--vm-s-item:${this.getColor(this.color)}`;
   }
 
   public setState(state: boolean): void {

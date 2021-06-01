@@ -41,11 +41,12 @@
 </template>
 
 <script lang="ts">
-import { convertStyles, getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { convertStyles } from '@/vuement/dev/util';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMProgress extends Vue {
+export default class VMProgress extends Mixins(VMColorMixin) {
   @Prop({ default: 'bar' }) type!: string;
   @Prop({ default: 0 }) progress!: number;
   @Prop({ default: 'primary' }) color!: string;
@@ -63,11 +64,11 @@ export default class VMProgress extends Vue {
 
   get vmBackground(): string | null {
     if (!this.background) return null;
-    return `background: ${getColor(this.background)};`;
+    return `background: ${this.getColor(this.background)};`;
   }
 
   get vmColor(): string {
-    return getColor(this.color);
+    return this.getColor(this.color);
   }
 
   get title(): string {

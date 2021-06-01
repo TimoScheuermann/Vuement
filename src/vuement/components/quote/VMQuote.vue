@@ -9,17 +9,17 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMQuote extends Vue {
+export default class VMQuote extends Mixins(VMColorMixin) {
   @Prop() title!: string;
   @Prop({ default: 'primary' }) color!: string;
   @Prop() background!: string;
 
   get vmColor(): string {
-    return `--vm-quote-c: ${getColor(this.color)};`;
+    return `--vm-quote-c: ${this.getColor(this.color)};`;
   }
 }
 </script>

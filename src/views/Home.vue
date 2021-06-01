@@ -33,7 +33,7 @@
         />
       </svg>
 
-      <p>
+      <p data-color="red">
         A library of high-quality ready to use components that will help you
         speed up your development workflow.
       </p>
@@ -72,6 +72,8 @@ export default class Home extends Vue {}
       max-width: 400px;
       margin: 20px auto;
       opacity: 0.8;
+
+      color: attr(data-color);
     }
     svg {
       width: 80%;

@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import { getColor } from '@/vuement/util';
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMScrollUp extends Vue {
+export default class VMScrollUp extends Mixins(VMColorMixin) {
   @Prop({ default: 'ti-chevron-up' }) icon!: string;
   @Prop({ default: 'primary' }) background!: string;
   @Prop({ default: 'white' }) color!: string;
@@ -34,11 +34,11 @@ export default class VMScrollUp extends Vue {
   }
 
   get scrollUpColor(): string {
-    return `--vm-color:${getColor(this.color)};`;
+    return `--vm-color:${this.getColor(this.color)};`;
   }
 
   get scrollUpBackground(): string {
-    return `--vm-background:${getColor(this.background)};`;
+    return `--vm-background:${this.getColor(this.background)};`;
   }
 
   public checkVisible(): void {
