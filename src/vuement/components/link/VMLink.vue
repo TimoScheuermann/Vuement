@@ -1,34 +1,36 @@
 <template>
   <router-link
+    class="vm-link"
     v-if="to || routeName || href"
+    @click.stop="clicked"
     :to="to || { name: routeName }"
     :href="href"
-    :style="vmColor"
-    @click.stop="clicked"
-    class="vm-link"
+    :style="{ '--vm-primary': vmColor }"
   >
     <slot />
   </router-link>
+  <span
+    v-else
+    class="vm-link"
+    @click.stop="clicked"
+    :style="{ '--vm-primary': vmColor }"
+  >
+    <slot />
+  </span>
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import { Component, Mixins, Prop } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMLink extends Mixins(VMLinkMixin, VMColorMixin) {
-  @Prop({ default: 'primary' }) color!: string;
-
-  get vmColor(): string {
-    return `--vm-color: ${this.getColor(this.color)}`;
-  }
-}
+export default class VMLink extends Mixins(VMLinkMixin, VMCProp) {}
 </script>
 
 <style lang="scss" scoped>
 .vm-link {
-  color: var(--vm-color);
+  color: rgba(var(--vm-primary), 1);
   text-decoration: none;
   cursor: pointer;
   position: relative;

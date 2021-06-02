@@ -18,26 +18,19 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMSidebarItem extends Mixins(VMLinkMixin, VMColorMixin) {
+export default class VMSidebarItem extends Mixins(
+  VMLinkMixin,
+  VMCProp,
+  VMBgProp
+) {
   @Prop() icon!: string;
   @Prop() title!: string;
-  @Prop() color!: string;
-  @Prop() background!: string;
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
-
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return this.getColor(this.background);
-  }
 }
 </script>
 

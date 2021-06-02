@@ -1,5 +1,12 @@
 <template>
-  <div class="vm-chip" @click="clicked">
+  <div
+    class="vm-chip"
+    @click="clicked"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-container': vmBackground,
+    }"
+  >
     <div class="vm-chip--image" v-if="image">
       <img :src="image" alt="" />
     </div>
@@ -24,11 +31,13 @@
 </template>
 
 <script lang="ts">
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMChip extends Mixins(VMLinkMixin) {
+export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: '' }) value!: string;
   @Prop() icon!: string;
   @Prop() image!: string;
@@ -76,7 +85,6 @@ export default class VMChip extends Mixins(VMLinkMixin) {
 
 <style lang="scss" scoped>
 .vm-chip {
-  background: var(--vm-container);
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
@@ -85,8 +93,17 @@ export default class VMChip extends Mixins(VMLinkMixin) {
   margin: 2.5px;
   cursor: pointer;
 
+  background: rgba(var(--vm-container), 1);
+  color: rgba(var(--vm-color), 1);
+
   $indicatorScale: 24px;
   border-radius: $indicatorScale;
+
+  transition: 0.2s ease-in-out;
+  &:active {
+    filter: brightness(105%);
+    transform: scale(0.9);
+  }
 
   &--image,
   &--icon {

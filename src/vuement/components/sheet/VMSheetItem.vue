@@ -1,5 +1,10 @@
 <template>
-  <div class="vm-sheet-item" @click.stop="handleClick">
+  <div
+    class="vm-sheet-item"
+    :disabled="disabled"
+    @click.stop="handleClick"
+    :style="{ '--vm-color': vmColor }"
+  >
     <div class="vm-sheet-item---media">
       <slot />
       <i v-if="icon && !$slots.default" :class="icon" />
@@ -9,11 +14,12 @@
 </template>
 
 <script lang="ts">
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMSheetItem extends Mixins(VMLinkMixin) {
+export default class VMSheetItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() icon!: string;
 
@@ -31,6 +37,16 @@ export default class VMSheetItem extends Mixins(VMLinkMixin) {
   display: grid;
   grid-template-columns: minmax(0, auto) 1fr;
   grid-gap: 10px;
+
+  color: rgba(var(--vm-color), 1);
+
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
   &--media {
     display: grid;
     place-content: center;

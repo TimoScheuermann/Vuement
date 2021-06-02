@@ -1,12 +1,21 @@
 <template>
   <div class="vm-table">
     <div class="vm-table--wrapper">
-      <table
+      <transition-group
+        tag="table"
+        name="vm-table-row-anim"
         class="vm-table--table"
         :class="{ 'vm-table--table__striped': striped }"
       >
+        <tr
+          key="vm-table-head"
+          class="vm-table--table__head"
+          v-if="$slots.head"
+        >
+          <slot name="head" />
+        </tr>
         <slot />
-      </table>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -31,14 +40,21 @@ export default class VMTable extends Vue {
     width: 100%;
     border-collapse: collapse;
 
+    &__head {
+      background: rgba(var(--vm-container), 1);
+    }
+
     &__striped {
-      .vm-tr:nth-child(ODD) {
-        background: var(--vm-paragraph);
+      /deep/ .vm-tr:nth-child(ODD) {
+        background: rgba(var(--vm-paragraph), 1);
         &:hover {
-          background: var(--vm-border);
+          background: rgba(var(--vm-border), 1);
         }
       }
     }
   }
+}
+.vm-table-row-anim-move {
+  transition: transform 1s;
 }
 </style>

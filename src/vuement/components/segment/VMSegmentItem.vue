@@ -3,7 +3,7 @@
     class="vm-segment-item"
     @click="clicked"
     :active="active"
-    :style="itemActiveColor"
+    :style="{ '--vm-primary': vmColor }"
   >
     <i v-if="icon && !iconTrailing" :class="icon" />
     <span v-if="title">{{ title }}</span>
@@ -12,15 +12,14 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMSegmentItem extends Mixins(VMColorMixin) {
+export default class VMSegmentItem extends Mixins(VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
   @Prop({ default: false }) iconTrailing!: boolean;
-  @Prop({ default: 'primary' }) color!: string;
 
   public active = false;
 
@@ -31,10 +30,6 @@ export default class VMSegmentItem extends Mixins(VMColorMixin) {
 
   beforeDestroy(): void {
     this.$parent.$emit('itemChange');
-  }
-
-  get itemActiveColor(): string {
-    return `--vm-s-item:${this.getColor(this.color)}`;
   }
 
   public setState(state: boolean): void {
@@ -60,11 +55,10 @@ export default class VMSegmentItem extends Mixins(VMColorMixin) {
   user-select: none;
 
   min-height: 24.33px;
-  // background: rgba(red, 0.25);
 
   transition: 0.2s ease-in-out;
   &[active] {
-    color: var(--vm-s-item);
+    color: rgba(var(--vm-primary), 1);
     transition-delay: 0.1s;
   }
 

@@ -1,5 +1,12 @@
 <template>
-  <div class="vm-spinner" :style="marginStyle + sizeStyle + colorStyle">
+  <div
+    class="vm-spinner"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-spinner-s': size,
+      '--vm-spinner-m': margin,
+    }"
+  >
     <component :is="spinnerType" />
   </div>
 </template>
@@ -16,7 +23,7 @@ import VMRotateSpinner from './types/VMRotateSpinner.vue';
 import VMScaleSpinner from './types/VMScaleSpinner.vue';
 import VMSquareSpinner from './types/VMSquareSpinner.vue';
 import VMDotsSpinner from './types/VMDotsSpinner.vue';
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 
 @Component({
   components: {
@@ -32,9 +39,8 @@ import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
     VMDotsSpinner,
   },
 })
-export default class VMSpinner extends Mixins(VMColorMixin) {
+export default class VMSpinner extends Mixins(VMCProp) {
   @Prop({ default: 'bar' }) type!: string;
-  @Prop() color!: string;
   @Prop({ default: '10px' }) size!: string;
   @Prop({ default: '3px' }) margin!: string;
 
@@ -58,24 +64,12 @@ export default class VMSpinner extends Mixins(VMColorMixin) {
     }
     return `VMBarSpinner`;
   }
-
-  get sizeStyle(): string {
-    return `--vm-spinner-s:${this.size || '20px'};`;
-  }
-
-  get marginStyle(): string {
-    return `--vm-spinner-m:${this.margin || '5px'};`;
-  }
-
-  get colorStyle(): string {
-    if (!this.color) return '';
-    return `color:${this.getColor(this.color)};`;
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 .vm-spinner {
   display: inline-flex;
+  color: rgba(var(--vm-color), 1);
 }
 </style>

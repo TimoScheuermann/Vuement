@@ -1,5 +1,12 @@
 <template>
-  <div class="vm-card" :direction="direction === 'column' ? direction : 'row'">
+  <div
+    class="vm-card"
+    :direction="direction === 'column' ? direction : 'row'"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-paragraph': vmBackground,
+    }"
+  >
     <div class="vm-card--media" v-if="video || image">
       <img v-if="image" :src="image" alt="" />
       <video
@@ -24,23 +31,28 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMCard extends Vue {
+export default class VMCard extends Mixins(VMCProp, VMBgProp) {
   @Prop() image!: string;
   @Prop() video!: string;
   @Prop() title!: string;
   @Prop({ default: 'column' }) direction!: string;
 
+  get videoElem(): HTMLVideoElement | null {
+    if (!this.video) return null;
+    const elem = this.$refs.video;
+    return elem ? (elem as HTMLVideoElement) : null;
+  }
+
   @Watch('video')
   public videoChanged(): void {
     if (this.video) {
       setTimeout(() => {
-        const elem = this.$refs.video;
-        if (elem) {
-          (elem as HTMLVideoElement).play();
-        }
+        if (this.videoElem) this.videoElem.play();
       }, 100);
     }
   }
@@ -70,12 +82,11 @@ export default class VMCard extends Vue {
   }
 
   border-radius: $border-radius;
-  background: var(--vm-paragraph);
+  background: rgba(var(--vm-paragraph), 1);
+  color: rgba(var(--vm-color), 1);
 
-  box-shadow: 2px 4px 10px rgba(#111, 0.09);
   transition: 0.2s ease-in-out;
   &:hover {
-    box-shadow: 4px 8px 20px rgba(#111, 0.18);
     transform: scale(1.0174);
   }
 

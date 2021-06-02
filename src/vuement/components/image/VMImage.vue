@@ -68,7 +68,7 @@ export default class VMImage extends Vue {
     setTimeout(() => {
       if (style) created.setAttribute('style', style);
       else created.removeAttribute('style');
-    }, 300);
+    }, 0);
   }
 
   public hideExpand(image: HTMLImageElement): void {
@@ -105,7 +105,7 @@ export default class VMImage extends Vue {
   position: fixed;
   object-fit: contain;
   z-index: 2000;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 </style>
 <style lang="scss" scoped>

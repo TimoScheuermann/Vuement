@@ -12,12 +12,7 @@
       <i :class="icon" @click.stop />
     </div>
     <transition name="appear">
-      <div
-        class="vm-action--items"
-        :pos="pos"
-        :style="actionStyles"
-        v-if="visible"
-      >
+      <div class="vm-action--items" :pos="pos" v-if="visible">
         <div class="vm-action--items__background" />
         <div class="vm-action--items__title" v-if="title">{{ title }}</div>
         <div class="vm-action--items__items"><slot /></div>

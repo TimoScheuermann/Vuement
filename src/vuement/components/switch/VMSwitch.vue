@@ -1,5 +1,9 @@
 <template>
-  <label class="vm-switch" :style="switchColor" @click.stop>
+  <label
+    class="vm-switch"
+    @click.stop
+    :style="{ '--vm-primary': vmColor, '--vm-container': vmBackground }"
+  >
     <input type="checkbox" v-model="checked" />
     <div class="vm-switch__container">
       <div class="vm-switch__container--ball" />
@@ -8,19 +12,15 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMSwitch extends Mixins(VMColorMixin) {
-  @Prop({ default: 'primary' }) color!: string;
+export default class VMSwitch extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: false }) value!: boolean;
 
   public checked = !!this.value;
-
-  get switchColor(): string {
-    return `--vm-switch:${this.getColor(this.color)}`;
-  }
 
   @Watch('value', { immediate: true })
   public valueChanged(): void {
@@ -46,7 +46,7 @@ export default class VMSwitch extends Mixins(VMColorMixin) {
 
   $ballSize: 21;
   input:checked + &__container {
-    background: var(--vm-switch);
+    background: rgba(var(--vm-primary), 1);
     .vm-switch__container--ball {
       transform: translate(calc(50% + #{$ballSize / 2 + 3}px), -50%);
     }
@@ -62,7 +62,7 @@ export default class VMSwitch extends Mixins(VMColorMixin) {
     height: #{$ballSize + 6}px;
     border-radius: #{$ballSize + 3}px;
 
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
     transition: 0.2s ease-in;
 
     &--ball {

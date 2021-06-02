@@ -1,5 +1,5 @@
 <template>
-  <div class="tl-grid" :style="gridMode + gridGap + gridWidth">
+  <div class="vm-grid" :style="gridMode + gridGap + gridWidth">
     <slot />
   </div>
 </template>
@@ -8,21 +8,21 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class TLGrid extends Vue {
+export default class VMGrid extends Vue {
   @Prop({ default: '200px' }) width!: string;
   @Prop({ default: 'auto-fill' }) mode!: string;
   @Prop({ default: '30px' }) gap!: string;
 
   get gridMode(): string {
-    return `--tl-grid-mode:${this.mode};`;
+    return `--vm-grid-mode:${this.mode};`;
   }
 
   get gridGap(): string {
-    return `--tl-grid-gap:${this.transformNumber(this.gap)};`;
+    return `--vm-grid-gap:${this.transformNumber(this.gap)};`;
   }
 
   get gridWidth(): string {
-    return `--tl-grid-width:${this.transformNumber(this.width)};`;
+    return `--vm-grid-width:${this.transformNumber(this.width)};`;
   }
 
   public transformNumber(number: string | number): string {
@@ -33,12 +33,12 @@ export default class TLGrid extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.tl-grid {
+.vm-grid {
   display: grid;
-  grid-gap: var(--tl-grid-gap);
+  grid-gap: var(--vm-grid-gap);
   grid-template-columns: repeat(
-    var(--tl-grid-mode),
-    minmax(var(--tl-grid-width), 1fr)
+    var(--vm-grid-mode),
+    minmax(var(--vm-grid-width), 1fr)
   );
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="vm-segment">
+  <div
+    class="vm-segment"
+    :style="{ '--vm-background': vmColor, '--vm-container': vmBackground }"
+  >
     <div class="vm-segment__background" />
     <div class="vm-segment__box">
       <div :style="boxStyle" />
@@ -12,10 +15,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMSegment extends Vue {
+export default class VMSegment extends Mixins(VMBgProp, VMCProp) {
   @Prop({ default: 0 }) value!: number;
 
   public segment = 0;
@@ -85,7 +90,7 @@ export default class VMSegment extends Vue {
     right: 0;
     bottom: 0;
     border-radius: inherit;
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
   }
 
   &__box {
@@ -95,7 +100,7 @@ export default class VMSegment extends Vue {
 
     div {
       position: absolute;
-      background: var(--vm-background);
+      background: rgba(var(--vm-background), 1);
       top: 50%;
       transform: translateY(-50%);
       height: 100%;

@@ -1,6 +1,13 @@
 <template>
-  <div class="vm-quote" :style="vmColor">
-    <div class="vm-quote__background" :style="{ background: background }" />
+  <div
+    class="vm-quote"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-container': vmBackground,
+      '--vm-primary': vmBorder,
+    }"
+  >
+    <div class="vm-quote__background" />
     <div class="vm-quote__bar" />
 
     <div class="vm-quote--title" v-if="title">{{ title }}</div>
@@ -9,17 +16,17 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMQuote extends Mixins(VMColorMixin) {
+export default class VMQuote extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
-  @Prop({ default: 'primary' }) color!: string;
-  @Prop() background!: string;
+  @Prop() border!: string;
 
-  get vmColor(): string {
-    return `--vm-quote-c: ${this.getColor(this.color)};`;
+  get vmBorder(): string | null {
+    return this.border ? this.getColor(this.border) : null;
   }
 }
 </script>
@@ -30,6 +37,7 @@ export default class VMQuote extends Mixins(VMColorMixin) {
   border-radius: $border-radius;
   padding: 10px;
   padding-left: #{$border-radius + 10px};
+  color: rgba(var(--vm-color), 1);
 
   &__background {
     position: absolute;
@@ -38,7 +46,7 @@ export default class VMQuote extends Mixins(VMColorMixin) {
     right: 0;
     bottom: 0;
     border-radius: inherit;
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
   }
 
   &__bar {
@@ -47,7 +55,7 @@ export default class VMQuote extends Mixins(VMColorMixin) {
     top: 0;
     bottom: 0;
     width: $border-radius;
-    background: var(--vm-quote-c);
+    background: rgba(var(--vm-primary), 1);
     border-radius: inherit;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -82,7 +90,7 @@ export default class VMQuote extends Mixins(VMColorMixin) {
       right: 6px;
       top: 0;
       font-weight: 900;
-      color: var(--vm-quote-c);
+      color: rgba(var(--vm-primary), 1);
     }
   }
 }

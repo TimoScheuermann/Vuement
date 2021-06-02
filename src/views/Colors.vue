@@ -16,9 +16,32 @@
 
       <vm-input></vm-input>
     </vm-flow>
-    <!-- <h1 v-for="(_, i) in Array(20)" :key="i">{{ i }}</h1> -->
+    <vm-chip-wrapper>
+      <vm-chip value="Chip #1" />
+      <vm-chip value="Chip #2" />
+    </vm-chip-wrapper>
+
+    <vm-divider></vm-divider>
+
+    <vm-hero></vm-hero>
+
+    <vm-link>Test</vm-link>
+
+    <vm-quote title="Hall">Ha</vm-quote>
+
+    <vm-segment>
+      <vm-segment-item title="hello"></vm-segment-item>
+      <vm-segment-item title="hello"></vm-segment-item>
+      <vm-segment-item title="hello"></vm-segment-item>
+    </vm-segment>
+
+    <vm-scroll-up></vm-scroll-up>
+    <h1 v-for="(_, i) in Array(20)" :key="i">{{ i }}</h1>
     <vm-dialog v-model="open">
       <vm-textarea></vm-textarea>
+
+      <vm-dialog-button slot="buttons" title="accept" />
+      <vm-dialog-button slot="buttons" title="cancel" />
     </vm-dialog>
   </div>
 </template>

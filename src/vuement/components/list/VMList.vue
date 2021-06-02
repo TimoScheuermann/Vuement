@@ -1,15 +1,20 @@
 <template>
-  <div class="vm-list">
+  <div
+    class="vm-list"
+    :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
+  >
     <div class="vm-list__background" />
     <div class="vm-list__content"><slot /></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMList extends Vue {}
+export default class VMList extends Mixins(VMCProp, VMBgProp) {}
 </script>
 
 <style lang="scss" scoped>
@@ -19,6 +24,8 @@ export default class VMList extends Vue {}
   margin: 2.5px;
   border-radius: $border-radius;
 
+  color: rgba(var(--vm-color), 1);
+
   &__background {
     position: absolute;
     top: 0;
@@ -26,7 +33,7 @@ export default class VMList extends Vue {}
     right: 0;
     bottom: 0;
     border-radius: inherit;
-    background: var(--vm-paragraph);
+    background: rgba(var(--vm-paragraph), 1);
   }
 
   &__content {

@@ -1,25 +1,25 @@
 <template>
   <div
-    class="vm-select-item"
-    :selected="isSelected"
     v-if="id"
+    class="vm-select-item"
     @click.capture.stop="clicked"
+    :selected="isSelected"
+    :style="{ '--vm-primary': vmColor }"
   >
-    <i :class="icon" :style="selectItemColor" />
-    <span :style="selectItemColor">{{ title }}</span>
+    <i :class="icon" />
+    <span>{{ title }}</span>
   </div>
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import { VMSelectSelection } from './VMSelect.vue';
 
 @Component
-export default class VMSelectItem extends Mixins(VMColorMixin) {
+export default class VMSelectItem extends Mixins(VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
-  @Prop({ default: 'primary' }) color!: string;
   @Prop() selected!: boolean;
   @Prop({ required: true }) id!: string;
 
@@ -33,10 +33,6 @@ export default class VMSelectItem extends Mixins(VMColorMixin) {
   selectedChanged(): void {
     this.isSelected = !!this.selected;
     this.updateState();
-  }
-
-  get selectItemColor(): string | null {
-    return `--vm-color:${this.getColor(this.color)};`;
   }
 
   public clicked(): void {
@@ -76,7 +72,7 @@ export default class VMSelectItem extends Mixins(VMColorMixin) {
   transition: 0.1s ease-in-out;
 
   &:not([disabled]):hover {
-    background: rgba(#111, 0.1);
+    background: rgba(var(--vm-color), 0.12);
   }
 
   &:disabled {
@@ -91,15 +87,12 @@ export default class VMSelectItem extends Mixins(VMColorMixin) {
     left: 0;
     height: 1px;
     width: 100%;
-    background: var(--vm-color);
+    background: rgba(var(--vm-color), 1);
     opacity: 0.1;
   }
 
   &[selected] {
-    i,
-    span {
-      color: var(--vm-color);
-    }
+    color: rgba(var(--vm-primary), 1);
   }
 
   i {

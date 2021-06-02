@@ -123,9 +123,9 @@ export default class InterimComponent extends Vue {
     // );
     background: radial-gradient(
       ellipse at center,
-      #fff 0%,
-      #f5f5f7 60%,
-      #dadada 90%
+      rgba(var(--vm-background), 1) 0%,
+      rgba(var(--vm-paragraph), 1) 60%,
+      rgba(var(--vm-border), 0.5) 90%
     );
 
     .hero-wrapper {

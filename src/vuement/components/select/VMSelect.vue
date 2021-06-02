@@ -1,5 +1,9 @@
 <template>
-  <div class="vm-select" :disabled="disabled">
+  <div
+    class="vm-select"
+    :disabled="disabled"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
+  >
     <div
       class="vm-select--container"
       ref="trigger"
@@ -15,12 +19,7 @@
       </div>
     </div>
     <transition name="appear" appear>
-      <div
-        class="vm-select--items"
-        :pos="pos"
-        :style="selectStyles"
-        v-if="visible"
-      >
+      <div class="vm-select--items" :pos="pos" v-if="visible">
         <div class="vm-select--items__background" />
         <div class="vm-select--items__title" v-if="title">{{ title }}</div>
         <div class="vm-select--items__items"><slot /></div>
@@ -30,8 +29,9 @@
 </template>
 
 <script lang="ts">
-import { convertStyles, getContainerPosition } from '@/vuement/dev/util';
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import { getContainerPosition } from '@/vuement/dev/util';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 export interface VMSelectSelection {
@@ -41,16 +41,15 @@ export interface VMSelectSelection {
 }
 
 @Component
-export default class VMSelect extends Mixins(VMColorMixin) {
+export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
   @Prop() icon!: string;
+  @Prop() frosted!: boolean;
+  @Prop() title!: string;
+
   @Prop({ default: false }) value!: boolean;
-  @Prop() color!: string;
-  @Prop() background!: string;
   @Prop({ default: 'Select one' }) placeholder!: string;
   @Prop({ default: false }) multiple!: boolean;
-  @Prop() frosted!: boolean;
   @Prop({ default: false }) disabled!: boolean;
-  @Prop() title!: string;
 
   public visible = !!this.value;
   public pos = '';
@@ -87,20 +86,6 @@ export default class VMSelect extends Mixins(VMColorMixin) {
   @Watch('value', { immediate: true })
   valueChanged(): void {
     this.visible = this.value;
-  }
-
-  get selectBackground(): string | null {
-    if (!this.background) return null;
-    return `--vm-container:${this.getColor(this.background)};`;
-  }
-
-  get selectColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-color:${this.getColor(this.color)};`;
-  }
-
-  get selectStyles(): string | null {
-    return convertStyles([this.selectBackground, this.selectColor]);
   }
 
   get selectedDisplay(): string | null {
@@ -152,11 +137,10 @@ export default class VMSelect extends Mixins(VMColorMixin) {
   max-width: calc(100% - 5px);
   cursor: pointer;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
 
   &[frosted] {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
-      color: red;
       .vm-select--container {
         &__background {
           opacity: 0.5;
@@ -193,7 +177,7 @@ export default class VMSelect extends Mixins(VMColorMixin) {
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--vm-container);
+      background: rgba(var(--vm-container), 1);
     }
     &--icon {
       position: relative;
@@ -201,6 +185,7 @@ export default class VMSelect extends Mixins(VMColorMixin) {
       place-content: center;
       margin-right: 2.5px;
       padding-right: 2.5px;
+
       &::after {
         content: '';
         position: absolute;
@@ -268,7 +253,7 @@ export default class VMSelect extends Mixins(VMColorMixin) {
       right: 0;
       bottom: 0;
       border-radius: inherit;
-      background: var(--vm-container);
+      background: rgba(var(--vm-container), 1);
     }
 
     &__title {

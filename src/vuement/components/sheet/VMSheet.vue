@@ -1,13 +1,14 @@
 <template>
   <transition name="appear" appear :delay="300">
     <div
-      class="vm-sheet"
       v-if="visible"
+      class="vm-sheet"
       @click.stop="close"
       @touchmove.self.prevent
       @wheel.self.prevent
       @mousewheel.self.prevent
       @DOMMouseScroll.self.prevent
+      :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
     >
       <transition name="slide" appear>
         <div class="vm-sheet--sheet" @click.prevent.stop>
@@ -23,10 +24,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMSheet extends Vue {
+export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() value!: boolean;
 
@@ -64,7 +67,9 @@ export default class VMSheet extends Vue {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 200;
+  z-index: 2000;
+
+  color: rgba(var(--vm-color), 1);
 
   &--sheet {
     position: absolute;
@@ -74,7 +79,7 @@ export default class VMSheet extends Vue {
     width: calc(90vw);
     max-width: 400px;
     border-radius: 39px 39px 0 0;
-    background: var(--vm-background);
+    background: rgba(var(--vm-background), 1);
 
     padding: 0px 5vw calc(20px + env(safe-area-inset-bottom)) 5vw;
 

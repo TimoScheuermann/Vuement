@@ -1,10 +1,7 @@
 <template>
   <div
     class="vm-title"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-color-secondary': vmColorSecondary,
-    }"
+    :style="{ '--vm-color': vmColor, '--vm-color-secondary': vmColorSecondary }"
   >
     <div class="vm-title--subtitle" v-if="subtitle">{{ subtitle }}</div>
     <div class="vm-title--title" v-if="title">{{ title }}</div>
@@ -12,19 +9,14 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMTitle extends Mixins(VMColorMixin) {
+export default class VMTitle extends Mixins(VMCProp) {
   @Prop() title!: string;
   @Prop() subtitle!: string;
-  @Prop() color!: string;
   @Prop() colorSecondary!: string;
-
-  get vmColor(): string | null {
-    return this.color ? this.getColor(this.color) : null;
-  }
 
   get vmColorSecondary(): string | null {
     return this.colorSecondary ? this.getColor(this.colorSecondary) : null;

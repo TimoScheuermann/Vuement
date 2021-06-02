@@ -19,16 +19,16 @@
     <br />
 
     <vm-grid>
-      <tl-flow>
+      <vm-flow>
         <vm-list>
           <vm-list-item title="Title #1" description="Description #1" />
           <vm-list-item title="Title #2" description="Description #2" />
           <vm-list-item title="Title #3" description="Description #3" />
           <vm-list-item title="Title #4" description="Description #4" />
         </vm-list>
-      </tl-flow>
+      </vm-flow>
 
-      <tl-flow>
+      <vm-flow>
         <vm-list>
           <vm-list-item title="User #1" description="Using Avatars">
             <vm-avatar slot="media" />
@@ -43,18 +43,18 @@
             <vm-avatar slot="media" />
           </vm-list-item>
         </vm-list>
-      </tl-flow>
+      </vm-flow>
 
-      <tl-flow>
+      <vm-flow>
         <vm-list>
           <vm-list-item title="Navigation #1" routeName="vmList" />
           <vm-list-item title="Navigation #2" routeName="vmList" />
           <vm-list-item title="Navigation #3" routeName="vmList" />
           <vm-list-item title="Navigation #4" routeName="vmList" />
         </vm-list>
-      </tl-flow>
+      </vm-flow>
 
-      <tl-flow>
+      <vm-flow>
         <vm-list>
           <vm-list-item title="Custom Action #1">
             <vm-switch />
@@ -69,7 +69,7 @@
             <vm-checkbox />
           </vm-list-item>
         </vm-list>
-      </tl-flow>
+      </vm-flow>
     </vm-grid>
   </div>
 </template>

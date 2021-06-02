@@ -11,6 +11,7 @@
       :style="{
         '--vm-color': vmColor,
         '--vm-background': vmBackground,
+        '--vm-border': vmBorder,
       }"
     >
       <transition name="slide" appear>
@@ -33,30 +34,24 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialog extends Mixins(VMColorMixin) {
+export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() value!: boolean;
-  @Prop() color!: string;
-  @Prop() background!: string;
+  @Prop() border!: string;
 
   public visible = !!this.value;
 
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
-
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return this.getColor(this.background);
-  }
-
   mounted(): void {
     this.$on('close', this.close);
+  }
+
+  get vmBorder(): string | null {
+    return this.border ? this.getColor(this.border) : null;
   }
 
   @Watch('value', { immediate: true })
@@ -140,13 +135,13 @@ export default class VMDialog extends Mixins(VMColorMixin) {
     }
 
     &__buttons {
-      margin: 20px -20px -20px;
+      margin: 15px -20px -20px;
       border-radius: inherit;
       border-top-right-radius: 0;
       border-top-left-radius: 0;
       overflow: hidden;
 
-      border-top: 1px solid rgba(129, 129, 129, 0.5);
+      border-top: 1.5px solid rgba(var(--vm-border), 1);
 
       display: flex;
       justify-content: center;

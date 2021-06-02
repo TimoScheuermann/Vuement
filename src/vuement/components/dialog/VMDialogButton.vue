@@ -2,8 +2,8 @@
   <div
     class="vm-dialog-button"
     @click.stop="handleClick"
-    :style="vmColor"
     :disabled="disabled"
+    :style="{ '--vm-color': vmColor }"
   >
     <div class="vm-dialog-button--icon" v-if="icon">
       <i :class="icon" />
@@ -16,14 +16,13 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialogButton extends Mixins(VMLinkMixin, VMColorMixin) {
+export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
-  @Prop() color!: string;
   @Prop() icon!: string;
   @Prop() image!: string;
 
@@ -32,11 +31,6 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMColorMixin) {
     if (!this.disabled) {
       this.$parent.$emit('close');
     }
-  }
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-color:${this.getColor(this.color)}`;
   }
 }
 </script>
@@ -50,21 +44,21 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMColorMixin) {
   flex-wrap: nowrap;
   cursor: pointer;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
 
   min-width: 80px;
 
   padding: 0 10px;
-  min-height: 50px;
+  min-height: 45px;
 
   &:not(:first-child) {
-    border-left: 1px solid rgba(129, 129, 129, 0.5);
+    border-left: 1.5px solid rgba(var(--vm-border), 1);
   }
 
   transition: 0.1s ease-in-out;
   &:not([disabled]) {
     &:hover {
-      background: rgba(129, 129, 129, 0.2);
+      background: rgba(var(--vm-color), 0.12);
     }
     &:active {
       filter: brightness(150%);

@@ -5,23 +5,23 @@
     </vm-divider>
     <br />
     <vm-grid>
-      <tl-flow>
+      <vm-flow>
         <vm-quote>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus, ad
           aut. Quaerat fugit alias ipsum, maiores modi dolor voluptas possimus
           architecto est, a autem fuga sequi necessitatibus ratione explicabo
           ipsa?
         </vm-quote>
-      </tl-flow>
-      <tl-flow>
+      </vm-flow>
+      <vm-flow>
         <vm-quote title="Quote by Don Joe">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat non
           unde alias tempore doloribus repudiandae nostrum aperiam quos
           deleniti, inventore reiciendis amet, similique nisi sequi eius aut
           adipisci modi. Debitis?
         </vm-quote>
-      </tl-flow>
-      <tl-flow>
+      </vm-flow>
+      <vm-flow>
         <vm-quote>
           <b>Quote by Don Joe:</b>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem rem
@@ -29,7 +29,7 @@
           recusandae exercitationem praesentium obcaecati quasi sunt. Incidunt
           maxime itaque provident dolorem!
         </vm-quote>
-      </tl-flow>
+      </vm-flow>
     </vm-grid>
 
     <br /><br />

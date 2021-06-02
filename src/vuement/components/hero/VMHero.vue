@@ -1,5 +1,8 @@
 <template>
-  <div class="vm-hero" :style="heroHeight + heroBackground">
+  <div
+    class="vm-hero"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground, height }"
+  >
     <video v-if="video" ref="video" playsinline autoplay="autoplay" loop muted>
       <source :src="video" />
     </video>
@@ -9,11 +12,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMHero extends Vue {
-  @Prop() background!: string;
+export default class VMHero extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: '200px' }) height!: string;
   @Prop() image!: string;
   @Prop() video!: string;
@@ -29,21 +33,13 @@ export default class VMHero extends Vue {
       }, 100);
     }
   }
-
-  get heroBackground(): string | null {
-    if (!this.background) return null;
-    return `--vm-container:${this.background};`;
-  }
-
-  get heroHeight(): string {
-    return `height:${this.height};`;
-  }
 }
 </script>
 
 <style lang="scss" scoped>
 .vm-hero {
-  background: var(--vm-container);
+  background: rgba(var(--vm-container), 1);
+  color: rgba(var(--vm-color), 1);
   position: relative;
   overflow: hidden;
 

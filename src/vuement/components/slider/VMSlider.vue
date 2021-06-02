@@ -1,32 +1,28 @@
 <template>
   <input
     class="vm-slider"
-    :style="vmColor"
+    v-model="innerVal"
     type="range"
     :min="min"
     :max="max"
     :step="step"
-    v-model="innerVal"
+    :style="{ '--vm-primary': vmColor, '--vm-container': vmBackground }"
   />
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
 @Component
-export default class VMSlider extends Mixins(VMColorMixin) {
-  @Prop({ default: 'primary' }) color!: string;
+export default class VMSlider extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 1 }) min!: number;
   @Prop({ default: 10 }) max!: number;
   @Prop({ default: 1 }) step!: number;
   @Prop({ default: 1 }) value!: number;
 
   public innerVal = this.value || 1;
-
-  get vmColor(): string {
-    return `--vm-slider-c:${this.getColor(this.color)};`;
-  }
 
   @Watch('value', { immediate: true })
   valueChanged(): void {
@@ -52,7 +48,7 @@ export default class VMSlider extends Mixins(VMColorMixin) {
   border-radius: 5px;
   margin: 7.5px 2.5px;
 
-  background: var(--vm-container);
+  background: rgba(var(--vm-container), 1);
 
   &::-webkit-slider-thumb {
     $size: 17.5px;
@@ -62,7 +58,7 @@ export default class VMSlider extends Mixins(VMColorMixin) {
     width: $size;
     border-radius: $size;
     height: $size;
-    background: var(--vm-slider-c);
+    background: rgba(var(--vm-primary), 1);
     cursor: grab;
   }
 }

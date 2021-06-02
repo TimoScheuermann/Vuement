@@ -1,9 +1,12 @@
 <template>
-  <div class="vm-progress">
+  <div
+    class="vm-progress"
+    :style="{ '--vm-primary': vmColor, '--vm-container': vmBackground }"
+  >
     <div
       class="vm-progress--bar"
       v-if="type === 'bar'"
-      :style="barStyle"
+      :style="{ height: barHeight, '--vm-progress-p': progress * 100 + '%' }"
       :title="title"
     >
       <div
@@ -41,17 +44,15 @@
 </template>
 
 <script lang="ts">
-import { convertStyles } from '@/vuement/dev/util';
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMProgress extends Mixins(VMColorMixin) {
+export default class VMProgress extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'bar' }) type!: string;
   @Prop({ default: 0 }) progress!: number;
-  @Prop({ default: 'primary' }) color!: string;
-  @Prop() background!: string;
-  @Prop({ default: '6px' }) barHeight!: string;
+  @Prop() barHeight!: string;
   @Prop({ default: 100 }) ringSize!: number;
   @Prop({ default: 6 }) ringWidth!: number;
 
@@ -62,26 +63,9 @@ export default class VMProgress extends Mixins(VMColorMixin) {
     return this.convertNumb(this.ringWidth, 6) + 4;
   }
 
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return `background: ${this.getColor(this.background)};`;
-  }
-
-  get vmColor(): string {
-    return this.getColor(this.color);
-  }
-
   get title(): string {
     const p = Math.round(this.progress * 10000) / 100;
     return `${p}%`;
-  }
-
-  get barStyle(): string | null {
-    return convertStyles([
-      `--vm-progress-p: ${this.progress * 100}%;`,
-      `height: ${this.barHeight ? this.barHeight : '5px'};`,
-      this.vmBackground,
-    ]);
   }
 
   private convertNumb(numb: string | number, fallback: number): number {
@@ -120,16 +104,18 @@ export default class VMProgress extends Mixins(VMColorMixin) {
     flex: 1 1 0px;
 
     max-width: calc(100% - 9px);
+    height: 6px;
 
     margin: 2.5px;
     padding: 2px;
     border-radius: 100vw;
-    background: var(--vm-container);
+    background: rgba(var(--vm-container), 1);
 
     &__bar {
       border-radius: inherit;
       width: var(--vm-progress-p);
       transition: 0.2s ease-in-out;
+      background: rgba(var(--vm-primary), 1);
     }
   }
 
@@ -139,10 +125,14 @@ export default class VMProgress extends Mixins(VMColorMixin) {
 
     circle {
       fill: none;
-      stroke: var(--vm-container);
+      stroke: rgba(var(--vm-container), 1);
       stroke-linecap: round;
       stroke-linejoin: round;
       transition: 0.2s ease-in-out;
+
+      &:last-child {
+        stroke: rgba(var(--vm-primary), 1);
+      }
     }
   }
 }

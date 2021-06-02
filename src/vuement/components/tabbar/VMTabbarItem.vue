@@ -4,9 +4,7 @@
     @click="clicked"
     :active="isUrlActive"
     :disabled="disabled"
-    :style="{
-      '--vm-primary': vmColor,
-    }"
+    :style="{ '--vm-primary': vmColor }"
   >
     <div class="vm-tabbar-item__icon" v-if="icon">
       <i :class="icon" />
@@ -18,18 +16,12 @@
 <script lang="ts">
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 
 @Component
-export default class VMTabbarItem extends Mixins(VMLinkMixin, VMColorMixin) {
+export default class VMTabbarItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() icon!: string;
-  @Prop() color!: string;
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
 }
 </script>
 

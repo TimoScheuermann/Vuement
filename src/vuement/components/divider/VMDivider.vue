@@ -1,5 +1,5 @@
 <template>
-  <div class="vm-divider" :style="vmColor">
+  <div class="vm-divider" :style="{ '--vm-border': vmColor }">
     <div class="vm-divider__bar" v-if="position !== 'leading'" />
     <div class="vm-divider__content" v-if="$slots.default"><slot /></div>
     <div class="vm-divider__bar" v-if="position !== 'trailing'" />
@@ -7,18 +7,12 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMDivider extends Mixins(VMColorMixin) {
-  @Prop() color!: string;
+export default class VMDivider extends Mixins(VMCProp) {
   @Prop({ default: 'center' }) position!: string;
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-color: ${this.getColor(this.color)}`;
-  }
 }
 </script>
 
@@ -33,8 +27,7 @@ export default class VMDivider extends Mixins(VMColorMixin) {
   &__bar {
     height: 1px;
     flex-grow: 1;
-    background: var(--vm-color);
-    opacity: 0.5;
+    background: rgba(var(--vm-border), 1);
   }
 
   &__content ~ &__bar {

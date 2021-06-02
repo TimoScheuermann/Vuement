@@ -46,7 +46,8 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
@@ -55,11 +56,9 @@ import VMRevealer from '../revealer/VMRevealer.vue';
     VMRevealer,
   },
 })
-export default class VMNavbar extends Mixins(VMColorMixin) {
+export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: '400px' }) breakpoint!: string;
   @Prop({ default: false }) floating!: boolean;
-  @Prop() background!: string;
-  @Prop() color!: string;
 
   public overflow = false;
   public overflowVisible = false;
@@ -76,16 +75,6 @@ export default class VMNavbar extends Mixins(VMColorMixin) {
     this.unregisterMediaQuery();
   }
 
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
-
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return this.getColor(this.background);
-  }
-
   @Watch('breakpoint', { immediate: true })
   public updateMediaQuery(): void {
     this.registerMediaQuery();
@@ -95,7 +84,7 @@ export default class VMNavbar extends Mixins(VMColorMixin) {
     this.unregisterMediaQuery();
     this.mediaQuery = window.matchMedia(`(max-width: ${this.breakpoint})`);
     this.mediaQuery.addListener(this.mediaQueryListener);
-    this.overflowVisible = !false;
+    this.overflowVisible = false;
     this.overflow = this.mediaQuery.matches;
   }
 

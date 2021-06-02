@@ -1,10 +1,7 @@
 <template>
   <div
     class="vm-tabbar"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-background': vmBackground,
-    }"
+    :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
   >
     <div class="vm-tabbar__background" />
     <div class="vm-tabbar__items"><slot /></div>
@@ -12,24 +9,12 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
-import { Component, Prop, Mixins } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMTabbar extends Mixins(VMColorMixin) {
-  @Prop() background!: string;
-  @Prop() color!: string;
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
-
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return this.getColor(this.background);
-  }
-}
+export default class VMTabbar extends Mixins(VMCProp, VMBgProp) {}
 </script>
 
 <style lang="scss" scoped>

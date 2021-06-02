@@ -1,10 +1,10 @@
 <template>
   <transition appear name="appear">
     <div
-      class="vm-scroll-up"
       v-if="visible"
-      :style="scrollUpColor + scrollUpBackground"
+      class="vm-scroll-up"
       @click="scrollUp"
+      :style="{ '--vm-primary': vmBackground, '--vm-color': vmColor }"
     >
       <i :class="icon" v-if="icon"></i>
     </div>
@@ -12,13 +12,13 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMScrollUp extends Mixins(VMColorMixin) {
+export default class VMScrollUp extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'ti-chevron-up' }) icon!: string;
-  @Prop({ default: 'primary' }) background!: string;
   @Prop({ default: 'white' }) color!: string;
   @Prop({ default: 200 }) trigger!: number;
 
@@ -31,14 +31,6 @@ export default class VMScrollUp extends Mixins(VMColorMixin) {
 
   beforeDestroy(): void {
     window.removeEventListener('scroll', this.checkVisible);
-  }
-
-  get scrollUpColor(): string {
-    return `--vm-color:${this.getColor(this.color)};`;
-  }
-
-  get scrollUpBackground(): string {
-    return `--vm-background:${this.getColor(this.background)};`;
   }
 
   public checkVisible(): void {
@@ -66,8 +58,8 @@ export default class VMScrollUp extends Mixins(VMColorMixin) {
   width: $scale;
   border-radius: $scale;
 
-  background: var(--vm-background);
-  color: var(--vm-color);
+  background: rgba(var(--vm-primary), 1);
+  color: rgba(var(--vm-color), 1);
 
   display: grid;
   place-content: center;

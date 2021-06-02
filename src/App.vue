@@ -25,6 +25,7 @@ import {
 import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import CTabbar from './components/CTabbar.vue';
+import { LooseObject } from './vuement/dev/interfaces';
 
 @Component({
   components: {
@@ -38,11 +39,7 @@ export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
 
-    // (this as LooseObject).$vm.setColor('primary', 'magenta');
-
-    setTimeout(() => {
-      // (this as LooseObject).$vm.setColor('primary', 'lime');
-    }, 5000);
+    (this as LooseObject).$vm.setTheme('light');
   }
 
   beforeDestroy(): void {

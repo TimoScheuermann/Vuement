@@ -1,5 +1,9 @@
 <template>
-  <label class="vm-textarea" :frosted="frosted">
+  <label
+    class="vm-textarea"
+    :frosted="frosted"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
+  >
     <div class="vm-textarea--title" v-if="title">{{ title }}</div>
     <div class="vm-textarea--textarea">
       <div class="vm-textarea--textarea__background" />
@@ -19,10 +23,12 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMTextarea extends Vue {
+export default class VMTextarea extends Mixins(VMCProp, VMBgProp) {
   @Prop() frosted!: boolean;
   @Prop() title!: string;
   @Prop({ default: 'Enter text...' }) placeholder!: string;
@@ -55,7 +61,7 @@ export default class VMTextarea extends Vue {
   display: inline-block;
   margin: 2.5px;
 
-  color: var(--vm-color);
+  color: rgba(var(--vm-color), 1);
 
   &[frosted] {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -88,7 +94,7 @@ export default class VMTextarea extends Vue {
       left: 0;
       right: 0;
       bottom: 0;
-      background: var(--vm-container);
+      background: rgba(var(--vm-container), 1);
     }
 
     textarea {

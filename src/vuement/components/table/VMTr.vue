@@ -18,7 +18,7 @@ export default class VMTr extends Vue {}
 
   transition: 0.1s ease-in-out;
   &:hover {
-    background: var(--vm-border);
+    background: rgba(var(--vm-border), 1);
   }
 }
 </style>

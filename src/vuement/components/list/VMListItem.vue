@@ -1,5 +1,13 @@
 <template>
-  <div class="vm-list-item" @click="clicked">
+  <div
+    class="vm-list-item"
+    @click="clicked"
+    :style="{
+      '--vm-color': vmColor,
+      '--vm-border': vmBorder,
+      '--vm-color-secondary': vmColorSecondary,
+    }"
+  >
     <div class="vm-list-item--media" v-if="$slots.media">
       <slot name="media" />
     </div>
@@ -22,13 +30,24 @@
 </template>
 
 <script lang="ts">
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMListItem extends Mixins(VMLinkMixin) {
+export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() description!: string;
+  @Prop() colorSecondary!: string;
+  @Prop() border!: string;
+
+  get vmBorder(): string | null {
+    return this.border ? this.getColor(this.border) : null;
+  }
+
+  get vmColorSecondary(): string | null {
+    return this.colorSecondary ? this.getColor(this.colorSecondary) : null;
+  }
 
   get showIndicator(): boolean {
     return (
@@ -49,21 +68,18 @@ export default class VMListItem extends Mixins(VMLinkMixin) {
 
   transition: 0.2s ease-in-out;
   border-radius: #{$border-radius / 1.5};
+  color: rgba(var(--vm-color), 1);
 
   &:hover {
-    background: rgba(#000, 0.15);
-    .vm-list-item--container::before {
-      opacity: 0 !important;
-    }
+    background: rgba(var(--vm-color), 0.1);
   }
 
   &--media,
   &--container {
-    padding: 5px;
+    padding: 2.5px 5px;
   }
 
   &--container {
-    padding: 5px;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -83,7 +99,7 @@ export default class VMListItem extends Mixins(VMLinkMixin) {
         -webkit-line-clamp: 1;
       }
       .vm-list-item--description {
-        opacity: 0.7;
+        color: rgba(var(--vm-color-secondary), 1);
         font-size: 14px;
         -webkit-line-clamp: 2;
       }
@@ -128,20 +144,9 @@ export default class VMListItem extends Mixins(VMLinkMixin) {
     }
   }
 
-  &:not(:last-of-type) {
+  &:not(:first-child) {
     .vm-list-item--container {
-      position: relative;
-      &::before {
-        position: absolute;
-        content: '';
-        height: 1px;
-        width: calc(100% - 10px);
-        bottom: 0;
-        border-radius: 1px;
-        opacity: 0.2;
-        background: var(--vm-color);
-        transition: 0.2s ease-in-out;
-      }
+      border-top: 1.5px solid rgba(var(--vm-border), 1);
     }
   }
 }

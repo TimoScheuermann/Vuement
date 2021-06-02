@@ -30,7 +30,7 @@ export default class VMAvatar extends Vue {
 <style lang="scss" scoped>
 .vm-avatar {
   overflow: hidden;
-  background: var(--vm-container);
+  background: rgba(var(--vm-container), 1);
 
   $sizes: 'small' 40px, 'normal' 80px, 'medium' 120px, 'large' 160px;
 

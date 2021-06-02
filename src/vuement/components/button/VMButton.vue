@@ -21,20 +21,20 @@
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 
 @Component
-export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
+export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() icon!: string;
   @Prop({ default: false }) iconTrailing!: boolean;
   @Prop({ default: 'normal' }) size!: string;
   @Prop({ default: 'filled' }) variant!: string;
   @Prop({ default: 'white' }) color!: string;
-  @Prop() background!: string;
 
   get buttonSize(): string {
     const sizes = ['normal', 'medium', 'large'];
@@ -46,16 +46,6 @@ export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
     const variants = ['filled', 'border', 'opaque'];
     const variant = (this.variant || '').toLowerCase();
     return variants.includes(variant) ? variant : variants[0];
-  }
-
-  get vmColor(): string | null {
-    if (!this.color) return null;
-    return this.getColor(this.color);
-  }
-
-  get vmBackground(): string | null {
-    if (!this.background) return null;
-    return this.getColor(this.background);
   }
 }
 </script>

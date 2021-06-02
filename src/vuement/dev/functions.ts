@@ -63,6 +63,9 @@ export function updateVariables(): void {
   });
 
   elem.innerHTML = `:root {${str}\n}`;
-  elem.innerHTML +=
-    '\nhtml {\n\tcolor: var(--vm-color);\n\tbackground: var(--vm-background);\n}';
+  elem.innerHTML += `
+  html {
+    color: rgba(var(--vm-color), 1);
+    background: rgba(var(--vm-background), 1);
+  }`;
 }

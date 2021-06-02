@@ -14,9 +14,8 @@ export default class VMTh extends Vue {}
 <style lang="scss" scoped>
 .vm-th {
   text-align: inherit;
-  padding: 10px;
+  padding: 7.5px;
   font-weight: bold;
   vertical-align: middle;
-  background: var(--vm-container);
 }
 </style>

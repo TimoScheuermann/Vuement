@@ -1,25 +1,26 @@
 <template>
-  <div class="vm-action-item" @click="clicked" :disabled="disabled">
-    <span :style="actionItemColor">{{ title }}</span>
-    <i :class="icon" :style="actionItemColor" />
+  <div
+    class="vm-action-item"
+    @click="clicked"
+    :disabled="disabled"
+    :style="{
+      '--vm-color': vmColor,
+    }"
+  >
+    <span>{{ title }}</span>
+    <i :class="icon" />
   </div>
 </template>
 
 <script lang="ts">
-import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
 @Component
-export default class VMActionItem extends Mixins(VMLinkMixin, VMColorMixin) {
+export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
-  @Prop() color!: string;
-
-  get actionItemColor(): string | null {
-    if (!this.color) return null;
-    return `--vm-color:${this.getColor(this.color)};`;
-  }
 }
 </script>
 
@@ -28,6 +29,7 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMColorMixin) {
   display: grid;
   grid-template-columns: 1fr 20px;
   padding: 5px;
+  color: rgba(var(--vm-color), 1);
 
   cursor: pointer;
   position: relative;
@@ -36,10 +38,10 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMColorMixin) {
   transition: 0.1s ease-in-out;
 
   &:not([disabled]):hover {
-    background: rgba(#111, 0.1);
+    background: rgba(var(--vm-color), 0.12);
   }
 
-  &:disabled {
+  &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
   }
@@ -51,13 +53,8 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMColorMixin) {
     left: 0;
     height: 1px;
     width: 100%;
-    background: var(--vm-color);
+    background: currentColor;
     opacity: 0.1;
-  }
-
-  i,
-  span {
-    color: var(--vm-color);
   }
 
   i {
