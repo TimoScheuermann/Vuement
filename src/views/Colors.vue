@@ -1,62 +1,161 @@
 <template>
   <div class="view-colors" content>
-    <h1 @click="open = true">Colors</h1>
+    <VSectionHeader title="Colors" subtitle="UI Options" />
 
-    <vm-title title="Components" subtitle="check"></vm-title>
+    <span>
+      You can also add new colors, or overwrite existing ones. By doing so you
+      can access them easily in every component.
+      <br /><br />
+    </span>
+
+    <vm-grid width="115">
+      <vm-card v-for="c in Object.keys(colors)" :key="c">
+        <div class="color-preview" :style="{ '--vm-color': colors[c] }">
+          <vm-image :src="imgSrc(colors[c])" />
+        </div>
+        <div class="color-name">{{ c }}</div>
+        <div class="color-hex">{{ colors[c] }}</div>
+      </vm-card>
+    </vm-grid>
     <br />
 
-    <vm-flow horizontal="start">
-      <vm-checkbox title="Thot"></vm-checkbox>
+    <VSectionHeader title="Themes" subtitle="UI Options" />
 
-      <vm-action>
-        <vm-action-item title="Test" />
-        <vm-action-item title="Hallo" />
-        <vm-action-item title="Was läuft" />
-      </vm-action>
+    <span>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium,
+      labore? Quisquam, consequuntur? Neque quasi repudiandae magnam ad autem
+      consectetur voluptatibus iste at quam! Modi illum quia doloribus nesciunt
+      aliquam totam!
+      <br /><br />
+    </span>
+    <div
+      class="theme"
+      v-for="(t, i) in themes"
+      :key="i"
+      :style="{ color: t.color, '--vm-background': t.background }"
+    >
+      <div class="theme-title">{{ names[i] }}</div>
 
-      <vm-input></vm-input>
-    </vm-flow>
-    <vm-chip-wrapper>
-      <vm-chip value="Chip #1" />
-      <vm-chip value="Chip #2" />
-    </vm-chip-wrapper>
-
-    <vm-divider></vm-divider>
-
-    <vm-hero></vm-hero>
-
-    <vm-link>Test</vm-link>
-
-    <vm-quote title="Hall">Ha</vm-quote>
-
-    <vm-segment>
-      <vm-segment-item title="hello"></vm-segment-item>
-      <vm-segment-item title="hello"></vm-segment-item>
-      <vm-segment-item title="hello"></vm-segment-item>
-    </vm-segment>
-
-    <vm-scroll-up></vm-scroll-up>
-    <h1 v-for="(_, i) in Array(20)" :key="i">{{ i }}</h1>
-    <vm-dialog v-model="open">
-      <vm-textarea></vm-textarea>
-
-      <vm-dialog-button slot="buttons" title="accept" />
-      <vm-dialog-button slot="buttons" title="cancel" />
-    </vm-dialog>
+      <vm-grid width="115">
+        <vm-card
+          v-for="c in Object.keys(t)"
+          :key="c"
+          :background="t.paragraph"
+          :color="t.color"
+        >
+          <div class="color-preview" :style="{ '--vm-color': t[c] }">
+            <vm-image :src="imgSrc(t[c])" />
+          </div>
+          <div class="color-name">{{ c }}</div>
+          <div class="color-hex">{{ t[c] }}</div>
+        </vm-card>
+      </vm-grid>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import VSectionHeader from '@/components/VSectionHeader.vue';
+import {
+  COLORS_DEFAULT,
+  THEME_DARK,
+  THEME_LIGHT,
+} from '@/vuement/dev/constants';
+import { VMTheme } from '@/vuement/dev/interfaces';
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VSectionHeader,
+  },
+})
 export default class Colors extends Vue {
-  public open = false;
+  public colors = COLORS_DEFAULT;
+
+  get dark(): boolean {
+    return this.$store.getters.dark;
+  }
+
+  get themes(): VMTheme[] {
+    const t = [THEME_LIGHT, THEME_DARK];
+    return this.dark ? t.reverse() : t;
+  }
+
+  get names(): string[] {
+    const n = ['Light', 'Dark'];
+    return this.dark ? n.reverse() : n;
+  }
+
+  public imgSrc(color: string): string {
+    return `https://www.colorbook.io/imagecreator.php?hex=${color.replaceAll(
+      '#',
+      ''
+    )}&width=1920&height=1080`;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .view-colors {
-  //
+  padding-bottom: 0px !important;
+
+  .vm-card {
+    height: fit-content;
+  }
+
+  .color-preview {
+    height: 100px;
+    border-radius: $border-radius;
+    background: var(--vm-color);
+    img {
+      border-radius: $border-radius;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .color-name {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: rgba(var(--vm-color-secondary), 1);
+  }
+  .color-hex {
+    margin-top: 5px;
+  }
+
+  .theme {
+    position: relative;
+    background: var(--vm-background);
+    padding-bottom: 30px;
+
+    &:last-child {
+      .theme-title {
+        padding-top: 30px;
+      }
+      @media #{$isMobile} {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+      }
+    }
+
+    .theme-title {
+      font-weight: bold;
+      font-size: 26px;
+      padding-bottom: 30px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100vw;
+      height: 100%;
+      background: inherit;
+      z-index: -1;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 </style>

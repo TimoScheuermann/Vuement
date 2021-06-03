@@ -12,9 +12,16 @@
     >
       <transition name="slide" appear>
         <div class="vm-sheet--sheet" @click.prevent.stop>
-          <div class="vm-sheet--sheet__dragger" v-touch:swipe.bottom="close" />
-          <div class="vm-sheet--sheet__title" v-if="title">{{ title }}</div>
-          <div class="vm-sheet--sheet__items">
+          <div class="vm-sheet--sheet__close-button" v-if="closeButton">
+            <VMMenuButton icon="cross" :filled="true" @click="close" />
+          </div>
+          <div class="vm-sheet--sheet__head" v-if="title || $slots.head">
+            <slot name="head">
+              <div class="vm-sheet--shett__head--title">{{ title }}</div>
+            </slot>
+          </div>
+
+          <div class="vm-sheet--sheet__content">
             <slot />
           </div>
         </div>
@@ -27,11 +34,18 @@
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
-@Component
+@Component({
+  components: {
+    VMMenuButton,
+  },
+})
 export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() value!: boolean;
+  @Prop({ default: true }) closeable!: boolean;
+  @Prop({ default: true }) closeButton!: boolean;
 
   public visible = !!this.value;
 
@@ -50,7 +64,7 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
   }
 
   public close(): void {
-    this.visible = false;
+    if (this.closeable) this.visible = false;
   }
 }
 </script>
@@ -76,37 +90,38 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0%);
-    width: calc(90vw);
+    width: 90vw;
     max-width: 400px;
     border-radius: 39px 39px 0 0;
     background: rgba(var(--vm-background), 1);
+    max-height: calc(90vh - 10vw);
+    overflow: auto;
 
-    padding: 0px 5vw calc(20px + env(safe-area-inset-bottom)) 5vw;
+    padding: 20px 5vw;
 
-    &__dragger {
-      position: relative;
-      height: 20px;
-      width: 100%;
-
-      &::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 3px;
-        border-radius: 10px;
-        width: 40%;
-        max-width: 200px;
-        background: currentColor;
-        opacity: 0.5;
-      }
+    @supports (-webkit-touch-callout: none) {
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    &__title {
-      font-weight: bold;
-      font-size: 26px;
-      margin-bottom: 20px;
+    &__head,
+    &__content {
+      position: relative;
+    }
+
+    &__head {
+      .vm-sheet--shett__head--title {
+        font-weight: bold;
+        text-align: center;
+        font-size: 1.4em;
+      }
+      margin-bottom: 10px;
+    }
+
+    &__close-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 25px;
     }
   }
 }

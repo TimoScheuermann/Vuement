@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 import { Component, Vue } from 'vue-property-decorator';
-import { COLORS_DEFAULT } from '../dev/constants';
+import { COLORS_DEFAULT, THEME_LIGHT } from '../dev/constants';
 import { LooseObject } from '../dev/interfaces';
 import { convertColor } from '../dev/util';
 
@@ -8,15 +8,30 @@ import { convertColor } from '../dev/util';
 export default class VMColorMixin extends Vue {
   get colors(): Record<string, string> {
     const vm = (this as LooseObject).$vm;
-    return vm && vm.colors ? vm.colors : COLORS_DEFAULT;
+    let colors = Object.assign({}, COLORS_DEFAULT, THEME_LIGHT);
+
+    if (vm) {
+      colors = Object.assign(colors, vm.colors ? vm.coloes : COLORS_DEFAULT);
+      if (vm.theme && vm.themes[vm.theme]) {
+        colors = Object.assign(colors, vm.themes[vm.theme]);
+      } else {
+        colors = Object.assign(colors, THEME_LIGHT);
+      }
+    }
+
+    return colors;
   }
 
   public getColor(color: string): string {
     color = (color || '').toLowerCase();
 
     if (Object.keys(this.colors).includes(color)) {
-      return this.colors[color];
+      color = this.colors[color];
     }
+    if (/^\d{1,3},\d{1,3},\d{1,3}$/.test(color)) {
+      return color;
+    }
+
     return convertColor(color);
   }
 

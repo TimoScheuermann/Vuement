@@ -20,12 +20,24 @@
             class="vm-dialog--dialog__dragger"
             v-touch:swipe.bottom="close"
           />
-          <div class="vm-dialog--dialog__title" v-if="title">{{ title }}</div>
-          <div class="vm-dialog--dialog__items">
+
+          <div
+            class="vm-dialog--dialog__head"
+            :class="{ preset: !$slots.head }"
+            v-if="title || $slots.head || $slots.button"
+          >
+            <span>
+              <slot name="head">{{ title }}</slot>
+            </span>
+            <span><slot name="button" /></span>
+          </div>
+
+          <div class="vm-dialog--dialog__content">
             <slot />
           </div>
-          <div class="vm-dialog--dialog__buttons" v-if="$slots.buttons">
-            <slot name="buttons" />
+
+          <div class="vm-dialog--dialog__footer" v-if="$slots.footer">
+            <slot name="footer" />
           </div>
         </div>
       </transition>
@@ -43,6 +55,7 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() value!: boolean;
   @Prop() border!: string;
+  @Prop({ default: true }) closeable!: boolean;
 
   public visible = !!this.value;
 
@@ -65,7 +78,7 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
   }
 
   public close(): void {
-    this.visible = false;
+    if (this.closeable) this.visible = false;
   }
 }
 </script>
@@ -98,25 +111,25 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
     max-height: 90vh;
 
     padding: 20px;
-    padding-top: 0px;
+    padding-top: 10px;
     border-radius: #{2 * $border-radius};
     background: rgba(var(--vm-background), 1);
 
-    &__title,
-    &__items,
-    &__buttons {
+    &__dragger,
+    &__head,
+    &__content,
+    &__footer {
       position: relative;
     }
 
     &__dragger {
-      position: relative;
       height: 20px;
       width: 100%;
 
       &::before {
         content: '';
         position: absolute;
-        top: 50%;
+        top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
         height: 3px;
@@ -128,13 +141,23 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
       }
     }
 
-    &__title {
-      font-weight: bold;
-      font-size: 22px;
-      margin-bottom: 10px;
+    &__head {
+      &.preset {
+        font-weight: bold;
+        font-size: 1.4em;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+
+      span {
+        display: grid;
+        place-content: center;
+      }
     }
 
-    &__buttons {
+    &__footer {
       margin: 15px -20px -20px;
       border-radius: inherit;
       border-top-right-radius: 0;

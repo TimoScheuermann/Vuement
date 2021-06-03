@@ -3,7 +3,7 @@
     class="vm-dialog-button"
     @click.stop="handleClick"
     :disabled="disabled"
-    :style="{ '--vm-color': vmColor }"
+    :style="{ '--vm-primary': vmColor }"
   >
     <div class="vm-dialog-button--icon" v-if="icon">
       <i :class="icon" />
@@ -44,7 +44,7 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
   flex-wrap: nowrap;
   cursor: pointer;
 
-  color: rgba(var(--vm-color), 1);
+  color: rgba(var(--vm-primary), 1);
 
   min-width: 80px;
 
@@ -58,7 +58,7 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
   transition: 0.1s ease-in-out;
   &:not([disabled]) {
     &:hover {
-      background: rgba(var(--vm-color), 0.12);
+      background: rgba(var(--vm-primary), 0.12);
     }
     &:active {
       filter: brightness(150%);

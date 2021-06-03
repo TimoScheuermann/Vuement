@@ -1,7 +1,7 @@
 import _Vue, { PluginFunction } from 'vue';
 import Vue2TouchEvents from 'vue2-touch-events';
 import * as vmComponents from './components';
-import { COLORS_DEFAULT, THEMES_DEFAULT } from './dev/constants';
+import { COLORS_DEFAULT, THEME_DARK, THEME_LIGHT } from './dev/constants';
 import { setTheme } from './dev/functions';
 import { LooseObject, VMOptions } from './dev/interfaces';
 import { convertColor } from './dev/util';
@@ -11,8 +11,12 @@ const install: PluginFunction<VMOptions> = function installVuement(
   Vue: typeof _Vue,
   options = {} as VMOptions
 ): void {
-  if (!options.colors) options.colors = COLORS_DEFAULT;
-  if (!options.themes) options.themes = THEMES_DEFAULT;
+  if (!options.colors) options.colors = Object.assign({}, COLORS_DEFAULT);
+  if (!options.themes)
+    options.themes = {
+      light: Object.assign({}, THEME_LIGHT),
+      dark: Object.assign({}, THEME_DARK),
+    };
 
   for (const c in COLORS_DEFAULT) {
     if (!options.colors[c]) options.colors[c] = COLORS_DEFAULT[c];

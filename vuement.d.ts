@@ -1,38 +1,55 @@
 import { PluginFunction } from 'vue';
 
-declare const Vuement: PluginFunction<any>;
+declare const Vuement: PluginFunction<VMOptions>;
 export default Vuement;
 
-export const vmButton: PluginFunction<any>;
-export const vmAction: PluginFunction<any>;
-export const vmAvatar: PluginFunction<any>;
-export const vmCard: PluginFunction<any>;
-export const vmCheckbox: PluginFunction<any>;
-export const vmChip: PluginFunction<any>;
-export const vmDialog: PluginFunction<any>;
-export const vmDivider: PluginFunction<any>;
-export const vmHero: PluginFunction<any>;
-export const vmImage: PluginFunction<any>;
-export const vmInput: PluginFunction<any>;
-export const vmLink: PluginFunction<any>;
-export const vmList: PluginFunction<any>;
-export const vmNavbar: PluginFunction<any>;
-export const vmProgress: PluginFunction<any>;
-export const vmQuote: PluginFunction<any>;
-export const vmRadio: PluginFunction<any>;
-export const vmRevealer: PluginFunction<any>;
-export const vmScrollUp: PluginFunction<any>;
-export const vmSegment: PluginFunction<any>;
-export const vmSelect: PluginFunction<any>;
-export const vmSheet: PluginFunction<any>;
-export const vmSidebar: PluginFunction<any>;
-export const vmSlider: PluginFunction<any>;
-export const vmSpacer: PluginFunction<any>;
-export const vmSpinner: PluginFunction<any>;
-export const vmSwitch: PluginFunction<any>;
-export const vmTabbar: PluginFunction<any>;
-export const vmTable: PluginFunction<any>;
-export const vmTextarea: PluginFunction<any>;
-export const vmTitle: PluginFunction<any>;
-export const vmFlow: PluginFunction<any>;
-export const vmGrid: PluginFunction<any>;
+export const vmAccordion: PluginFunction<VMOptions>;
+export const vmAction: PluginFunction<VMOptions>;
+export const vmAvatar: PluginFunction<VMOptions>;
+export const vmCard: PluginFunction<VMOptions>;
+export const vmButton: PluginFunction<VMOptions>;
+export const vmCheckbox: PluginFunction<VMOptions>;
+export const vmChip: PluginFunction<VMOptions>;
+export const vmDialog: PluginFunction<VMOptions>;
+export const vmDivider: PluginFunction<VMOptions>;
+export const vmHero: PluginFunction<VMOptions>;
+export const vmImage: PluginFunction<VMOptions>;
+export const vmInput: PluginFunction<VMOptions>;
+export const vmLink: PluginFunction<VMOptions>;
+export const vmList: PluginFunction<VMOptions>;
+export const vmMenuButton: PluginFunction<VMOptions>;
+export const vmNavbar: PluginFunction<VMOptions>;
+export const vmProgress: PluginFunction<VMOptions>;
+export const vmQuote: PluginFunction<VMOptions>;
+export const vmRadio: PluginFunction<VMOptions>;
+export const vmRevealer: PluginFunction<VMOptions>;
+export const vmScrollUp: PluginFunction<VMOptions>;
+export const vmSegment: PluginFunction<VMOptions>;
+export const vmSelect: PluginFunction<VMOptions>;
+export const vmSheet: PluginFunction<VMOptions>;
+export const vmSidebar: PluginFunction<VMOptions>;
+export const vmSlider: PluginFunction<VMOptions>;
+export const vmSpacer: PluginFunction<VMOptions>;
+export const vmSpinner: PluginFunction<VMOptions>;
+export const vmSwitch: PluginFunction<VMOptions>;
+export const vmTabbar: PluginFunction<VMOptions>;
+export const vmTable: PluginFunction<VMOptions>;
+export const vmTextarea: PluginFunction<VMOptions>;
+export const vmTitle: PluginFunction<VMOptions>;
+export const vmFlow: PluginFunction<VMOptions>;
+export const vmGrid: PluginFunction<VMOptions>;
+
+export declare class VMTheme {
+  color: string;
+  'color-secondary': string;
+  background: string;
+  paragraph: string;
+  container: string;
+  border: string;
+}
+
+export declare class VMOptions {
+  colors: Record<string, string>;
+  themes: Record<string, VMTheme>;
+  theme: string;
+}

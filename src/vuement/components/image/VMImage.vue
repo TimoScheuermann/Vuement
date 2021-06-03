@@ -58,6 +58,9 @@ export default class VMImage extends Vue {
       created.setAttribute(attr.name, attr.value);
     });
 
+    created.onscroll = (e) => e.preventDefault();
+    created.ontouchmove = (e) => e.preventDefault();
+
     created.classList.remove('vm-image');
     created.addEventListener('click', this.toggleExpand);
     created.setAttribute('style', [style, this.getOrigin()].join(';'));
@@ -103,8 +106,8 @@ export default class VMImage extends Vue {
   height: 100vh;
   width: 100vw;
   position: fixed;
-  object-fit: contain;
-  z-index: 2000;
+  object-fit: cover;
+  z-index: 20000;
   transition: all 0.2s ease-in-out;
 }
 </style>
@@ -112,6 +115,7 @@ export default class VMImage extends Vue {
 .vm-image {
   transition: opacity 0s;
   transition-delay: 0.3s;
+  cursor: zoom-in;
   &[expanded] {
     transition-delay: 0s;
     opacity: 0;

@@ -1,10 +1,11 @@
+import { VMOptions } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
 import VMTable from './VMTable.vue';
 import VMTd from './VMTd.vue';
 import VMTh from './VMTh.vue';
 import VMTr from './VMTr.vue';
 
-const install: PluginFunction<any> = function installVuementComponent(
+const install: PluginFunction<VMOptions> = function installVuementComponent(
   Vue: typeof _Vue
 ): void {
   Vue.component('vmTable', VMTable);

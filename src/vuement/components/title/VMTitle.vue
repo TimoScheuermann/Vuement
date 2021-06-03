@@ -27,13 +27,13 @@ export default class VMTitle extends Mixins(VMCProp) {
 <style lang="scss" scoped>
 .vm-title {
   &--title {
-    font-size: 25px;
+    font-size: 1.65em;
     font-weight: bold;
     overflow-wrap: break-word;
     color: rgba(var(--vm-color), 1);
   }
   &--subtitle {
-    font-size: 12px;
+    font-size: 0.75em;
     font-weight: bold;
     text-transform: uppercase;
     color: rgba(var(--vm-color-secondary), 1);

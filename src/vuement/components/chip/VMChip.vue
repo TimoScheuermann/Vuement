@@ -2,6 +2,7 @@
   <div
     class="vm-chip"
     @click="clicked"
+    :editable="editable"
     :style="{
       '--vm-color': vmColor,
       '--vm-container': vmBackground,
@@ -42,7 +43,7 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop() icon!: string;
   @Prop() image!: string;
   @Prop({ default: false }) remove!: boolean;
-  @Prop({ default: false }) editable!: boolean;
+  @Prop({ default: !false }) editable!: boolean;
   @Prop({ default: 10 }) maxLength!: number;
 
   public keypress(e: KeyboardEvent): void {
@@ -98,6 +99,14 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
 
   $indicatorScale: 24px;
   border-radius: $indicatorScale;
+
+  user-select: none;
+  &[editable] {
+    user-select: text;
+    .vm-chip--input {
+      cursor: text;
+    }
+  }
 
   transition: 0.2s ease-in-out;
   &:active {

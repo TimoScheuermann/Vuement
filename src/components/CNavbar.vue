@@ -1,5 +1,5 @@
 <template>
-  <vm-navbar class="c-navbar" breakpoint="850px">
+  <vm-navbar class="c-navbar" breakpoint="150px">
     <template slot="title">
       <vm-flow>
         <div class="title" @click="goHome">
@@ -11,14 +11,13 @@
       </vm-flow>
     </template>
 
-    <template v-if="$store.getters.desktop">
+    <template v-if="true || $store.getters.desktop">
       <vm-navbar-item
         title="Components"
         @click="$store.commit('sidebar', true)"
       />
       <vm-navbar-item title="Colors" routeName="colors" />
-      <vm-navbar-item title="Themes" />
-      <vm-navbar-item title="Getting started" />
+      <vm-navbar-item title="Getting started" routeName="playground" />
     </template>
   </vm-navbar>
 </template>

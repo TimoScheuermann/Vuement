@@ -1,7 +1,7 @@
 <template>
   <div class="vm-action">
-    <div
-      class="vm-action__icon"
+    <span
+      :class="{ 'vm-action__trigger': !$slots.trigger }"
       ref="trigger"
       @click.stop.capture="visible = !visible"
       :style="{
@@ -9,8 +9,9 @@
         '--vm-container': vmBackground,
       }"
     >
-      <i :class="icon" @click.stop />
-    </div>
+      <slot name="trigger" />
+      <i v-if="!$slots.trigger" :class="icon" @click.stop />
+    </span>
     <transition name="appear">
       <div class="vm-action--items" :pos="pos" v-if="visible">
         <div class="vm-action--items__background" />
@@ -69,6 +70,13 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
   }
 }
 </script>
+<style lang="scss">
+.vm-action {
+  .vm-menu-button {
+    transform: translateY(0.1em);
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 .vm-action {
@@ -79,16 +87,17 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
 
   color: rgba(var(--vm-color), 1);
 
-  &__icon {
+  &__trigger {
+    cursor: pointer;
     background: rgba(var(--vm-container), 1);
     height: $size;
     width: $size;
     border-radius: $size;
-    display: grid;
+    display: inline-grid;
     place-content: center;
-    cursor: pointer;
 
     transition: 0.2s ease-in-out;
+
     &:active {
       filter: brightness(105%);
       transform: scale(0.85);
@@ -101,6 +110,7 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
     overflow: hidden;
     transition: all 0.2s ease-in-out;
     z-index: 50;
+    font-size: 1rem;
 
     @include backdrop-blur();
 

@@ -1,9 +1,10 @@
+import { VMOptions } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
 import VMSidebar from './VMSidebar.vue';
 import VMSidebarGroup from './VMSidebarGroup.vue';
 import VMSidebarItem from './VMSidebarItem.vue';
 
-const install: PluginFunction<any> = function installVuementComponent(
+const install: PluginFunction<VMOptions> = function installVuementComponent(
   Vue: typeof _Vue
 ): void {
   Vue.component('vmSidebar', VMSidebar);

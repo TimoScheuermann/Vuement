@@ -38,11 +38,11 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/themes',
-      name: 'themes',
-      component: () => import('@/views/Themes.vue'),
+      path: '/playground',
+      name: 'playground',
+      component: () => import('@/views/Playground.vue'),
       meta: {
-        title: 'Themes',
+        title: 'Playground',
       },
     },
 

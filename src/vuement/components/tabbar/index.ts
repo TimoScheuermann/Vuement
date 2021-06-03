@@ -1,8 +1,9 @@
+import { VMOptions } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
 import VMTabbar from './VMTabbar.vue';
 import VMTabbarItem from './VMTabbarItem.vue';
 
-const install: PluginFunction<any> = function installVuementComponent(
+const install: PluginFunction<VMOptions> = function installVuementComponent(
   Vue: typeof _Vue
 ): void {
   Vue.component('vmTabbar', VMTabbar);

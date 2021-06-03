@@ -5,6 +5,8 @@
     :disabled="disabled"
     :size="size"
     :variant="buttonVariant"
+    :gradient="gradient"
+    :block="block"
     :style="{
       '--vm-color': vmColor,
       '--vm-primary': vmBackground,
@@ -35,6 +37,8 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: 'normal' }) size!: string;
   @Prop({ default: 'filled' }) variant!: string;
   @Prop({ default: 'white' }) color!: string;
+  @Prop({ default: true }) gradient!: boolean;
+  @Prop({ default: false }) block!: boolean;
 
   get buttonSize(): string {
     const sizes = ['normal', 'medium', 'large'];
@@ -53,16 +57,26 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
 <style lang="scss" scoped>
 @mixin button-gradient($opacity: 1, $gradient: 0.3) {
   background: rgba(var(--vm-primary), $opacity);
-  background: linear-gradient(
-      135deg,
-      rgba(#fff, $gradient),
-      rgba(#000, $gradient)
-    ),
-    rgba(var(--vm-primary), $opacity);
+
+  &[gradient] {
+    background: linear-gradient(
+        135deg,
+        rgba(#fff, $gradient),
+        rgba(#000, $gradient)
+      ),
+      rgba(var(--vm-primary), $opacity);
+  }
 }
 
 .vm-button {
   display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  &[block] {
+    display: flex;
+    width: 100%;
+  }
+
   flex: 1 1 0px;
 
   outline: none;
@@ -93,6 +107,10 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
       .vm-button__icon ~ .vm-button__title,
       .vm-button__title ~ .vm-button__icon {
         margin-left: #{2.5 * $size};
+      }
+
+      &[block] {
+        width: calc(100% - #{2 * $size});
       }
     }
   }

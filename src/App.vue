@@ -2,7 +2,7 @@
   <div id="timos-components">
     <CNavbar />
     <CSidebar />
-    <CTabbar />
+    <!-- <CTabbar /> -->
 
     <div
       class="router-view"
@@ -25,7 +25,6 @@ import {
 import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import CTabbar from './components/CTabbar.vue';
-import { LooseObject } from './vuement/dev/interfaces';
 
 @Component({
   components: {
@@ -39,7 +38,13 @@ export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
 
-    (this as LooseObject).$vm.setTheme('light');
+    // setLightmode();
+    // setTimeout(() => {
+    //   setDarkmode();
+    //   setTimeout(() => {
+    //     setLightmode();
+    //   }, 5000);
+    // }, 5000);
   }
 
   beforeDestroy(): void {

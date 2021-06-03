@@ -6,8 +6,8 @@
       title="Comps"
       @click="$store.commit('sidebar', true)"
     />
-    <vm-tabbar-item icon="ti-bucket" title="Themes" routeName="themes" />
     <vm-tabbar-item icon="ti-color-fan" title="Colors" routeName="colors" />
+    <vm-tabbar-item icon="ti-apple" title="Playground" routeName="playground" />
     <vm-tabbar-item icon="ti-gears" title="Guide" />
   </vm-tabbar>
 </template>

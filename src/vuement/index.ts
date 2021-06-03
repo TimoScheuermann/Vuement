@@ -15,3 +15,4 @@ Object.entries(components).forEach(([componentName, component]) => {
 });
 
 export default plugin;
+export * from './dev/interfaces';

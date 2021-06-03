@@ -1,3 +1,4 @@
+export { default as vmAccordion } from './components/accordion';
 export { default as vmAction } from './components/action';
 export { default as vmAvatar } from './components/avatar';
 export { default as vmButton } from './components/button';
@@ -11,6 +12,7 @@ export { default as vmImage } from './components/image';
 export { default as vmInput } from './components/input';
 export { default as vmLink } from './components/link';
 export { default as vmList } from './components/list';
+export { default as vmMenuButton } from './components/menuButton';
 export { default as vmNavbar } from './components/navbar';
 export { default as vmProgress } from './components/progress';
 export { default as vmQuote } from './components/quote';

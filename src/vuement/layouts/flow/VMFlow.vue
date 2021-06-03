@@ -1,14 +1,15 @@
 <template>
-  <div class="vm-flow" :class="classes">
+  <div class="vm-flow" :class="classes" @click="clicked">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import VMLink from '@/vuement/components/link/VMLink.vue';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMFlow extends Vue {
+export default class VMFlow extends Mixins(VMLink) {
   @Prop({ default: 'center' }) vertical!: string;
   @Prop({ default: 'space-between' }) horizontal!: string;
   @Prop({ default: 'row' }) flow!: string;
