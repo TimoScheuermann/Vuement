@@ -1,5 +1,5 @@
 <template>
-  <div id="timos-components">
+  <div class="vuement">
     <CNavbar />
     <CSidebar />
     <CTabbar />
