@@ -1,14 +1,12 @@
 <template>
   <div
     class="vm-action-item"
-    @click="clicked"
+    @click.stop="handleClick"
     :disabled="disabled"
-    :style="{
-      '--vm-color': vmColor,
-    }"
+    :style="{ '--vm-color': vmColor }"
   >
     <span>{{ title }}</span>
-    <i :class="icon" />
+    <i v-if="icon" :class="icon" />
   </div>
 </template>
 
@@ -21,22 +19,33 @@ import { Component, Mixins, Prop } from 'vue-property-decorator';
 export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
+
+  public handleClick(e: MouseEvent): void {
+    this.clicked(e);
+    if (!this.disabled) {
+      this.$parent.$emit('close');
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .vm-action-item {
-  display: grid;
-  grid-template-columns: 1fr 20px;
-  padding: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 5px 10px;
   color: rgba(var(--vm-color), 1);
 
-  cursor: pointer;
   position: relative;
   user-select: none;
 
   transition: 0.1s ease-in-out;
 
+  cursor: pointer;
   &:not([disabled]):hover {
     background: rgba(var(--vm-color), 0.12);
   }
@@ -46,28 +55,16 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
     cursor: not-allowed;
   }
 
-  & + .vm-action-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background: currentColor;
-    opacity: 0.1;
+  &:not(:last-child) {
+    border-bottom: 1.5px solid rgba(var(--vm-border), 1);
   }
 
   i {
-    display: grid;
-    place-content: center;
+    margin-left: 15px;
   }
 
   span {
-    display: grid;
-    place-content: center start;
     white-space: nowrap;
-    padding-left: 5px;
-    padding-right: 15px;
   }
 }
 </style>

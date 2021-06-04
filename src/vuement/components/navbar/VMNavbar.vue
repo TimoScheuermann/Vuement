@@ -175,7 +175,7 @@ export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
       position: relative;
       display: flex;
       transition: 0.5s ease-in-out;
-      @include scrollbar();
+      @include vm-scrollbar();
     }
 
     &__cross {

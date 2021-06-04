@@ -1,18 +1,15 @@
 <template>
-  <div
+  <button
     class="vm-dialog-button"
     @click.stop="handleClick"
     :disabled="disabled"
     :style="{ '--vm-primary': vmColor }"
   >
-    <div class="vm-dialog-button--icon" v-if="icon">
-      <i :class="icon" />
-    </div>
-    <div class="vm-dialog-button--image" v-else-if="image">
-      <img :src="image" alt="" />
-    </div>
-    <div class="vm-dialog-button--title" v-if="title">{{ title }}</div>
-  </div>
+    <i v-if="icon" :class="icon" />
+    <img v-else-if="image" :src="image" alt="" />
+    <span v-if="title">{{ title }}</span>
+    <slot />
+  </button>
 </template>
 
 <script lang="ts">
@@ -37,6 +34,8 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss" scoped>
 .vm-dialog-button {
+  @include vm-button();
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,11 +43,11 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
   flex-wrap: nowrap;
   cursor: pointer;
 
+  font-weight: 500;
+
   color: rgba(var(--vm-primary), 1);
 
-  min-width: 80px;
-
-  padding: 0 10px;
+  padding: 0 5px;
   min-height: 45px;
 
   &:not(:first-child) {
@@ -70,9 +69,14 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
     cursor: not-allowed;
   }
 
-  &--icon,
-  &--image,
-  &--title {
+  img {
+    max-height: 1em;
+    max-width: 1em;
+  }
+
+  i,
+  image,
+  span {
     user-select: none;
     margin: 0 5px;
   }

@@ -27,12 +27,12 @@
         <vm-title :title="$route.meta.title" subtitle="API" />
         <br />
         <vm-table>
-          <vm-tr>
+          <template slot="head">
             <vm-th>Prop</vm-th>
             <vm-th>Type</vm-th>
             <vm-th>Default</vm-th>
             <vm-th>Description</vm-th>
-          </vm-tr>
+          </template>
           <vm-tr v-for="p in props" :key="p.name">
             <vm-td>{{ p.name }}</vm-td>
             <vm-td>{{ p.type }}</vm-td>
@@ -48,12 +48,12 @@
           <vm-title :title="'VM ' + s" subtitle="API" />
           <br />
           <vm-table>
-            <vm-tr>
+            <template slot="head">
               <vm-th>Prop</vm-th>
               <vm-th>Type</vm-th>
               <vm-th>Default</vm-th>
               <vm-th>Description</vm-th>
-            </vm-tr>
+            </template>
             <vm-tr v-for="p in siblings[s]" :key="p.name">
               <vm-td>{{ p.name }}</vm-td>
               <vm-td>{{ p.type }}</vm-td>

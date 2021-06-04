@@ -53,3 +53,9 @@ export declare class VMOptions {
   themes: Record<string, VMTheme>;
   theme: string;
 }
+
+export declare class VMSelectSelection {
+  id: string;
+  title: string;
+  state: boolean;
+}

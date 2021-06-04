@@ -1,17 +1,21 @@
 <template>
-  <div class="vm-action">
-    <span
-      :class="{ 'vm-action__trigger': !$slots.trigger }"
-      ref="trigger"
-      @click.stop.capture="visible = !visible"
-      :style="{
-        '--vm-color': vmColor,
-        '--vm-container': vmBackground,
-      }"
-    >
-      <slot name="trigger" />
-      <i v-if="!$slots.trigger" :class="icon" @click.stop />
+  <button
+    class="vm-action"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
+  >
+    <span ref="trigger" @click.stop.capture="toggleVisible">
+      <slot name="trigger">
+        <div class="vm-action--trigger">
+          <VMMenuButton
+            :icon="icon"
+            :border="border"
+            :filled="filled"
+            :color="color"
+          />
+        </div>
+      </slot>
     </span>
+
     <transition name="appear">
       <div class="vm-action--items" :pos="pos" v-if="visible">
         <div class="vm-action--items__background" />
@@ -19,23 +23,30 @@
         <div class="vm-action--items__items"><slot /></div>
       </div>
     </transition>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
 import { getContainerPosition } from '@/vuement/dev/util';
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
+import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
-@Component
-export default class VMAction extends Mixins(VMCProp, VMBgProp) {
-  @Prop({ default: 'ti-dots-vertical' }) icon!: string;
+@Component({
+  components: {
+    VMMenuButton,
+  },
+})
+export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
+  @Prop({ default: 'dots-v' }) icon!: string;
+  @Prop({ default: false }) border!: string;
+  @Prop({ default: false }) filled!: string;
   @Prop() title!: string;
-  @Prop({ default: false }) value!: boolean;
 
-  public visible = !!this.value;
   public pos = '';
+  public vmOpensGroup = 'menu';
 
   mounted(): void {
     window.addEventListener('scroll', this.updatePosition);
@@ -53,26 +64,16 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
   @Watch('visible')
   visibleChanged(): void {
     if (this.visible) this.updatePosition();
-    this.$emit('input', this.visible);
-  }
-
-  @Watch('value')
-  valueChanged(): void {
-    this.visible = this.value;
   }
 
   public updatePosition(): void {
     this.pos = getContainerPosition(this.$refs.trigger);
   }
-
-  public close(): void {
-    this.visible = false;
-  }
 }
 </script>
 <style lang="scss">
 .vm-action {
-  .vm-menu-button {
+  span > .vm-menu-button {
     transform: translateY(0.1em);
   }
 }
@@ -80,6 +81,8 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
 
 <style lang="scss" scoped>
 .vm-action {
+  @include vm-button();
+
   display: inline-block;
   position: relative;
 
@@ -87,7 +90,7 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
 
   color: rgba(var(--vm-color), 1);
 
-  &__trigger {
+  .vm-action--trigger {
     cursor: pointer;
     background: rgba(var(--vm-container), 1);
     height: $size;
@@ -97,6 +100,7 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp) {
     place-content: center;
 
     transition: 0.2s ease-in-out;
+    font-size: $size;
 
     &:active {
       filter: brightness(105%);

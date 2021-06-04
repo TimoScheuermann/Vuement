@@ -32,3 +32,5 @@ export function convertStyles(styles: (string | null)[]): string | null {
   const style = styles.filter((x) => !!x).join('');
   return style.length > 0 ? style : null;
 }
+
+export const VMBus = new Vue();

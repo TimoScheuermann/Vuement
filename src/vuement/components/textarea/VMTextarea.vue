@@ -83,9 +83,9 @@ export default class VMTextarea extends Mixins(VMCProp, VMBgProp) {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: 100%;
-    padding: 0 5px;
+
     border-radius: $border-radius;
+    overflow: hidden;
 
     &__background {
       position: absolute;
@@ -98,11 +98,13 @@ export default class VMTextarea extends Mixins(VMCProp, VMBgProp) {
     }
 
     textarea {
+      @include vm-scrollbar();
       position: relative;
       margin: 0;
-      padding: 5px;
+      padding: 10px;
       display: flex;
       flex: 1 1 0px;
+      width: 100%;
 
       border: none;
       background: none;

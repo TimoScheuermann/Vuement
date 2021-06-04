@@ -99,7 +99,7 @@ export default class VMSidebar extends Mixins(VMCProp, VMBgProp) {
     &__body {
       padding: 10px;
       overflow: auto;
-      @include scrollbar();
+      @include vm-scrollbar();
     }
   }
 }

@@ -2,7 +2,7 @@
   <div id="timos-components">
     <CNavbar />
     <CSidebar />
-    <!-- <CTabbar /> -->
+    <CTabbar />
 
     <div
       class="router-view"
@@ -72,6 +72,7 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
+  @include vm-scrollbar();
 }
 
 [content] {

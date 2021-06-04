@@ -1,14 +1,13 @@
 <template>
   <div class="view-playground" content>
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
+    <vm-link @click="dialog = true">open</vm-link>
 
     <vm-dialog v-model="dialog" title="Hallo">
-      <vm-menu-button slot="button"></vm-menu-button>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus ab
-      molestiae enim fuga debitis! Voluptate ipsa consequatur officia quis
-      eveniet, tempora reiciendis et voluptates, aliquid sunt magnam libero
-      dolores delectus.
-
+      <vm-menu-button slot="button" @click="sheet = true"></vm-menu-button>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga
+      quo velit facere, aut fugiat impedit, asperiores deserunt ea accusamus,
+      magnam amet rerum adipisci quisquam suscipit ipsum quia molestiae!
       <template slot="footer">
         <vm-dialog-button title="cancel" color="error" />
         <vm-dialog-button title="accept" />
@@ -20,9 +19,8 @@
     <div style="font-sizedw: 30px">
       Heist ich klicke
       <vm-action>
-        <div slot="trigger">
-          <vm-menu-button icon="cross" />
-        </div>
+        <!-- <template slot="trigger">hier</template> -->
+        <vm-menu-button slot="trigger" icon="cross" />
         <vm-action-item title="Action #1" />
         <vm-action-item title="Action #2" />
         <vm-action-item title="Action #3" />
@@ -41,7 +39,7 @@
     </vm-chip-wrapper>
 
     <vm-sheet v-model="sheet" title="El individuo">
-      <div class="ppl-wrapper">
+      <div style="height: 100px; display: grid; place-content: center">
         <vm-avatar-group>
           <vm-avatar
             variant="round"
@@ -58,13 +56,13 @@
         background="container"
         title="Was geht"
         icon="ti-house"
+        @click="dialog = true"
       />
     </vm-sheet>
 
     <vm-accordion>
       <vm-accordion-item title="Was geht ab?">
         <vm-flow slot="title">
-          <vm-button title="Hello" />
           <span>Hello</span>
         </vm-flow>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit facere
@@ -110,13 +108,3 @@ export default class Playground extends Vue {
   ];
 }
 </script>
-
-<style lang="scss" scoped>
-.view-playground {
-  .ppl-wrapper {
-    height: 100px;
-    display: grid;
-    place-content: center;
-  }
-}
-</style>

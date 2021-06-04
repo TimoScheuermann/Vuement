@@ -17,3 +17,9 @@ export interface LooseObject {
   // eslint-disable-next-line
   [key: string]: any;
 }
+
+export interface VMSelectSelection {
+  id: string;
+  title: string;
+  state: boolean;
+}

@@ -1,39 +1,45 @@
 <template>
-  <transition name="appear" appear :delay="300">
-    <div
-      v-if="visible"
-      class="vm-sheet"
-      @click.stop="close"
-      @touchmove.self.prevent
-      @wheel.self.prevent
-      @mousewheel.self.prevent
-      @DOMMouseScroll.self.prevent
-      :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
-    >
-      <transition name="slide" appear>
-        <div class="vm-sheet--sheet" @click.prevent.stop>
-          <div class="vm-sheet--sheet__close-button" v-if="closeButton">
-            <VMMenuButton icon="cross" :filled="true" @click="close" />
-          </div>
-          <div class="vm-sheet--sheet__head" v-if="title || $slots.head">
-            <slot name="head">
-              <div class="vm-sheet--shett__head--title">{{ title }}</div>
-            </slot>
-          </div>
+  <span>
+    <transition name="appear">
+      <div
+        class="vm-sheet__background"
+        v-if="visible"
+        @click.stop="close"
+        @touchmove.prevent
+        @wheel.prevent
+        @mousewheel.prevent
+        @DOMMouseScroll.prevent
+      />
+    </transition>
 
-          <div class="vm-sheet--sheet__content">
-            <slot />
-          </div>
+    <transition name="slide">
+      <div
+        class="vm-sheet"
+        v-if="visible"
+        :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
+      >
+        <div class="vm-sheet__close-button" v-if="closeButton">
+          <VMMenuButton icon="cross" :filled="true" @click="close" />
         </div>
-      </transition>
-    </div>
-  </transition>
+        <div class="vm-sheet__head" v-if="title || $slots.head">
+          <slot name="head">
+            <div class="vm-sheet__head--title">{{ title }}</div>
+          </slot>
+        </div>
+
+        <div class="vm-sheet__content">
+          <slot />
+        </div>
+      </div>
+    </transition>
+  </span>
 </template>
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
-import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
 @Component({
@@ -41,36 +47,20 @@ import VMMenuButton from '../menuButton/VMMenuButton.vue';
     VMMenuButton,
   },
 })
-export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
+export default class VMSheet extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   @Prop() title!: string;
-  @Prop() value!: boolean;
-  @Prop({ default: true }) closeable!: boolean;
   @Prop({ default: true }) closeButton!: boolean;
 
-  public visible = !!this.value;
+  public vmOpensGroup = 'overlay';
 
   mounted(): void {
-    this.$on('close', this.close);
-  }
-
-  @Watch('value', { immediate: true })
-  valueChanged(): void {
-    this.visible = !!this.value;
-  }
-
-  @Watch('visible', { immediate: true })
-  visibleChanged(): void {
-    this.$emit('input', this.visible);
-  }
-
-  public close(): void {
-    if (this.closeable) this.visible = false;
+    document.body.appendChild(this.$el);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.vm-sheet {
+.vm-sheet__background {
   position: fixed;
   background: rgba(#000, 0.85);
   @supports (backdrop-filter: saturate(180%) blur(20px)) {
@@ -82,47 +72,42 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
   right: 0;
   bottom: 0;
   z-index: 2000;
+}
+
+.vm-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 90vw;
+  max-width: 400px;
+  border-radius: 39px 39px 0 0;
+  z-index: 2001;
 
   color: rgba(var(--vm-color), 1);
+  background: rgba(var(--vm-background), 1);
+  max-height: calc(90vh - 10vw);
+  overflow: auto;
 
-  &--sheet {
+  padding: 20px 5vw;
+  @supports (-webkit-touch-callout: none) {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  &__head {
+    &--title {
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.4em;
+    }
+    margin-bottom: 10px;
+  }
+
+  &__close-button {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 90vw;
-    max-width: 400px;
-    border-radius: 39px 39px 0 0;
-    background: rgba(var(--vm-background), 1);
-    max-height: calc(90vh - 10vw);
-    overflow: auto;
-
-    padding: 20px 5vw;
-
-    @supports (-webkit-touch-callout: none) {
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    &__head,
-    &__content {
-      position: relative;
-    }
-
-    &__head {
-      .vm-sheet--shett__head--title {
-        font-weight: bold;
-        text-align: center;
-        font-size: 1.4em;
-      }
-      margin-bottom: 10px;
-    }
-
-    &__close-button {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 25px;
-    }
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
   }
 }
 
@@ -130,17 +115,25 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp) {
 .appear-leave-to {
   opacity: 0;
 }
-.appear-enter-active,
-.appear-leave-active {
+
+.appear-leave-active,
+.appear-enter-active {
   transition: 0.3s ease-in-out;
+}
+.appear-leave-active {
+  transition-delay: 0.1s;
 }
 
 .slide-enter,
 .slide-leave-to {
   transform: translate(-50%, 100%);
 }
+
 .slide-enter-active,
 .slide-leave-active {
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.slide-enter-active {
+  transition-delay: 0.1s;
 }
 </style>

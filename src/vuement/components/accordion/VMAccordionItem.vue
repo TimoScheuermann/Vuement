@@ -89,16 +89,14 @@ export default class VMAccordionItem extends Vue {
   padding: 0;
 
   button {
+    @include vm-button();
+
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
 
-    outline: none;
-    background: none;
-    font: inherit;
-    border: none;
     text-align: inherit;
     color: inherit;
 

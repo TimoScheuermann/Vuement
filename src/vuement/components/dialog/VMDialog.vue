@@ -1,176 +1,162 @@
 <template>
-  <transition name="appear" appear :delay="300">
-    <div
-      class="vm-dialog"
-      v-if="visible"
-      @click.stop="close"
-      @touchmove.self.prevent
-      @wheel.self.prevent
-      @mousewheel.self.prevent
-      @DOMMouseScroll.self.prevent
-      :style="{
-        '--vm-color': vmColor,
-        '--vm-background': vmBackground,
-        '--vm-border': vmBorder,
-      }"
-    >
-      <transition name="slide" appear>
-        <div class="vm-dialog--dialog" @click.prevent.stop>
-          <div
-            class="vm-dialog--dialog__dragger"
-            v-touch:swipe.bottom="close"
-          />
+  <span>
+    <transition name="appear">
+      <div
+        v-if="visible"
+        class="vm-dialog__background"
+        @click.stop="close"
+        @touchmove.prevent
+        @wheel.prevent
+        @mousewheel.prevent
+        @DOMMouseScroll.prevent
+      />
+    </transition>
+    <transition name="slide">
+      <div
+        v-if="visible"
+        class="vm-dialog"
+        :style="{
+          '--vm-color': vmColor,
+          '--vm-background': vmBackground,
+          '--vm-border': vmBorder,
+        }"
+      >
+        <div
+          class="vm-dialog__dragger"
+          v-if="dragger"
+          v-touch:swipe.bottom="close"
+        />
 
-          <div
-            class="vm-dialog--dialog__head"
-            :class="{ preset: !$slots.head }"
-            v-if="title || $slots.head || $slots.button"
-          >
-            <span>
-              <slot name="head">{{ title }}</slot>
-            </span>
-            <span><slot name="button" /></span>
-          </div>
-
-          <div class="vm-dialog--dialog__content">
-            <slot />
-          </div>
-
-          <div class="vm-dialog--dialog__footer" v-if="$slots.footer">
-            <slot name="footer" />
-          </div>
+        <div class="vm-dialog__button" v-if="$slots.button">
+          <slot name="button" />
         </div>
-      </transition>
-    </div>
-  </transition>
+
+        <slot name="head">
+          <div class="vm-dialog__head" v-if="title">{{ title }}</div>
+        </slot>
+
+        <div class="vm-dialog__content">
+          <slot />
+        </div>
+
+        <div class="vm-dialog__footer" v-if="$slots.footer">
+          <slot name="footer" />
+        </div>
+      </div>
+    </transition>
+  </span>
 </template>
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
-import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
+import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
+import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
+export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   @Prop() title!: string;
-  @Prop() value!: boolean;
   @Prop() border!: string;
-  @Prop({ default: true }) closeable!: boolean;
+  @Prop({ default: false }) dragger!: boolean;
 
-  public visible = !!this.value;
+  public vmOpensGroup = 'overlay';
 
   mounted(): void {
-    this.$on('close', this.close);
+    document.body.appendChild(this.$el);
   }
 
   get vmBorder(): string | null {
     return this.border ? this.getColor(this.border) : null;
   }
-
-  @Watch('value', { immediate: true })
-  valueChanged(): void {
-    this.visible = !!this.value;
-  }
-
-  @Watch('visible', { immediate: true })
-  visibleChanged(): void {
-    this.$emit('input', this.visible);
-  }
-
-  public close(): void {
-    if (this.closeable) this.visible = false;
-  }
 }
 </script>
 
 <style lang="scss" scoped>
-.vm-dialog {
+.vm-dialog__background {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2000;
-  color: rgba(var(--vm-color), 1);
-
   background: rgba(#000, 0.85);
   @supports (backdrop-filter: saturate(180%) blur(20px)) {
     backdrop-filter: saturate(180%) blur(10px);
     background: rgba(#000, 0.65);
   }
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+}
 
-  &--dialog {
+.vm-dialog {
+  position: fixed;
+  z-index: 2001;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  min-width: 200px;
+  width: calc(100vw - 40px);
+  max-width: 500px;
+
+  border-radius: #{2 * $border-radius};
+  background: rgba(var(--vm-background), 1);
+  color: rgba(var(--vm-color), 1);
+
+  &__dragger {
     position: absolute;
-    top: 50%;
     left: 50%;
+    top: 10px;
     transform: translate(-50%, -50%);
 
-    min-width: 200px;
+    height: 3px;
+    width: 100%;
+    background: currentColor;
+    opacity: 0.5;
 
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 40%;
+    max-width: 200px;
+  }
 
+  &__button {
+    font-size: 1.4em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  &__head {
+    font-weight: bold;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 20px {
+      bottom: 10px;
+    }
+  }
+  &__head ~ &__content {
+    padding-top: 0;
+  }
+
+  &__content {
+    max-height: calc(
+      100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 200px
+    );
+    overflow: auto;
+    @include vm-scrollbar();
     padding: 20px;
-    padding-top: 10px;
-    border-radius: #{2 * $border-radius};
-    background: rgba(var(--vm-background), 1);
+  }
 
-    &__dragger,
-    &__head,
-    &__content,
-    &__footer {
-      position: relative;
-    }
+  &__footer {
+    border-radius: inherit;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    overflow: hidden;
 
-    &__dragger {
-      height: 20px;
-      width: 100%;
+    border-top: 1.5px solid rgba(var(--vm-border), 1);
 
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 3px;
-        border-radius: 10px;
-        width: 40%;
-        max-width: 200px;
-        background: currentColor;
-        opacity: 0.5;
-      }
-    }
-
-    &__head {
-      &.preset {
-        font-weight: bold;
-        font-size: 1.4em;
-      }
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-
-      span {
-        display: grid;
-        place-content: center;
-      }
-    }
-
-    &__footer {
-      margin: 15px -20px -20px;
-      border-radius: inherit;
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
-      overflow: hidden;
-
-      border-top: 1.5px solid rgba(var(--vm-border), 1);
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 }
 
@@ -178,18 +164,26 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp) {
 .appear-leave-to {
   opacity: 0;
 }
-.appear-enter-active,
-.appear-leave-active {
+
+.appear-leave-active,
+.appear-enter-active {
   transition: 0.3s ease-in-out;
+}
+.appear-leave-active {
+  transition-delay: 0.1s;
 }
 
 .slide-enter,
 .slide-leave-to {
-  transform: translate(-50%, 0%);
   opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
 }
+
 .slide-enter-active,
 .slide-leave-active {
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.slide-enter-active {
+  transition-delay: 0.1s;
 }
 </style>

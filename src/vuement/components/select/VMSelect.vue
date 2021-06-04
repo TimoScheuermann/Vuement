@@ -7,7 +7,7 @@
     <div
       class="vm-select--container"
       ref="trigger"
-      @click.stop.capture="visible = !visible"
+      @click.stop.capture="toggleVisible"
       :frosted="frosted"
     >
       <div class="vm-select--container__background" />
@@ -29,30 +29,25 @@
 </template>
 
 <script lang="ts">
+import { VMSelectSelection } from '@/vuement/dev/interfaces';
 import { getContainerPosition } from '@/vuement/dev/util';
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
-export interface VMSelectSelection {
-  id: string;
-  title: string;
-  state: boolean;
-}
-
 @Component
-export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
+export default class VMSelect extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   @Prop() icon!: string;
   @Prop() frosted!: boolean;
   @Prop() title!: string;
 
-  @Prop({ default: false }) value!: boolean;
   @Prop({ default: 'Select one' }) placeholder!: string;
   @Prop({ default: false }) multiple!: boolean;
   @Prop({ default: false }) disabled!: boolean;
 
-  public visible = !!this.value;
   public pos = '';
+  public vmOpensGroup = 'menu';
   public selection: VMSelectSelection[] = [];
 
   mounted(): void {
@@ -63,6 +58,7 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
     this.updatePosition();
     this.$on('select', this.updateSelection);
 
+    this.visible = true;
     this.$nextTick(() => {
       this.visible = this.value;
     });
@@ -80,12 +76,6 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
       this.$nextTick(this.updateChildren);
       this.updatePosition();
     }
-    this.$emit('input', this.visible);
-  }
-
-  @Watch('value', { immediate: true })
-  valueChanged(): void {
-    this.visible = this.value;
   }
 
   get selectedDisplay(): string | null {
@@ -104,10 +94,6 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
     this.pos = getContainerPosition(this.$refs.trigger);
   }
 
-  public close(): void {
-    this.visible = false;
-  }
-
   public updateSelection(data: VMSelectSelection): void {
     let exists = false;
     this.selection = this.selection.map((x) => {
@@ -121,10 +107,8 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp) {
       return x;
     });
     if (!exists) this.selection.push(data);
-
-    if (!this.multiple && data.state) {
-      this.updateChildren();
-    }
+    this.$emit('selection', this.selection);
+    this.updateChildren();
   }
 }
 </script>

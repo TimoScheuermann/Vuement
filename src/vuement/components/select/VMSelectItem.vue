@@ -6,15 +6,15 @@
     :selected="isSelected"
     :style="{ '--vm-primary': vmColor }"
   >
-    <i :class="icon" />
+    <i v-if="icon" :class="icon" />
     <span>{{ title }}</span>
   </div>
 </template>
 
 <script lang="ts">
+import { VMSelectSelection } from '@/vuement/dev/interfaces';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
-import { VMSelectSelection } from './VMSelect.vue';
 
 @Component
 export default class VMSelectItem extends Mixins(VMCProp) {
@@ -61,51 +61,42 @@ export default class VMSelectItem extends Mixins(VMCProp) {
 
 <style lang="scss" scoped>
 .vm-select-item {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  padding: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 10px;
+  color: rgba(var(--vm-color), 1);
 
-  cursor: pointer;
   position: relative;
   user-select: none;
 
   transition: 0.1s ease-in-out;
 
-  &:not([disabled]):hover {
-    background: rgba(var(--vm-color), 0.12);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  & + .vm-select-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background: rgba(var(--vm-color), 1);
-    opacity: 0.1;
-  }
-
   &[selected] {
     color: rgba(var(--vm-primary), 1);
   }
 
+  cursor: pointer;
+  &:not([disabled]):hover {
+    background: rgba(var(--vm-color), 0.12);
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1.5px solid rgba(var(--vm-border), 1);
+  }
+
   i {
-    display: grid;
-    place-content: center;
+    margin-right: 15px;
   }
 
   span {
-    display: grid;
-    place-content: center start;
     white-space: nowrap;
-    padding-right: 5px;
-    padding-left: 15px;
   }
 }
 </style>

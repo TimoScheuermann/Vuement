@@ -7,7 +7,16 @@
     }
 }
 
-@mixin scrollbar() {
+@mixin vm-button() {
+  border: none;
+  background: none;
+  outline: none;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin vm-scrollbar() {
   &::-webkit-scrollbar {
     width: 4px;
     height: 4px;

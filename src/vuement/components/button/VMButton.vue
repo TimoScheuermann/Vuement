@@ -69,6 +69,8 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
 }
 
 .vm-button {
+  @include vm-button();
+
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -78,11 +80,6 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   }
 
   flex: 1 1 0px;
-
-  outline: none;
-  background: none;
-  font: inherit;
-  border: none;
 
   transition: all 0.15s ease-in-out;
   cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     v-if="vmIcon"
     class="vm-menu-button"
     @click="clicked"
@@ -8,7 +8,7 @@
     :style="{ '--vm-color': vmColor }"
   >
     <component :is="'vm-mb-' + vmIcon" />
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
@@ -57,18 +57,26 @@ export default class VMMenuButton extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss">
 .vm-menu-button {
-  border-radius: 1em;
+  @include vm-button();
 
+  display: inline-grid;
+  place-content: center;
+
+  border-radius: 1em;
   height: 1em;
   width: 1em;
 
-  display: inline-flex;
+  svg {
+    height: inherit;
+    width: inherit;
+  }
 
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
     filter: saturate(25%);
   }
+
   transition: 0.2s ease-in-out;
 
   &:not([disabled]) {
@@ -99,10 +107,6 @@ export default class VMMenuButton extends Mixins(VMLinkMixin, VMCProp) {
     #background,
     #border {
       display: none;
-    }
-    #icon {
-      transform-origin: center;
-      transform: scale(1.2);
     }
   }
 }
