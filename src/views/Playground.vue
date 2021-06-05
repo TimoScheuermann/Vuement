@@ -1,6 +1,7 @@
 <template>
   <div class="view-playground" content>
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
+
     <vm-link @click="dialog = true">open</vm-link>
 
     <vm-dialog v-model="dialog" title="Hallo">
@@ -84,6 +85,19 @@
         cum eum, molestias itaque?
       </vm-accordion-item>
     </vm-accordion>
+
+    <br />
+
+    <vm-switch></vm-switch>
+
+    <vm-card>
+      <vm-list>
+        <vm-list-item title="Title #1" description="Description #1" />
+        <vm-list-item title="Title #2" description="Description #2" />
+        <vm-list-item title="Title #3" description="Description #3" />
+        <vm-list-item title="Title #4" description="Description #4" />
+      </vm-list>
+    </vm-card>
   </div>
 </template>
 

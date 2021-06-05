@@ -23,3 +23,15 @@ export interface VMSelectSelection {
   title: string;
   state: boolean;
 }
+
+import { Location } from 'vue-router';
+
+export interface VMNotification {
+  title?: string;
+  text: string;
+  image?: string;
+  href?: string;
+  to?: Location;
+  routeName?: string;
+  callback?: VoidFunction;
+}

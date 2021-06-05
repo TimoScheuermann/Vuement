@@ -6,7 +6,15 @@
   >
     <input type="checkbox" v-model="checked" />
     <div class="vm-switch__container">
-      <div class="vm-switch__container--ball" />
+      <span checked v-if="$slots.checked">
+        <slot name="checked" />
+      </span>
+
+      <div />
+
+      <span unchecked v-if="$slots.unchecked">
+        <slot name="unchecked" />
+      </span>
     </div>
   </label>
 </template>
@@ -47,7 +55,7 @@ export default class VMSwitch extends Mixins(VMCProp, VMBgProp) {
   $ballSize: 21;
   input:checked + &__container {
     background: rgba(var(--vm-primary), 1);
-    .vm-switch__container--ball {
+    & > div {
       transform: translate(calc(50% + #{$ballSize / 2 + 3}px), -50%);
     }
   }
@@ -65,8 +73,9 @@ export default class VMSwitch extends Mixins(VMCProp, VMBgProp) {
     background: rgba(var(--vm-container), 1);
     transition: 0.2s ease-in;
 
-    &--ball {
+    & > div {
       position: absolute;
+      z-index: 5;
       background: #fff;
       height: #{$ballSize}px;
       width: #{$ballSize}px;
@@ -75,6 +84,30 @@ export default class VMSwitch extends Mixins(VMCProp, VMBgProp) {
       top: 50%;
       transition: 0.2s cubic-bezier(0.73, 1.64, 0.35, 0.65);
       transform: translate(calc(50% - #{$ballSize / 2 - 3}px), -50%);
+    }
+
+    & > span {
+      z-index: 4;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-content: center;
+
+      height: #{$ballSize}px;
+      width: #{$ballSize}px;
+      border-radius: #{$ballSize}px;
+      font-size: 13px;
+      opacity: 0.75;
+
+      &[checked] {
+        color: #fff;
+        left: 3px;
+      }
+      &[unchecked] {
+        color: rgba(var(--vm-color), 1);
+        right: 3px;
+      }
     }
   }
 }

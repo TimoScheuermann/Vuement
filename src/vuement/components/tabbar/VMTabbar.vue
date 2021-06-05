@@ -27,7 +27,7 @@ export default class VMTabbar extends Mixins(VMCProp, VMBgProp) {}
 
   color: rgba(var(--vm-color), 1);
   padding: 0 5vw;
-  padding-bottom: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   box-shadow: -2px -4px 8px rgba(#111, 0.05);
 
   &__items {

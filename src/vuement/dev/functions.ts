@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { COLORS_DEFAULT, THEMES_DEFAULT, THEME_LIGHT } from './constants';
-import { LooseObject, VMTheme } from './interfaces';
-import { convertColor } from './util';
+import { LooseObject, VMNotification, VMTheme } from './interfaces';
+import { convertColor, VMBus } from './util';
 
 export function setColor(name: string, hex: string): void {
   const vm = Vue.prototype.$vm;
@@ -68,4 +68,8 @@ export function updateVariables(): void {
     color: rgba(var(--vm-color), 1);
     background: rgba(var(--vm-background), 1);
   }`;
+}
+
+export function sendNotification(notificiation: VMNotification): void {
+  VMBus.$emit('VMNotification', notificiation);
 }

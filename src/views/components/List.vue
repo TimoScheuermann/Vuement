@@ -47,10 +47,19 @@
 
       <vm-flow>
         <vm-list>
+          <vm-list-item>
+            <vm-flow flow="column" slot="custom">
+              <vm-avatar />
+              <vm-spacer />
+              <b>John Doe</b>
+              <vm-spacer />
+              <vm-spacer />
+              <vm-button title="Sign out" :block="true" />
+              <vm-spacer />
+            </vm-flow>
+          </vm-list-item>
           <vm-list-item title="Navigation #1" routeName="vmList" />
           <vm-list-item title="Navigation #2" routeName="vmList" />
-          <vm-list-item title="Navigation #3" routeName="vmList" />
-          <vm-list-item title="Navigation #4" routeName="vmList" />
         </vm-list>
       </vm-flow>
 

@@ -17,7 +17,7 @@
         class="vm-dialog"
         :style="{
           '--vm-color': vmColor,
-          '--vm-background': vmBackground,
+          '--vm-paragraph': vmBackground,
           '--vm-border': vmBorder,
         }"
       >
@@ -65,6 +65,10 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     document.body.appendChild(this.$el);
   }
 
+  beforeDestroy(): void {
+    document.body.removeChild(this.$el);
+  }
+
   get vmBorder(): string | null {
     return this.border ? this.getColor(this.border) : null;
   }
@@ -99,7 +103,7 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   max-width: 500px;
 
   border-radius: #{2 * $border-radius};
-  background: rgba(var(--vm-background), 1);
+  background: rgba(var(--vm-paragraph), 1);
   color: rgba(var(--vm-color), 1);
 
   &__dragger {

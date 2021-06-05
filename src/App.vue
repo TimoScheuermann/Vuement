@@ -3,6 +3,8 @@
     <CNavbar />
     <CSidebar />
     <CTabbar />
+    <VDarkModeToggle />
+    <vm-notification />
 
     <div
       class="router-view"
@@ -25,6 +27,7 @@ import {
 import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import CTabbar from './components/CTabbar.vue';
+import VDarkModeToggle from './components/VDarkModeToggle.vue';
 
 @Component({
   components: {
@@ -32,6 +35,7 @@ import CTabbar from './components/CTabbar.vue';
     CRouter,
     CNavbar,
     CTabbar,
+    VDarkModeToggle,
   },
 })
 export default class App extends Vue {

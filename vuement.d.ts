@@ -19,6 +19,7 @@ export const vmLink: PluginFunction<VMOptions>;
 export const vmList: PluginFunction<VMOptions>;
 export const vmMenuButton: PluginFunction<VMOptions>;
 export const vmNavbar: PluginFunction<VMOptions>;
+export const vmNotification: PluginFunction<VMOptions>;
 export const vmProgress: PluginFunction<VMOptions>;
 export const vmQuote: PluginFunction<VMOptions>;
 export const vmRadio: PluginFunction<VMOptions>;
@@ -58,4 +59,14 @@ export declare class VMSelectSelection {
   id: string;
   title: string;
   state: boolean;
+}
+
+export declare class VMNotification {
+  title?: string;
+  text: string;
+  image?: string;
+  href?: string;
+  to?: Location;
+  routeName?: string;
+  callback?: VoidFunction;
 }

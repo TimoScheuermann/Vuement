@@ -26,5 +26,6 @@ export default class VMAccordion extends Mixins(VMCProp) {
   margin: 0;
   padding: 0;
   color: rgba(var(--vm-color), 1);
+  width: 100%;
 }
 </style>

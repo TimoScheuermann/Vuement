@@ -9,17 +9,22 @@
       </p>
 
       <vm-flow>
-        <vm-button title="Get started" />
+        <vm-button title="Get started" @click="send" />
       </vm-flow>
     </vm-flow>
   </div>
 </template>
 
 <script lang="ts">
+import { sendNotification } from '@/vuement/dev/functions';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  public send(): void {
+    sendNotification({ text: 'Was geht ab' });
+  }
+}
 </script>
 
 <style lang="scss" scoped>

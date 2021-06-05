@@ -16,7 +16,7 @@
       <div
         class="vm-sheet"
         v-if="visible"
-        :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
+        :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
       >
         <div class="vm-sheet__close-button" v-if="closeButton">
           <VMMenuButton icon="cross" :filled="true" @click="close" />
@@ -56,6 +56,10 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   mounted(): void {
     document.body.appendChild(this.$el);
   }
+
+  beforeDestroy(): void {
+    document.body.removeChild(this.$el);
+  }
 }
 </script>
 
@@ -76,22 +80,30 @@ export default class VMSheet extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
 
 .vm-sheet {
   position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-  width: 90vw;
-  max-width: 400px;
-  border-radius: 39px 39px 0 0;
   z-index: 2001;
 
-  color: rgba(var(--vm-color), 1);
-  background: rgba(var(--vm-background), 1);
-  max-height: calc(90vh - 10vw);
-  overflow: auto;
+  left: 50%;
+  bottom: 15px;
+  transform: translate(-50%, 0%);
 
-  padding: 20px 5vw;
-  @supports (-webkit-touch-callout: none) {
-    padding-bottom: env(safe-area-inset-bottom);
+  color: rgba(var(--vm-color), 1);
+  background: rgba(var(--vm-paragraph), 1);
+  border-radius: 30px;
+
+  @media only screen and(max-width: 400px) {
+    padding: 5vw;
+    width: calc(90vw - 30px);
+  }
+  @media only screen and(min-width: 401px) {
+    padding: 20px;
+    min-width: 260px;
+    max-width: calc(90vw - 40px);
+  }
+
+  &__content {
+    @include vm-scrollbar();
+    overflow: auto;
+    max-height: calc(90vh - 10vw - 60px);
   }
 
   &__head {
