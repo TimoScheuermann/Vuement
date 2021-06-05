@@ -6,8 +6,9 @@
 
     <template v-if="$store.getters.desktop">
       <vm-navbar-item
+        icon="ti-dots"
         title="Components"
-        @click="$store.commit('sidebar', true)"
+        routeName="components"
       />
       <vm-navbar-item title="Colors" routeName="colors" />
       <vm-navbar-item title="Getting started" routeName="playground" />

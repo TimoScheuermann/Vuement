@@ -2,38 +2,37 @@ import router from '@/router';
 
 export interface VMProp {
   name: string;
-  default: string | boolean | number | undefined;
+  default: string;
   description: string;
   type: string;
 }
 
 export interface VMComponent {
-  icon?: string;
-  preview?: string;
   props: VMProp[];
   siblings?: string[];
+  isSibling?: boolean;
 }
 
 const V_MODEL_BOOL: VMProp = {
-  default: undefined,
+  default: 'undefined',
   description: 'TODO:',
   name: 'v-model',
   type: 'boolean',
 };
 const V_VALUE_BOOL: VMProp = {
-  default: false,
+  default: 'false',
   description: 'TODO:',
   name: 'value',
   type: 'boolean',
 };
 const COLOR_UNDEF: VMProp = {
-  default: undefined,
+  default: 'undefined',
   description: 'TODO:',
   name: 'color',
   type: 'string',
 };
 const BACKGROUND_UNDEF: VMProp = {
-  default: undefined,
+  default: 'undefined',
   description: 'TODO:',
   name: 'background',
   type: 'string',
@@ -41,7 +40,6 @@ const BACKGROUND_UNDEF: VMProp = {
 
 const components = {
   Action: {
-    preview: 'CPreviewAction',
     props: [
       {
         name: 'icon',
@@ -55,7 +53,7 @@ const components = {
       BACKGROUND_UNDEF,
       {
         name: 'title',
-        default: undefined,
+        default: 'undefined',
         type: 'string',
         description: 'TODO:',
       },
@@ -63,23 +61,24 @@ const components = {
     siblings: ['Action Item'],
   },
   'Action Item': {
+    isSibling: true,
     props: [
       {
         name: 'icon',
         type: 'string',
-        default: undefined,
+        default: 'undefined',
         description: 'TODO:',
       },
       {
         name: 'title',
         type: 'string',
-        default: undefined,
+        default: 'undefined',
         description: 'TODO:',
       },
       {
         name: 'color',
         type: 'string',
-        default: undefined,
+        default: 'undefined',
         description: 'TODO:',
       },
     ],
@@ -176,8 +175,12 @@ const components = {
   },
 } as Record<string, VMComponent>;
 
+export default components;
+
 export function getComponents(): string[] {
-  return Object.keys(components).sort((a, b) => a.localeCompare(b));
+  return Object.keys(components)
+    .filter((x) => !components[x].isSibling)
+    .sort((a, b) => a.localeCompare(b));
 }
 
 export function getComponent(

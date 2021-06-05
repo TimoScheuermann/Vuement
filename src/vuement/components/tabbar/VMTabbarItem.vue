@@ -57,6 +57,7 @@ export default class VMTabbarItem extends Mixins(VMLinkMixin, VMCProp) {
   span {
     font-size: 11px;
     font-weight: 500;
+    margin: 0 5px;
   }
 
   &[disabled] {

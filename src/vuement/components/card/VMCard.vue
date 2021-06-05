@@ -2,10 +2,8 @@
   <div
     class="vm-card"
     :direction="direction === 'column' ? direction : 'row'"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-paragraph': vmBackground,
-    }"
+    :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
+    @click="clicked"
   >
     <div class="vm-card--media" v-if="video || image">
       <img v-if="image" :src="image" alt="" />
@@ -33,10 +31,11 @@
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMCard extends Mixins(VMCProp, VMBgProp) {
+export default class VMCard extends Mixins(VMCProp, VMBgProp, VMLinkMixin) {
   @Prop() image!: string;
   @Prop() video!: string;
   @Prop() title!: string;

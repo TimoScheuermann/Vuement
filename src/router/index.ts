@@ -22,6 +22,14 @@ const router = new VueRouter({
       },
     },
     {
+      path: '/components',
+      name: 'components',
+      component: () => import('@/views/Components.vue'),
+      meta: {
+        title: 'Components',
+      },
+    },
+    {
       path: '/colors',
       name: 'colors',
       component: () => import('@/views/Colors.vue'),
