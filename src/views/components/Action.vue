@@ -3,15 +3,17 @@
     <vm-divider></vm-divider>
 
     <vm-flow>
-      <vm-action>
+      <vm-action title="Was geht">
         <vm-action-item title="Hallo #1" />
         <vm-action-item title="Hallo #2" icon="ti-pencil" />
+        <vm-spacer></vm-spacer>
         <vm-action-item title="Hallo #3" />
       </vm-action>
 
       <vm-select>
         <vm-select-item id="a" title="Herein #1" icon="ti-pencil" />
         <vm-select-item id="b" title="Herein #2" :selected="true" />
+        <vm-spacer></vm-spacer>
         <vm-select-item id="c" title="Herein #3" />
       </vm-select>
 

@@ -76,6 +76,10 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   span > .vm-menu-button {
     transform: translateY(0.1em);
   }
+  .vm-action--items .vm-spacer {
+    position: relative;
+    background: rgba(var(--vm-border), 1);
+  }
 }
 </style>
 

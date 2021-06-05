@@ -12,7 +12,7 @@ router.afterEach((to: Route) => {
   document.getElementsByTagName('title')[0].innerHTML = prefix + to.meta.title;
 });
 
-Vue.use(Vuement, { colors: {} });
+Vue.use(Vuement);
 
 new Vue({
   router,

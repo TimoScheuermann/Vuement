@@ -1,15 +1,8 @@
 <template>
   <vm-navbar class="c-navbar" breakpoint="850px">
-    <template slot="title">
-      <vm-flow>
-        <div class="title" @click="goHome">
-          <img
-            src="https://timos.s3.eu-central-1.amazonaws.com/lib/632e6c9c-bee5-4018-9e19-0ebdb099af7b.svg"
-            alt=""
-          />
-        </div>
-      </vm-flow>
-    </template>
+    <vm-flow slot="title" @click="goHome">
+      <img src="assets/logo-wide.svg" alt="" />
+    </vm-flow>
 
     <template v-if="$store.getters.desktop">
       <vm-navbar-item
@@ -46,17 +39,10 @@ export default class CNavbar extends Vue {
     place-content: center;
     font-size: 20px;
   }
-  .title {
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
 
-    img {
-      height: 20px;
-    }
+  img {
+    height: 22px;
+    cursor: pointer;
   }
 }
 </style>

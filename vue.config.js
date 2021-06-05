@@ -15,7 +15,7 @@ module.exports = {
       start_url: '.',
     },
     name: 'Vuement',
-    themeColor: '#000',
+    themeColor: '#000000',
     msTileColor: '#ffffff',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',

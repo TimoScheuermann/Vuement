@@ -12,6 +12,5 @@ export default class VMSpacer extends Vue {}
 <style lang="scss" scoped>
 .vm-spacer {
   height: 5px;
-  opacity: 0.1;
 }
 </style>

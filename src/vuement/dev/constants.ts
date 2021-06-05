@@ -19,7 +19,7 @@ export const THEME_DARK: VMTheme = {
 };
 
 export const COLORS_DEFAULT: Record<string, string> = {
-  primary: '#0088ff',
+  primary: '#66bfff',
   error: '#ff4757',
   success: '#25ca49',
   alarm: '#f1c40f',

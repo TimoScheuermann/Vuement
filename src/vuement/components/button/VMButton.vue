@@ -37,7 +37,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: 'normal' }) size!: string;
   @Prop({ default: 'filled' }) variant!: string;
   @Prop({ default: 'white' }) color!: string;
-  @Prop({ default: true }) gradient!: boolean;
+  @Prop({ default: false }) gradient!: boolean;
   @Prop({ default: false }) block!: boolean;
 
   get buttonSize(): string {
@@ -128,7 +128,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     @include button-gradient();
 
     &:not([disabled]):hover {
-      filter: brightness(110%);
+      filter: brightness(107.5%);
     }
   }
 

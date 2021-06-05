@@ -13,7 +13,7 @@
 	[plugins.inputs]
 
 	# The base url of your site (optional, default = main URL set in Netlify)
-	baseUrl = "https://photos.timos.design"
+	baseUrl = "https://vuement.timos.design"
 
 	# Path to the sitemap URL (optional, default = /sitemap.xml)
 	sitemapPath = "/sitemap.xml"
@@ -21,7 +21,7 @@
 	# Enabled providers to submit sitemap to (optional, default = 'google', 'bing'). Possible providers are currently only 'google' and 'bing'.
 	providers = [
 		"google",
-		"bing"
+		"bing",
 	]
 
 [[plugins]]

@@ -113,6 +113,15 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
 }
 </script>
 
+<style lang="scss">
+.vm-select {
+  .vm-select--items .vm-spacer {
+    position: relative;
+    background: rgba(var(--vm-border), 1);
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .vm-select {
   position: relative;
