@@ -87,8 +87,8 @@ export default class VMSelectItem extends Mixins(VMCProp) {
     cursor: not-allowed;
   }
 
-  &:not(:last-child) {
-    border-bottom: 1.5px solid rgba(var(--vm-border), 1);
+  & ~ .vm-select-item {
+    border-top: 1.5px solid rgba(var(--vm-border), 1);
   }
 
   i {

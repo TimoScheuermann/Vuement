@@ -1,5 +1,6 @@
-import { PluginFunction } from 'vue';
+import Vue from '*.vue';
 import { Location } from 'vue-router';
+import { VueConstructor } from 'vue/types/umd';
 
 export interface VMTheme {
   color: string;
@@ -14,7 +15,6 @@ export interface VMOptions {
   colors?: Record<string, string>;
   themes?: Record<string, VMTheme>;
   theme?: string;
-  components?: PluginFunction<VMOptions>[];
 }
 
 export interface LooseObject {
@@ -28,12 +28,17 @@ export interface VMSelectSelection {
   state: boolean;
 }
 
-export interface VMNotification {
+export interface VMNotificationObject {
+  id?: number;
   title?: string;
-  text: string;
+  text?: string;
   image?: string;
   href?: string;
   to?: Location;
   routeName?: string;
   callback?: VoidFunction;
+  duration?: 'none' | number;
+  closeable?: boolean;
+  content?: VueConstructor<Vue>;
+  props?: Record<string, any>;
 }

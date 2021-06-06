@@ -1,6 +1,8 @@
 import { VueConstructor } from 'vue';
 import {
   addTheme,
+  closeAllNotifications,
+  closeNotification,
   sendNotification,
   setColor,
   setTheme,
@@ -13,4 +15,6 @@ export default (Vue: VueConstructor, options: VMOptions): void => {
   Vue.prototype.$vm.setColor = setColor;
   Vue.prototype.$vm.addTheme = addTheme;
   Vue.prototype.$vm.sendNotification = sendNotification;
+  Vue.prototype.$vm.closeNotification = closeNotification;
+  Vue.prototype.$vm.closeAllNotifications = closeAllNotifications;
 };

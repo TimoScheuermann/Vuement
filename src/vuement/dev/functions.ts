@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { COLORS_DEFAULT, THEMES_DEFAULT, THEME_LIGHT } from './constants';
-import { LooseObject, VMNotification, VMTheme } from './interfaces';
+import { LooseObject, VMNotificationObject, VMTheme } from './interfaces';
 import { convertColor, VMBus } from './util';
 
 export function setColor(name: string, hex: string): void {
@@ -75,6 +75,19 @@ export function updateVariables(): void {
   }`;
 }
 
-export function sendNotification(notificiation: VMNotification): void {
-  VMBus.$emit('VMNotification', notificiation);
+let notficiationCounter = 0;
+export function sendNotification(notificiation: VMNotificationObject): number {
+  VMBus.$emit('VMNotification', {
+    ...notificiation,
+    id: ++notficiationCounter,
+  });
+  return notficiationCounter;
+}
+
+export function closeNotification(id: number): void {
+  VMBus.$emit('VMNotificationX', id);
+}
+
+export function closeAllNotifications(): void {
+  VMBus.$emit('VMNotificationXA');
 }

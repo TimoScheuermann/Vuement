@@ -96,6 +96,11 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     transform: scale(0.95);
   }
 
+  &__icon,
+  &__title {
+    user-select: none;
+  }
+
   &__icon {
     display: grid;
     height: 1.2085em;

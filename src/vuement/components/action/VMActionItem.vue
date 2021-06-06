@@ -55,8 +55,8 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
     cursor: not-allowed;
   }
 
-  &:not(:last-child) {
-    border-bottom: 1.5px solid rgba(var(--vm-border), 1);
+  & ~ .vm-action-item {
+    border-top: 1.5px solid rgba(var(--vm-border), 1);
   }
 
   i {

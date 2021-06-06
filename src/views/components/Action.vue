@@ -5,9 +5,11 @@
     <vm-flow>
       <vm-action title="Was geht">
         <vm-action-item title="Hallo #1" />
+        <vm-action-item title="Hallo #1" />
         <vm-action-item title="Hallo #2" icon="ti-pencil" />
         <vm-spacer></vm-spacer>
         <vm-action-item title="Hallo #3" />
+        <vm-action-item title="Hallo #1" />
       </vm-action>
 
       <vm-select>

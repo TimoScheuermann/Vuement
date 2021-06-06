@@ -16,13 +16,13 @@
 </template>
 
 <script lang="ts">
-import { sendNotification } from '@/vuement/dev/functions';
 import { Vue, Component } from 'vue-property-decorator';
+import Card from '@/views/components/Card.vue';
 
 @Component
 export default class Home extends Vue {
-  public send(): void {
-    sendNotification({ text: 'Was geht ab' });
+  send(): void {
+    this.$vm.sendNotification({ title: 'Was geht ab', content: Card });
   }
 }
 </script>

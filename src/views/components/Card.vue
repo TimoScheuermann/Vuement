@@ -1,5 +1,10 @@
 <template>
-  <div class="view-card">card</div>
+  <div class="view-card">
+    <vm-flow flow="column">
+      <b>Card</b>
+      <vm-button title="Test"></vm-button>
+    </vm-flow>
+  </div>
 </template>
 
 <script lang="ts">

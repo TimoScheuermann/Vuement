@@ -1,48 +1,19 @@
 import { PluginFunction } from 'vue';
+import { VueConstructor } from 'vue/types/umd';
 
 declare const Vuement: PluginFunction<VMOptions>;
 export default Vuement;
 
-export const vmAccordion: PluginFunction<VMOptions>;
-export const vmAction: PluginFunction<VMOptions>;
-export const vmAvatar: PluginFunction<VMOptions>;
-export const vmCard: PluginFunction<VMOptions>;
-export const vmButton: PluginFunction<VMOptions>;
-export const vmCheckbox: PluginFunction<VMOptions>;
-export const vmChip: PluginFunction<VMOptions>;
-export const vmDialog: PluginFunction<VMOptions>;
-export const vmDivider: PluginFunction<VMOptions>;
-export const vmHero: PluginFunction<VMOptions>;
-export const vmImage: PluginFunction<VMOptions>;
-export const vmInput: PluginFunction<VMOptions>;
-export const vmLink: PluginFunction<VMOptions>;
-export const vmList: PluginFunction<VMOptions>;
-export const vmMenuButton: PluginFunction<VMOptions>;
-export const vmNavbar: PluginFunction<VMOptions>;
-export const vmNotification: PluginFunction<VMOptions>;
-export const vmProgress: PluginFunction<VMOptions>;
-export const vmQuote: PluginFunction<VMOptions>;
-export const vmRadio: PluginFunction<VMOptions>;
-export const vmRevealer: PluginFunction<VMOptions>;
-export const vmScrollUp: PluginFunction<VMOptions>;
-export const vmSegment: PluginFunction<VMOptions>;
-export const vmSelect: PluginFunction<VMOptions>;
-export const vmSheet: PluginFunction<VMOptions>;
-export const vmSidebar: PluginFunction<VMOptions>;
-export const vmSlider: PluginFunction<VMOptions>;
-export const vmSpacer: PluginFunction<VMOptions>;
-export const vmSpinner: PluginFunction<VMOptions>;
-export const vmSwitch: PluginFunction<VMOptions>;
-export const vmTabbar: PluginFunction<VMOptions>;
-export const vmTable: PluginFunction<VMOptions>;
-export const vmTextarea: PluginFunction<VMOptions>;
-export const vmTitle: PluginFunction<VMOptions>;
-export const vmFlow: PluginFunction<VMOptions>;
-export const vmGrid: PluginFunction<VMOptions>;
-
 declare module 'vue/types/vue' {
   interface Vue {
-    $vm: any;
+    $vm: {
+      setTheme(theme: string): void;
+      setColor(name: string, color: string): void;
+      addTheme(name: string, theme: VMTheme, replace: boolean): void;
+      sendNotification(notificiation: VMNotificationObject): number;
+      closeNotification(id: number): void;
+      closeAllNotifications(): void;
+    };
   }
 }
 
@@ -59,7 +30,6 @@ export declare class VMOptions {
   colors?: Record<string, string>;
   themes?: Record<string, VMTheme>;
   theme?: string;
-  components?: PluginFunction<VMOptions>[];
 }
 
 export declare class VMSelectSelection {
@@ -68,12 +38,16 @@ export declare class VMSelectSelection {
   state: boolean;
 }
 
-export declare class VMNotification {
+export declare class VMNotificationObject {
   title?: string;
-  text: string;
+  text?: string;
   image?: string;
   href?: string;
   to?: Location;
   routeName?: string;
   callback?: VoidFunction;
+  duration?: 'none' | number;
+  closeable?: boolean;
+  content?: VueConstructor<Vue>;
+  props?: Record<string, any>;
 }

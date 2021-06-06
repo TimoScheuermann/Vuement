@@ -13,75 +13,37 @@ export interface VMComponent {
   isSibling?: boolean;
 }
 
-const V_MODEL_BOOL: VMProp = {
-  default: 'undefined',
-  description: 'TODO:',
-  name: 'v-model',
-  type: 'boolean',
-};
-const V_VALUE_BOOL: VMProp = {
-  default: 'false',
-  description: 'TODO:',
-  name: 'value',
-  type: 'boolean',
-};
-const COLOR_UNDEF: VMProp = {
-  default: 'undefined',
-  description: 'TODO:',
-  name: 'color',
-  type: 'string',
-};
-const BACKGROUND_UNDEF: VMProp = {
-  default: 'undefined',
-  description: 'TODO:',
-  name: 'background',
-  type: 'string',
-};
+// const V_MODEL_BOOL: VMProp = {
+//   default: 'undefined',
+//   description: 'TODO:',
+//   name: 'v-model',
+//   type: 'boolean',
+// };
+// const V_VALUE_BOOL: VMProp = {
+//   default: 'false',
+//   description: 'TODO:',
+//   name: 'value',
+//   type: 'boolean',
+// };
+// const COLOR_UNDEF: VMProp = {
+//   default: 'undefined',
+//   description: 'TODO:',
+//   name: 'color',
+//   type: 'string',
+// };
+// const BACKGROUND_UNDEF: VMProp = {
+//   default: 'undefined',
+//   description: 'TODO:',
+//   name: 'background',
+//   type: 'string',
+// };
 
 const components = {
-  Action: {
-    props: [
-      {
-        name: 'icon',
-        default: 'ti-dots-vertical',
-        type: 'string',
-        description: 'TODO:',
-      },
-      V_MODEL_BOOL,
-      V_VALUE_BOOL,
-      COLOR_UNDEF,
-      BACKGROUND_UNDEF,
-      {
-        name: 'title',
-        default: 'undefined',
-        type: 'string',
-        description: 'TODO:',
-      },
-    ],
-    siblings: ['Action Item'],
+  Accordion: {
+    props: [],
   },
-  'Action Item': {
-    isSibling: true,
-    props: [
-      {
-        name: 'icon',
-        type: 'string',
-        default: 'undefined',
-        description: 'TODO:',
-      },
-      {
-        name: 'title',
-        type: 'string',
-        default: 'undefined',
-        description: 'TODO:',
-      },
-      {
-        name: 'color',
-        type: 'string',
-        default: 'undefined',
-        description: 'TODO:',
-      },
-    ],
+  Action: {
+    props: [],
   },
   Avatar: {
     props: [],
@@ -119,7 +81,13 @@ const components = {
   List: {
     props: [],
   },
+  MenuButton: {
+    props: [],
+  },
   Navbar: {
+    props: [],
+  },
+  Notification: {
     props: [],
   },
   Progress: {
@@ -171,6 +139,12 @@ const components = {
     props: [],
   },
   Title: {
+    props: [],
+  },
+  Flow: {
+    props: [],
+  },
+  Grid: {
     props: [],
   },
 } as Record<string, VMComponent>;

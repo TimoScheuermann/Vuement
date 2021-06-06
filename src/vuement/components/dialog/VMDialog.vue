@@ -66,7 +66,11 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   }
 
   beforeDestroy(): void {
-    document.body.removeChild(this.$el);
+    try {
+      document.body.removeChild(this.$el);
+    } catch {
+      //
+    }
   }
 
   get vmBorder(): string | null {
