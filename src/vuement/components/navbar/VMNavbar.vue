@@ -50,10 +50,11 @@
           <span /><span />
         </div>
       </div>
-
-      <div class="vm-navbar--action-container" v-if="$slots.action">
-        <slot name="action" />
-      </div>
+      <VMRevealer>
+        <div class="vm-navbar--action-container" v-if="$slots.action">
+          <slot name="action" />
+        </div>
+      </VMRevealer>
 
       <VMRevealer>
         <div v-if="overflow && overflowVisible && $slots.default">

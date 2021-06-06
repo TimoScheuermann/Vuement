@@ -29,6 +29,7 @@ export default class VDarkModeToggle extends Vue {
   place-content: center;
   left: 0;
   padding: 5px;
+  padding-left: calc(5px + env(safe-area-inset-left));
   border-radius: 0 100px 100px 0;
   background: rgba(var(--vm-background), 1);
   box-shadow: 2px 4px 8px rgba(#111, 0.1);

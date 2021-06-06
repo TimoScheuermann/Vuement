@@ -5,7 +5,7 @@
     class="vm-notifications"
     @beforeLeave="beforeLeave"
     :position="vmPosition"
-    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
+    :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
   >
     <li
       class="vm-notification"
@@ -234,7 +234,7 @@ export default class VMNotification extends Mixins(VMCProp, VMBgProp) {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(var(--vm-container), 1);
+    background: rgba(var(--vm-paragraph), 1);
   }
 
   &--container {
