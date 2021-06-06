@@ -1,48 +1,69 @@
 <template>
-  <div
-    class="vm-navbar"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-background': vmBackground,
-    }"
-  >
-    <transition appear name="appear">
+  <span>
+    <transition name="appear">
       <div
         v-if="overflowVisible"
-        class="vm-navbar__overflow-background"
+        class="vm-navbar__overlay"
         @click.stop="overflowVisible = false"
         @touchmove.prevent
+        @wheel.prevent
+        @mousewheel.prevent
+        @DOMMouseScroll.prevent
       />
     </transition>
     <div
-      class="vm-navbar--container"
-      :overflow="overflow"
-      :overflowVisible="overflowVisible"
+      class="vm-navbar"
       :floating="floating"
+      :overflowVisible="overflowVisible"
+      :style="{ '--vm-color': vmColor, '--vm-background': vmBackground }"
     >
-      <div class="vm-navbar--container__background" />
-      <div class="vm-navbar--container__title">
-        <slot name="title" />
-      </div>
-      <div
-        class="vm-navbar--container__cross"
-        v-if="overflow && $slots.default"
-        :overflowVisible="overflowVisible"
-        @click="overflowVisible = !overflowVisible"
-      >
-        <span></span>
-        <span></span>
-      </div>
-      <VMRevealer>
+      <div class="vm-navbar__background" />
+      <div class="vm-navbar--container">
+        <slot name="title">
+          <div class="vm-navbar--container__title" v-if="title">
+            {{ title }}
+          </div>
+        </slot>
+
+        <div
+          class="vm-navbar--container__spacer"
+          v-if="$slots.static || $slots.default"
+        />
+
         <div
           class="vm-navbar--container__items"
-          v-if="!overflow || overflowVisible"
+          v-if="$slots.default && !overflowVisible && !overflow"
         >
           <slot />
         </div>
+
+        <div class="vm-navbar--container__static" v-if="$slots.static">
+          <slot name="static" />
+        </div>
+
+        <div
+          v-if="overflow && $slots.default"
+          class="vm-navbar--container__cross"
+          :overflowVisible="overflowVisible"
+          @click="overflowVisible = !overflowVisible"
+        >
+          <span /><span />
+        </div>
+      </div>
+
+      <div class="vm-navbar--action-container" v-if="$slots.action">
+        <slot name="action" />
+      </div>
+
+      <VMRevealer>
+        <div v-if="overflow && overflowVisible && $slots.default">
+          <div class="vm-navbar--overflow-container">
+            <slot />
+          </div>
+        </div>
       </VMRevealer>
     </div>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -59,6 +80,7 @@ import VMRevealer from '../revealer/VMRevealer.vue';
 export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: '400px' }) breakpoint!: string;
   @Prop({ default: false }) floating!: boolean;
+  @Prop() title!: string;
 
   public overflow = false;
   public overflowVisible = false;
@@ -101,92 +123,126 @@ export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .vm-navbar {
-  color: rgba(var(--vm-color), 1);
+  &--overflow-container {
+    padding: 10px 0;
+    > *:not(:first-child) {
+      border-top: 1.5px solid rgba(var(--vm-color), 0.5);
+    }
+    .vm-navbar-item {
+      font-weight: 500;
+      &[active] {
+        font-weight: 600;
+      }
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+</style>
 
-  &__overflow-background {
-    position: fixed;
+<style lang="scss" scoped>
+.vm-navbar__overlay {
+  position: fixed;
+  background: rgba(#000, 0.85);
+  @supports (backdrop-filter: saturate(180%) blur(20px)) {
+    backdrop-filter: saturate(180%) blur(10px);
+    background: rgba(#000, 0.65);
+  }
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.vm-navbar {
+  position: fixed;
+  z-index: 101;
+
+  color: rgba(var(--vm-color), 1);
+  backdrop-filter: saturate(180%) blur(20px);
+  box-shadow: 2px 4px 8px rgba(#111, 0.05);
+
+  &:not([floating]) {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    z-index: 1499;
+    padding: env(safe-area-inset-top) 5vw 0;
+  }
 
-    background: rgba(#000, 0.85);
+  &[floating] {
+    top: calc(20px + env(safe-area-inset-top));
+    left: 50%;
+    width: 400px;
+    max-width: calc(90vw - 40px);
+    transform: translateX(-50%);
+    padding: 0 20px;
+    border-radius: #{2 * $border-radius};
+  }
+
+  &[overflowVisible] {
+    border-bottom-right-radius: #{2 * $border-radius};
+    border-bottom-left-radius: #{2 * $border-radius};
+  }
+
+  &:not([overflowVisible]) {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
-      backdrop-filter: saturate(180%) blur(10px);
-      background: rgba(#000, 0.65);
+      .vm-navbar__background {
+        opacity: 0.72;
+      }
     }
   }
 
-  &--container {
-    position: fixed;
-    z-index: 1500;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-
-    box-shadow: 2px 4px 8px rgba(#111, 0.05);
-
-    &:not([floating]) {
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 0 5vw;
-      padding-top: env(safe-area-inset-top);
-    }
-
-    &[floating] {
-      top: calc(20px + env(safe-area-inset-top));
-      left: 50%;
-      width: 400px;
-      max-width: calc(90vw - 40px);
-      transform: translateX(-50%);
-      padding: 0 20px;
-      border-radius: #{2 * $border-radius};
-    }
-
+  &__background {
     transition: 0.2s ease-in-out;
+    border-radius: inherit;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(var(--vm-background), 1);
+  }
 
-    @include backdrop-blur();
-    &__background {
-      transition: 0.2s ease-in-out;
-      border-radius: inherit;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: rgba(var(--vm-background), 1);
+  &--container {
+    min-height: 50px;
+    flex-wrap: wrap;
+
+    &,
+    &__title,
+    &__items,
+    &__static {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__spacer {
+      flex-grow: 1;
+    }
+
+    &__static,
+    &__cross {
+      margin-left: 10px;
     }
 
     &__title {
-      display: grid;
-      place-content: center;
-      min-height: 50px;
-      position: relative;
-      white-space: nowrap;
-    }
-
-    &__items {
-      position: relative;
-      display: flex;
-      transition: 0.5s ease-in-out;
-      @include vm-scrollbar();
+      margin-left: -10px;
+      padding: 0 10px;
+      font-weight: bold;
     }
 
     &__cross {
       cursor: pointer;
-      position: absolute;
+      position: relative;
 
       height: 50px;
       width: 50px;
-      top: env(safe-area-inset-top);
-      right: env(safe-area-inset-right);
-
+      margin-right: -12px;
       span {
         position: absolute;
         border-radius: 10px;
@@ -207,12 +263,10 @@ export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
           transform: translate(-50%, -50%) rotate(0deg);
         }
       }
-
       &[overflowVisible] {
         span {
           transition: top 0.25s ease-in-out 0s,
             transform 0.25s ease-in-out 0.25s !important;
-
           &:nth-child(1) {
             top: 50%;
             transform: translate(-50%, -50%) rotate(45deg);
@@ -224,35 +278,6 @@ export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
         }
       }
     }
-
-    &[overflowVisible] {
-      border-bottom-right-radius: #{2 * $border-radius};
-      border-bottom-left-radius: #{2 * $border-radius};
-
-      .vm-navbar--container__background {
-        opacity: 1;
-      }
-    }
-
-    &[overflow] {
-      display: grid;
-      place-content: center;
-      grid-template-columns: 1fr;
-
-      .vm-navbar--container__items {
-        flex-direction: column;
-        padding-bottom: 10px;
-
-        /deep/ .vm-navbar-item {
-          &:not(:first-child) {
-            border-top: 1px solid currentColor;
-          }
-          &::before {
-            display: none;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -260,8 +285,12 @@ export default class VMNavbar extends Mixins(VMCProp, VMBgProp) {
 .appear-leave-to {
   opacity: 0;
 }
-.appear-enter-active,
-.appear-leave-active {
+
+.appear-leave-active,
+.appear-enter-active {
   transition: 0.3s ease-in-out;
+}
+.appear-leave-active {
+  transition-delay: 0.15s;
 }
 </style>

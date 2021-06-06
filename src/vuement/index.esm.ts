@@ -12,11 +12,13 @@ const install: PluginFunction<VMOptions> = function installVuement(
   options = {} as VMOptions
 ): void {
   if (!options.colors) options.colors = Object.assign({}, COLORS_DEFAULT);
-  if (!options.themes)
+  if (!options.themes) {
     options.themes = {
       light: Object.assign({}, THEME_LIGHT),
       dark: Object.assign({}, THEME_DARK),
     };
+  }
+  if (!options.components) options.components = Object.values(vmComponents);
 
   for (const c in COLORS_DEFAULT) {
     if (!options.colors[c]) options.colors[c] = COLORS_DEFAULT[c];
@@ -33,7 +35,7 @@ const install: PluginFunction<VMOptions> = function installVuement(
 
   $vm(Vue, options);
 
-  Object.values(vmComponents).forEach((component) => {
+  options.components.forEach((component) => {
     Vue.use(component);
   });
 

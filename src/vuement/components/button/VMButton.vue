@@ -7,15 +7,14 @@
     :variant="buttonVariant"
     :gradient="gradient"
     :block="block"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-primary': vmBackground,
-    }"
+    :style="{ '--vm-color': vmColor, '--vm-primary': vmBackground }"
   >
     <div class="vm-button__icon" v-if="icon && !iconTrailing">
       <i :class="icon" />
     </div>
-    <div class="vm-button__title" v-if="title">{{ title }}</div>
+    <slot>
+      <div class="vm-button__title" v-if="title">{{ title }}</div>
+    </slot>
     <div class="vm-button__icon" v-if="icon && iconTrailing">
       <i :class="icon" />
     </div>
@@ -74,6 +73,9 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
   &[block] {
     display: flex;
     width: 100%;
@@ -94,16 +96,26 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     transform: scale(0.95);
   }
 
-  $sizes: 'normal' 2px 1, 'medium' 3.5px 1.25, 'large' 5px 1.5;
+  &__icon {
+    display: grid;
+    height: 1.2085em;
+    width: 1.2085em;
+    place-content: center;
+    i {
+      font-size: 0.85em;
+    }
+  }
+
+  $sizes: 'normal' 0.125em 3, 'medium' 0.25em 2.5, 'large' 0.375em 2;
 
   @each $name, $size, $brScale in $sizes {
     &[size='#{$name}'] {
       margin: $size;
-      padding: #{3 * $size} #{4 * $size};
-      border-radius: #{$brScale * $border-radius};
-      .vm-button__icon ~ .vm-button__title,
-      .vm-button__title ~ .vm-button__icon {
-        margin-left: #{2.5 * $size};
+      padding: #{3 * $size};
+      border-radius: #{$brScale * $size};
+
+      .vm-button__title {
+        padding: 0 #{2 * $size};
       }
 
       &[block] {

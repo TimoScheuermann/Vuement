@@ -114,7 +114,7 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
 .vm-input {
   display: inline-block;
   margin: 2.5px;
-  max-width: calc(100% - 5px);
+  flex: 1 1 0px;
 
   color: rgba(var(--vm-color), 1);
   position: relative;
@@ -123,7 +123,7 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
     @supports (backdrop-filter: saturate(180%) blur(20px)) {
       .vm-input--input {
         &__background {
-          opacity: 0.5;
+          opacity: 0.33;
         }
         backdrop-filter: saturate(180%) blur(20px);
       }
@@ -164,7 +164,6 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    width: calc(100% - 10px);
     padding: 0 5px;
     border-radius: $border-radius;
 
@@ -203,8 +202,7 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
       position: relative;
       margin: 0;
       padding: 5px;
-      display: flex;
-      flex: 1 1 0px;
+      width: calc(100% - 10px);
 
       border: none;
       background: none;

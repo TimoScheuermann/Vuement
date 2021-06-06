@@ -50,9 +50,10 @@ export declare class VMTheme {
 }
 
 export declare class VMOptions {
-  colors: Record<string, string>;
-  themes: Record<string, VMTheme>;
-  theme: string;
+  colors?: Record<string, string>;
+  themes?: Record<string, VMTheme>;
+  theme?: string;
+  components?: PluginFunction<VMOptions>[];
 }
 
 export declare class VMSelectSelection {

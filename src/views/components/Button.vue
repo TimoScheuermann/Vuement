@@ -30,6 +30,19 @@
     </vm-grid>
 
     <br />
+    <vm-flow horizontal="start">
+      <div>
+        <vm-button title="Home" icon="ti-house" />
+      </div>
+      <div>
+        <vm-button title="Home" size="medium" icon="ti-house" />
+      </div>
+      <div>
+        <vm-button title="Home" size="large" icon="ti-house" />
+      </div>
+    </vm-flow>
+
+    <br />
     <vm-divider position="leading">
       <h3>Backgrounds</h3>
     </vm-divider>

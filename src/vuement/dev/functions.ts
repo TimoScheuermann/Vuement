@@ -67,6 +67,11 @@ export function updateVariables(): void {
   html {
     color: rgba(var(--vm-color), 1);
     background: rgba(var(--vm-background), 1);
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 16px;
   }`;
 }
 

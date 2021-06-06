@@ -9,6 +9,7 @@ export default new Vuex.Store({
     dark: false,
     desktop: false,
     sidebar: false,
+    compQuery: '',
   },
   getters: {
     dark: (state: any): boolean => {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     sidebar: (state: any): boolean => {
       return state.sidebar;
     },
+    compQuery: (state: any): string => {
+      return state.compQuery;
+    },
   },
   mutations: {
     dark(state: any, dark: boolean) {
@@ -30,6 +34,9 @@ export default new Vuex.Store({
     },
     sidebar(state: any, sidebar: boolean) {
       state.sidebar = sidebar;
+    },
+    compQuery(state: any, query: string) {
+      state.compQuery = query;
     },
   },
 });

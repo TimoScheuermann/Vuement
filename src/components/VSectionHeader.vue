@@ -1,9 +1,6 @@
 <template>
   <div class="v-section-header">
-    <vm-flow>
-      <vm-title :title="title" :subtitle="subtitle" />
-      <slot v-if="$slots.default" />
-    </vm-flow>
+    <vm-title :title="title" :subtitle="subtitle" />
     <vm-divider />
   </div>
 </template>
@@ -22,7 +19,7 @@ export default class VSectionHeader extends Vue {
 .v-section-header {
   padding: 20px 0;
   .vm-title {
-    font-size: 22px;
+    font-size: 20px;
   }
   .vm-divider {
     margin-top: 20px;

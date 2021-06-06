@@ -1,3 +1,6 @@
+import { PluginFunction } from 'vue';
+import { Location } from 'vue-router';
+
 export interface VMTheme {
   color: string;
   'color-secondary': string;
@@ -8,9 +11,10 @@ export interface VMTheme {
 }
 
 export interface VMOptions {
-  colors: Record<string, string>;
-  themes: Record<string, VMTheme>;
-  theme: string;
+  colors?: Record<string, string>;
+  themes?: Record<string, VMTheme>;
+  theme?: string;
+  components?: PluginFunction<VMOptions>[];
 }
 
 export interface LooseObject {
@@ -23,8 +27,6 @@ export interface VMSelectSelection {
   title: string;
   state: boolean;
 }
-
-import { Location } from 'vue-router';
 
 export interface VMNotification {
   title?: string;

@@ -1,18 +1,32 @@
 <template>
-  <vm-navbar class="c-navbar" breakpoint="850px">
+  <vm-navbar class="c-navbar" breakpoint="850px" title="Test">
     <vm-flow slot="title" @click="goHome">
       <img src="assets/logo-wide.svg" alt="" />
     </vm-flow>
 
+    <vm-button
+      slot="static"
+      title="Get started"
+      icon="ti-chevron-right"
+      :iconTrailing="true"
+    />
+
     <template v-if="$store.getters.desktop">
-      <vm-navbar-item
-        icon="ti-dots"
-        title="Components"
-        routeName="components"
-      />
+      <vm-navbar-item title="Components" routeName="components" />
       <vm-navbar-item title="Colors" routeName="colors" />
-      <vm-navbar-item title="Getting started" routeName="playground" />
+      <vm-navbar-item title="Playground" routeName="playground" />
     </template>
+    <div
+      v-else-if="$route.name === 'components'"
+      class="search-bar"
+      slot="action"
+    >
+      <vm-input
+        :frosted="true"
+        placeholder="Search Component..."
+        @input="$store.commit('compQuery', $event)"
+      />
+    </div>
   </vm-navbar>
 </template>
 
@@ -31,14 +45,14 @@ export default class CNavbar extends Vue {
 
 <style lang="scss" scoped>
 .c-navbar {
-  .sidebar-opener {
-    margin-right: 10px;
-    cursor: pointer;
-    height: 40px;
-    width: 40px;
-    display: grid;
-    place-content: center;
-    font-size: 20px;
+  .search-bar {
+    display: flex;
+    max-width: 400px;
+    margin: 5px auto;
+    .vm-input {
+      flex: 1 1 0px;
+      // margin: 0;
+    }
   }
 
   img {
