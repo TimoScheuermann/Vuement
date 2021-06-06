@@ -1,11 +1,10 @@
-import { VMOptions } from '@/vuement/dev/interfaces';
+import { LooseObject } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
+import { VMOptions } from 'vuement';
 import VMButton from './VMButton.vue';
 
-const install: PluginFunction<VMOptions> = function installVuementComponent(
-  Vue: typeof _Vue
-): void {
+(VMButton as LooseObject).install = (Vue: typeof _Vue) => {
   Vue.component('vmButton', VMButton);
 };
 
-export default install;
+export default VMButton as unknown as PluginFunction<VMOptions>;

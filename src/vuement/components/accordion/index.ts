@@ -1,13 +1,12 @@
-import { VMOptions } from '@/vuement/dev/interfaces';
+import { LooseObject } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
+import { VMOptions } from 'vuement';
 import VMAccordion from './VMAccordion.vue';
 import VMAccordionItem from './VMAccordionItem.vue';
 
-const install: PluginFunction<VMOptions> = function installVuementComponent(
-  Vue: typeof _Vue
-): void {
+(VMAccordion as LooseObject).install = (Vue: typeof _Vue) => {
   Vue.component('vmAccordion', VMAccordion);
   Vue.component('vmAccordionItem', VMAccordionItem);
 };
 
-export default install;
+export default VMAccordion as unknown as PluginFunction<VMOptions>;

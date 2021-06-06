@@ -40,6 +40,12 @@ export const vmTitle: PluginFunction<VMOptions>;
 export const vmFlow: PluginFunction<VMOptions>;
 export const vmGrid: PluginFunction<VMOptions>;
 
+declare module 'vue/types/vue' {
+  interface Vue {
+    $vm: any;
+  }
+}
+
 export declare class VMTheme {
   color: string;
   'color-secondary': string;
