@@ -157,7 +157,6 @@ export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     border-radius: inherit;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-    overflow: hidden;
 
     border-top: 1.5px solid rgba(var(--vm-border), 1);
 

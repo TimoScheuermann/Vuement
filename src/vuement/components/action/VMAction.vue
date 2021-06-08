@@ -18,7 +18,6 @@
 
     <transition name="appear">
       <div class="vm-action--items" :pos="pos" v-if="visible">
-        <div class="vm-action--items__background" />
         <div class="vm-action--items__title" v-if="title">{{ title }}</div>
         <div class="vm-action--items__items"><slot /></div>
       </div>
@@ -120,7 +119,12 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     z-index: 50;
     font-size: 1rem;
 
-    @include backdrop-blur();
+    box-shadow: inset 0 0 0 1.5px rgba(var(--vm-container), 0.5);
+    background: rgba(var(--vm-container), 1);
+    @supports (backdrop-filter: saturate(180%) blur(20px)) {
+      background: rgba(var(--vm-container), 0.52);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
 
     &[pos='tl'] {
       top: 0;
@@ -143,16 +147,6 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
       transform-origin: bottom right;
     }
 
-    &__background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: inherit;
-      background: rgba(var(--vm-container), 1);
-    }
-
     &__title {
       padding: 5px 10px;
       opacity: 0.75;
@@ -161,15 +155,18 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     }
 
     &__items {
+      @include vm-scrollbar();
       max-height: calc(50vh - 50px);
       overflow: auto;
     }
   }
 }
 
-.appear-enter-active,
+.appear-enter-active {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 .appear-leave-active {
-  transition: all 0.3s cubic-bezier(0.54, 1.51, 0.39, 0.76);
+  transition: all 0.3 ease;
 }
 .appear-enter,
 .appear-leave-to {

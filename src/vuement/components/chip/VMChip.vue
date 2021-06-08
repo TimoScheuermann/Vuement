@@ -3,10 +3,7 @@
     class="vm-chip"
     @click="clicked"
     :editable="editable"
-    :style="{
-      '--vm-color': vmColor,
-      '--vm-container': vmBackground,
-    }"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
   >
     <div class="vm-chip--image" v-if="image">
       <img :src="image" alt="" />
@@ -43,7 +40,7 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop() icon!: string;
   @Prop() image!: string;
   @Prop({ default: false }) remove!: boolean;
-  @Prop({ default: !false }) editable!: boolean;
+  @Prop({ default: false }) editable!: boolean;
   @Prop({ default: 10 }) maxLength!: number;
 
   public keypress(e: KeyboardEvent): void {

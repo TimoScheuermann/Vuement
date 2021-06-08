@@ -4,7 +4,7 @@
 
     <vm-flow>
       <vm-action title="Was geht">
-        <vm-action-item title="Hallo #1" />
+        <vm-action-item title="Open sheet" icon="ti-share" />
         <vm-action-item title="Hallo #1" />
         <vm-action-item title="Hallo #2" icon="ti-pencil" />
         <vm-spacer></vm-spacer>
@@ -20,9 +20,12 @@
       </vm-select>
 
       <vm-select>
-        <vm-select-item id="a" title="Heraus #1" />
-        <vm-select-item id="b" title="Heraus #2" />
-        <vm-select-item id="c" title="Heraus #3" />
+        <vm-select-item id="a" title="Open sheet" icon="ti-share" />
+        <vm-select-item id="b" title="Hallo #1" />
+        <vm-select-item id="c" title="Hallo #2" icon="ti-pencil" />
+        <vm-spacer></vm-spacer>
+        <vm-select-item id="d" title="Hallo #3" />
+        <vm-action-item id="e" title="Hallo #1" />
       </vm-select>
 
       <vm-action>

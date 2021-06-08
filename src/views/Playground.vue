@@ -5,10 +5,21 @@
     <vm-link @click="dialog = true">open</vm-link>
 
     <vm-dialog v-model="dialog" title="Hallo">
-      <vm-menu-button slot="button" @click="sheet = true"></vm-menu-button>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga
       quo velit facere, aut fugiat impedit, asperiores deserunt ea accusamus,
       magnam amet rerum adipisci quisquam suscipit ipsum quia molestiae!
+      <vm-action title="Was geht" slot="button">
+        <vm-action-item
+          title="Open sheet"
+          icon="ti-share"
+          @click="sheet = true"
+        />
+        <vm-action-item title="Hallo #1" />
+        <vm-action-item title="Hallo #2" icon="ti-pencil" />
+        <vm-spacer></vm-spacer>
+        <vm-action-item title="Hallo #3" />
+        <vm-action-item title="Hallo #1" />
+      </vm-action>
       <template slot="footer">
         <vm-dialog-button title="cancel" color="error" />
         <vm-dialog-button title="accept" />

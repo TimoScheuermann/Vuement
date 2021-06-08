@@ -7,6 +7,7 @@
     :style="{ '--vm-primary': vmColor }"
   >
     <i v-if="icon" :class="icon" />
+    <span v-else />
     <span>{{ title }}</span>
   </div>
 </template>
@@ -63,8 +64,9 @@ export default class VMSelectItem extends Mixins(VMCProp) {
 .vm-select-item {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
   align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
   padding: 5px 10px;
   color: rgba(var(--vm-color), 1);
 
@@ -87,7 +89,8 @@ export default class VMSelectItem extends Mixins(VMCProp) {
     cursor: not-allowed;
   }
 
-  & ~ .vm-select-item {
+  & ~ .vm-select-item,
+  & ~ /deep/ .vm-action-item {
     border-top: 1.5px solid rgba(var(--vm-border), 1);
   }
 

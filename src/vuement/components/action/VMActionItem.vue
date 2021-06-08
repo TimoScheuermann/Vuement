@@ -34,7 +34,6 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-  justify-content: flex-start;
   align-items: center;
 
   padding: 5px 10px;
