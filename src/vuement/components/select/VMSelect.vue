@@ -250,16 +250,20 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     }
 
     &__title {
-      padding: 5px 10px;
+      padding: 7.5px 10px;
       opacity: 0.75;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 500;
       position: relative;
+      color: rgba(var(--vm-color), 0.8);
+      border-bottom: 1.5px solid rgba(var(--vm-border), 1);
     }
 
     &__items {
       @include vm-scrollbar();
       max-height: calc(50vh - 50px);
       overflow: auto;
+      min-width: 135px;
     }
   }
 }

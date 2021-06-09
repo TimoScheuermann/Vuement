@@ -36,8 +36,9 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   justify-content: space-between;
   align-items: center;
 
+  font-weight: 500;
   padding: 5px 10px;
-  color: rgba(var(--vm-color), 1);
+  color: rgba(var(--vm-color), 0.8);
 
   position: relative;
   user-select: none;
@@ -46,7 +47,15 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
 
   cursor: pointer;
   &:not([disabled]):hover {
+    color: rgba(var(--vm-color), 1);
     background: rgba(var(--vm-color), 0.12);
+  }
+
+  &:first-child {
+    border-radius: $border-radius $border-radius 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 $border-radius $border-radius;
   }
 
   &[disabled] {
@@ -54,16 +63,14 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
     cursor: not-allowed;
   }
 
-  & ~ .vm-action-item {
+  & ~ .vm-action-item,
+  & ~ /deep/ .vm-action-group {
     border-top: 1.5px solid rgba(var(--vm-border), 1);
-  }
-
-  i {
-    margin-left: 15px;
   }
 
   span {
     white-space: nowrap;
+    padding: 0 15px;
   }
 }
 </style>

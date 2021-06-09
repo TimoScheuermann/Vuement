@@ -17,9 +17,12 @@
     </span>
 
     <transition name="appear">
-      <div class="vm-action--items" :pos="pos" v-if="visible">
+      <div class="vm-action--items" :shrink="shrink" :pos="pos" v-if="visible">
         <div class="vm-action--items__title" v-if="title">{{ title }}</div>
-        <div class="vm-action--items__items"><slot /></div>
+        <div class="vm-action--items__items">
+          <span v-if="title" />
+          <slot />
+        </div>
       </div>
     </transition>
   </button>
@@ -44,6 +47,7 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   @Prop({ default: false }) filled!: string;
   @Prop() title!: string;
 
+  public shrink = false;
   public pos = '';
   public vmOpensGroup = 'menu';
 
@@ -51,6 +55,9 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
     window.addEventListener('scroll', this.updatePosition);
     window.addEventListener('resize', this.updatePosition);
     window.addEventListener('click', this.close);
+    this.$on('shrink', (shrink: boolean) => {
+      this.shrink = shrink;
+    });
     this.updatePosition();
   }
 
@@ -62,7 +69,14 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
 
   @Watch('visible')
   visibleChanged(): void {
-    if (this.visible) this.updatePosition();
+    if (this.visible) {
+      this.shrink = false;
+      this.updatePosition();
+    } else {
+      setTimeout(() => {
+        this.shrink = false;
+      }, 300);
+    }
   }
 
   public updatePosition(): void {
@@ -75,9 +89,14 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   span > .vm-menu-button {
     transform: translateY(0.1em);
   }
-  .vm-action--items .vm-spacer {
-    position: relative;
-    background: rgba(var(--vm-border), 1);
+  .vm-action--items {
+    .vm-spacer {
+      background: rgba(var(--vm-border), 1);
+      margin: 0;
+    }
+    .vm-spacer + .vm-action-item {
+      border-top: none;
+    }
   }
 }
 </style>
@@ -114,7 +133,7 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   &--items {
     position: absolute;
     border-radius: $border-radius;
-    overflow: hidden;
+    // overflow: hidden;
     transition: all 0.2s ease-in-out;
     z-index: 50;
     font-size: 1rem;
@@ -147,17 +166,29 @@ export default class VMAction extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
       transform-origin: bottom right;
     }
 
+    &[shrink] {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: scale(0.9);
+      filter: brightness(90%);
+      pointer-events: none;
+    }
+
     &__title {
-      padding: 5px 10px;
+      padding: 7.5px 10px;
       opacity: 0.75;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 500;
       position: relative;
+      color: rgba(var(--vm-color), 0.8);
+      border-bottom: 1.5px solid rgba(var(--vm-border), 1);
     }
 
     &__items {
+      position: relative;
       @include vm-scrollbar();
       max-height: calc(50vh - 50px);
-      overflow: auto;
+      // overflow: auto;
+      min-width: 135px;
     }
   }
 }
