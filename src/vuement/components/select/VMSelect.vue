@@ -263,7 +263,6 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
       @include vm-scrollbar();
       max-height: calc(50vh - 50px);
       overflow: auto;
-      min-width: 135px;
     }
   }
 }

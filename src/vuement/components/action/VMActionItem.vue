@@ -5,8 +5,14 @@
     :disabled="disabled"
     :style="{ '--vm-color': vmColor }"
   >
-    <span>{{ title }}</span>
-    <i v-if="icon" :class="icon" />
+    <div class="vm-action-item__title">
+      <slot>{{ title }}</slot>
+    </div>
+    <div class="vm-action-item__icon" v-if="icon || $slots.icon">
+      <slot name="icon">
+        <i v-if="icon" :class="icon" />
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -22,6 +28,7 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
 
   public handleClick(e: MouseEvent): void {
     this.clicked(e);
+
     if (!this.disabled) {
       this.$parent.$emit('close');
     }
@@ -36,8 +43,9 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   justify-content: space-between;
   align-items: center;
 
+  margin: 0;
   font-weight: 500;
-  padding: 5px 10px;
+  padding: 5px 15px;
   color: rgba(var(--vm-color), 0.8);
 
   position: relative;
@@ -51,26 +59,17 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
     background: rgba(var(--vm-color), 0.12);
   }
 
-  &:first-child {
-    border-radius: $border-radius $border-radius 0 0;
-  }
-  &:last-child {
-    border-radius: 0 0 $border-radius $border-radius;
-  }
-
   &[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  & ~ .vm-action-item,
-  & ~ /deep/ .vm-action-group {
-    border-top: 1.5px solid rgba(var(--vm-border), 1);
+  &__icon {
+    margin-left: 15px;
   }
 
-  span {
+  &__title {
     white-space: nowrap;
-    padding: 0 15px;
   }
 }
 </style>

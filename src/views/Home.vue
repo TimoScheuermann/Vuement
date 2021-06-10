@@ -13,30 +13,6 @@
       </vm-flow>
 
       <br /><br />
-
-      <vm-action :title="'4 retweets, 41 likes\nVia Buffer'" :value="true">
-        <vm-action-group title="Save for later" icon="ti-bookmark">
-          <vm-action-item title="All" icon="ti-bookmark" />
-          <vm-spacer></vm-spacer>
-          <vm-action-item title="New Folder" icon="ti-plus" />
-        </vm-action-group>
-        <vm-action-item title="Reply" icon="ti-reply" />
-        <vm-action-item title="Retweet" icon="ti-repeat" />
-        <vm-action-item title="Quote" icon="ti-chat-bubbles" />
-        <vm-action-group title="Save for later" icon="ti-bookmark">
-          <vm-action-item title="All" icon="ti-bookmark" />
-          <vm-spacer></vm-spacer>
-          <vm-action-item title="New Folder" icon="ti-plus" />
-        </vm-action-group>
-        <vm-spacer></vm-spacer>
-        <vm-action-item title="Edit" icon="ti-pencil" />
-        <vm-action-item title="Delete" icon="ti-trashcan-alt" />
-        <vm-action-group title="Save for later" icon="ti-bookmark">
-          <vm-action-item title="All" icon="ti-bookmark" />
-          <vm-spacer></vm-spacer>
-          <vm-action-item title="New Folder" icon="ti-plus" />
-        </vm-action-group>
-      </vm-action>
     </vm-flow>
   </div>
 </template>

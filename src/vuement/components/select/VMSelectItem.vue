@@ -67,7 +67,7 @@ export default class VMSelectItem extends Mixins(VMCProp) {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  padding: 5px 10px;
+  padding: 5px 15px;
   color: rgba(var(--vm-color), 1);
 
   position: relative;
@@ -89,8 +89,8 @@ export default class VMSelectItem extends Mixins(VMCProp) {
     cursor: not-allowed;
   }
 
-  & ~ .vm-select-item,
-  & ~ /deep/ .vm-action-item {
+  & + .vm-select-item,
+  & + /deep/ .vm-action-item {
     border-top: 1.5px solid rgba(var(--vm-border), 1);
   }
 

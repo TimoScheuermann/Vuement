@@ -36,6 +36,40 @@
     </vm-flow>
 
     <vm-divider></vm-divider>
+
+    <br /><br />
+
+    <vm-action title="Filter Issues">
+      <vm-action-item title="Turn Filter On" />
+      <vm-spacer />
+      <vm-action-group title="Sort By">
+        <vm-action-item
+          title="Date Created"
+          :key="date + '' + latest"
+          :icon="date ? 'ti-checkmark' : null"
+          @click="date = true"
+        />
+        <vm-action-item
+          title="Date Modified"
+          :icon="!date ? 'ti-checkmark' : null"
+          @click="date = false"
+        />
+        <vm-spacer />
+        <vm-action-item
+          title="Newest to Oldest"
+          :icon="latest ? 'ti-checkmark' : null"
+          @click="latest = true"
+        />
+        <vm-action-item
+          title="Oldest to Neweset"
+          :icon="!latest ? 'ti-checkmark' : null"
+          @click="latest = false"
+        />
+      </vm-action-group>
+      <vm-spacer />
+      <vm-action-item title="Open" icon="ti-checkmark" />
+      <vm-action-item title="Closed" icon="ti-checkmark" />
+    </vm-action>
   </div>
 </template>
 
@@ -43,7 +77,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class Action extends Vue {}
+export default class Action extends Vue {
+  public date = false;
+  public latest = true;
+}
 </script>
 
 <style lang="scss" scoped>
