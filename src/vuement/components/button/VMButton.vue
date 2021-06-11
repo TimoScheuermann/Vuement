@@ -7,6 +7,7 @@
     :variant="buttonVariant"
     :gradient="gradient"
     :block="block"
+    :round="round"
     :style="{ '--vm-color': vmColor, '--vm-primary': vmBackground }"
   >
     <div class="vm-button__icon" v-if="icon && !iconTrailing">
@@ -38,6 +39,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: 'white' }) color!: string;
   @Prop({ default: false }) gradient!: boolean;
   @Prop({ default: false }) block!: boolean;
+  @Prop({ default: false }) round!: boolean;
 
   get buttonSize(): string {
     const sizes = ['normal', 'medium', 'large'];
@@ -46,7 +48,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   }
 
   get buttonVariant(): string {
-    const variants = ['filled', 'border', 'opaque'];
+    const variants = ['filled', 'border', 'opaque', 'transparent'];
     const variant = (this.variant || '').toLowerCase();
     return variants.includes(variant) ? variant : variants[0];
   }
@@ -79,6 +81,8 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   &[block] {
     display: flex;
     width: 100%;
+    margin: 0 auto;
+    max-width: 250px;
   }
 
   flex: 1 1 0px;
@@ -120,7 +124,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
       border-radius: #{$brScale * $size};
 
       .vm-button__title {
-        padding: 0 #{2 * $size};
+        padding: 0 #{3 * $size};
       }
 
       &[block] {
@@ -157,6 +161,18 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
       @include button-gradient();
       color: rgba(var(--vm-color), 1);
     }
+  }
+
+  &[variant='transparent'] {
+    color: rgba(var(--vm-primary), 1);
+
+    &:not([disabled]):hover {
+      @include button-gradient(0.25, 0.05);
+    }
+  }
+
+  &[round] {
+    border-radius: 10em;
   }
 }
 </style>

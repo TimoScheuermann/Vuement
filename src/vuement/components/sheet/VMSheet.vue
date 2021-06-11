@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMBodyMountMixin from '@/vuement/mixins/VMBodyMount.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
@@ -47,23 +48,16 @@ import VMMenuButton from '../menuButton/VMMenuButton.vue';
     VMMenuButton,
   },
 })
-export default class VMSheet extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
+export default class VMSheet extends Mixins(
+  VMCProp,
+  VMBgProp,
+  VMOpensMixin,
+  VMBodyMountMixin
+) {
   @Prop() title!: string;
   @Prop({ default: true }) closeButton!: boolean;
 
   public vmOpensGroup = 'overlay';
-
-  mounted(): void {
-    document.body.appendChild(this.$el);
-  }
-
-  beforeDestroy(): void {
-    try {
-      document.body.removeChild(this.$el);
-    } catch {
-      //
-    }
-  }
 }
 </script>
 

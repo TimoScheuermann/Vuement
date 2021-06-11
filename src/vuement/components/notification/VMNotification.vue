@@ -46,20 +46,24 @@ import { NOOP } from '@/vuement/dev/constants';
 import { VMNotificationObject } from '@/vuement/dev/interfaces';
 import { VMBus } from '@/vuement/dev/util';
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMBodyMountMixin from '@/vuement/mixins/VMBodyMount.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Vue, Component, Prop, Mixins } from 'vue-property-decorator';
 
 type VMNot = VMNotificationObject & { timer?: number; id: number };
 
 @Component
-export default class VMNotification extends Mixins(VMCProp, VMBgProp) {
+export default class VMNotification extends Mixins(
+  VMCProp,
+  VMBgProp,
+  VMBodyMountMixin
+) {
   @Prop({ default: 5000 }) duration!: number;
   @Prop({ default: 'top' }) position!: string;
 
   public notifications: VMNot[] = [];
 
   mounted(): void {
-    document.body.appendChild(this.$el);
     VMBus.$on('VMNotification', this.received);
     VMBus.$on('VMNotificationX', this.close);
     VMBus.$on('VMNotificationXA', this.closeAll);
@@ -67,11 +71,6 @@ export default class VMNotification extends Mixins(VMCProp, VMBgProp) {
 
   beforeDestroy(): void {
     this.closeAll();
-    try {
-      document.body.removeChild(this.$el);
-    } catch {
-      //
-    }
   }
 
   get vmPosition(): string {

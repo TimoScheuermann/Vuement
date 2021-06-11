@@ -2,7 +2,11 @@
   <div class="view-playground" content>
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
 
-    <vm-link @click="dialog = true">open</vm-link>
+    <vm-button
+      title="Onboarding"
+      variant="transparent"
+      @click="onboarding = true"
+    />
 
     <vm-dialog v-model="dialog" title="Hallo">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga
@@ -109,21 +113,74 @@
         <vm-list-item title="Title #4" description="Description #4" />
       </vm-list>
     </vm-card>
+
+    <vm-onboarding v-model="onboarding">
+      <vm-flow slot="head" horizontal="end">
+        <span>
+          <vm-button
+            variant="transparent"
+            title="Skip"
+            @click="onboarding = false"
+          />
+        </span>
+      </vm-flow>
+      <vm-flow flow="column" slot="footer">
+        <vm-spacer />
+        <vm-button
+          size="medium"
+          :block="true"
+          :round="true"
+          title="Create account"
+        />
+        <vm-button
+          size="medium"
+          :block="true"
+          :round="true"
+          variant="transparent"
+          title="Sign in"
+        />
+      </vm-flow>
+      <vm-onboarding-view
+        title="Ready to travel"
+        description="Choose your destination, plan your trip. Pick the best place for your holiday"
+      >
+        <Onboarding1 slot="media" />
+      </vm-onboarding-view>
+      <vm-onboarding-view
+        title="Book your ticket"
+        description="Book your trip with us, we give you the best price, guaranteed."
+      >
+        <Onboarding2 slot="media" />
+      </vm-onboarding-view>
+      <vm-onboarding-view
+        title="Stress-free planning"
+        description="Get personalized activity ideas based on the time, place and weather."
+      >
+        <Onboarding3 slot="media" />
+      </vm-onboarding-view>
+    </vm-onboarding>
   </div>
 </template>
 
 <script lang="ts">
+import Onboarding1 from '@/components/etc/onboarding/Onboarding1.vue';
+import Onboarding2 from '@/components/etc/onboarding/Onboarding2.vue';
+import Onboarding3 from '@/components/etc/onboarding/Onboarding3.vue';
 import VSectionHeader from '@/components/VSectionHeader.vue';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({
   components: {
     VSectionHeader,
+    Onboarding1,
+    Onboarding2,
+    Onboarding3,
   },
 })
 export default class Playground extends Vue {
   public dialog = false;
   public sheet = false;
+  public onboarding = false;
 
   public avatars = [
     'https://newtonfoxbds.com/wp-content/uploads/2019/04/user-placeholder-man-10-6.jpg',

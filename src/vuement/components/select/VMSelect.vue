@@ -271,7 +271,7 @@ export default class VMSelect extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .appear-leave-active {
-  transition: all 0.3 ease;
+  transition: all 0.3s ease;
 }
 .appear-enter,
 .appear-leave-to {

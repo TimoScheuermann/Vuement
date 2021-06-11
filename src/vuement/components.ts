@@ -15,6 +15,7 @@ export { default as vmList } from './components/list';
 export { default as vmMenuButton } from './components/menuButton';
 export { default as vmNavbar } from './components/navbar';
 export { default as vmNotification } from './components/notification';
+export { default as vmOnboarding } from './components/onboarding';
 export { default as vmProgress } from './components/progress';
 export { default as vmQuote } from './components/quote';
 export { default as vmRadio } from './components/radio';

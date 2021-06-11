@@ -90,6 +90,9 @@ const components = {
   Notification: {
     props: [],
   },
+  Onboarding: {
+    props: [],
+  },
   Progress: {
     props: [],
   },

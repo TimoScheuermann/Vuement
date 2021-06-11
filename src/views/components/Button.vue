@@ -14,6 +14,11 @@
         <vm-button title="Filled" icon="ti-tccomponents-tc" />
         <vm-button icon="ti-tccomponents-tc" />
         <vm-button title="Filled" :disabled="true" />
+
+        <vm-button :round="true" title="Filled" />
+        <vm-button :round="true" title="Filled" icon="ti-tccomponents-tc" />
+        <vm-button :round="true" icon="ti-tccomponents-tc" />
+        <vm-button :round="true" title="Filled" :disabled="true" />
       </div>
       <div>
         <vm-button variant="border" title="Border" />
@@ -26,6 +31,16 @@
         <vm-button variant="opaque" title="Opaque" icon="ti-tccomponents-tc" />
         <vm-button variant="opaque" icon="ti-tccomponents-tc" />
         <vm-button variant="opaque" title="Opaque" :disabled="true" />
+      </div>
+      <div>
+        <vm-button variant="transparent" title="Transparent" />
+        <vm-button
+          variant="transparent"
+          title="Transparent"
+          icon="ti-tccomponents-tc"
+        />
+        <vm-button variant="transparent" icon="ti-tccomponents-tc" />
+        <vm-button variant="transparent" title="Transparent" :disabled="true" />
       </div>
     </vm-grid>
 
@@ -121,6 +136,5 @@ export default class Button extends Vue {}
 
 <style lang="scss" scoped>
 .view-button {
-  //
 }
 </style>

@@ -50,28 +50,22 @@
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
+import VMBodyMount from '@/vuement/mixins/VMBodyMount.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
 @Component
-export default class VMDialog extends Mixins(VMCProp, VMBgProp, VMOpensMixin) {
+export default class VMDialog extends Mixins(
+  VMCProp,
+  VMBgProp,
+  VMOpensMixin,
+  VMBodyMount
+) {
   @Prop() title!: string;
   @Prop() border!: string;
   @Prop({ default: false }) dragger!: boolean;
 
   public vmOpensGroup = 'overlay';
-
-  mounted(): void {
-    document.body.appendChild(this.$el);
-  }
-
-  beforeDestroy(): void {
-    try {
-      document.body.removeChild(this.$el);
-    } catch {
-      //
-    }
-  }
 
   get vmBorder(): string | null {
     return this.border ? this.getColor(this.border) : null;
