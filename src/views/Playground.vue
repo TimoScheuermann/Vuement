@@ -24,6 +24,9 @@
         <vm-action-item title="Hallo #3" />
         <vm-action-item title="Hallo #1" />
       </vm-action>
+      <vm-textarea
+        value=" Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga quo velit facere, aut fugiat impedit, asperiores deserunt ea accusamus"
+      ></vm-textarea>
       <template slot="footer">
         <vm-dialog-button title="cancel" color="error" />
         <vm-dialog-button title="accept" />
@@ -124,7 +127,7 @@
           />
         </span>
       </vm-flow>
-      <vm-flow flow="column" slot="footer">
+      <!-- <vm-flow flow="column" slot="footer">
         <vm-spacer />
         <vm-button
           size="medium"
@@ -139,7 +142,7 @@
           variant="transparent"
           title="Sign in"
         />
-      </vm-flow>
+      </vm-flow> -->
       <vm-onboarding-view
         title="Ready to travel"
         description="Choose your destination, plan your trip. Pick the best place for your holiday"

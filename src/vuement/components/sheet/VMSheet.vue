@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span vm-prevent-body-scroll>
     <transition name="appear">
       <div
         class="vm-sheet__background"

@@ -9,7 +9,8 @@
       </p>
 
       <vm-flow>
-        <vm-button title="Get started" @click="send" />
+        <vm-button title="Get started" @click="send(undefined)" />
+        <vm-button title="Get started" @click="send('bottom')" />
       </vm-flow>
 
       <br /><br />
@@ -23,8 +24,8 @@ import Card from '@/views/components/Card.vue';
 
 @Component
 export default class Home extends Vue {
-  send(): void {
-    this.$vm.sendNotification({ title: 'Was geht ab', content: Card });
+  send(vmId?: string | number): void {
+    this.$vm.sendNotification({ title: 'Was geht ab', content: Card, vmId });
   }
 }
 </script>

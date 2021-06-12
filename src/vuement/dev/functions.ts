@@ -62,8 +62,9 @@ export function updateVariables(): void {
     str += `\n\t--vm-${key}: ${value};`;
   });
 
-  elem.innerHTML = `:root {${str}\n}`;
-  elem.innerHTML += `
+  elem.innerHTML = `
+  :root {${str}
+  }
   html {
     color: rgba(var(--vm-color), 1);
     background: rgba(var(--vm-background), 1);
@@ -72,6 +73,10 @@ export function updateVariables(): void {
     -ms-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 16px;
+  }
+
+  .vm-prevent-scroll {
+    overflow-y: hidden;
   }`;
 }
 
@@ -79,8 +84,10 @@ let notficiationCounter = 0;
 export function sendNotification(notificiation: VMNotificationObject): number {
   VMBus.$emit('VMNotification', {
     ...notificiation,
+    vmId: notificiation.vmId || 'default',
     id: ++notficiationCounter,
   });
+
   return notficiationCounter;
 }
 

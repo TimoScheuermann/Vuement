@@ -5,7 +5,7 @@
     class="vm-notifications"
     @beforeLeave="beforeLeave"
     :position="vmPosition"
-    :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
+    :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
   >
     <li
       class="vm-notification"
@@ -60,6 +60,7 @@ export default class VMNotification extends Mixins(
 ) {
   @Prop({ default: 5000 }) duration!: number;
   @Prop({ default: 'top' }) position!: string;
+  @Prop({ default: 'default' }) vmId!: string | number;
 
   public notifications: VMNot[] = [];
 
@@ -94,7 +95,8 @@ export default class VMNotification extends Mixins(
   }
 
   public received(notificiation: VMNotificationObject & { id: number }): void {
-    let { duration } = notificiation;
+    let { duration, vmId } = notificiation;
+    if (vmId !== this.vmId) return;
     if (!duration) duration = +this.duration || 5000;
     const not: VMNot = { ...notificiation };
 
@@ -154,8 +156,8 @@ export default class VMNotification extends Mixins(
 .vm-notifications {
   position: fixed;
   margin: 0;
-  padding: calc(20px + env(safe-area-inset-top)) 5vw
-    calc(20px + env(safe-area-inset-bottom));
+  padding: calc(12.5px + env(safe-area-inset-top)) 5vw
+    calc(12.5px + env(safe-area-inset-bottom));
   z-index: 1500;
   top: 0;
   left: 0;
@@ -208,12 +210,7 @@ export default class VMNotification extends Mixins(
   }
   pointer-events: all;
 
-  &:not(:last-child) {
-    margin-bottom: 5px;
-  }
-  &:not(:first-child) {
-    margin-top: 5px;
-  }
+  margin: 7.5px;
 
   list-style: none;
   padding: 0;
@@ -233,7 +230,7 @@ export default class VMNotification extends Mixins(
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(var(--vm-paragraph), 1);
+    background: rgba(var(--vm-container), 1);
   }
 
   &--container {

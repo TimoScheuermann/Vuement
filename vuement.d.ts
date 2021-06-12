@@ -40,6 +40,7 @@ export declare class VMSelectSelection {
 
 export declare class VMNotificationObject {
   title?: string;
+  vmId?: string | number;
   text?: string;
   image?: string;
   href?: string;

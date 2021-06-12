@@ -56,7 +56,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
 </script>
 
 <style lang="scss" scoped>
-@mixin button-gradient($opacity: 1, $gradient: 0.3) {
+@mixin button-gradient($opacity: 1, $gradient: 0.2) {
   background: rgba(var(--vm-primary), $opacity);
 
   &[gradient] {
@@ -167,7 +167,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     color: rgba(var(--vm-primary), 1);
 
     &:not([disabled]):hover {
-      @include button-gradient(0.25, 0.05);
+      @include button-gradient(0.1, 0.05);
     }
   }
 

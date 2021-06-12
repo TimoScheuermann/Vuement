@@ -24,6 +24,10 @@ export default class VMOpensMixin extends Vue {
     });
   }
 
+  beforeDestroy(): void {
+    this.unfreezeBody();
+  }
+
   @Watch('value', { immediate: true })
   valueChanged(): void {
     if (this.value) this.open();
@@ -47,9 +51,26 @@ export default class VMOpensMixin extends Vue {
       el: this.$el,
       gr: this.vmOpensGroup,
     } as VMCloseExcept);
+
+    if (this.$el.getAttributeNames().includes('vm-prevent-body-scroll')) {
+      requestAnimationFrame(() => {
+        this.freezeBody();
+      });
+    }
   }
 
   public close(): void {
-    if (this.closeable) this.visible = false;
+    if (this.closeable) {
+      this.visible = false;
+      this.unfreezeBody();
+    }
+  }
+
+  public freezeBody(): void {
+    document.body.classList.add('vm-prevent-scroll');
+  }
+
+  public unfreezeBody(): void {
+    document.body.classList.remove('vm-prevent-scroll');
   }
 }

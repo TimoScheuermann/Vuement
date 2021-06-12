@@ -15,8 +15,10 @@ export default class VMList extends Mixins(VMCProp) {}
 <style lang="scss" scoped>
 .vm-list {
   margin: 0;
-  padding: 0;
+  padding: 0px;
   color: rgba(var(--vm-color), 1);
   width: 100%;
+  background: rgba(var(--vm-paragraph), 1);
+  border-radius: $border-radius;
 }
 </style>

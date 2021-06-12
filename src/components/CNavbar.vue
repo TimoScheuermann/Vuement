@@ -6,6 +6,7 @@
 
     <vm-button
       slot="static"
+      variant="transparent"
       title="Get started"
       icon="ti-chevron-right"
       :iconTrailing="true"

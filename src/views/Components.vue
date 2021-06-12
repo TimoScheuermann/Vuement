@@ -49,7 +49,7 @@ export default class Components extends Vue {
 <style lang="scss" scoped>
 .view-components {
   @media #{$isMobile} {
-    padding-top: calc(110px + env(safe-area-inset-top));
+    margin-top: 34.33px;
   }
 
   .vm-input {

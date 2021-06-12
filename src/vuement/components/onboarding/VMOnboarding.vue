@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span vm-prevent-body-scroll>
     <transition name="appear">
       <div
         class="vm-onboarding"
@@ -13,7 +13,7 @@
           <slot name="head" />
         </div>
         <div
-          ref="slider"
+          @scroll="scrolled"
           class="vm-onboarding--views"
           @touchmove.capture.stop
           @wheel.capture.stop
@@ -22,7 +22,7 @@
         >
           <slot />
         </div>
-        <div class="vm-onboarding--indicator" v-if="view !== -1">
+        <div class="vm-onboarding--indicator" v-if="slides > 0">
           <span
             v-for="(_, i) in Array(slides)"
             :key="i"
@@ -40,7 +40,7 @@
 <script lang="ts">
 import VMBodyMountMixin from '@/vuement/mixins/VMBodyMount.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
-import { Component, Mixins, Watch } from 'vue-property-decorator';
+import { Component, Mixins } from 'vue-property-decorator';
 
 @Component
 export default class VMOnboarding extends Mixins(
@@ -48,34 +48,17 @@ export default class VMOnboarding extends Mixins(
   VMBodyMountMixin
 ) {
   public vmOpensGroup = 'onboarding';
-  public view = -1;
+  public view = 0;
 
-  mounted(): void {
-    this.slider.addEventListener('scroll', this.scrolled);
-    this.scrolled();
-  }
-
-  beforeDestroy(): void {
-    this.slider.removeEventListener('scroll', this.scrolled);
-  }
-
-  @Watch('visible')
-  public scrolled(): void {
-    const { scrollWidth, scrollLeft } = this.slider;
-    if (this.slides === 0) {
-      this.view = -1;
-    } else {
-      const slideWidth = scrollWidth / this.slides;
-      this.view = Math.floor(scrollLeft / slideWidth + 0.5);
-    }
+  public scrolled(event: Event): void {
+    if (!event.target) return;
+    const { scrollWidth, scrollLeft } = event.target as HTMLElement;
+    const slideWidth = scrollWidth / this.slides;
+    this.view = Math.floor(scrollLeft / slideWidth + 0.5);
   }
 
   get slides(): number {
     return (this.$slots.default || []).length;
-  }
-
-  get slider(): HTMLElement {
-    return this.$refs.slider as HTMLElement;
   }
 }
 </script>

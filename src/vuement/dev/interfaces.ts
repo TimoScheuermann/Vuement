@@ -30,6 +30,7 @@ export interface VMSelectSelection {
 
 export interface VMNotificationObject {
   id?: number;
+  vmId?: string | number;
   title?: string;
   text?: string;
   image?: string;

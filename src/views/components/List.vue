@@ -66,16 +66,16 @@
       <vm-flow>
         <vm-list>
           <vm-list-item title="Custom Action #1">
-            <vm-switch />
+            <vm-switch slot="action" />
           </vm-list-item>
           <vm-list-item title="Custom Action #2">
-            <vm-select placeholder="Select">
+            <vm-select placeholder="Select" slot="action">
               <vm-select-item title="Item #1" id="1" icon="ti-heart" />
               <vm-select-item title="Item #2" id="2" icon="ti-heart" />
             </vm-select>
           </vm-list-item>
           <vm-list-item title="Custom Action #3">
-            <vm-checkbox />
+            <vm-checkbox slot="action" />
           </vm-list-item>
         </vm-list>
       </vm-flow>

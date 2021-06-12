@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span vm-prevent-body-scroll>
     <transition name="appear">
       <div
         v-if="visible"
@@ -49,8 +49,8 @@
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMBodyMountMixin from '@/vuement/mixins/VMBodyMount.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
-import VMBodyMount from '@/vuement/mixins/VMBodyMount.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
@@ -59,7 +59,7 @@ export default class VMDialog extends Mixins(
   VMCProp,
   VMBgProp,
   VMOpensMixin,
-  VMBodyMount
+  VMBodyMountMixin
 ) {
   @Prop() title!: string;
   @Prop() border!: string;

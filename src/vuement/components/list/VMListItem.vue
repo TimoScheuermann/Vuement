@@ -3,28 +3,46 @@
     @click="clicked"
     :style="{ '--vm-color': vmColor, '--vm-color-secondary': vmColorSecondary }"
   >
-    <slot name="custom">
-      <div class="vm-list-item">
-        <div class="vm-list-item--media" v-if="$slots.media">
-          <slot name="media" />
-        </div>
-        <div class="vm-list-item--container">
-          <div class="vm-list-item--container__wrapper">
-            <div class="vm-list-item--title" v-if="title">{{ title }}</div>
-            <div class="vm-list-item--description" v-if="description">
-              {{ description }}
-            </div>
-          </div>
-          <div class="vm-list-item--action">
-            <div class="vm-list-item--action__indicator" v-if="showIndicator">
-              <span></span>
-              <span></span>
-            </div>
-            <slot />
-          </div>
-        </div>
+    <div class="vm-list-item__custom" v-if="$slots.custom">
+      <slot name="custom" />
+    </div>
+    <template v-else>
+      <div class="vm-list-item__media" v-if="$slots.media">
+        <slot name="media" />
       </div>
-    </slot>
+      <div class="vm-list-item">
+        <div class="vm-list-item--container">
+          <slot>
+            <slot name="title">
+              <div class="vm-list-item--container__title" v-if="title">
+                {{ title }}
+              </div>
+            </slot>
+            <slot name="description">
+              <div
+                class="vm-list-item--container__description"
+                v-if="description"
+              >
+                {{ description }}
+              </div>
+            </slot>
+          </slot>
+        </div>
+
+        <slot name="action" />
+        <svg
+          class="vm-list-item--chevron"
+          v-if="showIndicator"
+          xmlns="http://www.w3.org/2000/svg"
+          width="6.901"
+          height="12"
+        >
+          <path
+            d="M.264 11.736a.9.9 0 010-1.274l4.461-4.461L.264 1.54a.9.9 0 010-1.275.9.9 0 011.275 0l5.1 5.1a.9.9 0 010 1.275l-5.1 5.1a.9.9 0 01-.637.264.9.9 0 01-.638-.268z"
+          />
+        </svg>
+      </div>
+    </template>
   </li>
 </template>
 
@@ -38,6 +56,7 @@ export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() description!: string;
   @Prop() colorSecondary!: string;
+  @Prop({ default: true }) showChevron!: boolean;
 
   get vmColorSecondary(): string | null {
     return this.colorSecondary ? this.getColor(this.colorSecondary) : null;
@@ -47,7 +66,7 @@ export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
     return (
       [this.to, this.href, this.routeName].some((x) => !!x) &&
       !this.disabled &&
-      !this.$slots.default
+      this.showChevron
     );
   }
 }
@@ -56,96 +75,78 @@ export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
 <style lang="scss" scoped>
 li {
   &:not(:first-child) {
-    border-top: 1.5px solid rgba(var(--vm-border), 1);
+    .vm-list-item__custom,
+    .vm-list-item {
+      border-top: 1.5px solid rgba(var(--vm-border), 1);
+    }
+  }
+
+  &:first-child {
+    border-radius: $border-radius $border-radius 0 0;
+  }
+  &:last-child {
+    border-radius: 0 0 $border-radius $border-radius;
   }
 
   list-style: none;
   margin: 0;
-  padding: 2.5px 0;
   cursor: pointer;
+  display: flex;
+  flex: 1 1 0px;
+  width: 100%;
+
+  transition: background 0.1s ease-in-out;
+
+  &:hover {
+    background: rgba(var(--vm-color), 0.1);
+    .vm-list-item--chevron {
+      fill: rgba(var(--vm-color), 0.8);
+    }
+  }
+
+  .vm-list-item__media {
+    display: grid;
+    place-content: center;
+    padding: 5px;
+    margin-right: 5px;
+
+    + .vm-list-item {
+      padding-left: 0;
+    }
+  }
 
   .vm-list-item {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    padding: 2.5px 0;
-
-    transition: 0.2s ease-in-out;
-    border-radius: $border-radius;
-    color: rgba(var(--vm-color), 1);
-
-    &:hover {
-      background: rgba(var(--vm-color), 0.12);
-    }
-
-    &--media,
-    &--container {
-      padding: 0 5px;
-    }
+    flex-wrap: nowrap;
+    flex-grow: 1;
+    padding: 5px 10px;
 
     &--container {
-      display: flex;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-
-      &__wrapper {
-        display: flex;
-        flex: 1 1 0px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        margin-right: 10px;
-        min-height: 30px;
-
-        .vm-list-item--title {
-          font-weight: 500;
-          -webkit-line-clamp: 1;
-        }
-        .vm-list-item--description {
-          color: rgba(var(--vm-color-secondary), 1);
-          font-size: 14px;
-          -webkit-line-clamp: 2;
-        }
-        .vm-list-item--title,
-        .vm-list-item--description {
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          text-overflow: ellipsis;
-        }
+      flex-grow: 1;
+      &__title,
+      &__description {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
       }
-
-      .vm-list-item--action {
-        display: grid;
-        place-content: center;
-        &__indicator {
-          height: 20px;
-          width: 10px;
-          position: relative;
-          opacity: 0.5;
-
-          span {
-            position: absolute;
-            height: 2px;
-            border-radius: 50px;
-            background: currentColor;
-            width: 50%;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-
-            &:first-child {
-              top: 33.33%;
-              transform: translate(-50%, calc(-25% + 0.5px)) rotate(45deg);
-            }
-            &:last-child {
-              top: 66.66%;
-              transform: translate(-50%, calc(-25% - 0.5px)) rotate(-45deg);
-            }
-          }
-        }
+      &__title {
+        font-weight: 500;
+        -webkit-line-clamp: 1;
       }
+      &__description {
+        color: rgba(var(--vm-color-secondary), 1);
+        font-size: 14px;
+        -webkit-line-clamp: 2;
+      }
+    }
+
+    &--chevron {
+      fill: rgba(var(--vm-border), 1);
+
+      transition: fill 0.1s ease-in-out;
     }
   }
 }

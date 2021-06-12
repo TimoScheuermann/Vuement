@@ -5,6 +5,7 @@
     <CTabbar />
     <VDarkModeToggle />
     <vm-notification />
+    <vm-notification position="bottom" vmId="bottom" />
 
     <div
       class="router-view"

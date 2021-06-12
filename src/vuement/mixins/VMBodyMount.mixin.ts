@@ -10,7 +10,7 @@ export default class VMBodyMountMixin extends Vue {
     try {
       document.body.removeChild(this.$el);
     } catch {
-      //
+      /**/
     }
   }
 }
