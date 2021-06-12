@@ -37,21 +37,21 @@ export class ComponentManager {
   }
 
   public static async loadComps(callback?: VoidFunction): Promise<void> {
-    fetch(this.backend + '/vuement/components')
-      .then((res) => res.json())
-      .then((res) => {
-        this.setComps(res);
-        if (callback) callback();
-      });
+    // fetch(this.backend + '/vuement/components')
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     this.setComps(res);
+    //     if (callback) callback();
+    //   });
   }
 
   public static loadProps(callback?: VoidFunction): void {
-    fetch(this.backend + '/vuement/props')
-      .then((res) => res.json())
-      .then((res) => {
-        this.setProps(res);
-        if (callback) callback();
-      });
+    // fetch(this.backend + '/vuement/props')
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     this.setProps(res);
+    //     if (callback) callback();
+    //   });
   }
 
   public static getComponent(id: string): VMComp | null {
