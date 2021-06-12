@@ -35,6 +35,7 @@ export default class VMTable extends Vue {
     max-width: 100%;
     overflow: auto;
     border-radius: $border-radius;
+    @include vm-scrollbar();
   }
   .vm-table--table {
     width: 100%;

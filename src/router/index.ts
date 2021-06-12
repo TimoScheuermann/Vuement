@@ -1,14 +1,13 @@
-import { getComponents } from '@/utils/components';
-import InterimComponent from '@/views-interim/InterimComponent.vue';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
-export const prefix = 'Vuement | ';
+export const suffix = ' | Vuement';
 
 const router = new VueRouter({
-  scrollBehavior() {
-    return { x: 0, y: 0 };
+  scrollBehavior(to, _, savePosition) {
+    if (to.name === 'component-details') return { x: 0, y: 0 };
+    if (savePosition) return savePosition;
   },
   mode: 'history',
 
@@ -27,6 +26,14 @@ const router = new VueRouter({
       component: () => import('@/views/Components.vue'),
       meta: {
         title: 'Components',
+      },
+    },
+    {
+      path: '/components/:name',
+      name: 'component-details',
+      component: () => import('@/views/ComponentDetails.vue'),
+      meta: {
+        title: 'Component',
       },
     },
     {
@@ -53,20 +60,6 @@ const router = new VueRouter({
         title: 'Playground',
       },
     },
-
-    {
-      path: '/component',
-      component: InterimComponent,
-      children: getComponents().map((x) => {
-        return {
-          path: x.toLowerCase(),
-          name: 'vm' + x,
-          component: () => import('@/views/components/' + x + '.vue'),
-          meta: { title: 'VM ' + x, component: x },
-        };
-      }),
-    },
-
     {
       path: '*',
       redirect: { name: 'home' },

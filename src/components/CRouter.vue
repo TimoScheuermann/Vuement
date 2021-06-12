@@ -6,7 +6,9 @@
         :fullscreen="$route.meta.fullscreen"
         :key="$route.name"
       >
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </div>
     </transition>
   </div>

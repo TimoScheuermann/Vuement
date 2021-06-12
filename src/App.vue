@@ -29,6 +29,7 @@ import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import CTabbar from './components/CTabbar.vue';
 import VDarkModeToggle from './components/VDarkModeToggle.vue';
+import { ComponentManager } from './utils/ComponentManager';
 
 @Component({
   components: {
@@ -43,13 +44,8 @@ export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
 
-    // setLightmode();
-    // setTimeout(() => {
-    //   setDarkmode();
-    //   setTimeout(() => {
-    //     setLightmode();
-    //   }, 5000);
-    // }, 5000);
+    ComponentManager.loadComps();
+    ComponentManager.loadProps();
   }
 
   beforeDestroy(): void {

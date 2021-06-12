@@ -34,7 +34,7 @@
       :key="i"
       :style="{ color: t.color, '--vm-background': t.background }"
     >
-      <div class="theme-title">{{ names[i] }}</div>
+      <div class="theme-title">Theme | {{ names[i] }}</div>
 
       <vm-grid width="115">
         <vm-card
@@ -141,7 +141,7 @@ export default class Colors extends Vue {
 
     .theme-title {
       font-weight: bold;
-      font-size: 26px;
+      font-size: 20px;
       padding-bottom: 30px;
     }
 

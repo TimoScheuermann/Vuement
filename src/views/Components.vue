@@ -3,11 +3,15 @@
     <VSectionHeader title="Components" subtitle="Vuement" />
 
     <vm-grid width="220px">
-      <router-link v-for="c in components" :key="c" :to="{ name: 'vm' + c }">
+      <router-link
+        v-for="c in components"
+        :key="c.id"
+        :to="{ name: 'component-details', params: { name: c.name } }"
+      >
         <div class="icon">
-          <img :src="`assets/icons/vm${c}.svg`" :alt="c" />
+          <img v-if="c.image" :src="c.image" :alt="c" />
         </div>
-        <div class="name">{{ c }}</div>
+        <div class="name">{{ c.name }}</div>
       </router-link>
     </vm-grid>
   </div>
@@ -15,7 +19,7 @@
 
 <script lang="ts">
 import VSectionHeader from '@/components/VSectionHeader.vue';
-import components, { getComponents } from '@/utils/components';
+import { ComponentManager, VMComp } from '@/utils/ComponentManager';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({
@@ -28,20 +32,18 @@ export default class Components extends Vue {
     this.$store.commit('compQuery', '');
   }
 
-  get total(): number {
-    return Object.keys(components).length;
-  }
-
   get query(): string {
-    return this.$store.getters.compQuery;
+    return this.$store.getters.compQuery.toLowerCase();
   }
 
-  get components(): string[] {
-    return getComponents().filter((x) => {
-      return this.query.length === 0
-        ? true
-        : x.toLowerCase().includes(this.query.toLowerCase());
-    });
+  get components(): VMComp[] {
+    return ComponentManager.comps
+      .filter((x) => !x.isChild)
+      .filter((x) => {
+        return this.query.length === 0
+          ? true
+          : x.name.toLowerCase().includes(this.query);
+      });
   }
 }
 </script>

@@ -18,9 +18,7 @@ export default class VSectionHeader extends Vue {
 <style lang="scss" scoped>
 .v-section-header {
   padding: 20px 0;
-  .vm-title {
-    font-size: 20px;
-  }
+
   .vm-divider {
     margin-top: 20px;
   }
