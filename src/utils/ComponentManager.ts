@@ -17,7 +17,7 @@ export interface VMProp {
 }
 
 export class ComponentManager {
-  private static backend = 'https://api.timos.design:3002';
+  // private static backend = 'https://api.timos.design:3002';
   public static get comps(): VMComp[] {
     return store.getters.comps;
   }
