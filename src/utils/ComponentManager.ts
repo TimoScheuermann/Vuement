@@ -36,22 +36,24 @@ export class ComponentManager {
     store.commit('props', props);
   }
 
-  public static async loadComps(callback?: VoidFunction): Promise<void> {
+  public static async loadComps(): Promise<void> {
     // fetch(this.backend + '/vuement/components')
     //   .then((res) => res.json())
     //   .then((res) => {
     //     this.setComps(res);
     //     if (callback) callback();
     //   });
+    this.setComps([]);
   }
 
-  public static loadProps(callback?: VoidFunction): void {
+  public static loadProps(): void {
     // fetch(this.backend + '/vuement/props')
     //   .then((res) => res.json())
     //   .then((res) => {
     //     this.setProps(res);
     //     if (callback) callback();
     //   });
+    this.setProps([]);
   }
 
   public static getComponent(id: string): VMComp | null {
