@@ -72,6 +72,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-typescript": "^7.13.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
