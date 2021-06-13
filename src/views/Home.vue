@@ -1,78 +1,51 @@
 <template>
-  <div class="view-home" content>
-    <vm-flow flow="column" horizontal="center" class="hero-container">
-      <img src="assets/logo-subtitle.svg" alt="" />
+  <div class="view-home">
+    <img src="assets/logo-subtitle.svg" alt="" />
 
-      <p data-color="red">
-        A library of high-quality ready to use components that will help you
-        speed up your development workflow.
-      </p>
+    <p>
+      A library of high-quality ready to use components that will help you speed
+      up your development workflow.
+    </p>
 
-      <vm-flow>
-        <vm-button title="Get started" @click="send(undefined)" />
-        <vm-button title="Get started" @click="send('bottom')" />
-      </vm-flow>
-
-      <br /><br />
-    </vm-flow>
+    <vm-button title="Get started" routeName="guide" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import Card from '@/views/components/Card.vue';
 
 @Component
-export default class Home extends Vue {
-  send(vmId?: string | number): void {
-    this.$vm.sendNotification({ title: 'Was geht ab', content: Card, vmId });
-  }
-}
+export default class Home extends Vue {}
 </script>
 
 <style lang="scss" scoped>
 .view-home {
-  .vm-hero {
-    padding-top: env(safe-area-inset-top);
+  display: grid;
+  height: 100vh;
+  place-content: center;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 90vw;
 
-    img {
-      max-height: 100px;
-      max-width: 90vw;
-    }
+  img {
+    width: 80%;
+    max-width: 400px;
+    margin: 0 auto;
   }
 
-  .hero-container {
-    height: 300px;
-    min-height: 80vh;
+  p {
+    text-align: center;
+    color: rgba(var(--vm-color-secondary), 1);
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 400px;
+  }
 
-    p {
-      text-align: center;
-      max-width: 400px;
-      margin: 20px auto;
-      opacity: 0.8;
-
-      color: attr(data-color);
-    }
-
-    img {
-      width: 80%;
-      max-width: 400px;
-      object-fit: contain;
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 2em;
-      span {
-        opacity: 0.5;
-      }
-    }
-
-    .subtitle {
-      margin: 10px 0;
-      font-weight: bold;
-      font-size: 1.4em;
-    }
+  .vm-button {
+    margin: 0 auto;
+    width: 200px;
+    max-width: 80vw;
   }
 }
 </style>

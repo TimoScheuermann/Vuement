@@ -7,14 +7,7 @@
     <vm-notification />
     <vm-notification position="bottom" vmId="bottom" />
 
-    <div
-      class="router-view"
-      :darken="$store.getters.sidebar"
-      @click="$store.commit('sidebar', false)"
-      @touchmove="touchmove"
-    >
-      <CRouter />
-    </div>
+    <CRouter />
   </div>
 </template>
 
@@ -88,10 +81,9 @@ body {
   margin: 0 auto;
 }
 
-.router-view {
-  transition: 0.2s ease-in-out;
-  &[darken] {
-    filter: brightness(50%);
-  }
+.section-title {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 30px;
 }
 </style>

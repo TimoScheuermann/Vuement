@@ -9,13 +9,14 @@
       variant="transparent"
       title="Get started"
       icon="ti-chevron-right"
+      routeName="guide"
       :iconTrailing="true"
     />
 
     <template v-if="$store.getters.desktop">
       <vm-navbar-item title="Components" routeName="components" />
       <vm-navbar-item title="Colors" routeName="colors" />
-      <vm-navbar-item title="Playground" routeName="playground" />
+      <!-- <vm-navbar-item title="Playground" routeName="playground" /> -->
     </template>
     <div
       v-else-if="$route.name === 'components'"

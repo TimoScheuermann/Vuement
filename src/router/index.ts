@@ -45,11 +45,11 @@ const router = new VueRouter({
       },
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('@/views/Settings.vue'),
+      path: '/guide',
+      name: 'guide',
+      component: () => import('@/views/Guide.vue'),
       meta: {
-        title: 'Settings',
+        title: 'Guide',
       },
     },
     {

@@ -15,14 +15,14 @@ router.afterEach((to: Route) => {
 
   document.title = title;
 
-  // const gt = document.querySelector('meta[name="title"]');
-  // if (gt) gt.setAttribute('content', title);
+  const gt = document.querySelector('meta[name="title"]');
+  if (gt) gt.setAttribute('content', title);
 
-  // const twitter = document.querySelector('meta[property="twitter:title"]');
-  // if (twitter) twitter.setAttribute('content', title);
+  const twitter = document.querySelector('meta[property="twitter:title"]');
+  if (twitter) twitter.setAttribute('content', title);
 
-  // const og = document.querySelector('meta[property="og:title"]');
-  // if (og) og.setAttribute('content', title);
+  const og = document.querySelector('meta[property="og:title"]');
+  if (og) og.setAttribute('content', title);
 });
 
 Vue.use(Vuement, { theme: 'light' });

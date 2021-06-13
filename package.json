@@ -9,7 +9,7 @@
   },
   "description": "Component Library for Vue.js",
   "license": "MIT",
-  "homepage": "https://components.timos.design",
+  "homepage": "https://vuement.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TimoScheuermann/Vuement"
@@ -41,7 +41,7 @@
     "vuejs",
     "vue.js",
     "component",
-    "comüonents",
+    "components",
     "vue-components",
     "css",
     "javascript",

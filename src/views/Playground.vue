@@ -162,6 +162,18 @@
         <Onboarding3 slot="media" />
       </vm-onboarding-view>
     </vm-onboarding>
+
+    <!-- <p v-for="c in $store.getters.comps" :key="c.id">
+      &lt;url> &lt;loc>https://vuement.com/components/{{ c.name }}&lt;/loc>
+      &lt;changefreq>daily&lt;/changefreq> &lt;priority>1&lt;/priority> &lt;/url
+      >
+    </p> -->
+    <p>{{ $store.getters.comps.length }}</p>
+    <div v-for="c in $store.getters.comps" :key="c.id">
+      <span v-if="!c.isChild"
+        >* [{{ c.name }}](https://vuement.com/components/{{ c.name }})</span
+      >
+    </div>
   </div>
 </template>
 

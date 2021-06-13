@@ -1,11 +1,11 @@
 <template>
   <li class="vm-accordion-item">
-    <button :preset="!$slots.title" @click="innerVal = !innerVal">
-      <span>
-        <slot name="title">{{ title }}</slot>
-      </span>
+    <button @click="innerVal = !innerVal">
+      <slot name="title">
+        <div class="vm-accordion-item__title">{{ title }}</div>
+      </slot>
 
-      <svg viewBox="0 0 17 8.85" height="8.85" width="17">
+      <svg v-if="$slots.default" viewBox="0 0 17 8.85" height="8.85" width="17">
         <polyline
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -83,10 +83,20 @@ export default class VMAccordionItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
+$tb: 0.5em;
+$lr: 0.2em;
+
 .vm-accordion-item {
   list-style: none;
   margin: 0;
   padding: 0;
+
+  &__title {
+    font-weight: 600;
+    font-size: 18px;
+    padding: $tb $lr;
+    padding-right: 0;
+  }
 
   button {
     @include vm-button();
@@ -102,19 +112,7 @@ export default class VMAccordionItem extends Vue {
 
     cursor: pointer;
 
-    &[preset] {
-      font-weight: 600;
-      font-size: 18px;
-    }
-
     border-bottom: 1px solid rgba(var(--vm-border), 1);
-    $tb: 0.5em;
-    $lr: 0.2em;
-
-    span {
-      padding: $tb $lr;
-      padding-right: 0;
-    }
 
     svg {
       opacity: 0.75;

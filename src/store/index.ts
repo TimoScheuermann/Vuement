@@ -1,6 +1,5 @@
 /* eslint-disable */
-import { VMComp } from '@/utils/ComponentManager';
-import { VMProp } from '@/utils/components';
+import { VMComp, VMProp } from '@/utils/ComponentManager';
 import Vue from 'vue';
 import Vuex from 'vuex';
 

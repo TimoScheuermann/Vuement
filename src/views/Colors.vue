@@ -34,7 +34,7 @@
       :key="i"
       :style="{ color: t.color, '--vm-background': t.background }"
     >
-      <div class="theme-title">Theme | {{ names[i] }}</div>
+      <div class="section-title">Theme | {{ names[i] }}</div>
 
       <vm-grid width="115">
         <vm-card
@@ -137,12 +137,6 @@ export default class Colors extends Vue {
       @media #{$isMobile} {
         padding-bottom: calc(80px + env(safe-area-inset-bottom));
       }
-    }
-
-    .theme-title {
-      font-weight: bold;
-      font-size: 20px;
-      padding-bottom: 30px;
     }
 
     &::before {
