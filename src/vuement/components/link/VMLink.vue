@@ -34,9 +34,11 @@ export default class VMLink extends Mixins(VMLinkMixin, VMCProp) {}
   text-decoration: none;
   cursor: pointer;
   position: relative;
+  z-index: 4;
 
   &::before {
     content: '';
+    z-index: 5;
     position: absolute;
     bottom: 0;
     height: 1px;

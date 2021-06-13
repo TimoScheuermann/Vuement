@@ -6,6 +6,7 @@
       '--vm-container': vmBackground,
       '--vm-primary': vmBorder,
     }"
+    :key="$vm.theme"
   >
     <div class="vm-quote__background" />
     <div class="vm-quote__bar" />
@@ -46,6 +47,7 @@ export default class VMQuote extends Mixins(VMCProp, VMBgProp) {
     right: 0;
     bottom: 0;
     border-radius: inherit;
+    z-index: -1;
     background: rgba(var(--vm-container), 1);
   }
 
@@ -64,6 +66,7 @@ export default class VMQuote extends Mixins(VMCProp, VMBgProp) {
   &--title,
   &--content {
     position: relative;
+    z-index: 2;
   }
 
   &--title {

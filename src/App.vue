@@ -86,4 +86,8 @@ body {
   font-size: 20px;
   padding-bottom: 30px;
 }
+
+h3 {
+  margin-bottom: 0;
+}
 </style>

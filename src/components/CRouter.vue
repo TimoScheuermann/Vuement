@@ -4,7 +4,7 @@
       <div
         class="sub-view"
         :fullscreen="$route.meta.fullscreen"
-        :key="$route.name"
+        :key="$route.name + $route.params.name"
       >
         <keep-alive>
           <router-view />
@@ -22,6 +22,10 @@ import { Route } from 'vue-router';
 export default class CRouter extends Vue {
   public transitionName = 'slide-bottom';
   public transitionMode: string | null = 'out-in';
+
+  get keepAlive(): boolean {
+    return Object.keys(this.$route.params).length === 0;
+  }
 
   created(): void {
     this.$router.beforeEach((to: Route, from: Route, next) => {

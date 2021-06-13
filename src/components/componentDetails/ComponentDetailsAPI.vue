@@ -21,7 +21,6 @@
       </vm-tr>
     </vm-table>
     <br />
-    <br />
   </div>
 </template>
 

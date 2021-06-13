@@ -131,7 +131,7 @@ export default class Colors extends Vue {
     padding-bottom: 30px;
 
     &:last-child {
-      .theme-title {
+      .section-title {
         padding-top: 30px;
       }
       @media #{$isMobile} {
