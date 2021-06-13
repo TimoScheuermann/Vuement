@@ -29,7 +29,7 @@ import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import CTabbar from './components/CTabbar.vue';
 import VDarkModeToggle from './components/VDarkModeToggle.vue';
-import { ComponentManager } from './utils/ComponentManager';
+// import { ComponentManager } from './utils/ComponentManager';
 
 @Component({
   components: {
@@ -44,8 +44,8 @@ export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
 
-    ComponentManager.loadComps();
-    ComponentManager.loadProps();
+    // ComponentManager.loadComps();
+    // ComponentManager.loadProps();
   }
 
   beforeDestroy(): void {
