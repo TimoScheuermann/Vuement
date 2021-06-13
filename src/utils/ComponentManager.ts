@@ -17,7 +17,7 @@ export interface VMProp {
 }
 
 export class ComponentManager {
-  // private static backend = 'https://api.timos.design:3002';
+  private static backend = 'https://api.timos.design:3002';
   public static get comps(): VMComp[] {
     return store.getters.comps;
   }
@@ -36,24 +36,22 @@ export class ComponentManager {
     store.commit('props', props);
   }
 
-  public static async loadComps(): Promise<void> {
-    // fetch(this.backend + '/vuement/components')
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     this.setComps(res);
-    //     if (callback) callback();
-    //   });
-    this.setComps([]);
+  public static async loadComps(callback?: VoidFunction): Promise<void> {
+    fetch(this.backend + '/vuement/components')
+      .then((res) => res.json())
+      .then((res) => {
+        this.setComps(res);
+        if (callback) callback();
+      });
   }
 
-  public static loadProps(): void {
-    // fetch(this.backend + '/vuement/props')
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     this.setProps(res);
-    //     if (callback) callback();
-    //   });
-    this.setProps([]);
+  public static loadProps(callback?: VoidFunction): void {
+    fetch(this.backend + '/vuement/props')
+      .then((res) => res.json())
+      .then((res) => {
+        this.setProps(res);
+        if (callback) callback();
+      });
   }
 
   public static getComponent(id: string): VMComp | null {
