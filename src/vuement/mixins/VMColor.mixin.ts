@@ -26,7 +26,7 @@ export default class VMColorMixin extends Vue {
     color = (color || '').toLowerCase();
 
     if (Object.keys(this.colors).includes(color)) {
-      color = this.colors[color];
+      return `var(--vm-${color})`;
     }
     if (/^\d{1,3},\d{1,3},\d{1,3}$/.test(color)) {
       return color;

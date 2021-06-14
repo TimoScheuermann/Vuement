@@ -2,31 +2,31 @@
   <div class="component-details-hero" v-if="comp">
     <vm-flow>
       <vm-title :title="compName" subtitle="Component" />
-      <div class="button-wrapper" :key="$store.getters.dark">
+      <div class="button-wrapper">
         <vm-button
           variant="transparent"
-          background="color"
+          color="color"
           :round="true"
           icon="ti-share"
           @click="share"
         />
         <vm-button
           variant="transparent"
-          background="color"
+          color="color"
           :round="true"
           icon="ti-github"
           href="https://github.com/TimoScheuermann/Vuement"
         />
         <vm-button
           variant="transparent"
-          background="color"
+          color="color"
           :round="true"
           icon="ti-download"
           href="https://www.npmjs.com/package/vuement"
         />
         <vm-button
           variant="transparent"
-          background="color"
+          color="color"
           :round="true"
           icon="ti-bug"
           :href="`https://github.com/TimoScheuermann/Vuement/issues/new?title=[${compName}]%20-%20Your%20Bug%20Name&body=**Steps%20to%20Reproduce**%0A1.%20Do%20something%0A2.%20Do%20something%20else.%0A3.%20Do%20one%20last%20thing.%0A%0A**Expected**%0AThe%20${compName}%20should%20do%20this%0A%0A**Result**%0AThe%20${compName}%20does%20not%20do%20this`"

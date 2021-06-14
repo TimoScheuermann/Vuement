@@ -8,7 +8,10 @@
     :gradient="gradient"
     :block="block"
     :round="round"
-    :style="{ '--vm-color': vmColor, '--vm-primary': vmBackground }"
+    :style="{
+      '--vm-button-color': vmColor,
+      '--vm-button-background': vmBackground,
+    }"
   >
     <div class="vm-button__icon" v-if="icon && !iconTrailing">
       <i :class="icon" />
@@ -26,17 +29,17 @@
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
-import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
-import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 
 @Component
-export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
+export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
   @Prop() title!: string;
   @Prop() icon!: string;
   @Prop({ default: false }) iconTrailing!: boolean;
   @Prop({ default: 'normal' }) size!: string;
   @Prop({ default: 'filled' }) variant!: string;
-  @Prop({ default: 'white' }) color!: string;
+  @Prop() color!: string;
+  @Prop() background!: string;
   @Prop({ default: false }) gradient!: boolean;
   @Prop({ default: false }) block!: boolean;
   @Prop({ default: false }) round!: boolean;
@@ -45,6 +48,22 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     const sizes = ['normal', 'medium', 'large'];
     const size = (this.size || '').toLowerCase();
     return sizes.includes(size) ? size : sizes[0];
+  }
+
+  get vmColor(): string | null {
+    if (!this.color) {
+      if (this.buttonVariant === 'transparent') return this.getColor('color');
+      return this.getColor('white');
+    }
+    return this.color ? this.getColor(this.color) : null;
+  }
+
+  get vmBackground(): string | null {
+    if (!this.background) {
+      if (this.buttonVariant === 'transparent') return this.getColor('color');
+      return this.getColor('primary');
+    }
+    return this.background ? this.getColor(this.background) : null;
   }
 
   get buttonVariant(): string {
@@ -57,7 +76,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
 
 <style lang="scss" scoped>
 @mixin button-gradient($opacity: 1, $gradient: 0.2) {
-  background: rgba(var(--vm-primary), $opacity);
+  background: rgba(var(--vm-button-background), $opacity);
 
   &[gradient] {
     background: linear-gradient(
@@ -65,7 +84,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
         rgba(#fff, $gradient),
         rgba(#000, $gradient)
       ),
-      rgba(var(--vm-primary), $opacity);
+      rgba(var(--vm-button-background), $opacity);
   }
 }
 
@@ -77,6 +96,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   align-items: center;
   flex-wrap: nowrap;
   white-space: nowrap;
+  flex: 1 1 0px;
 
   &[block] {
     display: flex;
@@ -84,8 +104,6 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
     margin: 0 auto;
     max-width: 250px;
   }
-
-  flex: 1 1 0px;
 
   transition: all 0.15s ease-in-out;
   cursor: pointer;
@@ -134,40 +152,51 @@ export default class VMButton extends mixins(VMLinkMixin, VMCProp, VMBgProp) {
   }
 
   &[variant='border'] {
-    box-shadow: inset 0 0 0 1px rgba(var(--vm-primary), 1);
-    color: rgba(var(--vm-primary), 1);
+    box-shadow: inset 0 0 0 1px rgba(var(--vm-button-background), 1);
+    color: rgba(var(--vm-button-background), 1);
 
-    &:not([disabled]):hover {
-      @include button-gradient();
-      box-shadow: none;
-      color: rgba(var(--vm-color), 1);
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        @include button-gradient();
+        box-shadow: none;
+        color: rgba(var(--vm-button-color), 1);
+      }
     }
   }
 
   &[variant='filled'] {
-    color: rgba(var(--vm-color), 1);
+    color: rgba(var(--vm-button-color), 1);
     @include button-gradient();
 
-    &:not([disabled]):hover {
-      filter: brightness(107.5%);
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        filter: brightness(107.5%);
+      }
     }
   }
 
   &[variant='opaque'] {
-    color: rgba(var(--vm-primary), 1);
+    color: rgba(var(--vm-button-background), 1);
     @include button-gradient(0.25, 0.05);
 
-    &:not([disabled]):hover {
-      @include button-gradient();
-      color: rgba(var(--vm-color), 1);
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        @include button-gradient();
+        color: rgba(var(--vm-button-color), 1);
+      }
     }
   }
 
   &[variant='transparent'] {
-    color: rgba(var(--vm-primary), 1);
-
-    &:not([disabled]):hover {
-      @include button-gradient(0.1, 0.05);
+    color: rgba(var(--vm-button-color), 1);
+    &:not([disabled]) {
+      &:hover,
+      &:focus {
+        @include button-gradient(0.1, 0.05);
+      }
     }
   }
 

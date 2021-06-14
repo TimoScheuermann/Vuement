@@ -1,6 +1,6 @@
 <template>
-  <div class="component-details-hero" v-if="comp">
-    <component v-if="comp" :is="comp.name" />
+  <div class="component-details-hero" v-if="exists">
+    <component v-if="comp" :is="comp.name + 'Details'" />
   </div>
 </template>
 
@@ -14,5 +14,10 @@ import * as components from '@/views/vmComponents';
 })
 export default class ComponentDetailsComponent extends Vue {
   @Prop() comp!: VMComp;
+
+  get exists(): boolean {
+    if (!this.comp) return false;
+    return Object.keys(components).includes(this.comp.name + 'Details');
+  }
 }
 </script>

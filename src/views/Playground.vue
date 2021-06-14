@@ -8,6 +8,11 @@
       @click="onboarding = true"
     />
 
+    <div class="test">
+      <div>Hallo</div>
+      <span>Hallo</span>
+    </div>
+
     <vm-dialog v-model="dialog" title="Hallo">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga
       quo velit facere, aut fugiat impedit, asperiores deserunt ea accusamus,

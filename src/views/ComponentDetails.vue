@@ -4,7 +4,7 @@
 
     <div content>
       <template v-if="parent">
-        <vm-quote background="paragraph" :key="$store.getters.dark">
+        <vm-quote background="paragraph">
           This component is part of
           <vm-link
             :to="{ name: 'component-details', params: { name: parent.name } }"

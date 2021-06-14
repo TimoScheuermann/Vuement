@@ -8,7 +8,7 @@
     />
     <vm-tabbar-item icon="ti-color-fan" title="Colors" routeName="colors" />
     <vm-tabbar-item icon="ti-gears" title="Guide" routeName="guide" />
-    <!-- <vm-tabbar-item icon="ti-apple" title="Playground" routeName="playground" /> -->
+    <vm-tabbar-item icon="ti-apple" title="Playground" routeName="playground" />
   </vm-tabbar>
 </template>
 
