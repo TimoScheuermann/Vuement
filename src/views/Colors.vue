@@ -32,7 +32,7 @@
       class="theme"
       v-for="(t, i) in themes"
       :key="i"
-      :style="{ color: t.color, '--vm-background': t.background }"
+      :style="{ color: t.color, background: i === 0 ? null : t.background }"
     >
       <div class="section-title">Theme | {{ names[i] }}</div>
 
@@ -127,7 +127,6 @@ export default class Colors extends Vue {
 
   .theme {
     position: relative;
-    background: var(--vm-background);
     padding-bottom: 30px;
 
     &:last-child {

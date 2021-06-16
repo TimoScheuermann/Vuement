@@ -38,6 +38,12 @@
       </template>
     </vm-dialog>
 
+    <svg width="512" height="512">
+      <image
+        xlink:href="https://timos.s3.eu-central-1.amazonaws.com/tmp/heart.svg"
+      />
+    </svg>
+
     <!-- <vm-menu-button></vm-menu-button> -->
 
     <div style="font-sizedw: 30px">
@@ -210,3 +216,11 @@ export default class Playground extends Vue {
   ];
 }
 </script>
+
+<style lang="scss">
+svg {
+  path {
+    fill: red !important;
+  }
+}
+</style>

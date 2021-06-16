@@ -1,5 +1,5 @@
 <template>
-  <div class="component-details-api" v-if="comp && props.length > 0">
+  <div class="component-details-api" v-if="comp && comp.props.length > 0">
     <vm-title :title="comp.name" subtitle="API" />
     <br />
     <vm-table>
@@ -13,7 +13,7 @@
         <vm-th />
         <vm-th />
       </template>
-      <vm-tr v-for="p in props" :key="p.id">
+      <vm-tr v-for="(p, i) in comp.props" :key="i">
         <vm-td nowrap>{{ p.name.split(' | ')[0] }}</vm-td>
         <vm-td nowrap>{{ p.value }}</vm-td>
         <vm-td nowrap>{{ p.type }}</vm-td>
@@ -25,19 +25,12 @@
 </template>
 
 <script lang="ts">
-import { ComponentManager, VMComp, VMProp } from '@/utils/ComponentManager';
+import { VMComp } from '@/utils/ComponentManager';
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class ComponentDetailsAPI extends Vue {
   @Prop() comp!: VMComp;
-
-  get props(): VMProp[] {
-    if (!this.comp) return [];
-    return this.comp.props
-      .map((x) => ComponentManager.getProp(x))
-      .filter((x) => !!x) as VMProp[];
-  }
 }
 </script>
 

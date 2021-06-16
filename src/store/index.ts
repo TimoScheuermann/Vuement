@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { VMComp, VMProp } from '@/utils/ComponentManager';
+import { VMComp } from '@/utils/ComponentManager';
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -12,7 +12,6 @@ export default new Vuex.Store({
     sidebar: false,
     compQuery: '',
     comps: [],
-    props: [],
   },
   getters: {
     dark: (state: any): boolean => {
@@ -30,9 +29,6 @@ export default new Vuex.Store({
     comps: (state: any): VMComp[] => {
       return state.comps;
     },
-    props: (state: any): VMProp[] => {
-      return state.props;
-    },
   },
   mutations: {
     dark(state: any, dark: boolean) {
@@ -49,9 +45,6 @@ export default new Vuex.Store({
     },
     comps(state: any, comps: VMComp[]) {
       state.comps = comps;
-    },
-    props(state: any, props: VMProp[]) {
-      state.props = props;
     },
   },
 });

@@ -29,25 +29,6 @@ yarn add vuement</pre>
     </code>
 
     <h3>Available Components</h3>
-
-    <vm-accordion>
-      <vm-accordion-item v-for="co in comps" :key="co.id">
-        <span class="comp-title" slot="title">
-          <vm-link
-            :to="{ name: 'component-details', params: { name: co.name } }"
-            >{{ co.name }}</vm-link
-          >
-        </span>
-        <template v-if="getChilds(co.id).length > 0">
-          <span v-for="(c, i) in getChilds(co.id)" :key="c">
-            <template v-if="i !== 0">, </template>
-            <vm-link :to="{ name: 'component-details', params: { name: c } }">{{
-              c
-            }}</vm-link>
-          </span>
-        </template>
-      </vm-accordion-item>
-    </vm-accordion>
     <p>
       You can find a full list of components
       <vm-link routeName="components">here</vm-link>.
@@ -57,7 +38,6 @@ yarn add vuement</pre>
 
 <script lang="ts">
 import VSectionHeader from '@/components/VSectionHeader.vue';
-import { ComponentManager, VMComp } from '@/utils/ComponentManager';
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component({
@@ -65,22 +45,7 @@ import { Vue, Component } from 'vue-property-decorator';
     VSectionHeader,
   },
 })
-export default class Guide extends Vue {
-  public get comps(): VMComp[] {
-    return ComponentManager.comps.filter((x) => !x.isChild);
-  }
-
-  public getChilds(id: string): string[] {
-    const comp = ComponentManager.getComponent(id);
-    const names: string[] = [];
-    if (!comp) return names;
-    comp.children.forEach((x) => {
-      const c = ComponentManager.getComponent(x);
-      if (c) names.push(c.name);
-    });
-    return names;
-  }
-}
+export default class Guide extends Vue {}
 </script>
 
 <style lang="scss" scoped>
@@ -95,6 +60,9 @@ export default class Guide extends Vue {
   pre {
     background: rgba(var(--vm-paragraph), 1);
     padding: 20px;
+    max-width: calc(100% - 40px);
+    @include vm-scrollbar();
+    overflow: auto;
     border-radius: $border-radius;
 
     .comment {

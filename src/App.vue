@@ -1,54 +1,51 @@
 <template>
   <div class="vuement">
     <CNavbar />
-    <CSidebar />
-    <CTabbar />
-    <VDarkModeToggle />
-    <vm-notification />
-    <vm-notification position="bottom" vmId="bottom" />
 
     <CRouter />
+    <VDarkModeToggle />
+
+    <vm-tabbar class="c-tabbar" v-if="!$store.getters.desktop">
+      <vm-tabbar-item icon="ti-house" title="Home" routeName="home" />
+      <vm-tabbar-item
+        icon="ti-tiles-four-filled"
+        title="Components"
+        routeName="components"
+      />
+      <vm-tabbar-item icon="ti-color-fan" title="Colors" routeName="colors" />
+      <vm-tabbar-item icon="ti-gears" title="Guide" routeName="guide" />
+      <!-- <vm-tabbar-item icon="ti-apple" title="Playground" routeName="playground" /> -->
+    </vm-tabbar>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import CSidebar from '@/components/CSidebar.vue';
+
 import {
   registerMediaQueries,
   unregisterMediaQueries,
 } from '@/utils/mediaQueries';
 import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
-import CTabbar from './components/CTabbar.vue';
 import VDarkModeToggle from './components/VDarkModeToggle.vue';
 import { ComponentManager } from './utils/ComponentManager';
 
 @Component({
   components: {
-    CSidebar,
     CRouter,
     CNavbar,
-    CTabbar,
     VDarkModeToggle,
   },
 })
 export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
-
     ComponentManager.loadComps();
-    ComponentManager.loadProps();
   }
 
   beforeDestroy(): void {
     unregisterMediaQueries();
-  }
-
-  public touchmove(e: Event): void {
-    if (this.$store.getters.sidebar) {
-      e.preventDefault();
-    }
   }
 }
 </script>
@@ -74,7 +71,7 @@ body {
   padding-top: calc(70px + env(safe-area-inset-top));
 
   @media #{$isMobile} {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
   }
 
   max-width: 800px;
