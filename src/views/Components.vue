@@ -9,7 +9,11 @@
         :to="{ name: 'component-details', params: { name: c.name } }"
       >
         <div class="icon">
-          <img v-if="c.image" :src="c.image" :alt="c" />
+          <img
+            v-if="c.image && c.image.includes('.svg')"
+            :src="c.image"
+            :alt="c"
+          />
         </div>
         <div class="name">{{ c.name }}</div>
       </router-link>

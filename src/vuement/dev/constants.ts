@@ -5,7 +5,7 @@ export const THEME_LIGHT: VMTheme = {
   'color-secondary': '#86868b',
   background: '#ffffff',
   paragraph: '#f5f5f7',
-  container: '#e7e5e5',
+  container: '#f2efef',
   border: '#d2d2d7',
 };
 
@@ -14,7 +14,7 @@ export const THEME_DARK: VMTheme = {
   'color-secondary': '#6e6e73',
   background: '#000000',
   paragraph: '#1d1d1f',
-  container: '#3a3b41',
+  container: '#2f3035',
   border: '#424245',
 };
 

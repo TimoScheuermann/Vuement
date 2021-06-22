@@ -102,7 +102,8 @@ export default class CRouter extends Vue {
     min-height: 100vh;
     overflow-x: hidden;
 
-    background: rgba(var(--vm-background), 1);
+    background: rgba(var(--vm-background), 1)
+      linear-gradient(120deg, transparent, rgba(var(--vm-paragraph), 0.5));
 
     &[fullscreen] {
       transition: all 0.71s cubic-bezier(0.55, 0, 0.1, 1);

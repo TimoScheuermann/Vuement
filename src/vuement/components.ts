@@ -5,6 +5,7 @@ export { default as vmButton } from './components/button';
 export { default as vmCard } from './components/card';
 export { default as vmCheckbox } from './components/checkbox';
 export { default as vmChip } from './components/chip';
+export { default as vmContainer } from './components/container';
 export { default as vmDialog } from './components/dialog';
 export { default as vmDivider } from './components/divider';
 export { default as vmHero } from './components/hero';

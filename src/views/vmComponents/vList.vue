@@ -48,7 +48,7 @@
       <vm-flow>
         <vm-list>
           <vm-list-item>
-            <vm-flow flow="column" slot="custom">
+            <vm-flow flow="column">
               <vm-avatar />
               <vm-spacer />
               <b>John Doe</b>

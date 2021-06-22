@@ -1,11 +1,11 @@
 import { VMOptions } from '@/vuement/dev/interfaces';
 import _Vue, { PluginFunction } from 'vue';
-import VMCard from './VMCard2.vue';
+import VMContainer from './VMContainer.vue';
 
 const install: PluginFunction<VMOptions> = function installVuementComponent(
   Vue: typeof _Vue
 ): void {
-  Vue.component('vmCard', VMCard);
+  Vue.component('vmContainer', VMContainer);
 };
 
 export default install;

@@ -8,13 +8,14 @@
       <br /><br />
     </span>
 
-    <vm-grid width="115">
-      <vm-card v-for="c in Object.keys(colors)" :key="c">
-        <div class="color-preview" :style="{ '--vm-color': colors[c] }">
-          <vm-image :src="imgSrc(colors[c])" />
-        </div>
-        <div class="color-name">{{ c }}</div>
-        <div class="color-hex">{{ colors[c] }}</div>
+    <vm-grid width="155">
+      <vm-card
+        v-for="c in Object.keys(colors)"
+        :key="c"
+        :title="c"
+        :subtitle="colors[c]"
+      >
+        <vm-image slot="media" :src="imgSrc(colors[c])" />
       </vm-card>
     </vm-grid>
     <br />
@@ -36,18 +37,16 @@
     >
       <div class="section-title">Theme | {{ names[i] }}</div>
 
-      <vm-grid width="115">
+      <vm-grid width="155">
         <vm-card
           v-for="c in Object.keys(t)"
           :key="c"
           :background="t.paragraph"
           :color="t.color"
+          :title="c"
+          :subtitle="t[c]"
         >
-          <div class="color-preview" :style="{ '--vm-color': t[c] }">
-            <vm-image :src="imgSrc(t[c])" />
-          </div>
-          <div class="color-name">{{ c }}</div>
-          <div class="color-hex">{{ t[c] }}</div>
+          <vm-image slot="media" :src="imgSrc(t[c])" />
         </vm-card>
       </vm-grid>
     </div>
@@ -90,7 +89,7 @@ export default class Colors extends Vue {
     return `https://www.colorbook.io/imagecreator.php?hex=${color.replaceAll(
       '#',
       ''
-    )}&width=1920&height=1080`;
+    )}&width=3&height=2`;
   }
 }
 </script>
@@ -98,32 +97,6 @@ export default class Colors extends Vue {
 <style lang="scss" scoped>
 .view-colors {
   padding-bottom: 0px !important;
-
-  .vm-card {
-    height: fit-content;
-  }
-
-  .color-preview {
-    height: 100px;
-    border-radius: $border-radius;
-    background: var(--vm-color);
-    img {
-      border-radius: $border-radius;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .color-name {
-    margin-top: 15px;
-    font-weight: bold;
-    font-size: 13px;
-    text-transform: uppercase;
-    color: rgba(var(--vm-color-secondary), 1);
-  }
-  .color-hex {
-    margin-top: 5px;
-  }
 
   .theme {
     position: relative;

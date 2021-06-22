@@ -1,6 +1,6 @@
 <template>
   <li
-    @click="clicked"
+    @click="handleClick"
     :style="{ '--vm-color': vmColor, '--vm-color-secondary': vmColorSecondary }"
   >
     <div class="vm-list-item__custom" v-if="$slots.custom">
@@ -69,6 +69,23 @@ export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
       this.showChevron
     );
   }
+
+  public handleClick(e: MouseEvent): void {
+    this.clicked(e);
+
+    if (!this.disabled) {
+      Object.values(this.$slots).forEach((slotValue) => {
+        if (slotValue) {
+          slotValue.forEach((x) => {
+            const { componentInstance } = x;
+            if (componentInstance) {
+              (componentInstance.$el as HTMLElement).click();
+            }
+          });
+        }
+      });
+    }
+  }
 }
 </script>
 
@@ -98,7 +115,8 @@ li {
   transition: background 0.1s ease-in-out;
 
   &:hover {
-    background: rgba(var(--vm-color), 0.1);
+    transition-duration: 0.2s;
+    background: rgba(var(--vm-color), 0.05);
     .vm-list-item--chevron {
       fill: rgba(var(--vm-color), 0.8);
     }
@@ -121,9 +139,11 @@ li {
     align-items: center;
     flex-wrap: nowrap;
     flex-grow: 1;
-    padding: 5px 10px;
+    padding: 7.5px 10px;
+    color: rgba(var(--vm-color-secondary), 1);
 
     &--container {
+      color: rgba(var(--vm-color), 1);
       flex-grow: 1;
       &__title,
       &__description {
