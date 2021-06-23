@@ -19,10 +19,6 @@ export default class VMLinkMixin extends Vue {
     if (this.href) window.open(this.href);
   }
 
-  get clickable(): boolean {
-    return (!!this.to || !!this.href || !!this.routeName) && !this.disabled;
-  }
-
   get isUrlActive(): boolean {
     const conditions: boolean[] = [];
     const { name, path } = this.$route;

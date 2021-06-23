@@ -70,8 +70,8 @@
           </vm-list-item>
           <vm-list-item title="Custom Action #2">
             <vm-select placeholder="Select" slot="action">
-              <vm-select-item title="Item #1" id="1" icon="ti-heart" />
-              <vm-select-item title="Item #2" id="2" icon="ti-heart" />
+              <vm-select-item title="Item #1" vmId="1" icon="ti-heart" />
+              <vm-select-item title="Item #2" vmId="2" icon="ti-heart" />
             </vm-select>
           </vm-list-item>
           <vm-list-item title="Custom Action #3">

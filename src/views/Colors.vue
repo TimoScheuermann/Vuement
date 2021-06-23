@@ -11,6 +11,7 @@
     <vm-grid width="155">
       <vm-card
         v-for="c in Object.keys(colors)"
+        type="frosted"
         :key="c"
         :title="c"
         :subtitle="colors[c]"
@@ -42,6 +43,8 @@
           v-for="c in Object.keys(t)"
           :key="c"
           :background="t.paragraph"
+          :autoHeight="true"
+          type="frosted"
           :color="t.color"
           :title="c"
           :subtitle="t[c]"
@@ -89,7 +92,7 @@ export default class Colors extends Vue {
     return `https://www.colorbook.io/imagecreator.php?hex=${color.replaceAll(
       '#',
       ''
-    )}&width=3&height=2`;
+    )}&width=5&height=4`;
   }
 }
 </script>

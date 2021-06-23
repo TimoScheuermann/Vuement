@@ -1,31 +1,47 @@
 <template>
   <div class="view-details-card">
-    <!--  -->
-    hi
+    <h3>Card Types</h3>
+    <br />
     <vm-grid>
-      <vm-card></vm-card>
-    </vm-grid>
-    <vm-flow horizontal="start">
-      <vm-container>Hallo</vm-container>
-      <vm-input />
-      <vm-checkbox />
-      <vm-select />
-    </vm-flow>
+      <vm-card
+        type="frosted"
+        routeName="home"
+        :image="$store.getters.prevImage"
+        title="Frosted"
+        subtitle="Cardtype"
+      >
+        <span slot="header">Header</span>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </vm-card>
+      <vm-card
+        type="preview"
+        :image="$store.getters.prevImage"
+        title="Preview"
+        subtitle="Cardtype"
+      >
+        <span slot="header">Header</span>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </vm-card>
+      <vm-card
+        type="fullscreen"
+        :image="$store.getters.prevImage"
+        title="Fullscreen"
+        subtitle="Cardtype"
+        color="#fff"
+      >
+        <span slot="header">Header</span>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </vm-card>
 
-    <vm-flow horizontal="start">
-      <vm-container>
-        <vm-container>Hallo</vm-container>
-      </vm-container>
-      <vm-container>
-        <vm-input />
-      </vm-container>
-      <vm-container>
-        <vm-checkbox />
-      </vm-container>
-      <vm-container>
-        <vm-select />
-      </vm-container>
-    </vm-flow>
+      <vm-card
+        type="plain"
+        :image="$store.getters.prevImage"
+        title="Plain"
+        subtitle="Cardtype"
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </vm-card>
+    </vm-grid>
   </div>
 </template>
 

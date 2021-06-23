@@ -5,7 +5,6 @@
     </div>
     <div class="vm-frosted-card--media" v-if="hasMedia">
       <slot name="media">
-        <img v-if="image" :src="image" :alt="title || image" />
         <video
           v-if="video"
           ref="video"
@@ -16,6 +15,7 @@
         >
           <source :src="video" />
         </video>
+        <img v-else-if="image" :src="image" :alt="title || image" />
       </slot>
     </div>
     <div class="vm-frosted-card--content">
@@ -52,7 +52,7 @@ export default class VMFrostedCard extends Mixins(VMCardMixin) {}
 
   &--media {
     user-select: none;
-    min-height: 210px;
+    min-height: 200px;
     img,
     video {
       border-radius: $border-radius $border-radius 0 0;
@@ -71,6 +71,7 @@ export default class VMFrostedCard extends Mixins(VMCardMixin) {}
   }
 
   &--content {
+    position: relative;
     display: flex;
     flex-direction: column;
     flex: 1 1 0px;

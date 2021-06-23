@@ -2,48 +2,6 @@
   <div class="view-playground" content>
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
 
-    <vm-grid>
-      <vm-card
-        type="plain"
-        image="https://th.wallhaven.cc/lg/57/57zol5.jpg"
-        title="Title"
-        subtitle="Subtitle"
-      >
-        <!-- <span slot="header">Header</span> -->
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </vm-card>
-      <vm-card
-        type="frosted"
-        image="https://th.wallhaven.cc/lg/57/57zol5.jpg"
-        title="Title"
-        subtitle="Subtitle"
-      >
-        <span slot="header">Header</span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </vm-card>
-      <vm-card
-        type="preview"
-        image="https://th.wallhaven.cc/lg/57/57zol5.jpg"
-        title="Title"
-        subtitle="Subtitle"
-      >
-        <span slot="header">Header</span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </vm-card>
-      <vm-card
-        type="fullscreen"
-        image="https://th.wallhaven.cc/lg/57/57zol5.jpg"
-        title="Title"
-        subtitle="Subtitle"
-        color="#fff"
-      >
-        <span slot="header">Header</span>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      </vm-card>
-    </vm-grid>
-
-    <br /><br />
-
     <vm-button
       title="Onboarding"
       variant="transparent"

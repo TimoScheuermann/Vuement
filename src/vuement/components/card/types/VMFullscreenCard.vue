@@ -2,7 +2,6 @@
   <div class="vm-fullscreen-card">
     <div class="vm-fullscreen-card--media" v-if="hasMedia">
       <slot name="media">
-        <img v-if="image" :src="image" :alt="title || image" />
         <video
           v-if="video"
           ref="video"
@@ -13,6 +12,7 @@
         >
           <source :src="video" />
         </video>
+        <img v-else-if="image" :src="image" :alt="title || image" />
       </slot>
     </div>
 

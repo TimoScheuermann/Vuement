@@ -5,7 +5,6 @@
     </div>
     <div class="vm-plain-card--media" v-if="hasMedia">
       <slot name="media">
-        <img v-if="image" :src="image" :alt="title || image" />
         <video
           v-if="video"
           ref="video"
@@ -16,6 +15,7 @@
         >
           <source :src="video" />
         </video>
+        <img v-else-if="image" :src="image" :alt="title || image" />
       </slot>
     </div>
 
@@ -72,7 +72,7 @@ export default class VMPlainCard extends Mixins(VMCardMixin) {}
   }
 
   &--content {
-    margin: 0 20px 20px;
+    margin: 20px;
 
     &__title {
       font-size: 1.3em;
@@ -92,8 +92,8 @@ export default class VMPlainCard extends Mixins(VMCardMixin) {}
     }
   }
 
-  &--media ~ &--content {
-    margin-top: 20px;
+  &--header ~ &--content {
+    margin-top: 0px;
   }
 }
 </style>

@@ -1,22 +1,14 @@
 <template>
-  <router-link
+  <component
+    :is="to || routeName || href ? 'router-link' : 'span'"
     class="vm-link"
-    v-if="to || routeName || href"
     @click.stop="clicked"
     :to="to || { name: routeName }"
     :href="href"
     :style="{ '--vm-primary': vmColor }"
   >
     <slot />
-  </router-link>
-  <span
-    v-else
-    class="vm-link"
-    @click.stop="clicked"
-    :style="{ '--vm-primary': vmColor }"
-  >
-    <slot />
-  </span>
+  </component>
 </template>
 
 <script lang="ts">

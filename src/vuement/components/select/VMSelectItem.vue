@@ -22,7 +22,7 @@ export default class VMSelectItem extends Mixins(VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
   @Prop() selected!: boolean;
-  @Prop({ required: true }) id!: string;
+  @Prop({ required: true }) vmId!: string;
 
   public isSelected = !!this.selected;
 
@@ -42,7 +42,7 @@ export default class VMSelectItem extends Mixins(VMCProp) {
   }
 
   public compareState(selection: VMSelectSelection[]): void {
-    const item = selection.filter((x) => x.id === this.id)[0] || null;
+    const item = selection.filter((x) => x.id === this.vmId)[0] || null;
     if (item) this.isSelected = item.state;
     else {
       this.isSelected = !!this.selected;
@@ -52,7 +52,7 @@ export default class VMSelectItem extends Mixins(VMCProp) {
 
   public updateState(): void {
     this.$parent.$emit('select', {
-      id: this.id,
+      id: this.vmId,
       state: this.isSelected,
       title: this.title,
     } as VMSelectSelection);

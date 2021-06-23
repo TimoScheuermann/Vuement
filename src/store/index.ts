@@ -29,6 +29,12 @@ export default new Vuex.Store({
     comps: (state: any): VMComp[] => {
       return state.comps;
     },
+    prevImage: (state: any): string => {
+      if (state.dark) {
+        return 'https://timos.s3.eu-central-1.amazonaws.com/lib/ba61c73e-6236-423a-926a-05e7719c81f3.webp';
+      }
+      return 'https://timos.s3.eu-central-1.amazonaws.com/lib/a970c7fb-e678-4aa0-bb97-d93836f741bf.webp';
+    },
   },
   mutations: {
     dark(state: any, dark: boolean) {
