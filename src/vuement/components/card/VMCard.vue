@@ -1,9 +1,9 @@
 <template>
+  <!-- :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
+    :to="to || { name: routeName }"
+    :href="href" -->
   <div
     class="vm-card"
-    :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
-    :to="to || { name: routeName }"
-    :href="href"
     @click="clicked"
     :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
     :disabled="disabled"

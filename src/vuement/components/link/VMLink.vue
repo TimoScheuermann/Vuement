@@ -1,10 +1,10 @@
 <template>
+  <!-- :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
+    :to="to || { name: routeName }"
+    :href="href" -->
   <span
-    :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
     class="vm-link"
     @click.stop="clicked"
-    :to="to || { name: routeName }"
-    :href="href"
     :style="{ '--vm-primary': vmColor }"
   >
     <slot />
