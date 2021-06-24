@@ -1,6 +1,6 @@
 <template>
-  <component
-    :is="!!to || !!routeName || !!href ? 'router-link' : 'span'"
+  <span
+    :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
     class="vm-link"
     @click.stop="clicked"
     :to="to || { name: routeName }"
@@ -8,7 +8,7 @@
     :style="{ '--vm-primary': vmColor }"
   >
     <slot />
-  </component>
+  </span>
 </template>
 
 <script lang="ts">

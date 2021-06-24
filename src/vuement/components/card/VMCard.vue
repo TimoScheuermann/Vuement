@@ -1,7 +1,7 @@
 <template>
-  <component
+  <div
     class="vm-card"
-    :is="!!to || !!routeName || !!href ? 'router-link' : 'div'"
+    :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
     :to="to || { name: routeName }"
     :href="href"
     @click="clicked"
@@ -22,7 +22,7 @@
       <template slot="subtitle"><slot name="subtitle" /></template>
       <template slot="header"><slot name="header" /></template>
     </component>
-  </component>
+  </div>
 </template>
 
 <script lang="ts">
