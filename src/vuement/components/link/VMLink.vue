@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="to || routeName || href ? 'router-link' : 'span'"
+    :is="!!to || !!routeName || !!href ? 'router-link' : 'span'"
     class="vm-link"
     @click.stop="clicked"
     :to="to || { name: routeName }"

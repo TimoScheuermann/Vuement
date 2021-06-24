@@ -1,7 +1,7 @@
 <template>
   <component
     class="vm-card"
-    :is="to || routeName || href ? 'router-link' : 'div'"
+    :is="!!to || !!routeName || !!href ? 'router-link' : 'div'"
     :to="to || { name: routeName }"
     :href="href"
     @click="clicked"

@@ -13,19 +13,19 @@
       </vm-action>
 
       <vm-select>
-        <vm-select-item id="a" title="Herein #1" icon="ti-pencil" />
-        <vm-select-item id="b" title="Herein #2" :selected="true" />
+        <vm-select-item vmId="a" title="Herein #1" icon="ti-pencil" />
+        <vm-select-item vmId="b" title="Herein #2" :selected="true" />
         <vm-spacer></vm-spacer>
-        <vm-select-item id="c" title="Herein #3" />
+        <vm-select-item vmId="c" title="Herein #3" />
       </vm-select>
 
       <vm-select>
-        <vm-select-item id="a" title="Open sheet" icon="ti-share" />
-        <vm-select-item id="b" title="Hallo #1" />
-        <vm-select-item id="c" title="Hallo #2" icon="ti-pencil" />
+        <vm-select-item vmId="a" title="Open sheet" icon="ti-share" />
+        <vm-select-item vmId="b" title="Hallo #1" />
+        <vm-select-item vmId="c" title="Hallo #2" icon="ti-pencil" />
         <vm-spacer></vm-spacer>
-        <vm-select-item id="d" title="Hallo #3" />
-        <vm-action-item id="e" title="Hallo #1" />
+        <vm-select-item vmId="d" title="Hallo #3" />
+        <vm-action-item vmId="e" title="Hallo #1" />
       </vm-select>
 
       <vm-action>
