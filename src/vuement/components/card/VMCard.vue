@@ -1,13 +1,14 @@
 <template>
-  <!-- :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
-    :to="to || { name: routeName }"
-    :href="href" -->
-  <div
+  <VMClickable
     class="vm-card"
     @click="clicked"
     :style="{ '--vm-color': vmColor, '--vm-paragraph': vmBackground }"
-    :disabled="disabled"
     :autoHeight="autoHeight"
+    :disabled="disabled"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
+    fallback="div"
   >
     <component
       :is="cardComp"
@@ -22,7 +23,7 @@
       <template slot="subtitle"><slot name="subtitle" /></template>
       <template slot="header"><slot name="header" /></template>
     </component>
-  </div>
+  </VMClickable>
 </template>
 
 <script lang="ts">
@@ -35,9 +36,11 @@ import VMFrostedCard from './types/VMFrostedCard.vue';
 import VMFullscreenCard from './types/VMFullscreenCard.vue';
 import VMPlainCard from './types/VMPlainCard.vue';
 import VMPreviewCard from './types/VMPreviewCard.vue';
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
 @Component({
   components: {
+    VMClickable,
     'vm-plain-card': VMPlainCard,
     'vm-fullscreen-card': VMFullscreenCard,
     'vm-preview-card': VMPreviewCard,
@@ -66,11 +69,12 @@ export default class VMCard extends Mixins(
 
 <style lang="scss" scoped>
 .vm-card {
+  @include vm-clickable();
+
+  display: block;
   color: rgba(var(--vm-color), 1);
   background: rgba(var(--vm-paragraph), 1);
   border-radius: #{1.5 * $border-radius};
-  display: block;
-  text-decoration: none;
 
   &[autoHeight] {
     height: fit-content;

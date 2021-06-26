@@ -15,6 +15,7 @@ export interface VMOptions {
   colors?: Record<string, string>;
   themes?: Record<string, VMTheme>;
   theme?: string;
+  components?: string[];
 }
 
 export interface LooseObject {

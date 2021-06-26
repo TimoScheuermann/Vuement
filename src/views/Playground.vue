@@ -1,7 +1,11 @@
 <template>
   <div class="view-playground" content>
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
-
+    <br />
+    <div>
+      <vm-link routeName="home">Hallo</vm-link>
+    </div>
+    <br />
     <vm-button
       title="Onboarding"
       variant="transparent"

@@ -58,8 +58,8 @@
               <vm-spacer />
             </vm-flow>
           </vm-list-item>
-          <vm-list-item title="Navigation #1" routeName="vmList" />
-          <vm-list-item title="Navigation #2" routeName="vmList" />
+          <vm-list-item title="Navigation #1" />
+          <vm-list-item title="Navigation #2" />
         </vm-list>
       </vm-flow>
 

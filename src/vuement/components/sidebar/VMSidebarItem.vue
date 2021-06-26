@@ -1,29 +1,35 @@
 <template>
-  <div
+  <VMClickable
     class="vm-sidebar-item"
     @click="clicked"
     :active="isUrlActive"
+    :style="{ '--vm-primary': vmColor, '--vm-container': vmBackground }"
     :disabled="disabled"
-    :style="{
-      '--vm-primary': vmColor,
-      '--vm-container': vmBackground,
-    }"
+    fallback="button"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
   >
     <div class="vm-sidebar-item__background" />
     <div class="vm-sidebar-item__icon" v-if="icon">
       <i :class="icon" />
     </div>
     <div class="vm-sidebar-item__title" v-if="title">{{ title }}</div>
-  </div>
+  </VMClickable>
 </template>
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMSidebarItem extends Mixins(
   VMLinkMixin,
   VMCProp,
@@ -36,6 +42,8 @@ export default class VMSidebarItem extends Mixins(
 
 <style lang="scss" scoped>
 .vm-sidebar-item {
+  @include vm-clickable();
+
   display: flex;
   flex: 1 1 0px;
   justify-content: flex-start;

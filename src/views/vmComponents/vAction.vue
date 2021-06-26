@@ -1,6 +1,6 @@
 <template>
   <div class="view-details-action">
-    <vm-flow>
+    <!-- <vm-flow>
       <vm-action title="Was geht">
         <vm-action-item title="Open sheet" icon="ti-share" />
         <vm-action-item title="Hallo #1" />
@@ -33,32 +33,36 @@
       </vm-action>
     </vm-flow>
 
-    <vm-divider></vm-divider>
+    <vm-divider></vm-divider> -->
 
     <br /><br />
 
-    <vm-action title="Filter Issues">
+    <vm-action :value="true" title="Filter Issues">
       <vm-action-item title="Turn Filter On" />
       <vm-spacer />
-      <vm-action-group title="Sort By">
+      <vm-action-group title="Change sort direction">
         <vm-action-item
+          :closeOnClick="false"
           title="Date Created"
           :key="date + '' + latest"
           :icon="date ? 'ti-checkmark' : null"
           @click="date = true"
         />
         <vm-action-item
+          :closeOnClick="false"
           title="Date Modified"
           :icon="!date ? 'ti-checkmark' : null"
           @click="date = false"
         />
         <vm-spacer />
         <vm-action-item
+          :closeOnClick="false"
           title="Newest to Oldest"
           :icon="latest ? 'ti-checkmark' : null"
           @click="latest = true"
         />
         <vm-action-item
+          :closeOnClick="false"
           title="Oldest to Neweset"
           :icon="!latest ? 'ti-checkmark' : null"
           @click="latest = false"
@@ -68,6 +72,8 @@
       <vm-action-item title="Open" icon="ti-checkmark" />
       <vm-action-item title="Closed" icon="ti-checkmark" />
     </vm-action>
+
+    <br /><br />
   </div>
 </template>
 
@@ -75,7 +81,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class DetailsVAction extends Vue {}
+export default class DetailsVAction extends Vue {
+  public latest = true;
+  public date = true;
+}
 </script>
 
 <style lang="scss" scoped>

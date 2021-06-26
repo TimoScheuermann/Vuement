@@ -5,7 +5,6 @@
     <vm-grid>
       <vm-card
         type="frosted"
-        routeName="home"
         :image="$store.getters.prevImage"
         title="Frosted"
         subtitle="Cardtype"

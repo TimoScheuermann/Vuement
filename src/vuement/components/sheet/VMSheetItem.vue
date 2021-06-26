@@ -1,24 +1,33 @@
 <template>
-  <div
-    class="vm-sheet-item"
-    :disabled="disabled"
+  <VMClickable
     @click.stop="handleClick"
+    class="vm-sheet-item"
     :style="{ '--vm-color': vmColor }"
+    :disabled="disabled"
+    fallback="button"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
   >
     <div class="vm-sheet-item---media">
       <slot />
       <i v-if="icon && !$slots.default" :class="icon" />
     </div>
     <div class="vm-sheet-item--title">{{ title }}</div>
-  </div>
+  </VMClickable>
 </template>
 
 <script lang="ts">
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMSheetItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() icon!: string;
@@ -34,6 +43,8 @@ export default class VMSheetItem extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss" scoped>
 .vm-sheet-item {
+  @include vm-clickable();
+
   display: grid;
   grid-template-columns: minmax(0, auto) 1fr;
   grid-gap: 10px;
@@ -41,7 +52,6 @@ export default class VMSheetItem extends Mixins(VMLinkMixin, VMCProp) {
   color: rgba(var(--vm-color), 1);
 
   cursor: pointer;
-
   &[disabled] {
     cursor: not-allowed;
     opacity: 0.5;

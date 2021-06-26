@@ -34,8 +34,14 @@ const install: PluginFunction<VMOptions> = function installVuement(
 
   $vm(Vue, options);
 
-  Object.values(vmComponents).forEach((component) => {
-    Vue.use(component);
+  Object.entries(vmComponents).forEach(([name, component]) => {
+    if (
+      !options.components ||
+      options.components.length === 0 ||
+      options.components.includes(name)
+    ) {
+      Vue.use(component);
+    }
   });
 
   if (typeof window !== 'undefined') {

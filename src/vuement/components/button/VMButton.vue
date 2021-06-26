@@ -1,8 +1,12 @@
 <template>
-  <button
+  <VMClickable
     class="vm-button"
+    fallback="button"
     @click.stop="clicked"
     :disabled="disabled"
+    :href="href"
+    :to="to"
+    :routeName="routeName"
     :size="size"
     :variant="buttonVariant"
     :gradient="gradient"
@@ -22,7 +26,7 @@
     <div class="vm-button__icon" v-if="icon && iconTrailing">
       <i :class="icon" />
     </div>
-  </button>
+  </VMClickable>
 </template>
 
 <script lang="ts">
@@ -30,8 +34,13 @@ import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
   @Prop() title!: string;
   @Prop() icon!: string;
@@ -89,7 +98,7 @@ export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
 }
 
 .vm-button {
-  @include vm-button();
+  @include vm-clickable();
 
   display: inline-flex;
   justify-content: center;

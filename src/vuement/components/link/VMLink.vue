@@ -1,29 +1,37 @@
 <template>
-  <!-- :is="!!to || !!routeName || !!href ? 'router-link' : undefined"
-    :to="to || { name: routeName }"
-    :href="href" -->
-  <span
+  <VMClickable
     class="vm-link"
     @click.stop="clicked"
+    fallback="span"
+    :disabled="disabled"
+    :to="to"
+    :href="href"
+    :routeName="routeName"
     :style="{ '--vm-primary': vmColor }"
   >
     <slot />
-  </span>
+  </VMClickable>
 </template>
 
 <script lang="ts">
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMLink extends Mixins(VMLinkMixin, VMCProp) {}
 </script>
 
 <style lang="scss" scoped>
 .vm-link {
+  @include vm-clickable();
+
   color: rgba(var(--vm-primary), 1);
-  text-decoration: none;
   cursor: pointer;
   position: relative;
   z-index: 4;

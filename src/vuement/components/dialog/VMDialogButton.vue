@@ -1,23 +1,32 @@
 <template>
-  <button
+  <VMClickable
     class="vm-dialog-button"
     @click.stop="handleClick"
-    :disabled="disabled"
     :style="{ '--vm-primary': vmColor }"
+    :disabled="disabled"
+    fallback="button"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
   >
     <i v-if="icon" :class="icon" />
     <img v-else-if="image" :src="image" alt="" />
     <span v-if="title">{{ title }}</span>
     <slot />
-  </button>
+  </VMClickable>
 </template>
 
 <script lang="ts">
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() icon!: string;
@@ -34,7 +43,7 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss" scoped>
 .vm-dialog-button {
-  @include vm-button();
+  @include vm-clickable();
 
   display: flex;
   justify-content: center;

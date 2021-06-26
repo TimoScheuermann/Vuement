@@ -99,19 +99,15 @@ $lr: 0.2em;
   }
 
   button {
-    @include vm-button();
+    @include vm-clickable();
 
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
     text-align: inherit;
-    color: inherit;
-
     cursor: pointer;
-
     border-bottom: 1px solid rgba(var(--vm-border), 1);
 
     svg {

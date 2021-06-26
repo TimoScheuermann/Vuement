@@ -1,7 +1,13 @@
 <template>
-  <li
+  <VMClickable
     @click="handleClick"
+    class="vm-list-item-wrapper"
     :style="{ '--vm-color': vmColor, '--vm-color-secondary': vmColorSecondary }"
+    :disabled="disabled"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
+    fallback="li"
   >
     <div class="vm-list-item__custom" v-if="$slots.custom">
       <slot name="custom" />
@@ -43,15 +49,20 @@
         </svg>
       </div>
     </template>
-  </li>
+  </VMClickable>
 </template>
 
 <script lang="ts">
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() title!: string;
   @Prop() description!: string;
@@ -90,7 +101,9 @@ export default class VMListItem extends Mixins(VMLinkMixin, VMCProp) {
 </script>
 
 <style lang="scss" scoped>
-li {
+.vm-list-item-wrapper {
+  @include vm-clickable();
+
   &:not(:first-child) {
     .vm-list-item__custom,
     .vm-list-item {
@@ -99,14 +112,19 @@ li {
   }
 
   &:first-child {
-    border-radius: $border-radius $border-radius 0 0;
+    border-top: {
+      left-radius: $border-radius;
+      right-radius: $border-radius;
+    }
   }
   &:last-child {
-    border-radius: 0 0 $border-radius $border-radius;
+    border-bottom: {
+      left-radius: $border-radius;
+      right-radius: $border-radius;
+    }
   }
 
   list-style: none;
-  margin: 0;
   cursor: pointer;
   display: flex;
   flex: 1 1 0px;

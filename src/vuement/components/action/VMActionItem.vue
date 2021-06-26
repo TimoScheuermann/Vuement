@@ -1,9 +1,13 @@
 <template>
-  <div
+  <VMClickable
     class="vm-action-item"
     @click.stop="handleClick"
-    :disabled="disabled"
     :style="{ '--vm-color': vmColor }"
+    :disabled="disabled"
+    fallback="button"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
   >
     <div class="vm-action-item__title">
       <slot>{{ title }}</slot>
@@ -13,23 +17,29 @@
         <i v-if="icon" :class="icon" />
       </slot>
     </div>
-  </div>
+  </VMClickable>
 </template>
 
 <script lang="ts">
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;
+  @Prop({ default: true }) closeOnClick!: boolean;
 
   public handleClick(e: MouseEvent): void {
     this.clicked(e);
 
-    if (!this.disabled) {
+    if (!this.disabled && this.closeOnClick) {
       this.$parent.$emit('close');
     }
   }
@@ -38,25 +48,44 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss" scoped>
 .vm-action-item {
+  @include vm-clickable();
+
+  transform: scale(var(--vm-action-scale));
+
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
-  margin: 0;
   font-weight: 500;
+  // font-size: calc(var(--vm-action-scale) * 1rem);
   padding: 5px 15px;
+
   color: rgba(var(--vm-color), 0.8);
+  // opacity: calc(var(--vm-action-scale) * 100%);
 
   position: relative;
   user-select: none;
-
   transition: 0.1s ease-in-out;
 
   cursor: pointer;
   &:not([disabled]):hover {
     color: rgba(var(--vm-color), 1);
     background: rgba(var(--vm-color), 0.12);
+  }
+
+  &:first-child {
+    border-top: {
+      left-radius: $border-radius;
+      right-radius: $border-radius;
+    }
+  }
+  &:last-child {
+    border-bottom: {
+      left-radius: $border-radius;
+      right-radius: $border-radius;
+    }
   }
 
   &[disabled] {

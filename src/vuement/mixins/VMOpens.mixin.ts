@@ -52,7 +52,10 @@ export default class VMOpensMixin extends Vue {
       gr: this.vmOpensGroup,
     } as VMCloseExcept);
 
-    if (this.$el.getAttributeNames().includes('vm-prevent-body-scroll')) {
+    if (
+      this.$el &&
+      this.$el.getAttributeNames().includes('vm-prevent-body-scroll')
+    ) {
       requestAnimationFrame(() => {
         this.freezeBody();
       });

@@ -27,16 +27,16 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 
 @Component({
   components: {
-    VMBounceSpinner,
-    VMDotSpinner,
-    VMBarSpinner,
-    VMGridSpinner,
-    VMPropagateSpinner,
-    VMPulseSpinner,
-    VMRotateSpinner,
-    VMScaleSpinner,
-    VMSquareSpinner,
-    VMDotsSpinner,
+    'vm-bounce-spinner': VMBounceSpinner,
+    'vm-dot-spinner': VMDotSpinner,
+    'vm-bar-spinner': VMBarSpinner,
+    'vm-grid-spinner': VMGridSpinner,
+    'vm-propagate-spinner': VMPropagateSpinner,
+    'vm-pulse-spinner': VMPulseSpinner,
+    'vm-rotate-spinner': VMRotateSpinner,
+    'vm-scale-spinner': VMScaleSpinner,
+    'vm-square-spinner': VMSquareSpinner,
+    'vm-dots-spinner': VMDotsSpinner,
   },
 })
 export default class VMSpinner extends Mixins(VMCProp) {
@@ -59,10 +59,9 @@ export default class VMSpinner extends Mixins(VMCProp) {
     ];
     let type = (this.type || '').toLowerCase();
     if (types.includes(type)) {
-      type = type.charAt(0).toUpperCase() + type.slice(1);
-      return `VM${type}Spinner`;
+      return `vm-${type}-spinner`;
     }
-    return `VMBarSpinner`;
+    return `vm-bar-spinner`;
   }
 }
 </script>

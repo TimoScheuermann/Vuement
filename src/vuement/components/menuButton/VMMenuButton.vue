@@ -1,14 +1,18 @@
 <template>
-  <button
+  <VMClickable
     v-if="vmIcon"
     class="vm-menu-button"
     @click="clicked"
-    :disabled="disabled"
     :type="vmMenuButtonType"
     :style="{ '--vm-color': vmColor }"
+    :disabled="disabled"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
+    fallback="button"
   >
     <component :is="'vm-mb-' + vmIcon" />
-  </button>
+  </VMClickable>
 </template>
 
 <script lang="ts">
@@ -23,9 +27,11 @@ import VMMenuButtonCross from './buttons/VMMenuButtonCross.vue';
 import VMMenuButtonDotsH from './buttons/VMMenuButtonDotsH.vue';
 import VMMenuButtonDotsV from './buttons/VMMenuButtonDotsV.vue';
 import VMMenuButtonBars from './buttons/VMMenuButtonBars.vue';
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
 @Component({
   components: {
+    VMClickable,
     'vm-mb-plus': VMMenuButtonPlus,
     'vm-mb-minus': VMMenuButtonMinus,
     'vm-mb-cross': VMMenuButtonCross,
@@ -57,7 +63,7 @@ export default class VMMenuButton extends Mixins(VMLinkMixin, VMCProp) {
 
 <style lang="scss">
 .vm-menu-button {
-  @include vm-button();
+  @include vm-clickable();
 
   display: inline-grid;
   place-content: center;

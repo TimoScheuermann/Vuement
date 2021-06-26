@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="id"
+    v-if="vmId"
     class="vm-select-item"
     @click.capture.stop="clicked"
     :selected="isSelected"

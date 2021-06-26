@@ -1,9 +1,14 @@
 <template>
-  <div
-    class="vm-chip"
+  <VMClickable
     @click="clicked"
+    class="vm-chip"
     :editable="editable"
     :style="{ '--vm-color': vmColor, '--vm-container': vmBackground }"
+    :disabled="disabled"
+    fallback="button"
+    :href="href"
+    :routeName="routeName"
+    :to="to"
   >
     <div class="vm-chip--image" v-if="image">
       <img :src="image" alt="" />
@@ -25,16 +30,21 @@
       <span></span>
       <span></span>
     </div>
-  </div>
+  </VMClickable>
 </template>
 
 <script lang="ts">
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
+import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component({
+  components: {
+    VMClickable,
+  },
+})
 export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: '' }) value!: string;
   @Prop() icon!: string;
@@ -83,10 +93,13 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
 
 <style lang="scss" scoped>
 .vm-chip {
+  @include vm-clickable();
+
   display: inline-flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: nowrap;
+
   padding: 2.5px;
   margin: 2.5px;
   cursor: pointer;
