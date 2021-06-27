@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { readFileSync, writeFileSync } = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { join } = require('path');
 
 const file = readFileSync(join(__dirname, 'package.json')).toString('utf-8');

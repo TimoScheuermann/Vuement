@@ -11,7 +11,7 @@
     fallback="div"
   >
     <component
-      :is="cardComp"
+      :is="cardType"
       :title="title"
       :subtitle="subtitle"
       :video="video"
@@ -27,24 +27,18 @@
 </template>
 
 <script lang="ts">
+import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
-import { Component, Mixins, Prop } from 'vue-property-decorator';
-import VMFrostedCard from './types/VMFrostedCard.vue';
-import VMFullscreenCard from './types/VMFullscreenCard.vue';
-import VMPlainCard from './types/VMPlainCard.vue';
-import VMPreviewCard from './types/VMPreviewCard.vue';
 import VMClickable from '@/vuement/mixins/VMClickable.vue';
+import * as types from './types';
 
 @Component({
   components: {
     VMClickable,
-    'vm-plain-card': VMPlainCard,
-    'vm-fullscreen-card': VMFullscreenCard,
-    'vm-preview-card': VMPreviewCard,
-    'vm-frosted-card': VMFrostedCard,
+    ...types,
   },
 })
 export default class VMCard extends Mixins(
@@ -56,13 +50,18 @@ export default class VMCard extends Mixins(
   @Prop({ default: 'plain' }) type!: string;
   @Prop({ default: false }) autoHeight!: boolean;
 
-  get cardComp(): string {
-    const types = ['plain', 'fullscreen', 'preview', 'frosted'];
-    var type: string | null = null;
-    if (!this.type) type = 'plain';
-    else if (types.includes(this.type.toLowerCase()))
-      type = this.type.toLowerCase();
-    return `vm-${type}-card`;
+  get types(): string[] {
+    return Object.keys(types).map((x) =>
+      x.toLowerCase().substring(2, x.length - 4)
+    );
+  }
+
+  get cardType(): string {
+    let type = (this.type || '').toLowerCase();
+    if (this.types.includes(type)) {
+      return `vm-${type}-card`;
+    }
+    return `vm-plain-card`;
   }
 }
 </script>

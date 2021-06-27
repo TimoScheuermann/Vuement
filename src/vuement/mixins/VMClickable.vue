@@ -1,12 +1,12 @@
 <template>
-  <span
+  <component
     :is="compTag"
     @click="click"
     :href="href ? href : undefined"
     :to="to || routeName ? to || { name: routeName } : undefined"
   >
     <slot />
-  </span>
+  </component>
 </template>
 
 <script lang="ts">

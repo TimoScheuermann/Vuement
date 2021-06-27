@@ -42,5 +42,6 @@ export interface VMNotificationObject {
   duration?: 'none' | number;
   closeable?: boolean;
   content?: VueConstructor<Vue>;
+  // eslint-disable-next-line
   props?: Record<string, any>;
 }
