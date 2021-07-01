@@ -6,16 +6,21 @@
       <vm-link routeName="home">Hallo</vm-link>
     </div>
     <br />
-    <vm-button
-      title="Onboarding"
-      variant="transparent"
-      @click="onboarding = true"
-    />
 
-    <div class="test">
-      <div>Hallo</div>
-      <span>Hallo</span>
-    </div>
+    <p>
+      Lorem ipsum
+      <span style="color: red" v-vm-tooltip.html.text="tool"
+        >dolor sit amet</span
+      >
+      consectetur, adipisicing elit. Quisquam consequatur eligendi labore
+      delectus laborum exercitationem quidem quia doloribus beatae error, rem
+      ducimus, tempore eveniet vel incidunt laudantium suscipit perferendis
+      temporibus?
+    </p>
+
+    <vm-link variant="transparent" @click="onboarding = true">
+      title="Onboarding"
+    </vm-link>
 
     <vm-dialog v-model="dialog" title="Hallo">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit iusto fuga
@@ -211,6 +216,7 @@ export default class Playground extends Vue {
   public dialog = false;
   public sheet = false;
   public onboarding = false;
+  public tool = Onboarding1;
 
   public avatars = [
     'https://newtonfoxbds.com/wp-content/uploads/2019/04/user-placeholder-man-10-6.jpg',

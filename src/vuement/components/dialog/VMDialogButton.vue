@@ -63,6 +63,13 @@ export default class VMDialogButton extends Mixins(VMLinkMixin, VMCProp) {
     border-left: 1.5px solid rgba(var(--vm-border), 1);
   }
 
+  &:first-child {
+    border-bottom-left-radius: #{2 * $border-radius};
+  }
+  &:last-child {
+    border-bottom-right-radius: #{2 * $border-radius};
+  }
+
   transition: 0.1s ease-in-out;
   &:not([disabled]) {
     &:hover {

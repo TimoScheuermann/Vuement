@@ -35,7 +35,7 @@
 
     <vm-divider></vm-divider> -->
 
-    <br /><br />
+    <!-- <br /><br />
 
     <vm-action :value="true" title="Filter Issues">
       <vm-action-item title="Turn Filter On" />
@@ -71,9 +71,15 @@
       <vm-spacer />
       <vm-action-item title="Open" icon="ti-checkmark" />
       <vm-action-item title="Closed" icon="ti-checkmark" />
-    </vm-action>
+    </vm-action> -->
 
-    <br /><br />
+    <!-- <br /><br /> -->
+
+    <vm-dialog :value="true" title="Beitrag erstellen">
+      <vm-textarea placeholder="Text eingeben..." />
+      <vm-dialog-button slot="footer" title="Abbrechen" color="error" />
+      <vm-dialog-button slot="footer" title="Senden" />
+    </vm-dialog>
   </div>
 </template>
 

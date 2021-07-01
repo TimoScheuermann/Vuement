@@ -52,18 +52,16 @@ export default class VMActionItem extends Mixins(VMLinkMixin, VMCProp) {
 
   transform: scale(var(--vm-action-scale));
 
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px 15px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 
   font-weight: 500;
-  // font-size: calc(var(--vm-action-scale) * 1rem);
-  padding: 5px 15px;
-
   color: rgba(var(--vm-color), 0.8);
-  // opacity: calc(var(--vm-action-scale) * 100%);
 
   position: relative;
   user-select: none;

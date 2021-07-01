@@ -22,7 +22,7 @@ export class ComponentManager {
     return store.getters.comps;
   }
 
-  private static setComps(comps: VMComp[]): void {
+  public static setComps(comps: VMComp[]): void {
     comps = comps.sort((a, b) => a.name.localeCompare(b.name));
     store.commit('comps', comps);
   }

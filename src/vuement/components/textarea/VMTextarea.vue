@@ -58,7 +58,7 @@ export default class VMTextarea extends Mixins(VMCProp, VMBgProp) {
 
 <style lang="scss" scoped>
 .vm-textarea {
-  display: inline-block;
+  display: block;
   margin: 2.5px;
 
   color: rgba(var(--vm-color), 1);
