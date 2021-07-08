@@ -29,8 +29,7 @@ import {
 import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import VDarkModeToggle from './components/VDarkModeToggle.vue';
-import { ComponentManager, VMComp } from './utils/ComponentManager';
-import * as vmComponents from '@/vuement/components';
+import { ComponentManager } from './utils/ComponentManager';
 
 @Component({
   components: {
@@ -43,17 +42,17 @@ export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
 
-    ComponentManager.setComps(
-      Object.keys(vmComponents).map((x, i) => {
-        return {
-          id: i + '',
-          name: x,
-          isChild: false,
-          children: [],
-          props: [],
-        } as VMComp;
-      })
-    );
+    // ComponentManager.setComps(
+    //   Object.keys(vmComponents).map((x, i) => {
+    //     return {
+    //       id: i + '',
+    //       name: x,
+    //       isChild: false,
+    //       children: [],
+    //       props: [],
+    //     } as VMComp;
+    //   })
+    // );
     ComponentManager.loadComps();
   }
 

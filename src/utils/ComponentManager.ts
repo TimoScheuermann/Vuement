@@ -1,4 +1,5 @@
 import store from '@/store';
+import * as vmComponents from '@/vuement/components';
 
 export interface VMComp {
   id: string;
@@ -16,7 +17,7 @@ export interface VMProp {
 }
 
 export class ComponentManager {
-  private static backend = 'https://api.timos.design:3002';
+  private static backend = 'https://api.timos.design';
 
   public static get comps(): VMComp[] {
     return store.getters.comps;
@@ -28,15 +29,31 @@ export class ComponentManager {
   }
 
   public static async loadComps(callback?: VoidFunction): Promise<void> {
-    fetch(this.backend + '/vuement/components')
+    fetch(this.backend + '/vuement/component')
       .then((res) => res.json())
       .then((res) => {
         this.setComps(res);
+        if (callback) callback();
+      })
+      .catch(() => {
+        this.setComps(
+          Object.keys(vmComponents).map((x, i) => {
+            return {
+              id: i + '',
+              name: x,
+              isChild: false,
+              children: [],
+              props: [],
+            } as VMComp;
+          })
+        );
+
         if (callback) callback();
       });
   }
 
   public static getComponent(id: string): VMComp | null {
+    if (!id) return null;
     id = id.toLowerCase();
     return (
       this.comps.filter((x) => x.id === id || x.name.toLowerCase() === id)[0] ||

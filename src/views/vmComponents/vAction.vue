@@ -74,12 +74,6 @@
     </vm-action> -->
 
     <!-- <br /><br /> -->
-
-    <vm-dialog :value="true" title="Beitrag erstellen">
-      <vm-textarea placeholder="Text eingeben..." />
-      <vm-dialog-button slot="footer" title="Abbrechen" color="error" />
-      <vm-dialog-button slot="footer" title="Senden" />
-    </vm-dialog>
   </div>
 </template>
 
