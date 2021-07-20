@@ -1,7 +1,6 @@
 import _Vue, { PluginFunction } from 'vue';
 import Vue2TouchEvents from 'vue2-touch-events';
 import * as vmComponents from './components';
-import { VMTooltipDirective } from './components/tooltip/VMTooltip';
 import { COLORS_DEFAULT, THEME_DARK, THEME_LIGHT } from './dev/constants';
 import { setTheme } from './dev/functions';
 import { LooseObject, VMOptions } from './dev/interfaces';
@@ -50,8 +49,6 @@ const install: PluginFunction<VMOptions> = function installVuement(
   }
 
   Vue.use(Vue2TouchEvents);
-
-  Vue.directive('vm-tooltip', VMTooltipDirective);
 };
 
 if (typeof window !== 'undefined' && window.Vue) {

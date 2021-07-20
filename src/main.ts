@@ -4,9 +4,12 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router, { suffix } from './router';
 import store from './store';
+import { VMTooltipDirective } from './vuement/components/tooltip/VMTooltip';
 import Vuement from './vuement/index.esm';
 
 Vue.config.productionTip = false;
+
+Vue.directive('vm-tooltip', VMTooltipDirective);
 
 router.afterEach((to: Route) => {
   let title = to.meta.title;
