@@ -49,8 +49,19 @@ export default class VMLink extends Mixins(VMLinkMixin, VMCProp) {}
     background: currentColor;
   }
 
-  &:hover::before {
-    width: calc(100% + 5px);
+  &[disabled] {
+    cursor: not-allowed;
+    filter: saturate(25%);
+  }
+
+  &:not([disabled]) {
+    &:hover::before {
+      width: calc(100% + 5px);
+    }
+    &:active {
+      filter: brightness(120%);
+      transform: scale(0.95);
+    }
   }
 }
 </style>

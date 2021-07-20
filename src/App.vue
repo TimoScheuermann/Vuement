@@ -41,18 +41,6 @@ import { ComponentManager } from './utils/ComponentManager';
 export default class App extends Vue {
   mounted(): void {
     registerMediaQueries();
-
-    // ComponentManager.setComps(
-    //   Object.keys(vmComponents).map((x, i) => {
-    //     return {
-    //       id: i + '',
-    //       name: x,
-    //       isChild: false,
-    //       children: [],
-    //       props: [],
-    //     } as VMComp;
-    //   })
-    // );
     ComponentManager.loadComps();
   }
 
@@ -64,9 +52,10 @@ export default class App extends Vue {
 
 <style lang="scss">
 html {
-  font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, Segoe UI,
-    Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
-    Segoe UI Symbol;
+  font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue,
+    Segoe UI, Roboto, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji;
+
   scroll-behavior: smooth;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;

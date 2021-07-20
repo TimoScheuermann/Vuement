@@ -107,6 +107,8 @@ export default class VMButton extends mixins(VMLinkMixin, VMColorMixin) {
   white-space: nowrap;
   flex: 1 1 0px;
 
+  font-weight: 500;
+
   &[block] {
     display: flex;
     width: 100%;

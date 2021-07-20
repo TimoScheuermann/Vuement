@@ -61,7 +61,7 @@ export default class ComponentDetailsHero extends Vue {
 <style lang="scss" scoped>
 .component-details-hero {
   background: rgba(var(--vm-container), 0.5);
-  min-height: 80px;
+  min-height: 100px;
   display: grid;
   grid-template-columns: 1fr;
   place-content: center;

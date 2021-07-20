@@ -46,6 +46,7 @@ export default class VMNavbarItem extends Mixins(VMLinkMixin, VMCProp) {
   flex-wrap: nowrap;
   margin-left: 10px;
   padding: 0 5px;
+  font-weight: 500;
 
   &__icon ~ &__title,
   &__title ~ &__icon {

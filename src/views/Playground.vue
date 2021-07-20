@@ -3,15 +3,13 @@
     <VSectionHeader title="Playground" subtitle="UI Elements Testing" />
     <br />
     <div>
-      <vm-link routeName="home">Hallo</vm-link>
+      <vm-link routeName="home">Back Home</vm-link>
     </div>
     <br />
 
     <p>
       Lorem ipsum
-      <span style="color: red" v-vm-tooltip.html.text="tool"
-        >dolor sit amet</span
-      >
+      <span style="color: red" v-vm-tooltip.text="tool">dolor sit amet</span>
       consectetur, adipisicing elit. Quisquam consequatur eligendi labore
       delectus laborum exercitationem quidem quia doloribus beatae error, rem
       ducimus, tempore eveniet vel incidunt laudantium suscipit perferendis
@@ -201,6 +199,7 @@
 import Onboarding1 from '@/components/etc/onboarding/Onboarding1.vue';
 import Onboarding2 from '@/components/etc/onboarding/Onboarding2.vue';
 import Onboarding3 from '@/components/etc/onboarding/Onboarding3.vue';
+import TooltipTest from '@/components/tooltiptest.vue';
 import VSectionHeader from '@/components/VSectionHeader.vue';
 import { Vue, Component } from 'vue-property-decorator';
 
@@ -210,13 +209,14 @@ import { Vue, Component } from 'vue-property-decorator';
     Onboarding1,
     Onboarding2,
     Onboarding3,
+    TooltipTest,
   },
 })
 export default class Playground extends Vue {
   public dialog = false;
   public sheet = false;
   public onboarding = false;
-  public tool = Onboarding1;
+  public tool = TooltipTest;
 
   public avatars = [
     'https://newtonfoxbds.com/wp-content/uploads/2019/04/user-placeholder-man-10-6.jpg',

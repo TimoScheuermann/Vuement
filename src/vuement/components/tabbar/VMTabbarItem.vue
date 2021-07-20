@@ -44,6 +44,7 @@ export default class VMTabbarItem extends Mixins(VMLinkMixin, VMCProp) {
   flex: 1 1 0px;
   justify-content: center;
   align-items: center;
+  font-weight: 500;
 
   cursor: pointer;
   opacity: 0.5;

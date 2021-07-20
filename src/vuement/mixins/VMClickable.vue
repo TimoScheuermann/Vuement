@@ -4,6 +4,7 @@
     @click="click"
     :href="href ? href : undefined"
     :to="to || routeName ? to || { name: routeName } : undefined"
+    :disabled="disabled"
   >
     <slot />
   </component>
