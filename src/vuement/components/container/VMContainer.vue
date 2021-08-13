@@ -9,7 +9,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMContainer>({
+  name: 'vmContainer',
+})
 export default class VMContainer extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'container' }) background!: string;
 }

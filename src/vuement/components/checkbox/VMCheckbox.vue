@@ -27,7 +27,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
-@Component
+@Component<VMCheckbox>({
+  name: 'vmCheckbox',
+})
 export default class VMCheckbox extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() value!: boolean;

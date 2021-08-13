@@ -5,6 +5,9 @@
     <div>
       <vm-link routeName="home">Back Home</vm-link>
     </div>
+    <div>
+      <vm-link href="/">Back Home</vm-link>
+    </div>
     <br />
 
     <p>

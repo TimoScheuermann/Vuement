@@ -15,7 +15,9 @@
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMSegmentItem>({
+  name: 'vmSegmentItem',
+})
 export default class VMSegmentItem extends Mixins(VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;

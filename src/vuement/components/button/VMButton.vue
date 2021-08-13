@@ -36,7 +36,8 @@ import { mixins } from 'vue-class-component';
 import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
-@Component({
+@Component<VMButton>({
+  name: 'vmButton',
   components: {
     VMClickable,
   },

@@ -15,7 +15,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMGridSpinner>({
+  name: 'vmGridSpinner',
+})
 export default class VMGridSpinner extends Vue {}
 </script>
 

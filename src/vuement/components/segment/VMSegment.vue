@@ -19,7 +19,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMSegment>({
+  name: 'vmSegment',
+})
 export default class VMSegment extends Mixins(VMBgProp, VMCProp) {
   @Prop({ default: 0 }) value!: number;
 

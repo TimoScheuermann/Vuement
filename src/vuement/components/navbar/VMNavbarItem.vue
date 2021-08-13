@@ -26,7 +26,8 @@ import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
-@Component({
+@Component<VMNavbarItem>({
+  name: 'vmNavbarItem',
   components: {
     VMClickable,
   },

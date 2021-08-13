@@ -63,7 +63,8 @@ import VMRevealer from '../revealer/VMRevealer.vue';
  * This component isn't recommended for final use as of yet,
  * but thanks for beeing interested.
  */
-@Component({
+@Component<VMActionGroup>({
+  name: 'vmActionGroup',
   components: {
     VMRevealer,
   },

@@ -27,7 +27,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMTextarea>({
+  name: 'vmTextarea',
+})
 export default class VMTextarea extends Mixins(VMCProp, VMBgProp) {
   @Prop() frosted!: boolean;
   @Prop() title!: string;

@@ -10,7 +10,9 @@
 import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
-@Component
+@Component<VMRadio>({
+  name: 'vmRadio',
+})
 export default class VMRadio extends Mixins(VMColorMixin) {
   @Prop() title!: string;
   @Prop({ required: true }) name!: string;

@@ -37,7 +37,8 @@ import { Component, Prop, Mixins, Watch } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 import VMActionItem from './VMActionItem.vue';
 
-@Component({
+@Component<VMActionGroupContainer>({
+  name: 'vmActionGroupContainer',
   components: {
     VMActionItem,
     VMRevealer,

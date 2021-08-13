@@ -36,7 +36,8 @@ import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
-@Component({
+@Component<VMSelect>({
+  name: 'vmSelect',
   components: {
     VMRevealer,
   },

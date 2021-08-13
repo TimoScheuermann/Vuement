@@ -15,7 +15,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
-@Component
+@Component<VMSlider>({
+  name: 'vmSlider',
+})
 export default class VMSlider extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 1 }) min!: number;
   @Prop({ default: 10 }) max!: number;

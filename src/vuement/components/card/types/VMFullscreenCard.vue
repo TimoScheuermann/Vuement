@@ -47,7 +47,9 @@
 import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMFullscreenCard>({
+  name: 'vmFullscreenCard',
+})
 export default class VMFullscreenCard extends Mixins(VMCardMixin) {}
 </script>
 

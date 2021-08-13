@@ -21,7 +21,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMQuote>({
+  name: 'vmQuote',
+})
 export default class VMQuote extends Mixins(VMCProp, VMBgProp) {
   @Prop() title!: string;
   @Prop() border!: string;

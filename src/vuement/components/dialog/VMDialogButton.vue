@@ -22,7 +22,8 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component({
+@Component<VMDialogButton>({
+  name: 'vmDialogButton',
   components: {
     VMClickable,
   },

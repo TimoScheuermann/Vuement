@@ -43,7 +43,8 @@ import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
-@Component({
+@Component<VMSheet>({
+  name: 'vmSheet',
   components: {
     VMMenuButton,
   },

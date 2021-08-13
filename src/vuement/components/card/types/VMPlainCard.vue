@@ -45,7 +45,9 @@
 import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMPlainCard>({
+  name: 'vmPlainCard',
+})
 export default class VMPlainCard extends Mixins(VMCardMixin) {}
 </script>
 

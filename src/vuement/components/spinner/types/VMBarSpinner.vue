@@ -14,7 +14,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMBarSpinner>({
+  name: 'vmBarSpinner',
+})
 export default class VMBarSpinner extends Vue {}
 </script>
 

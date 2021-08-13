@@ -5,7 +5,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMSquareSpinner>({
+  name: 'vmSquareSpinner',
+})
 export default class VMSquareSpinner extends Vue {}
 </script>
 

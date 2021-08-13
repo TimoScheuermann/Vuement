@@ -52,7 +52,9 @@ import { Vue, Component, Prop, Mixins } from 'vue-property-decorator';
 
 type VMNot = VMNotificationObject & { timer?: number; id: number };
 
-@Component
+@Component<VMNotification>({
+  name: 'vmNotification',
+})
 export default class VMNotification extends Mixins(
   VMCProp,
   VMBgProp,

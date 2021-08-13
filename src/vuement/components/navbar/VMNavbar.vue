@@ -73,7 +73,8 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
-@Component({
+@Component<VMNavbar>({
+  name: 'vmNavbar',
   components: {
     VMRevealer,
   },

@@ -39,7 +39,9 @@
 import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMPreviewCard>({
+  name: 'vmPreviewCard',
+})
 export default class VMPreviewCard extends Mixins(VMCardMixin) {}
 </script>
 

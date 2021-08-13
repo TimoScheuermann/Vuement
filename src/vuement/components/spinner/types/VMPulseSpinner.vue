@@ -9,7 +9,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMPulseSpinner>({
+  name: 'vmPulseSpinner',
+})
 export default class VMPulseSpinner extends Vue {}
 </script>
 

@@ -12,7 +12,9 @@
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMTitle>({
+  name: 'vmTitle',
+})
 export default class VMTitle extends Mixins(VMCProp) {
   @Prop() title!: string;
   @Prop() subtitle!: string;

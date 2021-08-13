@@ -44,7 +44,9 @@ import VMBodyMountMixin from '@/vuement/mixins/VMBodyMount.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMOnboarding>({
+  name: 'vmOnboarding',
+})
 export default class VMOnboarding extends Mixins(
   VMOpensMixin,
   VMBodyMountMixin

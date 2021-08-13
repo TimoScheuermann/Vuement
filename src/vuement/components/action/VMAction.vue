@@ -43,7 +43,8 @@ import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
-@Component({
+@Component<VMAction>({
+  name: 'vmAction',
   components: {
     VMMenuButton,
   },

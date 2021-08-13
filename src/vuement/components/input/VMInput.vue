@@ -50,7 +50,9 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
-@Component
+@Component<VMInput>({
+  name: 'vmInput',
+})
 export default class VMInput extends Mixins(VMCProp, VMBgProp) {
   @Prop() outline!: string;
 

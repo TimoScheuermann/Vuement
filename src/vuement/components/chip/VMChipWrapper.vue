@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMChipWrapper>({
+  name: 'vmChipWrapper',
+})
 export default class VMChipWrapper extends Vue {}
 </script>
 

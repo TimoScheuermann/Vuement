@@ -47,7 +47,8 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import VMMenuButton from '../menuButton/VMMenuButton.vue';
 
-@Component({
+@Component<VMImageFullscreen>({
+  name: 'vmImageFullscreen',
   components: {
     VMMenuButton,
   },

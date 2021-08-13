@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMGrid>({
+  name: 'vmGrid',
+})
 export default class VMGrid extends Vue {
   @Prop({ default: '200px' }) width!: string;
   @Prop({ default: 'auto-fill' }) mode!: string;

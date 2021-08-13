@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMTh>({
+  name: 'vmTh',
+})
 export default class VMTh extends Vue {}
 </script>
 

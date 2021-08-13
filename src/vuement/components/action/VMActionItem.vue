@@ -26,7 +26,8 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component({
+@Component<VMActionItem>({
+  name: 'vmActionItem',
   components: {
     VMClickable,
   },

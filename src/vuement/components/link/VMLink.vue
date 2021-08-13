@@ -19,7 +19,8 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component({
+@Component<VMLink>({
+  name: 'vmLink',
   components: {
     VMClickable,
   },

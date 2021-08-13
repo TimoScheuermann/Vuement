@@ -10,7 +10,9 @@
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMDivider>({
+  name: 'vmDivider',
+})
 export default class VMDivider extends Mixins(VMCProp) {
   @Prop({ default: 'center' }) position!: string;
 }

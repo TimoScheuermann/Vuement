@@ -8,7 +8,9 @@
 import VMLink from '@/vuement/components/link/VMLink.vue';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMFlow>({
+  name: 'vmFlow',
+})
 export default class VMFlow extends Mixins(VMLink) {
   @Prop({ default: 'center' }) vertical!: string;
   @Prop({ default: 'space-between' }) horizontal!: string;

@@ -11,7 +11,9 @@
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMAccordion>({
+  name: 'vmAccordion',
+})
 export default class VMAccordion extends Mixins(VMCProp) {
   @Prop() border!: string;
 

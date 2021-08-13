@@ -24,7 +24,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop, Watch } from 'vue-property-decorator';
 
-@Component
+@Component<VMSwitch>({
+  name: 'vmSwitch',
+})
 export default class VMSwitch extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: false }) value!: boolean;
 

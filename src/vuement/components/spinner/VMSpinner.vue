@@ -16,7 +16,8 @@ import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import * as types from './types';
 
-@Component({
+@Component<VMSpinner>({
+  name: 'vmSpinner',
   components: { ...types },
 })
 export default class VMSpinner extends Mixins(VMCProp) {

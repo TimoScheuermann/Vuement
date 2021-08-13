@@ -14,7 +14,9 @@
 import VMColorMixin from '@/vuement/mixins/VMColor.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMAvatar>({
+  name: 'vmAvatar',
+})
 export default class VMAvatar extends Mixins(VMColorMixin) {
   @Prop() src!: string;
   @Prop({ default: 'small' }) size!: string;

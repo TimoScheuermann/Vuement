@@ -39,7 +39,9 @@
 import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMFrostedCard>({
+  name: 'vmFrostedCard',
+})
 export default class VMFrostedCard extends Mixins(VMCardMixin) {}
 </script>
 

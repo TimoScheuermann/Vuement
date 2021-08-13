@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMTd>({
+  name: 'vmTd',
+})
 export default class VMTd extends Vue {
   @Prop({ default: 1 }) colspan!: number;
 }

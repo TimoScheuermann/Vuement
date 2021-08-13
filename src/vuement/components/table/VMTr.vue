@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMTr>({
+  name: 'vmTr',
+})
 export default class VMTr extends Vue {}
 </script>
 

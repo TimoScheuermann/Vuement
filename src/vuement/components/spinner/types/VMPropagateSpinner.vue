@@ -12,7 +12,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMPropagateSpinner>({
+  name: 'vmPropagateSpinner',
+})
 export default class VMPropagateSpinner extends Vue {}
 </script>
 

@@ -54,7 +54,8 @@ import { LooseObject } from '@/vuement/dev/interfaces';
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
-@Component({
+@Component<VMAccordionItem>({
+  name: 'vmAccordionItem',
   components: {
     VMRevealer,
   },
@@ -62,6 +63,11 @@ import VMRevealer from '../revealer/VMRevealer.vue';
 export default class VMAccordionItem extends Vue {
   @Prop() title!: string;
   @Prop() value!: boolean;
+
+  $refs!: {
+    expand: SVGAnimateElement;
+    collapse: SVGAnimateElement;
+  };
 
   public innerVal = !!this.value;
 

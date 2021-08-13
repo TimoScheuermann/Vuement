@@ -48,7 +48,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMProgress>({
+  name: 'vmProgress',
+})
 export default class VMProgress extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'bar' }) type!: string;
   @Prop({ default: 0 }) progress!: number;

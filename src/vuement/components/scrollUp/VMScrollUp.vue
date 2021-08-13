@@ -16,7 +16,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMScrollUp>({
+  name: 'vmScrollUp',
+})
 export default class VMScrollUp extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: 'ti-chevron-up' }) icon!: string;
   @Prop({ default: 'white' }) color!: string;

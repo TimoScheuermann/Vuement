@@ -40,7 +40,8 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMLinkMixin from '@/vuement/mixins/VMLink.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component({
+@Component<VMChip>({
+  name: 'vmChip',
   components: {
     VMClickable,
   },
@@ -53,6 +54,10 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
   @Prop({ default: false }) editable!: boolean;
   @Prop({ default: 10 }) maxLength!: number;
 
+  $refs!: {
+    input: HTMLDivElement;
+  };
+
   public keypress(e: KeyboardEvent): void {
     let elem = this.$refs.input;
     if (elem) {
@@ -64,7 +69,6 @@ export default class VMChip extends Mixins(VMLinkMixin, VMCProp, VMBgProp) {
         return;
       }
 
-      elem = elem as HTMLElement;
       let value = elem.innerHTML;
       let maxLength = 10;
       if (this.maxLength && !isNaN(+this.maxLength)) {

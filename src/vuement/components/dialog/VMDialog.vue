@@ -54,7 +54,9 @@ import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import VMOpensMixin from '@/vuement/mixins/VMOpens.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMDialog>({
+  name: 'vmDialog',
+})
 export default class VMDialog extends Mixins(
   VMCProp,
   VMBgProp,

@@ -12,7 +12,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMList>({
+  name: 'vmList',
+})
 export default class VMList extends Mixins(VMCProp, VMBgProp) {}
 </script>
 

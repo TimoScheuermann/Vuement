@@ -16,20 +16,24 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMHero>({
+  name: 'vmHero',
+})
 export default class VMHero extends Mixins(VMCProp, VMBgProp) {
   @Prop({ default: '200px' }) height!: string;
   @Prop() image!: string;
   @Prop() video!: string;
+
+  $refs!: {
+    video: HTMLVideoElement;
+  };
 
   @Watch('video')
   public videoChanged(): void {
     if (this.video) {
       setTimeout(() => {
         const elem = this.$refs.video;
-        if (elem) {
-          (elem as HTMLVideoElement).play();
-        }
+        if (elem) elem.play();
       }, 100);
     }
   }

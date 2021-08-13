@@ -17,7 +17,9 @@ import { VMSelectSelection } from '@/vuement/dev/interfaces';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Watch, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMSelectItem>({
+  name: 'vmSelectItem',
+})
 export default class VMSelectItem extends Mixins(VMCProp) {
   @Prop() icon!: string;
   @Prop() title!: string;

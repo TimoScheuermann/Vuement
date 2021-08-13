@@ -13,7 +13,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMTabbar>({
+  name: 'vmTabbar',
+})
 export default class VMTabbar extends Mixins(VMCProp, VMBgProp) {}
 </script>
 

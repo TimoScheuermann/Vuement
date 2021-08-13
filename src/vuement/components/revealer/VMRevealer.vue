@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'VMRevealer',
+  name: 'vmRevealer',
   functional: true,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   render(createElement, context) {

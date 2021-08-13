@@ -19,7 +19,8 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import VMRevealer from '../revealer/VMRevealer.vue';
 
-@Component({
+@Component<VMSidebarGroup>({
+  name: 'vmSidebarGroup',
   components: {
     VMRevealer,
   },

@@ -29,7 +29,8 @@ import VMMenuButtonDotsV from './buttons/VMMenuButtonDotsV.vue';
 import VMMenuButtonBars from './buttons/VMMenuButtonBars.vue';
 import VMClickable from '@/vuement/mixins/VMClickable.vue';
 
-@Component({
+@Component<VMMenuButton>({
+  name: 'vmMenuButton',
   components: {
     VMClickable,
     'vm-mb-plus': VMMenuButtonPlus,

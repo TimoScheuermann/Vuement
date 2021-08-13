@@ -25,7 +25,9 @@ import store from '@/store';
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { VMTooltipInstance } from './VMTooltip';
 
-@Component
+@Component<VMTooltip>({
+  name: 'vmTooltip',
+})
 export default class VMTooltip extends Vue {
   @Prop() tooltip!: VMTooltipInstance;
   @Prop() top!: number;
@@ -33,16 +35,21 @@ export default class VMTooltip extends Vue {
   @Prop() width!: number;
   @Prop() hover!: boolean;
 
+  $refs!: {
+    comp: HTMLDivElement;
+    tooltip: HTMLSpanElement;
+  };
+
   public mouseOver = false;
 
   mounted(): void {
-    this.instanceElement.addEventListener('mouseenter', this.mouseEnter);
-    this.instanceElement.addEventListener('mouseleave', this.mouseLeave);
+    this.$refs.tooltip.addEventListener('mouseenter', this.mouseEnter);
+    this.$refs.tooltip.addEventListener('mouseleave', this.mouseLeave);
   }
 
   beforeDestroy(): void {
-    this.instanceElement.removeEventListener('mouseenter', this.mouseEnter);
-    this.instanceElement.removeEventListener('mouseleave', this.mouseLeave);
+    this.$refs.tooltip.removeEventListener('mouseenter', this.mouseEnter);
+    this.$refs.tooltip.removeEventListener('mouseleave', this.mouseLeave);
   }
 
   public mouseEnter(): void {
@@ -53,10 +60,6 @@ export default class VMTooltip extends Vue {
     this.mouseOver = false;
   }
 
-  get instanceElement(): HTMLElement {
-    return this.$refs.tooltip as HTMLElement;
-  }
-
   @Watch('hover', { immediate: true })
   hoverChanged(): void {
     if (this.hover && this.tooltip && this.tooltip.component) {
@@ -65,10 +68,9 @@ export default class VMTooltip extends Vue {
         if (component) {
           const ComponentClass = Vue.extend(component);
           const instance = new ComponentClass({ store: store, router: router });
-          const elem = this.$refs.comp;
 
           instance.$mount();
-          (elem as HTMLElement).appendChild(instance.$el);
+          this.$refs.comp.appendChild(instance.$el);
         }
       });
     }

@@ -14,10 +14,16 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import VMImageFullscreen from './VMImageFullscreen.vue';
 
-@Component
+@Component<VMImage>({
+  name: 'vmImage',
+})
 export default class VMImage extends Vue {
   @Prop() src!: string;
   @Prop() srcset!: string;
+
+  $refs!: {
+    image: HTMLImageElement;
+  };
 
   public expanded = false;
   public instance: null | VMImageFullscreen = null;
@@ -66,10 +72,9 @@ export default class VMImage extends Vue {
   @Watch('srcset')
   public updateInstance(): void {
     if (!this.instance) return;
-    const elem = this.$refs.image;
-    if (!elem) return;
+    const image = this.$refs.image;
+    if (!image) return;
 
-    const image = elem as HTMLImageElement;
     const { top, left, height, width } = image.getBoundingClientRect();
 
     this.instance.$props.top = top;

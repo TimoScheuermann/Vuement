@@ -35,7 +35,8 @@ import VMCardMixin from '@/vuement/mixins/VMCard.mixin';
 import VMClickable from '@/vuement/mixins/VMClickable.vue';
 import * as types from './types';
 
-@Component({
+@Component<VMCard>({
+  name: 'vmCard',
   components: {
     VMClickable,
     ...types,

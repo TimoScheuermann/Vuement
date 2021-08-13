@@ -7,7 +7,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMAvatarGroup>({
+  name: 'vmAvatarGroup',
+})
 export default class VMAvatarGroup extends Vue {}
 </script>
 

@@ -31,7 +31,9 @@ import VMBgProp from '@/vuement/mixins/VMBackgroundProp.mixin';
 import VMCProp from '@/vuement/mixins/VMColorProp.mixin';
 import { Component, Prop, Mixins } from 'vue-property-decorator';
 
-@Component
+@Component<VMSidebar>({
+  name: 'vmSidebar',
+})
 export default class VMSidebar extends Mixins(VMCProp, VMBgProp) {
   @Prop() backgroundImage!: string;
   @Prop({ default: false }) frosted!: boolean;

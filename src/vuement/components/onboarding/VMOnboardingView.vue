@@ -26,7 +26,9 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
-@Component
+@Component<VMOnboardingView>({
+  name: 'vmOnboardingView',
+})
 export default class VMOnboardingView extends Vue {
   @Prop() image!: string;
   @Prop() video!: string;

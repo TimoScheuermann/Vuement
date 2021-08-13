@@ -11,7 +11,9 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
-@Component
+@Component<VMScaleSpinner>({
+  name: 'vmScaleSpinner',
+})
 export default class VMScaleSpinner extends Vue {}
 </script>
 
