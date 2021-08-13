@@ -23,13 +23,13 @@
 
     <VSectionHeader title="Themes" subtitle="UI Options" />
 
-    <span>
+    <!-- <span>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium,
       labore? Quisquam, consequuntur? Neque quasi repudiandae magnam ad autem
       consectetur voluptatibus iste at quam! Modi illum quia doloribus nesciunt
       aliquam totam!
       <br /><br />
-    </span>
+    </span> -->
     <div
       class="theme"
       v-for="(t, i) in themes"

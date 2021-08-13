@@ -17,7 +17,7 @@
     >
       {{ title }}
     </div>
-    <div class="vm-input--input">
+    <div class="vm-input--input" :size="inputSize">
       <div class="vm-input--input__background" />
       <div class="vm-input--input--icon" v-if="icon">
         <i :class="icon" />
@@ -59,11 +59,12 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
   @Prop() placeholder!: string;
   @Prop() icon!: string;
   @Prop() frosted!: boolean;
+  @Prop() size!: 'normal' | 'medium' | 'large';
 
   @Prop({ default: 'text' }) type!: string;
   @Prop() value!: string;
   @Prop() accept!: string;
-  @Prop() autocomplete!: 'on' | 'off';
+  @Prop() autocomplete!: string;
   @Prop() autofocus!: boolean;
   @Prop() disabled!: boolean;
   @Prop() max!: number | string;
@@ -80,6 +81,12 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
   get vmOutline(): string | null {
     if (!this.outline) return null;
     return this.getColor(this.outline);
+  }
+
+  get inputSize(): string {
+    const sizes = ['normal', 'medium', 'large'];
+    const size = (this.size || '').toLowerCase();
+    return sizes.includes(size) ? size : sizes[0];
   }
 
   get inputMode(): string {
@@ -164,8 +171,17 @@ export default class VMInput extends Mixins(VMCProp, VMBgProp) {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    padding: 0 5px;
     border-radius: $border-radius;
+
+    &[size='normal'] {
+      padding: 0 5px;
+    }
+    &[size='medium'] {
+      padding: 5px 7.5px;
+    }
+    &[size='large'] {
+      padding: 7.5px 10px;
+    }
 
     border-bottom: 1.5px solid rgba(var(--vm-outline), 1);
     box-sizing: border-box;

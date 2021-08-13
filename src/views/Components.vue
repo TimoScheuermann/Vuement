@@ -2,7 +2,7 @@
   <div class="view-components" content>
     <VSectionHeader title="Components" subtitle="Vuement" />
 
-    <vm-grid width="220px">
+    <transition-group tag="ul" class="components-grid" name="list">
       <router-link
         v-for="c in components"
         :key="c.id"
@@ -17,7 +17,7 @@
         </div>
         <div class="name">{{ c.name }}</div>
       </router-link>
-    </vm-grid>
+    </transition-group>
   </div>
 </template>
 
@@ -58,12 +58,15 @@ export default class Components extends Vue {
     margin-top: 34.33px;
   }
 
-  .vm-input {
-    margin: 0 {
-      right: -10px;
-    }
-    width: auto;
+  .components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 20px;
+    margin: 0;
+    padding: 0;
+    position: relative;
   }
+
   a {
     display: grid;
     grid-template-columns: 80px 1fr;

@@ -187,11 +187,15 @@
       >
     </p> -->
     <p>{{ $store.getters.comps.length }}</p>
-    <div v-for="c in $store.getters.comps" :key="c.id">
+    <!-- <div v-for="c in $store.getters.comps" :key="c.id">
       <span v-if="!c.isChild"
         >* [{{ c.name }}](https://vuement.com/components/{{ c.name }})</span
       >
-    </div>
+    </div> -->
+
+    <!-- <vm-dialog :value="true" :title="test">
+      <vm-input v-model="test"></vm-input>
+    </vm-dialog> -->
   </div>
 </template>
 
@@ -217,6 +221,8 @@ export default class Playground extends Vue {
   public sheet = false;
   public onboarding = false;
   public tool = TooltipTest;
+
+  public test = 'Test';
 
   public avatars = [
     'https://newtonfoxbds.com/wp-content/uploads/2019/04/user-placeholder-man-10-6.jpg',

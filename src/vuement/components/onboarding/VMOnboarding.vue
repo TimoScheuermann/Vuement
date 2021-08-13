@@ -10,6 +10,7 @@
         @DOMMouseScroll.prevent
       >
         <div class="vm-onboarding--head">
+          <div class="spacer" />
           <slot name="head" />
         </div>
         <div
@@ -31,6 +32,7 @@
         </div>
         <div class="vm-onboarding--footer">
           <slot name="footer" />
+          <div class="spacer" />
         </div>
       </div>
     </transition>
@@ -109,12 +111,18 @@ export default class VMOnboarding extends Mixins(
   &--head {
     flex-shrink: 0;
     padding: 0 5vw;
-    padding-top: env(safe-area-inset-top);
+    .spacer {
+      height: 10px;
+      min-height: env(safe-area-inset-top);
+    }
   }
   &--footer {
     flex-shrink: 0;
     padding: 0 5vw;
-    padding-bottom: env(safe-area-inset-bottom);
+    .spacer {
+      height: 10px;
+      min-height: env(safe-area-inset-bottom);
+    }
   }
 }
 
