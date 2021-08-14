@@ -1,6 +1,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-@Component
+@Component<VMCardMixin>({
+  name: 'vmCardMixin',
+})
 export default class VMCardMixin extends Vue {
   @Prop() video!: string;
   @Prop() image!: string;

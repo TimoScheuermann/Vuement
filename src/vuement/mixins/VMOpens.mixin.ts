@@ -6,7 +6,9 @@ interface VMCloseExcept {
   gr: string;
 }
 
-@Component
+@Component<VMOpensMixin>({
+  name: 'vmOpensMixin',
+})
 export default class VMOpensMixin extends Vue {
   @Prop() value!: boolean;
   @Prop({ default: true }) closeable!: boolean;

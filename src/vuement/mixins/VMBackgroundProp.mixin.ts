@@ -1,7 +1,9 @@
 import { Component, Mixins, Prop } from 'vue-property-decorator';
 import VMColorMixin from './VMColor.mixin';
 
-@Component
+@Component<VMBgProp>({
+  name: 'vmBgProp',
+})
 export default class VMBgProp extends Mixins(VMColorMixin) {
   @Prop() background!: string;
 

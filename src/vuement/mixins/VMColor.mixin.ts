@@ -4,7 +4,9 @@ import { COLORS_DEFAULT, THEME_LIGHT } from '../dev/constants';
 import { LooseObject } from '../dev/interfaces';
 import { convertColor } from '../dev/util';
 
-@Component
+@Component<VMColorMixin>({
+  name: 'vmColorMixin',
+})
 export default class VMColorMixin extends Vue {
   get colors(): Record<string, string> {
     const vm = (this as LooseObject).$vm;

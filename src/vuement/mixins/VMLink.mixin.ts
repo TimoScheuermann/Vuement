@@ -2,7 +2,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Location } from 'vue-router';
 import { NOOP } from '../dev/constants';
 
-@Component
+@Component<VMLinkMixin>({
+  name: 'vmLinkMixin',
+})
 export default class VMLinkMixin extends Vue {
   @Prop() to!: Location;
   @Prop() href!: string;
