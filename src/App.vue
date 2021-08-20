@@ -51,11 +51,40 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-html {
-  font-family: -apple-system, BlinkMacSystemFont, SF Pro Display, Helvetica Neue,
-    Segoe UI, Roboto, Arial, noto sans, sans-serif, apple color emoji,
-    segoe ui emoji, segoe ui symbol, noto color emoji;
+@font-face {
+  font-family: 'Timos Design';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Regular.woff2')
+    format('woff2');
+}
+@font-face {
+  font-family: 'Timos Design';
+  font-style: normal;
+  font-weight: 500;
+  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Medium.woff2')
+    format('woff2');
+}
+@font-face {
+  font-family: 'Timos Design';
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Semibold.woff2')
+    format('woff2');
+}
+@font-face {
+  font-family: 'Timos Design';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Bold.woff2')
+    format('woff2');
+}
 
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'Timos Design', 'Helvetica Neue', 'Segoe UI', Roboto, Arial, 'noto sans',
+    'apple color emoji', 'segoe ui emoji', 'segoe ui symbol', 'noto color emoji',
+    sans-serif;
   scroll-behavior: smooth;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
