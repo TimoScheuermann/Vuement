@@ -15,7 +15,7 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/Home.vue'),
+      component: () => import(/* webpackPrefetch: true */ '@/views/Home.vue'),
       meta: {
         title: 'Home',
       },

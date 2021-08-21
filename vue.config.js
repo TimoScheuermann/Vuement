@@ -1,5 +1,8 @@
 module.exports = {
   outputDir: process.env.VM_TARGET ? 'lib' : 'dist',
+  chainWebpack: (config) => {
+    config.plugins.delete('prefetch');
+  },
   css: {
     extract: false,
     loaderOptions: {

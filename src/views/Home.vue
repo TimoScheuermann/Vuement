@@ -7,7 +7,7 @@
       up your development workflow.
     </p>
 
-    <vm-button title="Get started" routeName="guide" />
+    <vm-button size="medium" title="Get started" routeName="guide" />
   </div>
 </template>
 

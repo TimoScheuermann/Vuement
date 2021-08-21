@@ -4,6 +4,7 @@
 
     <CRouter />
     <VDarkModeToggle />
+    <CUpdateAvailable v-model="updateAvailable" @refresh="refresh" />
 
     <vm-tabbar class="c-tabbar" v-if="!$store.getters.desktop">
       <vm-tabbar-item icon="ti-house" title="Home" routeName="home" />
@@ -30,15 +31,38 @@ import CRouter from '@/components/CRouter.vue';
 import CNavbar from '@/components/CNavbar.vue';
 import VDarkModeToggle from './components/VDarkModeToggle.vue';
 import { ComponentManager } from './utils/ComponentManager';
+import CUpdateAvailable from './components/CUpdateAvailable.vue';
 
 @Component({
   components: {
     CRouter,
     CNavbar,
     VDarkModeToggle,
+    CUpdateAvailable,
   },
 })
 export default class App extends Vue {
+  public registration: ServiceWorkerRegistration | null = null;
+  public updateAvailable = false;
+  public refreshing = false;
+
+  created(): void {
+    document.addEventListener(
+      'serviceWorkerUpdateEvent',
+      (e) => {
+        const reg = e as CustomEvent<ServiceWorkerRegistration>;
+        this.registration = reg.detail;
+        this.updateAvailable = true;
+      },
+      { once: true }
+    );
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (this.refreshing) return;
+      this.refreshing = true;
+      window.location.reload();
+    });
+  }
+
   mounted(): void {
     registerMediaQueries();
     ComponentManager.loadComps();
@@ -47,39 +71,17 @@ export default class App extends Vue {
   beforeDestroy(): void {
     unregisterMediaQueries();
   }
+
+  public refresh(): void {
+    this.updateAvailable = false;
+    if (this.registration) {
+      this.registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-@font-face {
-  font-family: 'Timos Design';
-  font-style: normal;
-  font-weight: 400;
-  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Regular.woff2')
-    format('woff2');
-}
-@font-face {
-  font-family: 'Timos Design';
-  font-style: normal;
-  font-weight: 500;
-  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Medium.woff2')
-    format('woff2');
-}
-@font-face {
-  font-family: 'Timos Design';
-  font-style: normal;
-  font-weight: 600;
-  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Semibold.woff2')
-    format('woff2');
-}
-@font-face {
-  font-family: 'Timos Design';
-  font-style: normal;
-  font-weight: 700;
-  src: url('https://timos.s3.eu-central-1.amazonaws.com/fonts/TimosDesign-Bold.woff2')
-    format('woff2');
-}
-
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
     'Timos Design', 'Helvetica Neue', 'Segoe UI', Roboto, Arial, 'noto sans',
@@ -106,6 +108,10 @@ body {
 
   max-width: 800px;
   margin: 0 auto;
+}
+
+[center] {
+  text-align: center;
 }
 
 .section-title {
